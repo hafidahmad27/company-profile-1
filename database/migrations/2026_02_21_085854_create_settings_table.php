@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('site_name');
             $table->string('logo')->nullable();
-            $table->string('email')->nullable();
-            $table->string('phone')->nullable();
             $table->string('address')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('email')->nullable();
             $table->string('footer_text')->nullable();
             $table->foreignId('user_id')->nullable()->constrained()
                 ->onUpdate('cascade')

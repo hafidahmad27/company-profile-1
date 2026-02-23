@@ -15,10 +15,10 @@ class SettingSeeder extends Seeder
     {
         Setting::factory()->create([
             'site_name' => 'HFD Corp',
-            'logo' => fake()->imageUrl(200, 200, 'business', true, 'logo'),
-            'email' => 'hfdofficial@test.com',
-            'phone' => '083854520264',
+            'logo' => 'storage/logo.png',
             'address' => fake()->address(),
+            'phone' => '012345678910',
+            'email' => 'hfdcorp@test.com',
             'footer_text' => '© 2026 HFD Corp. All rights reserved.',
             'user_id' => 1,
         ]);

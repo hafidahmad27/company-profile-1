@@ -16,7 +16,7 @@ class PageSeeder extends Seeder
         Page::factory()->createMany([
             [
                 'name' => 'Home',
-                'slug' => 'home',
+                'slug' => 'index',
                 'order' => 1,
                 'is_active' => true,
             ],

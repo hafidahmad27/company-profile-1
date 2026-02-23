@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Backend\ArticleCategoryController;
 use App\Http\Controllers\Backend\ArticleController;
 use App\Http\Controllers\Backend\DashboardController;
@@ -11,9 +10,7 @@ use App\Http\Controllers\Backend\SectionController;
 use App\Http\Controllers\Backend\SettingController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [HomeController::class, 'index'])->name('index');
-
-Route::prefix('backend')->name('backend.')->group(function () {
+Route::prefix('backend')->name('be.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('index');
     Route::resource('products', ProductController::class)->only([
         'index',
@@ -72,3 +69,6 @@ Route::prefix('backend')->name('backend.')->group(function () {
         'destroy'
     ]);
 });
+
+// Include route frontend from webfe.php
+require __DIR__ . '/webfe.php';
