@@ -1,7 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-expand-sm bg-secondary sticky-top">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
-            <img src="{{ asset('storage/logo.png') }}" width="90" class="d-inline-block align-text-top">
+            <img src="{{ Str::startsWith($setting->logo, ['http://', 'https://']) ? $setting->logo : asset('storage/' . $setting->logo) }}"
+                width="90" class="d-inline-block align-text-top">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -11,8 +12,8 @@
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 @foreach ($pages as $page)
                     <li class="nav-item">
-                        <a class="nav-link {{ ($page->slug == 'index' ? request()->is('/') : request()->is($page->slug)) ? 'active' : '' }}"
-                            href="{{ $page->slug == 'index' ? url('/') : url($page->slug) }}">{{ $page->name }}
+                        <a class="nav-link {{ ($page->slug == 'index' ? request()->is('/') : request()->is($page->slug)) ? 'active fw-bold' : '' }}"
+                            href="{{ $page->slug == 'index' ? url('/') : url($page->slug) }}">{{ $page->title }}
                         </a>
                     </li>
                 @endforeach

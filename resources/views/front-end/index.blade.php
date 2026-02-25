@@ -1,20 +1,15 @@
 @extends('front-end.layouts.app')
 
-@section('title')
-
 @section('content')
     <section id="carousel" class="mt-3">
         <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="https://placehold.co/1100x500/light/blue" class="d-block w-100" alt="Gambar">
-                </div>
-                <div class="carousel-item">
-                    <img src="https://placehold.co/1100x500/light/blue" class="d-block w-100" alt="Gambar">
-                </div>
-                <div class="carousel-item">
-                    <img src="https://placehold.co/1100x500/light/blue" class="d-block w-100" alt="Gambar">
-                </div>
+                @foreach ($carouselSlides as $key => $slide)
+                    <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                        <img src="{{ Str::startsWith($slide->image, ['http://', 'https://']) ? $slide->image : asset('storage/' . $slide->image) }}"
+                            class="d-block w-100" style="height: 510px; object-fit: cover" alt="Gambar">
+                    </div>
+                @endforeach
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
                 data-bs-slide="prev">
@@ -29,389 +24,136 @@
         </div>
     </section>
 
+
     <section id="about" style="padding-top: 8%">
-        <div class="text-center">
-            <h3>About Us</h3>
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam fuga incidunt adipisci voluptate saepe,
-                iste provident eius in quod itaque veritatis obcaecati cum natus accusamus dolorum perspiciatis qui
-                consequuntur molestias.
-            </p>
-        </div>
+        <h3 class="text-center">{{ $about->title ?? '-' }}</h3>
+        <p style="text-align: justify">
+            {{ $about->content ?? '-' }}
+        </p>
     </section>
+
 
     <section id="products" style="padding-top: 8%">
         <div class="text-center">
-            <h3>Products</h3>
+            <h3>{{ $product->title ?? '-' }}</h3>
             <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam fuga incidunt adipisci voluptate saepe,
-                iste provident eius in quod itaque veritatis obcaecati cum natus accusamus dolorum perspiciatis qui
-                consequuntur molestias.
+                {{ $product->subtitle ?? '-' }}
             </p>
         </div>
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="category-1-tab" data-bs-toggle="tab"
-                    data-bs-target="#category-1-tab-pane" type="button" role="tab" aria-controls="category-1-tab-pane"
-                    aria-selected="true">Category 1</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="category-2-tab" data-bs-toggle="tab" data-bs-target="#category-2-tab-pane"
-                    type="button" role="tab" aria-controls="category-2-tab-pane" aria-selected="true">Category
-                    2</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="category-3-tab" data-bs-toggle="tab" data-bs-target="#category-3-tab-pane"
-                    type="button" role="tab" aria-controls="category-3-tab-pane" aria-selected="true">Category
-                    3</button>
-            </li>
-            {{-- <li class="nav-item" role="presentation">
-                <button class="nav-link" id="disabled-tab" data-bs-toggle="tab" data-bs-target="#disabled-tab-pane"
-                    type="button" role="tab" aria-controls="disabled-tab-pane" aria-selected="false"
-                    disabled>Disabled</button>
-            </li> --}}
+
+        <ul class="nav nav-tabs justify-content-center" id="productsTab" role="tablist">
+            @foreach ($productCategoriesPreview as $productCategoryPreview)
+                @php
+                    $count = isset($productsPreview[$productCategoryPreview->id])
+                        ? count($productsPreview[$productCategoryPreview->id])
+                        : 0;
+                @endphp
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link {{ $loop->first ? 'active' : '' }}" data-bs-toggle="tab"
+                        data-bs-target="#products-{{ $productCategoryPreview->id }}" type="button" role="tab"
+                        aria-controls="category-1-tab-pane" aria-selected="true">
+                        {{ $productCategoryPreview->name ?? '-' }} ({{ $count }})
+                    </button>
+                </li>
+            @endforeach
         </ul>
-        <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="category-1-tab-pane" role="tabpanel" aria-labelledby="category-1-tab"
-                tabindex="0">
-                <div class="row row-cols-1 row-cols-md-3 g-4 mt-0">
-                    <div class="col">
-                        <div class="card h-100">
-                            <img src="https://placehold.co/300x200/light/blue" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Category 1 Card title 1</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                                    additional
-                                    content. This content is a little bit longer.</p>
-                            </div>
-                            <div class="card-footer">
+        <div class="tab-content" id="productsTabContent">
+            @foreach ($productCategoriesPreview as $productCategoryPreview)
+                <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}"
+                    id="products-{{ $productCategoryPreview->id }}" role="tabpanel" aria-labelledby="" tabindex="0">
+                    <div class="row row-cols-1 row-cols-md-3 justify-content-center g-4 mt-0">
+                        @forelse ($productsPreview[$productCategoryPreview->id] ?? [] as $product)
+                            <div class="col">
+                                <div class="card h-100">
+                                    <img src="{{ Str::startsWith($product->image, ['http://', 'https://']) ? $product->image : asset('storage/' . $product->image) }}"
+                                        class="card-img-top" style="height: 235px; object-fit: cover" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ $product->name ?? '-' }}</h5>
+                                        <span class="badge text-bg-info">Rp
+                                            {{ number_format($product->price, 0, ',', '.') }}</span>
+                                        <p class="card-text mt-2" style="text-align: justify">
+                                            {{ $product->description ?? '-' }}
+                                        </p>
+                                    </div>
+                                    {{-- <div class="card-footer">
                                 <small class="text-body-secondary">Last updated 3 mins ago</small>
+                            </div> --}}
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card h-100">
-                            <img src="https://placehold.co/300x200/light/blue" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Category 1 Card title 2</h5>
-                                <p class="card-text">This card has supporting text below as a natural lead-in to additional
-                                    content.
-                                </p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-body-secondary">Last updated 3 mins ago</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card h-100">
-                            <img src="https://placehold.co/300x200/light/blue" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Category 1 Card title 3</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in
-                                    to
-                                    additional
-                                    content. This card has even longer content than the first to show that equal height
-                                    action.</p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-body-secondary">Last updated 3 mins ago</small>
-                            </div>
-                        </div>
+                        @empty
+                            <p class="text-center">Belum ada products</p>
+                        @endforelse
                     </div>
                 </div>
-            </div>
-            <div class="tab-pane fade" id="category-2-tab-pane" role="tabpanel" aria-labelledby="category-2-tab"
-                tabindex="0">
-                <div class="row row-cols-1 row-cols-md-3 g-4 mt-0">
-                    <div class="col">
-                        <div class="card h-100">
-                            <img src="https://placehold.co/300x200/light/blue" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Category 2 Card title 1</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in
-                                    to
-                                    additional
-                                    content. This content is a little bit longer.</p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-body-secondary">Last updated 3 mins ago</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card h-100">
-                            <img src="https://placehold.co/300x200/light/blue" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Category 2 Card title 2</h5>
-                                <p class="card-text">This card has supporting text below as a natural lead-in to additional
-                                    content.
-                                </p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-body-secondary">Last updated 3 mins ago</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card h-100">
-                            <img src="https://placehold.co/300x200/light/blue" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Category 2 Card title 3</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in
-                                    to
-                                    additional
-                                    content. This card has even longer content than the first to show that equal height
-                                    action.</p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-body-secondary">Last updated 3 mins ago</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="tab-pane fade" id="category-3-tab-pane" role="tabpanel" aria-labelledby="category-3-tab"
-                tabindex="0">
-                <div class="row row-cols-1 row-cols-md-3 g-4 mt-0">
-                    <div class="col">
-                        <div class="card h-100">
-                            <img src="https://placehold.co/300x200/light/blue" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Category 3 Card title 1</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in
-                                    to
-                                    additional
-                                    content. This content is a little bit longer.</p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-body-secondary">Last updated 3 mins ago</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card h-100">
-                            <img src="https://placehold.co/300x200/light/blue" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Category 3 Card title 2</h5>
-                                <p class="card-text">This card has supporting text below as a natural lead-in to additional
-                                    content.
-                                </p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-body-secondary">Last updated 3 mins ago</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card h-100">
-                            <img src="https://placehold.co/300x200/light/blue" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Category 3 Card title 3</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in
-                                    to
-                                    additional
-                                    content. This card has even longer content than the first to show that equal height
-                                    action.</p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-body-secondary">Last updated 3 mins ago</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {{-- <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0">
+                {{-- <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0">
                 ...
             </div> --}}
+            @endforeach
         </div>
     </section>
 
+
     <section id="articles" style="padding-top: 8%">
         <div class="text-center">
-            <h3>Articles</h3>
+            <h3>{{ $article->title ?? '-' }}</h3>
             <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam fuga incidunt adipisci voluptate saepe,
-                iste provident eius in quod itaque veritatis obcaecati cum natus accusamus dolorum perspiciatis qui
-                consequuntur molestias.
+                {{ $article->subtitle ?? '-' }}
             </p>
         </div>
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="category-1-tab" data-bs-toggle="tab"
-                    data-bs-target="#category-1-tab-pane" type="button" role="tab"
-                    aria-controls="category-1-tab-pane" aria-selected="true">Category 1</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="category-2-tab" data-bs-toggle="tab" data-bs-target="#category-2-tab-pane"
-                    type="button" role="tab" aria-controls="category-2-tab-pane" aria-selected="true">Category
-                    2</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="category-3-tab" data-bs-toggle="tab" data-bs-target="#category-3-tab-pane"
-                    type="button" role="tab" aria-controls="category-3-tab-pane" aria-selected="true">Category
-                    3</button>
-            </li>
-            {{-- <li class="nav-item" role="presentation">
-                <button class="nav-link" id="disabled-tab" data-bs-toggle="tab" data-bs-target="#disabled-tab-pane"
-                    type="button" role="tab" aria-controls="disabled-tab-pane" aria-selected="false"
-                    disabled>Disabled</button>
-            </li> --}}
+
+        <ul class="nav nav-tabs justify-content-center" id="articlesTab" role="tablist">
+            @foreach ($articleCategoriesPreview as $articleCategoryPreview)
+                @php
+                    $count = isset($articlesPreview[$articleCategoryPreview->id])
+                        ? count($articlesPreview[$articleCategoryPreview->id])
+                        : 0;
+                @endphp
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link {{ $loop->first ? 'active' : '' }}" data-bs-toggle="tab"
+                        data-bs-target="#articles-{{ $articleCategoryPreview->id }}" type="button" role="tab"
+                        aria-controls="category-1-tab-pane" aria-selected="true">
+                        {{ $articleCategoryPreview->name ?? '-' }} ({{ $count }})
+                    </button>
+                </li>
+            @endforeach
         </ul>
-        <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="category-1-tab-pane" role="tabpanel"
-                aria-labelledby="category-1-tab" tabindex="0">
-                <div class="row row-cols-1 row-cols-md-3 g-4 mt-0">
-                    <div class="col">
-                        <div class="card h-100">
-                            <img src="https://placehold.co/300x200/light/blue" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Category 1 Card title 1</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in
-                                    to
-                                    additional
-                                    content. This content is a little bit longer.</p>
-                            </div>
-                            <div class="card-footer">
+        <div class="tab-content" id="articlesTabContent">
+            @foreach ($articleCategoriesPreview as $articleCategoryPreview)
+                <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}"
+                    id="articles-{{ $articleCategoryPreview->id }}" role="tabpanel" aria-labelledby="" tabindex="0">
+                    <div class="row row-cols-1 row-cols-md-3 justify-content-center g-4 mt-0">
+                        @forelse ($articlesPreview[$articleCategoryPreview->id] ?? [] as $article)
+                            <div class="col">
+                                <div class="card h-100">
+                                    <img src="{{ Str::startsWith($article->image, ['http://', 'https://']) ? $article->image : asset('storage/' . $article->image) }}"
+                                        class="card-img-top" style="height: 235px; object-fit: cover" alt="...">
+                                    <div class="card-body">
+                                        <div class="d-flex mb-3">
+                                            <div class="me-auto">
+                                                <span
+                                                    class="badge text-bg-secondary">{{ $articleCategoryPreview->name ?? '-' }}</span>
+                                            </div>
+                                            <small><i class="bi bi-eye-fill"></i> {{ $article->views ?? '-' }}</small>
+                                        </div>
+                                        <h5 class="card-title">{{ $article->title ?? '-' }}</h5>
+                                        <p class="card-text" style="text-align: justify">
+                                            {{ $article->content ?? '-' }}
+                                        </p>
+                                    </div>
+                                    {{-- <div class="card-footer">
                                 <small class="text-body-secondary">Last updated 3 mins ago</small>
+                            </div> --}}
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card h-100">
-                            <img src="https://placehold.co/300x200/light/blue" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Category 1 Card title 2</h5>
-                                <p class="card-text">This card has supporting text below as a natural lead-in to additional
-                                    content.
-                                </p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-body-secondary">Last updated 3 mins ago</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card h-100">
-                            <img src="https://placehold.co/300x200/light/blue" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Category 1 Card title 3</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in
-                                    to
-                                    additional
-                                    content. This card has even longer content than the first to show that equal height
-                                    action.</p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-body-secondary">Last updated 3 mins ago</small>
-                            </div>
-                        </div>
+                        @empty
+                            <p class="text-center">Belum ada articles</p>
+                        @endforelse
                     </div>
                 </div>
-            </div>
-            <div class="tab-pane fade" id="category-2-tab-pane" role="tabpanel" aria-labelledby="category-2-tab"
-                tabindex="0">
-                <div class="row row-cols-1 row-cols-md-3 g-4 mt-0">
-                    <div class="col">
-                        <div class="card h-100">
-                            <img src="https://placehold.co/300x200/light/blue" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Category 2 Card title 1</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in
-                                    to
-                                    additional
-                                    content. This content is a little bit longer.</p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-body-secondary">Last updated 3 mins ago</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card h-100">
-                            <img src="https://placehold.co/300x200/light/blue" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Category 2 Card title 2</h5>
-                                <p class="card-text">This card has supporting text below as a natural lead-in to additional
-                                    content.
-                                </p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-body-secondary">Last updated 3 mins ago</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card h-100">
-                            <img src="https://placehold.co/300x200/light/blue" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Category 2 Card title 3</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in
-                                    to
-                                    additional
-                                    content. This card has even longer content than the first to show that equal height
-                                    action.</p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-body-secondary">Last updated 3 mins ago</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="tab-pane fade" id="category-3-tab-pane" role="tabpanel" aria-labelledby="category-3-tab"
-                tabindex="0">
-                <div class="row row-cols-1 row-cols-md-3 g-4 mt-0">
-                    <div class="col">
-                        <div class="card h-100">
-                            <img src="https://placehold.co/300x200/light/blue" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Category 3 Card title 1</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in
-                                    to
-                                    additional
-                                    content. This content is a little bit longer.</p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-body-secondary">Last updated 3 mins ago</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card h-100">
-                            <img src="https://placehold.co/300x200/light/blue" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Category 3 Card title 2</h5>
-                                <p class="card-text">This card has supporting text below as a natural lead-in to additional
-                                    content.
-                                </p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-body-secondary">Last updated 3 mins ago</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card h-100">
-                            <img src="https://placehold.co/300x200/light/blue" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Category 3 Card title 3</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in
-                                    to
-                                    additional
-                                    content. This card has even longer content than the first to show that equal height
-                                    action.</p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-body-secondary">Last updated 3 mins ago</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {{-- <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0">
+                {{-- <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0">
                 ...
             </div> --}}
+            @endforeach
         </div>
     </section>
 @endsection

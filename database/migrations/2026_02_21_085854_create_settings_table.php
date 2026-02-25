@@ -15,10 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('site_name');
             $table->string('logo')->nullable();
-            $table->string('address')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('email')->nullable();
-            $table->string('footer_text')->nullable();
+            $table->string('address');
+            $table->string('phone');
+            $table->string('email');
+            $table->string('footer_about');
+            $table->string('footer_text');
             $table->foreignId('user_id')->nullable()->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('set null');

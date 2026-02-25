@@ -18,7 +18,7 @@ return new class extends Migration
                 ->onDelete('set null');
             $table->string('title')->unique();
             $table->string('slug')->unique();
-            $table->longText('content');
+            $table->text('content')->nullable();
             $table->string('image')->nullable();
             $table->timestamp('published_at')->nullable();
             $table->boolean('is_published')->unsigned()->default(false);

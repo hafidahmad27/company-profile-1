@@ -20,7 +20,13 @@
     @include('front-end.layouts.partials.navbar')
 
     <div class="container">
-        @yield('content', 'Default Content')
+        @hasSection('title')
+            <h2 class="text-center mt-4">{{ $page->title }}</h2>
+            <hr>
+            @yield('content')
+        @else
+            @yield('content')
+        @endif
     </div>
 
     @include('front-end.layouts.partials.footer')

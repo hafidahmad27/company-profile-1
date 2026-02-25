@@ -16,9 +16,18 @@ return new class extends Migration
             $table->foreignId('page_id')->nullable()->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('set null');
-            $table->string('section_key')->index();
+            $table->enum('section_key', [
+                'carousel',
+                'about-preview',
+                'products-preview',
+                'articles-preview',
+                'about',
+                'products',
+                'articles'
+            ]);
             $table->string('title')->nullable();
             $table->string('subtitle')->nullable();
+            $table->text('content')->nullable();
             $table->string('image')->nullable();
             $table->string('button_text')->nullable();
             $table->string('button_link')->nullable();
@@ -28,8 +37,6 @@ return new class extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('set null');
             $table->timestamps();
-
-            $table->unique(['page_id', 'section_key']);
         });
     }
 

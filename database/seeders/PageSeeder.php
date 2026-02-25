@@ -15,25 +15,25 @@ class PageSeeder extends Seeder
     {
         Page::factory()->createMany([
             [
-                'name' => 'Home',
+                'title' => 'Home',
                 'slug' => 'index',
                 'order' => 1,
                 'is_active' => true,
             ],
             [
-                'name' => 'About',
+                'title' => 'About',
                 'slug' => 'about',
                 'order' => 2,
                 'is_active' => true,
             ],
             [
-                'name' => 'Products',
+                'title' => 'Products',
                 'slug' => 'products',
                 'order' => 3,
                 'is_active' => true,
             ],
             [
-                'name' => 'Articles',
+                'title' => 'Articles',
                 'slug' => 'articles',
                 'order' => 4,
                 'is_active' => true,

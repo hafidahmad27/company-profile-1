@@ -25,7 +25,7 @@ class ProductFactory extends Factory
             'slug' => Str::slug($name),
             'description' => fake()->text(),
             'price' => fake()->randomFloat(2, 10000, 99990000),
-            'image' => fake()->imageUrl(800, 600, 'business', true, 'slide'),
+            'image' => 'https://placehold.co/300x200/light/blue',
             'published_at' => fake()->dateTime(),
             'is_published' => fake()->boolean(),
             'user_id' => 1,
