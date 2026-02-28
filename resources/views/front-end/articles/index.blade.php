@@ -3,9 +3,9 @@
 @section('title', $page->title)
 
 @section('content')
-    <p class="text-center" style="text-align: justify">
-        {{ $section->subtitle ?? '-' }}
-    </p>
+    {{-- <p class="text-center" style="text-align: justify">
+        {{ $section->subtitle }}
+    </p> --}}
 
     <ul class="nav nav-tabs justify-content-center" id="articlesTab" role="tablist">
         @foreach ($articleCategories as $articleCategory)
@@ -14,8 +14,8 @@
             @endphp
             <li class="nav-item" role="presentation">
                 <button class="nav-link {{ $loop->first ? 'active' : '' }}" data-bs-toggle="tab"
-                    data-bs-target="#articles-{{ $articleCategory->id }}" type="button" role="tab"
-                    aria-controls="category-1-tab-pane" aria-selected="true">
+                    data-bs-target="#articles-{{ $articleCategory->id }}" type="button" role="tab" aria-controls=""
+                    aria-selected="true">
                     {{ $articleCategory->name ?? '-' }} ({{ $count }})
                 </button>
             </li>
@@ -36,20 +36,31 @@
                                         <div class="me-auto">
                                             <span class="badge text-bg-secondary">{{ $articleCategory->name ?? '-' }}</span>
                                         </div>
-                                        <small><i class="bi bi-eye-fill"></i> {{ $article->views ?? '-' }}</small>
+                                        <small class="text-body-secondary">
+                                            {{ $article->published_at ? $article->published_at->diffForHumans() : '-' }}
+                                        </small>
                                     </div>
-                                    <h5 class="card-title">{{ $article->title ?? '-' }}</h5>
+                                    <h5 class="card-title">
+                                        <a class="text-decoration-none"
+                                            href="{{ url(url()->current() . '/' . $article->category_slug . '/' . $article->slug) }}">
+                                            {{ $article->title ?? '-' }}
+                                        </a>
+                                    </h5>
                                     <p class="card-text" style="text-align: justify">
-                                        {{ $article->content ?? '-' }}
+                                        {{ Str::limit($article->content, 150, '...') ?? '-' }}
+                                        <a class="text-decoration-none"
+                                            href="{{ url(url()->current() . '/' . $article->category_slug . '/' . $article->slug) }}">Selengkapnya</a>
                                     </p>
                                 </div>
-                                {{-- <div class="card-footer">
-                                <small class="text-body-secondary">Last updated 3 mins ago</small>
-                            </div> --}}
+                                <div class="card-footer text-end">
+                                    <small class="text-body-secondary">
+                                        <i class="bi bi-eye-fill"></i> {{ $article->views ?? '-' }}
+                                    </small>
+                                </div>
                             </div>
                         </div>
                     @empty
-                        <p class="text-center">Belum ada {{ Str::slug($page->title) ?? '-' }}</p>
+                        <p class="text-center">Belum ada {{ Str::lower($page->title) ?? '-' }}</p>
                     @endforelse
                 </div>
             </div>
@@ -59,3 +70,7 @@
         @endforeach
     </div>
 @endsection
+
+@push('styles')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+@endpush

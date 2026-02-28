@@ -1,4 +1,4 @@
-<div class="container-fluid bg-secondary text-white mt-5">
+<div class="container-fluid bg-secondary text-white mt-4">
     <div class="container py-4">
         <div class="row">
             <div class="col-md-4 col-sm-4">
@@ -28,7 +28,7 @@
                     {{ $setting->address ?? '-' }}
                 </p>
                 <a class="d-block mb-2 text-white text-decoration-none"
-                    href="http://wa.me/{{ $setting->phone }}">+{{ $setting->phone ?? '-' }}</a>
+                    href="tel:{{ $setting->phone }}">{{ $setting->phone ?? '-' }}</a>
                 <a class="d-block text-white text-decoration-none"
                     href="mailto:{{ $setting->email }}">{{ $setting->email ?? '-' }}</a>
             </div>

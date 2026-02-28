@@ -23,7 +23,8 @@ return new class extends Migration
             $table->foreignId('user_id')->nullable()->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('set null');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
     }
 

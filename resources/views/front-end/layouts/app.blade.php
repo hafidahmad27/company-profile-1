@@ -16,18 +16,19 @@
     @stack('styles')
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
     @include('front-end.layouts.partials.navbar')
 
-    <div class="container">
-        @hasSection('title')
-            <h2 class="text-center mt-4">{{ $page->title }}</h2>
-            <hr>
+    @hasSection('title')
+        @include('front-end.layouts.partials.breadcrumb')
+        <div class="container mt-4 flex-grow-1">
             @yield('content')
-        @else
+        </div>
+    @else
+        <div class="container flex-grow-1">
             @yield('content')
-        @endif
-    </div>
+        </div>
+    @endif
 
     @include('front-end.layouts.partials.footer')
 

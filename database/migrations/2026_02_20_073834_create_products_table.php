@@ -21,12 +21,13 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->unsignedInteger('price')->nullable();
             $table->string('image')->nullable();
-            $table->timestamp('published_at')->nullable();
+            $table->dateTime('published_at')->nullable();
             $table->boolean('is_published')->unsigned()->default(false);
             $table->foreignId('user_id')->nullable()->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('set null');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
     }
 

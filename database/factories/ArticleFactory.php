@@ -25,7 +25,7 @@ class ArticleFactory extends Factory
             'slug' => Str::slug($title),
             'content' => fake()->paragraphs(5, true),
             'image' => 'https://placehold.co/300x200/light/blue',
-            'published_at' => fake()->dateTime(),
+            'published_at' => fake()->dateTimeBetween('-2 days', 'now'),
             'is_published' => fake()->boolean(),
             'views' => fake()->numberBetween(5, 999),
             'user_id' => 1,

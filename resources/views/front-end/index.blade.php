@@ -7,7 +7,7 @@
                 @foreach ($carouselSlides as $key => $slide)
                     <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
                         <img src="{{ Str::startsWith($slide->image, ['http://', 'https://']) ? $slide->image : asset('storage/' . $slide->image) }}"
-                            class="d-block w-100" style="height: 510px; object-fit: cover" alt="Gambar">
+                            class="d-block w-100" alt="Gambar">
                     </div>
                 @endforeach
             </div>
@@ -25,7 +25,7 @@
     </section>
 
 
-    <section id="about" style="padding-top: 8%">
+    <section id="about" style="margin-top: 8%">
         <h3 class="text-center">{{ $about->title ?? '-' }}</h3>
         <p style="text-align: justify">
             {{ $about->content ?? '-' }}
@@ -33,11 +33,11 @@
     </section>
 
 
-    <section id="products" style="padding-top: 8%">
+    <section id="products" style="margin-top: 8%">
         <div class="text-center">
-            <h3>{{ $product->title ?? '-' }}</h3>
+            <h3>{{ $sectionProduct->title ?? '-' }}</h3>
             <p>
-                {{ $product->subtitle ?? '-' }}
+                {{ $sectionProduct->subtitle ?? '-' }}
             </p>
         </div>
 
@@ -51,7 +51,7 @@
                 <li class="nav-item" role="presentation">
                     <button class="nav-link {{ $loop->first ? 'active' : '' }}" data-bs-toggle="tab"
                         data-bs-target="#products-{{ $productCategoryPreview->id }}" type="button" role="tab"
-                        aria-controls="category-1-tab-pane" aria-selected="true">
+                        aria-controls="" aria-selected="true">
                         {{ $productCategoryPreview->name ?? '-' }} ({{ $count }})
                     </button>
                 </li>
@@ -62,26 +62,41 @@
                 <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}"
                     id="products-{{ $productCategoryPreview->id }}" role="tabpanel" aria-labelledby="" tabindex="0">
                     <div class="row row-cols-1 row-cols-md-3 justify-content-center g-4 mt-0">
-                        @forelse ($productsPreview[$productCategoryPreview->id] ?? [] as $product)
+                        @forelse ($productsPreview[$productCategoryPreview->id] ?? [] as $productPreview)
                             <div class="col">
                                 <div class="card h-100">
-                                    <img src="{{ Str::startsWith($product->image, ['http://', 'https://']) ? $product->image : asset('storage/' . $product->image) }}"
+                                    <img src="{{ Str::startsWith($productPreview->image, ['http://', 'https://']) ? $productPreview->image : asset('storage/' . $productPreview->image) }}"
                                         class="card-img-top" style="height: 235px; object-fit: cover" alt="...">
                                     <div class="card-body">
-                                        <h5 class="card-title">{{ $product->name ?? '-' }}</h5>
-                                        <span class="badge text-bg-info">Rp
-                                            {{ number_format($product->price, 0, ',', '.') }}</span>
-                                        <p class="card-text mt-2" style="text-align: justify">
-                                            {{ $product->description ?? '-' }}
-                                        </p>
+                                        {{-- <div class="d-flex mb-3">
+                                            <div class="me-auto">
+                                                <span
+                                                    class="badge text-bg-secondary">{{ $productCategoryPreview->name ?? '-' }}</span>
+                                            </div>
+                                            <small class="text-body-secondary">
+
+                                            </small>
+                                        </div> --}}
+                                        <h5 class="card-title">
+                                            <a class="text-decoration-none"
+                                                href="{{ url($sectionProduct->slug . '/' . $productPreview->category_slug . '/' . $productPreview->slug) }}">{{ $productPreview->name ?? '-' }}
+                                            </a>
+                                        </h5>
+                                        {{-- <span class="badge text-bg-info">Rp
+                                            {{ number_format($productPreview->price, 0, ',', '.') }}</span> --}}
+                                        {{-- <p class="card-text mt-2" style="text-align: justify">
+                                            {{ $productPreview->description ?? '-' }}
+                                        </p> --}}
                                     </div>
-                                    {{-- <div class="card-footer">
-                                <small class="text-body-secondary">Last updated 3 mins ago</small>
-                            </div> --}}
+                                    {{-- <div class="card-footer text-end">
+                                        <small class="text-body-secondary">
+                                            
+                                        </small>
+                                    </div> --}}
                                 </div>
                             </div>
                         @empty
-                            <p class="text-center">Belum ada products</p>
+                            <p class="text-center">Belum ada {{ Str::lower($sectionProduct->title) ?? '-' }}</p>
                         @endforelse
                     </div>
                 </div>
@@ -93,11 +108,11 @@
     </section>
 
 
-    <section id="articles" style="padding-top: 8%">
+    <section id="articles" style="margin-top: 8%">
         <div class="text-center">
-            <h3>{{ $article->title ?? '-' }}</h3>
+            <h3>{{ $sectionArticle->title ?? '-' }}</h3>
             <p>
-                {{ $article->subtitle ?? '-' }}
+                {{ $sectionArticle->subtitle ?? '-' }}
             </p>
         </div>
 
@@ -111,7 +126,7 @@
                 <li class="nav-item" role="presentation">
                     <button class="nav-link {{ $loop->first ? 'active' : '' }}" data-bs-toggle="tab"
                         data-bs-target="#articles-{{ $articleCategoryPreview->id }}" type="button" role="tab"
-                        aria-controls="category-1-tab-pane" aria-selected="true">
+                        aria-controls="" aria-selected="true">
                         {{ $articleCategoryPreview->name ?? '-' }} ({{ $count }})
                     </button>
                 </li>
@@ -122,10 +137,10 @@
                 <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}"
                     id="articles-{{ $articleCategoryPreview->id }}" role="tabpanel" aria-labelledby="" tabindex="0">
                     <div class="row row-cols-1 row-cols-md-3 justify-content-center g-4 mt-0">
-                        @forelse ($articlesPreview[$articleCategoryPreview->id] ?? [] as $article)
+                        @forelse ($articlesPreview[$articleCategoryPreview->id] ?? [] as $articlePreview)
                             <div class="col">
                                 <div class="card h-100">
-                                    <img src="{{ Str::startsWith($article->image, ['http://', 'https://']) ? $article->image : asset('storage/' . $article->image) }}"
+                                    <img src="{{ Str::startsWith($articlePreview->image, ['http://', 'https://']) ? $articlePreview->image : asset('storage/' . $articlePreview->image) }}"
                                         class="card-img-top" style="height: 235px; object-fit: cover" alt="...">
                                     <div class="card-body">
                                         <div class="d-flex mb-3">
@@ -133,20 +148,29 @@
                                                 <span
                                                     class="badge text-bg-secondary">{{ $articleCategoryPreview->name ?? '-' }}</span>
                                             </div>
-                                            <small><i class="bi bi-eye-fill"></i> {{ $article->views ?? '-' }}</small>
+                                            <small class="text-body-secondary">
+                                                {{ $articlePreview->published_at ? $articlePreview->published_at->diffForHumans() : '-' }}
+                                            </small>
                                         </div>
-                                        <h5 class="card-title">{{ $article->title ?? '-' }}</h5>
+                                        <h5 class="card-title">
+                                            <a class="text-decoration-none"
+                                                href="{{ url($sectionArticle->slug . '/' . $articlePreview->category_slug . '/' . $articlePreview->slug) }}">{{ $articlePreview->title ?? '-' }}</a>
+                                        </h5>
                                         <p class="card-text" style="text-align: justify">
-                                            {{ $article->content ?? '-' }}
+                                            {{ Str::limit($articlePreview->content, 150, '...') ?? '-' }}
+                                            <a class="text-decoration-none"
+                                                href="{{ url($sectionArticle->slug . '/' . $articlePreview->category_slug . '/' . $articlePreview->slug) }}">Selengkapnya</a>
                                         </p>
                                     </div>
-                                    {{-- <div class="card-footer">
-                                <small class="text-body-secondary">Last updated 3 mins ago</small>
-                            </div> --}}
+                                    <div class="card-footer text-end">
+                                        <small class="text-body-secondary">
+                                            <i class="bi bi-eye-fill"></i> {{ $articlePreview->views ?? '-' }}
+                                        </small>
+                                    </div>
                                 </div>
                             </div>
                         @empty
-                            <p class="text-center">Belum ada articles</p>
+                            <p class="text-center">Belum ada {{ Str::lower($sectionArticle->title) ?? '-' }}</p>
                         @endforelse
                     </div>
                 </div>
@@ -157,3 +181,7 @@
         </div>
     </section>
 @endsection
+
+@push('styles')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+@endpush

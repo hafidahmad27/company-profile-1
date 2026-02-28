@@ -12,25 +12,28 @@
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 @foreach ($pages as $page)
                     <li class="nav-item">
-                        <a class="nav-link {{ ($page->slug == 'index' ? request()->is('/') : request()->is($page->slug)) ? 'active fw-bold' : '' }}"
+                        <a class="nav-link fw-bold {{ ($page->slug == 'index' ? request()->is('/') : request()->is($page->slug)) ? 'active text-primary' : 'text-light' }}"
                             href="{{ $page->slug == 'index' ? url('/') : url($page->slug) }}">{{ $page->title }}
                         </a>
                     </li>
                 @endforeach
-                {{-- <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
-                        </li> --}}
+
                 {{-- <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </li> --}}
+                    <a class="nav-link fw-bold {{ request()->is('articles') ? 'active text-primary' : 'text-light' }} dropdown-toggle"
+                        href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Dropdown
+                    </a>
+                    <ul class="dropdown-menu bg-secondary">
+                        @foreach ($pages as $page)
+                            <li>
+                                <a class="dropdown-item link-primary link-underline-primary {{ ($page->slug == 'index' ? request()->is('/') : request()->is($page->slug)) ? 'active text-light' : 'text-light' }}"
+                                    href="{{ $page->slug == 'index' ? url('/') : url($page->slug) }}">
+                                    {{ $page->title }}
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </li> --}}
                 {{-- <li class="nav-item">
                             <a class="nav-link disabled" aria-disabled="true">Disabled</a>
                         </li> --}}

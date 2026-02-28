@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->unsignedTinyInteger('order')->default(0);
             $table->boolean('is_active')->unsigned()->default(false);
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
     }
 

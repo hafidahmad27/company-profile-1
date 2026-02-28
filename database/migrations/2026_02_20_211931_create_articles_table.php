@@ -20,13 +20,14 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('content')->nullable();
             $table->string('image')->nullable();
-            $table->timestamp('published_at')->nullable();
+            $table->dateTime('published_at')->nullable();
             $table->boolean('is_published')->unsigned()->default(false);
             $table->unsignedInteger('views')->default(0);
             $table->foreignId('user_id')->nullable()->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('set null');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
     }
 
