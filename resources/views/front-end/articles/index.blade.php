@@ -30,7 +30,7 @@
                         <div class="col">
                             <div class="card h-100">
                                 <img src="{{ Str::startsWith($article->image, ['http://', 'https://']) ? $article->image : asset('storage/' . $article->image) }}"
-                                    class="card-img-top" style="height: 235px; object-fit: cover" alt="...">
+                                    class="card-img-top" style="height: 235px; object-fit: cover" alt="Gambar">
                                 <div class="card-body">
                                     <div class="d-flex mb-3">
                                         <div class="me-auto">

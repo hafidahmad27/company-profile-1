@@ -30,16 +30,16 @@
                         <div class="col">
                             <div class="card h-100">
                                 <img src="{{ Str::startsWith($product->image, ['http://', 'https://']) ? $product->image : asset('storage/' . $product->image) }}"
-                                    class="card-img-top" style="height: 235px; object-fit: cover" alt="...">
+                                    class="card-img-top" style="height: 235px; object-fit: cover" alt="Gambar">
                                 <div class="card-body">
-                                    <div class="d-flex mb-3">
-                                        <div class="me-auto">
+                                    {{-- <div class="d-flex mb-3"> --}}
+                                    {{-- <div class="me-auto">
                                             <span class="badge text-bg-secondary">{{ $productCategory->name ?? '-' }}</span>
-                                        </div>
-                                        {{-- <small class="text-body-secondary">
+                                        </div> --}}
+                                    {{-- <small class="text-body-secondary">
                                             
                                         </small> --}}
-                                    </div>
+                                    {{-- </div> --}}
                                     <h5 class="card-title">
                                         <a class="text-decoration-none"
                                             href="{{ url(url()->current() . '/' . $product->category_slug . '/' . $product->slug) }}">{{ $product->name ?? '-' }}</a>

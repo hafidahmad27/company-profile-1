@@ -53,7 +53,14 @@ class CompanyProfileController extends Controller
         // Cek apakah kategori ada di ArticleCategory
         if (ArticleCategory::where('slug', $category_slug)->exists()) {
             $articleCategory = ArticleCategory::where('slug', $category_slug)->firstOrFail();
-            $article = Article::where('slug', $slug)
+            $article = Article::join('article_categories', 'articles.article_category_id', '=', 'article_categories.id')
+                ->join('users', 'articles.user_id', '=', 'users.id')
+                ->select(
+                    'articles.*',
+                    'article_categories.name as category_name',
+                    'users.name as user_name',
+                )
+                ->where('articles.slug', $slug)
                 ->where('article_category_id', $articleCategory->id)
                 ->where('is_published', 1)
                 ->firstOrFail();
@@ -62,7 +69,14 @@ class CompanyProfileController extends Controller
         // Cek apakah kategori ada di ProductCategory
         elseif (ProductCategory::where('slug', $category_slug)->exists()) {
             $productCategory = ProductCategory::where('slug', $category_slug)->firstOrFail();
-            $product = Product::where('slug', $slug)
+            $product = Product::join('product_categories', 'products.product_category_id', '=', 'product_categories.id')
+                ->join('users', 'products.user_id', '=', 'users.id')
+                ->select(
+                    'products.*',
+                    'product_categories.name as category_name',
+                    'users.name as user_name',
+                )
+                ->where('products.slug', $slug)
                 ->where('product_category_id', $productCategory->id)
                 ->where('is_published', 1)
                 ->firstOrFail();
