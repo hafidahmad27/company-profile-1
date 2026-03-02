@@ -33,6 +33,7 @@
                         {{ $page->title }}
                     @endif
                 </h2>
+
                 @include('front-end.layouts.partials.breadcrumb')
             </div>
         </div>

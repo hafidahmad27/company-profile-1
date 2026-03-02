@@ -28,30 +28,34 @@
                 <div class="row row-cols-1 row-cols-md-3 justify-content-center g-4 mt-0">
                     @forelse ($products[$productCategory->id] ?? [] as $product)
                         <div class="col">
-                            <div class="card h-100">
+                            <div class="card h-100 border-0">
                                 <img src="{{ Str::startsWith($product->image, ['http://', 'https://']) ? $product->image : asset('storage/' . $product->image) }}"
-                                    class="card-img-top" style="height: 235px; object-fit: cover" alt="Gambar">
-                                <div class="card-body">
-                                    {{-- <div class="d-flex mb-3"> --}}
-                                    {{-- <div class="me-auto">
+                                    class="card-img-top rounded-4" style="height: 235px; object-fit: cover" alt="Gambar">
+                                {{-- <div class="card-body"> --}}
+                                {{-- <div class="d-flex mb-3"> --}}
+                                {{-- <div class="me-auto">
                                             <span class="badge text-bg-secondary">{{ $productCategory->name ?? '-' }}</span>
                                         </div> --}}
-                                    {{-- <small class="text-body-secondary">
+                                {{-- <small class="text-body-secondary">
                                             
                                         </small> --}}
-                                    {{-- </div> --}}
-                                    <h5 class="card-title">
-                                        <a class="text-decoration-none"
-                                            href="{{ url(url()->current() . '/' . $product->category_slug . '/' . $product->slug) }}">{{ $product->name ?? '-' }}</a>
-                                    </h5>
-                                    <span class="badge text-bg-info">Rp
-                                        {{ number_format($product->price, 0, ',', '.') }}</span>
-                                    <p class="card-text mt-2" style="text-align: justify">
-                                        {{ Str::limit($product->description, 150, '...') ?? '-' }}
-                                        <a class="text-decoration-none"
-                                            href="{{ url(url()->current() . '/' . $product->category_slug . '/' . $product->slug) }}">Selengkapnya</a>
-                                    </p>
+                                {{-- </div> --}}
+                                <h5 class="card-title mt-3">
+                                    <a class="text-decoration-none"
+                                        href="{{ url(url()->current() . '/' . $product->category_slug . '/' . $product->slug) }}">{{ $product->name ?? '-' }}</a>
+                                </h5>
+                                <div class="d-flex">
+                                    <div class="me-auto">
+                                        <span class="badge text-bg-info">Rp
+                                            {{ number_format($product->price, 0, ',', '.') }}</span>
+                                    </div>
                                 </div>
+                                <p class="card-text mt-2" style="text-align: justify">
+                                    {{ Str::limit($product->description, 150, '...') ?? '-' }}
+                                    <a class="text-decoration-none"
+                                        href="{{ url(url()->current() . '/' . $product->category_slug . '/' . $product->slug) }}">Selengkapnya</a>
+                                </p>
+                                {{-- </div> --}}
                                 {{-- <div class="card-footer text-end">
                                     <small class="text-body-secondary">
                                         

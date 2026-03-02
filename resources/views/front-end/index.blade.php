@@ -2,21 +2,32 @@
 
 @section('content')
     <section id="carousel" class="mt-3">
-        <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                @foreach ($carouselSlides as $key => $slide)
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ $key }}"
+                        class="{{ $key == 0 ? 'active' : '' }}" aria-current=""
+                        aria-label="Slide {{ $key + 1 }}"></button>
+                @endforeach
+            </div>
             <div class="carousel-inner">
                 @foreach ($carouselSlides as $key => $slide)
                     <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
                         <img src="{{ Str::startsWith($slide->image, ['http://', 'https://']) ? $slide->image : asset('storage/' . $slide->image) }}"
                             class="d-block w-100" alt="Gambar">
+                        {{-- <div class="carousel-caption d-block">
+                            <h5>{{ $slide->title }}</h5>
+                            <p>{{ $slide->subtitle }}</p>
+                        </div> --}}
                     </div>
                 @endforeach
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
                 data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
                 data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
@@ -64,9 +75,10 @@
                     <div class="row row-cols-1 row-cols-md-3 justify-content-center g-4 mt-0">
                         @forelse ($productsPreview[$productCategoryPreview->id] ?? [] as $productPreview)
                             <div class="col">
-                                <div class="card h-100">
+                                <div class="card h-100 border-0">
                                     <img src="{{ Str::startsWith($productPreview->image, ['http://', 'https://']) ? $productPreview->image : asset('storage/' . $productPreview->image) }}"
-                                        class="card-img-top" style="height: 235px; object-fit: cover" alt="Gambar">
+                                        class="card-img-top rounded-4" style="height: 235px; object-fit: cover"
+                                        alt="Gambar">
                                     <div class="card-body">
                                         {{-- <div class="d-flex mb-3">
                                             <div class="me-auto">
@@ -77,7 +89,7 @@
 
                                             </small>
                                         </div> --}}
-                                        <h5 class="card-title">
+                                        <h5 class="card-title text-center">
                                             <a class="text-decoration-none"
                                                 href="{{ url($sectionProduct->slug . '/' . $productPreview->category_slug . '/' . $productPreview->slug) }}">{{ $productPreview->name ?? '-' }}
                                             </a>
@@ -139,34 +151,39 @@
                     <div class="row row-cols-1 row-cols-md-3 justify-content-center g-4 mt-0">
                         @forelse ($articlesPreview[$articleCategoryPreview->id] ?? [] as $articlePreview)
                             <div class="col">
-                                <div class="card h-100">
+                                <div class="card h-100 border-0">
                                     <img src="{{ Str::startsWith($articlePreview->image, ['http://', 'https://']) ? $articlePreview->image : asset('storage/' . $articlePreview->image) }}"
-                                        class="card-img-top" style="height: 235px; object-fit: cover" alt="Gambar">
-                                    <div class="card-body">
-                                        <div class="d-flex mb-3">
-                                            <div class="me-auto">
-                                                <span
-                                                    class="badge text-bg-secondary">{{ $articleCategoryPreview->name ?? '-' }}</span>
-                                            </div>
-                                            <small class="text-body-secondary">
-                                                {{ $articlePreview->published_at ? $articlePreview->published_at->diffForHumans() : '-' }}
-                                            </small>
+                                        class="card-img-top rounded-4" style="height: 235px; object-fit: cover"
+                                        alt="Gambar">
+                                    {{-- <div class="card-body"> --}}
+                                    <div class="d-flex mt-3 mb-3">
+                                        <div class="me-auto">
+                                            <span
+                                                class="badge text-bg-secondary">{{ $articleCategoryPreview->name ?? '-' }}</span>
                                         </div>
-                                        <h5 class="card-title">
-                                            <a class="text-decoration-none"
-                                                href="{{ url($sectionArticle->slug . '/' . $articlePreview->category_slug . '/' . $articlePreview->slug) }}">{{ $articlePreview->title ?? '-' }}</a>
-                                        </h5>
-                                        <p class="card-text" style="text-align: justify">
-                                            {{ Str::limit($articlePreview->content, 150, '...') ?? '-' }}
-                                            <a class="text-decoration-none"
-                                                href="{{ url($sectionArticle->slug . '/' . $articlePreview->category_slug . '/' . $articlePreview->slug) }}">Selengkapnya</a>
-                                        </p>
+                                        <small class="text-body-secondary">
+                                            {{ $articlePreview->published_at ? $articlePreview->published_at->diffForHumans() : '-' }}
+                                        </small>
                                     </div>
-                                    <div class="card-footer text-end">
+                                    <h5 class="card-title">
+                                        <a class="text-decoration-none"
+                                            href="{{ url($sectionArticle->slug . '/' . $articlePreview->category_slug . '/' . $articlePreview->slug) }}">{{ $articlePreview->title ?? '-' }}</a>
+                                    </h5>
+                                    <p class="card-text" style="text-align: justify">
+                                        {{ Str::limit($articlePreview->content, 150, '...') ?? '-' }}
+                                        <a class="text-decoration-none"
+                                            href="{{ url($sectionArticle->slug . '/' . $articlePreview->category_slug . '/' . $articlePreview->slug) }}">Selengkapnya</a>
+                                        <br>
+                                        <span class="text-body-secondary float-end" style="font-size: 8pt"><i
+                                                class="bi bi-eye-fill"></i>
+                                            {{ $articlePreview->views ?? '-' }}</span>
+                                    </p>
+                                    {{-- </div> --}}
+                                    {{-- <div class="card-footer text-end">
                                         <small class="text-body-secondary">
                                             <i class="bi bi-eye-fill"></i> {{ $articlePreview->views ?? '-' }}
                                         </small>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         @empty
