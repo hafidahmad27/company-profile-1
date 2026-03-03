@@ -112,26 +112,36 @@ class CompanyProfileController extends Controller
         $sectionProduct = Section::join('pages', 'sections.page_id', '=', 'pages.id')
             ->where('section_key', 'products')->first();
         $productCategoriesPreview = ProductCategory::where('is_active', 1)->get();
-        $productsPreview = Product::where('is_published', 1)->orderBy('published_at', 'desc')
-            ->join('product_categories', 'products.product_category_id', '=', 'product_categories.id')
-            ->select(
-                'product_categories.slug as category_slug',
-                'products.*'
-            )
-            ->get()
-            ->groupBy('product_category_id');
+        $productsPreview = [];
+        foreach ($productCategoriesPreview as $category) {
+            $productsPreview[$category->id] = Product::join('product_categories', 'products.product_category_id', '=', 'product_categories.id')
+                ->select(
+                    'product_categories.slug as category_slug',
+                    'products.*'
+                )
+                ->where('product_category_id', $category->id)
+                ->where('is_published', 1)
+                ->orderBy('published_at', 'desc')
+                ->limit(3)
+                ->get();
+        }
 
         $sectionArticle = Section::join('pages', 'sections.page_id', '=', 'pages.id')
             ->where('section_key', 'articles')->first();
         $articleCategoriesPreview = ArticleCategory::where('is_active', 1)->get();
-        $articlesPreview = Article::where('is_published', 1)->orderBy('published_at', 'desc')
-            ->join('article_categories', 'articles.article_category_id', '=', 'article_categories.id')
-            ->select(
-                'article_categories.slug as category_slug',
-                'articles.*'
-            )
-            ->get()
-            ->groupBy('article_category_id');
+        $articlesPreview = [];
+        foreach ($articleCategoriesPreview as $category) {
+            $articlesPreview[$category->id] = Article::join('article_categories', 'articles.article_category_id', '=', 'article_categories.id')
+                ->select(
+                    'article_categories.slug as category_slug',
+                    'articles.*'
+                )
+                ->where('article_category_id', $category->id)
+                ->where('is_published', 1)
+                ->orderBy('published_at', 'desc')
+                ->limit(3)
+                ->get();
+        }
 
         return compact('carouselSlides', 'about', 'sectionProduct', 'productCategoriesPreview', 'productsPreview', 'sectionArticle', 'articleCategoriesPreview', 'articlesPreview');
     }
@@ -154,16 +164,21 @@ class CompanyProfileController extends Controller
     private function articles()
     {
         $articleCategories = ArticleCategory::where('is_active', 1)->get();
-        $articles = Article::where('is_published', 1)->orderBy('published_at', 'desc')
-            ->join('article_categories', 'articles.article_category_id', '=', 'article_categories.id')
-            ->select(
-                'article_categories.slug as category_slug',
-                'articles.*'
-            )
-            ->get()
-            ->groupBy('article_category_id');
 
-        return compact('articleCategories', 'articles');
+        foreach ($articleCategories as $category) {
+            $articles[$category->id] = article::join('article_categories', 'articles.article_category_id', '=', 'article_categories.id')
+                ->select(
+                    'article_categories.slug as category_slug',
+                    'articles.*'
+                )
+                ->where('article_category_id', $category->id)
+                ->where('is_published', 1)
+                ->orderBy('published_at', 'desc')
+                ->paginate(6);
+        }
+        $defaultArticleCategoryId = request()->get('tab', $articleCategories->first()->id);
+
+        return compact('articleCategories', 'articles', 'defaultArticleCategoryId');
     }
 
     private function settings()

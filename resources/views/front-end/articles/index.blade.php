@@ -10,21 +10,27 @@
     <ul class="nav nav-tabs justify-content-center" id="articlesTab" role="tablist">
         @foreach ($articleCategories as $articleCategory)
             @php
-                $count = isset($articles[$articleCategory->id]) ? count($articles[$articleCategory->id]) : 0;
+                // $count = isset($articles[$articleCategory->id]) ? count($articles[$articleCategory->id]) : 0;
+                $count = $articles[$articleCategory->id]->total();
             @endphp
             <li class="nav-item" role="presentation">
-                <button class="nav-link {{ $loop->first ? 'active' : '' }}" data-bs-toggle="tab"
+                {{-- <button class="nav-link {{ $loop->first ? 'active' : '' }}" data-bs-toggle="tab"
                     data-bs-target="#articles-{{ $articleCategory->id }}" type="button" role="tab" aria-controls=""
                     aria-selected="true">
                     {{ $articleCategory->name ?? '-' }} ({{ $count }})
-                </button>
+                </button> --}}
+                <a class="nav-link {{ $articleCategory->id == $defaultArticleCategoryId ? 'active' : '' }}"
+                    href="{{ request()->fullUrlWithQuery(['tab' => $articleCategory->id]) }}" role="tab" aria-controls=""
+                    aria-selected="true">
+                    {{ $articleCategory->name ?? '-' }} ({{ $count }})
+                </a>
             </li>
         @endforeach
     </ul>
     <div class="tab-content" id="articlesTabContent">
         @foreach ($articleCategories as $articleCategory)
-            <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="articles-{{ $articleCategory->id }}"
-                role="tabpanel" aria-labelledby="" tabindex="0">
+            <div class="tab-pane fade {{ $articleCategory->id == $defaultArticleCategoryId ? 'show active' : '' }}"
+                id="articles-{{ $articleCategory->id }}" role="tabpanel" aria-labelledby="" tabindex="0">
                 <div class="row row-cols-1 row-cols-md-3 justify-content-center g-4 mt-0">
                     @forelse ($articles[$articleCategory->id] ?? [] as $article)
                         <div class="col">
@@ -66,6 +72,9 @@
                     @empty
                         <p class="text-center">Belum ada {{ Str::lower($page->title) ?? '-' }}</p>
                     @endforelse
+                </div>
+                <div class="d-flex justify-content-center mt-4">
+                    {{ $articles[$articleCategory->id]->withQueryString()->links() }}
                 </div>
             </div>
             {{-- <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0">

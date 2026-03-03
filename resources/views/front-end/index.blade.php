@@ -54,16 +54,11 @@
 
         <ul class="nav nav-tabs justify-content-center" id="productsTab" role="tablist">
             @foreach ($productCategoriesPreview as $productCategoryPreview)
-                @php
-                    $count = isset($productsPreview[$productCategoryPreview->id])
-                        ? count($productsPreview[$productCategoryPreview->id])
-                        : 0;
-                @endphp
                 <li class="nav-item" role="presentation">
                     <button class="nav-link {{ $loop->first ? 'active' : '' }}" data-bs-toggle="tab"
                         data-bs-target="#products-{{ $productCategoryPreview->id }}" type="button" role="tab"
                         aria-controls="" aria-selected="true">
-                        {{ $productCategoryPreview->name ?? '-' }} ({{ $count }})
+                        {{ $productCategoryPreview->name ?? '-' }}
                     </button>
                 </li>
             @endforeach
@@ -117,29 +112,30 @@
             </div> --}}
             @endforeach
         </div>
+        <div class="d-grid gap-2 col-2 mx-auto text-center mt-3">
+            <a href="{{ url($sectionProduct->button_link ?? '/') }}"
+                class="btn btn-primary">{{ $sectionProduct->button_text ?? '-' }}
+                <i class="bi bi-chevron-double-right"></i>
+            </a>
+        </div>
     </section>
 
 
     <section id="articles" style="margin-top: 8%">
-        <div class="text-center">
+        <div class="text-center mb-4">
             <h3>{{ $sectionArticle->title ?? '-' }}</h3>
-            <p>
-                {{ $sectionArticle->subtitle ?? '-' }}
+            <p class="mt-4">
+                {{ $sectionArticle->subtitle }}
             </p>
         </div>
 
         <ul class="nav nav-tabs justify-content-center" id="articlesTab" role="tablist">
             @foreach ($articleCategoriesPreview as $articleCategoryPreview)
-                @php
-                    $count = isset($articlesPreview[$articleCategoryPreview->id])
-                        ? count($articlesPreview[$articleCategoryPreview->id])
-                        : 0;
-                @endphp
                 <li class="nav-item" role="presentation">
                     <button class="nav-link {{ $loop->first ? 'active' : '' }}" data-bs-toggle="tab"
                         data-bs-target="#articles-{{ $articleCategoryPreview->id }}" type="button" role="tab"
                         aria-controls="" aria-selected="true">
-                        {{ $articleCategoryPreview->name ?? '-' }} ({{ $count }})
+                        {{ $articleCategoryPreview->name ?? '-' }}
                     </button>
                 </li>
             @endforeach
@@ -195,6 +191,12 @@
                 ...
             </div> --}}
             @endforeach
+        </div>
+        <div class="d-grid gap-2 col-2 mx-auto text-center mt-3">
+            <a href="{{ url($sectionArticle->button_link ?? '/') }}"
+                class="btn btn-primary">{{ $sectionArticle->button_text ?? '-' }}
+                <i class="bi bi-chevron-double-right"></i>
+            </a>
         </div>
     </section>
 @endsection
