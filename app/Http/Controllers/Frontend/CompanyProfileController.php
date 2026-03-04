@@ -122,7 +122,7 @@ class CompanyProfileController extends Controller
                 ->where('product_category_id', $category->id)
                 ->where('is_published', 1)
                 ->orderBy('published_at', 'desc')
-                ->limit(3)
+                ->limit(4)
                 ->get();
         }
 
@@ -149,21 +149,28 @@ class CompanyProfileController extends Controller
     private function products()
     {
         $productCategories = ProductCategory::where('is_active', 1)->get();
-        $products = Product::where('is_published', 1)->orderBy('published_at', 'desc')
-            ->join('product_categories', 'products.product_category_id', '=', 'product_categories.id')
-            ->select(
-                'product_categories.slug as category_slug',
-                'products.*'
-            )
-            ->get()
-            ->groupBy('product_category_id');
+        $products = [];
 
-        return compact('productCategories', 'products');
+        foreach ($productCategories as $category) {
+            $products[$category->id] = product::join('product_categories', 'products.product_category_id', '=', 'product_categories.id')
+                ->select(
+                    'product_categories.slug as category_slug',
+                    'products.*'
+                )
+                ->where('product_category_id', $category->id)
+                ->where('is_published', 1)
+                ->orderBy('published_at', 'desc')
+                ->paginate(6);
+        }
+        $defaultProductCategoryId = $productCategories->isNotEmpty() ? request()->get('tab', $productCategories->first()->id) : null;
+
+        return compact('productCategories', 'products', 'defaultProductCategoryId');
     }
 
     private function articles()
     {
         $articleCategories = ArticleCategory::where('is_active', 1)->get();
+        $articles = [];
 
         foreach ($articleCategories as $category) {
             $articles[$category->id] = article::join('article_categories', 'articles.article_category_id', '=', 'article_categories.id')
@@ -176,7 +183,7 @@ class CompanyProfileController extends Controller
                 ->orderBy('published_at', 'desc')
                 ->paginate(6);
         }
-        $defaultArticleCategoryId = request()->get('tab', $articleCategories->first()->id);
+        $defaultArticleCategoryId = $articleCategories->isNotEmpty() ? request()->get('tab', $articleCategories->first()->id) : null;
 
         return compact('articleCategories', 'articles', 'defaultArticleCategoryId');
     }

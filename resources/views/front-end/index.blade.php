@@ -67,7 +67,7 @@
             @foreach ($productCategoriesPreview as $productCategoryPreview)
                 <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}"
                     id="products-{{ $productCategoryPreview->id }}" role="tabpanel" aria-labelledby="" tabindex="0">
-                    <div class="row row-cols-1 row-cols-md-3 justify-content-center g-4 mt-0">
+                    <div class="row row-cols-1 row-cols-md-4 justify-content-center g-4 mt-0">
                         @forelse ($productsPreview[$productCategoryPreview->id] ?? [] as $productPreview)
                             <div class="col">
                                 <div class="card h-100 border-0">
@@ -112,7 +112,7 @@
             </div> --}}
             @endforeach
         </div>
-        <div class="d-grid gap-2 col-2 mx-auto text-center mt-3">
+        <div class="d-grid gap-2 col-2 mx-auto text-center mt-2">
             <a href="{{ url($sectionProduct->button_link ?? '/') }}"
                 class="btn btn-primary">{{ $sectionProduct->button_text ?? '-' }}
                 <i class="bi bi-chevron-double-right"></i>
