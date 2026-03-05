@@ -108,9 +108,13 @@ class CompanyProfileController extends Controller
 
         $about = Section::join('pages', 'sections.page_id', '=', 'pages.id')
             ->where('section_key', 'about')->first();
+        $aboutPreview = Section::where('section_key', 'about-preview')
+            ->where('sections.is_active', 1)->first();
 
         $sectionProduct = Section::join('pages', 'sections.page_id', '=', 'pages.id')
             ->where('section_key', 'products')->first();
+        $sectionProductPreview = Section::join('pages', 'sections.page_id', '=', 'pages.id')
+            ->where('section_key', 'products-preview')->where('sections.is_active', 1)->first();
         $productCategoriesPreview = ProductCategory::where('is_active', 1)->get();
         $productsPreview = [];
         foreach ($productCategoriesPreview as $category) {
@@ -128,6 +132,8 @@ class CompanyProfileController extends Controller
 
         $sectionArticle = Section::join('pages', 'sections.page_id', '=', 'pages.id')
             ->where('section_key', 'articles')->first();
+        $sectionArticlePreview = Section::join('pages', 'sections.page_id', '=', 'pages.id')
+            ->where('section_key', 'articles-preview')->where('sections.is_active', 1)->first();
         $articleCategoriesPreview = ArticleCategory::where('is_active', 1)->get();
         $articlesPreview = [];
         foreach ($articleCategoriesPreview as $category) {
@@ -143,7 +149,7 @@ class CompanyProfileController extends Controller
                 ->get();
         }
 
-        return compact('carouselSlides', 'about', 'sectionProduct', 'productCategoriesPreview', 'productsPreview', 'sectionArticle', 'articleCategoriesPreview', 'articlesPreview');
+        return compact('carouselSlides', 'about', 'aboutPreview', 'sectionProduct', 'sectionProductPreview', 'productCategoriesPreview', 'productsPreview', 'sectionArticle', 'sectionArticlePreview', 'articleCategoriesPreview', 'articlesPreview');
     }
 
     private function products()

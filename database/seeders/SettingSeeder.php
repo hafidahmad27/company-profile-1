@@ -18,7 +18,7 @@ class SettingSeeder extends Seeder
             'logo' => 'logo.png',
             'address' => fake()->address(),
             'phone' => '012345678910',
-            'email' => 'hfdcorp@test.com',
+            'email' => 'hfdofficial1@gmail.com',
             'footer_about' => 'HFD Corp is a lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla vitae ad sit, tempora accusamus accusantium necessitatibus dignissimos libero adipisci quo.',
             'footer_text' => '© 2026 HFD Corp. All rights reserved.',
             'user_id' => 1,

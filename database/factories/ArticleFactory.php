@@ -20,14 +20,14 @@ class ArticleFactory extends Factory
         $title = fake()->words(5, true);
 
         return [
-            'article_category_id' => fake()->numberBetween(1, 4),
+            'article_category_id' => fake()->numberBetween(1, 3),
             'title' => ucwords($title),
             'slug' => Str::slug($title),
             'content' => fake()->paragraphs(5, true),
             'image' => 'https://placehold.co/300x200/light/blue',
             'published_at' => fake()->dateTimeBetween('-2 days', 'now'),
             'is_published' => fake()->boolean(),
-            'views' => fake()->numberBetween(5, 999),
+            'views' => fake()->numberBetween(0, 999),
             'user_id' => 1,
         ];
     }

@@ -37,18 +37,23 @@
 
 
     <section id="about" style="margin-top: 8%">
-        <h3 class="text-center">{{ $about->title ?? '-' }}</h3>
-        <p style="text-align: justify">
+        <div class="text-center mb-4">
+            <h3>{{ $about->title ?? '-' }}</h3>
+            <p class="mt-4">
+                {{ $aboutPreview->subtitle ?? null }}
+            </p>
+        </div>
+        <p class="mt-4" style="text-align: justify">
             {{ $about->content ?? '-' }}
         </p>
     </section>
 
 
     <section id="products" style="margin-top: 8%">
-        <div class="text-center">
+        <div class="text-center mb-4">
             <h3>{{ $sectionProduct->title ?? '-' }}</h3>
-            <p>
-                {{ $sectionProduct->subtitle ?? '-' }}
+            <p class="mt-4">
+                {{ $sectionProductPreview->subtitle ?? null }}
             </p>
         </div>
 
@@ -113,8 +118,8 @@
             @endforeach
         </div>
         <div class="d-grid gap-2 col-2 mx-auto text-center mt-2">
-            <a href="{{ url($sectionProduct->button_link ?? '/') }}"
-                class="btn btn-primary">{{ $sectionProduct->button_text ?? '-' }}
+            <a href="{{ url($sectionProductPreview->button_link ?? '/') }}"
+                class="btn btn-primary">{{ $sectionProductPreview->button_text ?? '-' }}
                 <i class="bi bi-chevron-double-right"></i>
             </a>
         </div>
@@ -125,7 +130,7 @@
         <div class="text-center mb-4">
             <h3>{{ $sectionArticle->title ?? '-' }}</h3>
             <p class="mt-4">
-                {{ $sectionArticle->subtitle }}
+                {{ $sectionArticlePreview->subtitle ?? null }}
             </p>
         </div>
 
@@ -193,8 +198,8 @@
             @endforeach
         </div>
         <div class="d-grid gap-2 col-2 mx-auto text-center mt-3">
-            <a href="{{ url($sectionArticle->button_link ?? '/') }}"
-                class="btn btn-primary">{{ $sectionArticle->button_text ?? '-' }}
+            <a href="{{ url($sectionArticlePreview->button_link ?? '/') }}"
+                class="btn btn-primary">{{ $sectionArticlePreview->button_text ?? '-' }}
                 <i class="bi bi-chevron-double-right"></i>
             </a>
         </div>

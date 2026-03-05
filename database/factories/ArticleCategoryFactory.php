@@ -17,12 +17,8 @@ class ArticleCategoryFactory extends Factory
      */
     public function definition(): array
     {
-        $name = fake()->words(2, true);
-
         return [
-            'name' => ucwords($name),
-            'slug' => Str::slug($name),
-            'is_active' => true,
+            //
         ];
     }
 }

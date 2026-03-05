@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-expand-sm bg-secondary sticky-top">
+<nav class="navbar navbar-expand-lg navbar-expand-sm bg-secondary sticky-top" style="border-bottom: 3px solid #0D6EFD">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
             <img src="{{ Str::startsWith($setting->logo, ['http://', 'https://']) ? $setting->logo : asset('storage/' . $setting->logo) }}"

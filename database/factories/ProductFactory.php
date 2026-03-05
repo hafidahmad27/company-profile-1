@@ -20,7 +20,7 @@ class ProductFactory extends Factory
         $name = fake()->words(3, true);
 
         return [
-            'product_category_id' => fake()->numberBetween(1, 4),
+            'product_category_id' => fake()->numberBetween(1, 2),
             'name' => ucwords($name),
             'slug' => Str::slug($name),
             'description' => fake()->text(),

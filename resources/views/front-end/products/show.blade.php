@@ -5,6 +5,7 @@
 @section('content')
     <div class="row">
         <div class="col-sm-2">
+
         </div>
         <div class="col-sm-8">
             <img src="{{ Str::startsWith($product->image, ['http://', 'https://']) ? $product->image : asset('storage/' . $product->image) }}"
@@ -30,6 +31,7 @@
             </ul>
         </div>
         <div class="col-sm-2">
+
         </div>
     </div>
 @endsection

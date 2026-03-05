@@ -3,9 +3,11 @@
 @section('title', $page->title)
 
 @section('content')
-    {{-- <p class="text-center" style="text-align: justify">
-        {{ $section->subtitle }}
-    </p> --}}
+    @if (!empty($section->subtitle))
+        <p class="text-center" style="text-align: justify">
+            {{ $section->subtitle }}
+        </p>
+    @endif
 
     <ul class="nav nav-tabs justify-content-center" id="productsTab" role="tablist">
         @foreach ($productCategories as $productCategory)

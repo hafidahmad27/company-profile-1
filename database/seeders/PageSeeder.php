@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Page;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class PageSeeder extends Seeder
 {
@@ -16,25 +17,25 @@ class PageSeeder extends Seeder
         Page::factory()->createMany([
             [
                 'title' => 'Home',
-                'slug' => 'index',
+                'slug' => Str::slug('index'),
                 'order' => 1,
                 'is_active' => true,
             ],
             [
                 'title' => 'About',
-                'slug' => 'about',
+                'slug' => Str::slug('About'),
                 'order' => 2,
                 'is_active' => true,
             ],
             [
                 'title' => 'Products',
-                'slug' => 'products',
+                'slug' => Str::slug('Products'),
                 'order' => 3,
                 'is_active' => true,
             ],
             [
                 'title' => 'Articles',
-                'slug' => 'articles',
+                'slug' => Str::slug('Articles'),
                 'order' => 4,
                 'is_active' => true,
             ],
