@@ -96,7 +96,7 @@ class SectionSeeder extends Seeder
                 'section_key' => 'about',
                 'title' => null,
                 'subtitle' => null,
-                'content' => fake()->paragraph(),
+                'content' => fake()->paragraphs(3, true),
                 'image' => null,
                 'button_text' => null,
                 'button_link' => null,

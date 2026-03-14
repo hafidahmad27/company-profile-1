@@ -10,6 +10,6 @@
     @endif --}}
 
     <p style="text-align: justify">
-        {{ $section->content ?? '-' }}
+        {!! nl2br(e($section->content ?? '-')) !!}
     </p>
 @endsection

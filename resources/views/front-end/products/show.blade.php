@@ -27,7 +27,7 @@
                 <li class="list-group-item">
                     <span class="badge text-bg-secondary">{{ $product->category_name ?? '-' }}</span>
                 </li>
-                <li class="list-group-item" style="text-align: justify">{{ $product->description ?? '-' }}</li>
+                <li class="list-group-item" style="text-align: justify">{!! nl2br(e($product->description ?? '-')) !!}</li>
             </ul>
         </div>
         <div class="col-sm-2">

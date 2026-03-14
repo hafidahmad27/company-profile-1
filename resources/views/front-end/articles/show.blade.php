@@ -18,7 +18,7 @@
             <img src="{{ Str::startsWith($article->image, ['http://', 'https://']) ? $article->image : asset('storage/' . $article->image) }}"
                 class="img-fluid w-100" alt="Gambar">
             <p class="mt-3" style="text-align: justify">
-                {{ $article->content ?? '-' }}
+                {!! nl2br(e($article->content ?? '-')) !!}
             </p>
             <br>
             <small class="text-body-secondary">
