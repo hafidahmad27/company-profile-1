@@ -25,7 +25,7 @@
                 </li>
                 <li class="breadcrumb-item text-light active" aria-current="page">
                     <a class="text-decoration-none text-light link-dark link-underline-dark"
-                        href="{{ url($page->slug . '/' . $articleCategory->slug) }}">{{ $articleCategory->name ?? '-' }}
+                        href="{{ url($page->slug) . '?tab=' . $articleCategory->id }}">{{ $articleCategory->name ?? '-' }}
                     </a>
                 </li>
                 <li class="breadcrumb-item text-light active" aria-current="page">
@@ -46,7 +46,7 @@
                 </li>
                 <li class="breadcrumb-item text-light active" aria-current="page">
                     <a class="text-decoration-none text-light link-dark link-underline-dark"
-                        href="{{ url($page->slug . '/' . $productCategory->slug) }}">{{ $productCategory->name ?? '-' }}
+                        href="{{ url($page->slug) . '?tab=' . $productCategory->id }}">{{ $productCategory->name ?? '-' }}
                     </a>
                 </li>
                 <li class="breadcrumb-item text-light active" aria-current="page">

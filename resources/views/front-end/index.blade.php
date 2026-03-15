@@ -1,7 +1,7 @@
 @extends('front-end.layouts.app')
 
 @section('content')
-    <section id="carousel" class="mt-3">
+    <section id="carousel">
         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
                 @foreach ($carouselSlides as $key => $slide)

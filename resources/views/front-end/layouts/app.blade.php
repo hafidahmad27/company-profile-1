@@ -4,10 +4,9 @@
 <head>
     <title>
         @hasSection('title')
-            @yield('title') &ndash; HFD Corp
-        @else
-            HFD Corp
+            @yield('title') &ndash;
         @endif
+        HFD Corp
     </title>
 
     @include('front-end.layouts.partials.meta')
@@ -20,7 +19,7 @@
     @include('front-end.layouts.partials.navbar')
 
     @hasSection('title')
-        <div class="container-fluid" style="background-color: orchid">
+        <div class="container-fluid bg-primary">
             <div class="row py-3">
                 <h2 class="text-center text-light mt-3 pb-2">
                     @if (request()->segment(1) && empty(request()->segment(2)))
@@ -37,14 +36,11 @@
                 @include('front-end.layouts.partials.breadcrumb')
             </div>
         </div>
-        <div class="container mt-4 flex-grow-1">
-            @yield('content')
-        </div>
-    @else
-        <div class="container flex-grow-1">
-            @yield('content')
-        </div>
     @endif
+
+    <div class="container mt-3 flex-grow-1">
+        @yield('content')
+    </div>
 
     @include('front-end.layouts.partials.footer')
 
