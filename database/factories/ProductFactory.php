@@ -27,7 +27,7 @@ class ProductFactory extends Factory
             'price' => fake()->randomFloat(2, 10000, 99990000),
             'image' => 'https://placehold.co/300x200/light/blue',
             'published_at' => fake()->dateTimeBetween('-2 days', 'now'),
-            'is_published' => fake()->boolean(),
+            'is_published' => true,
             'user_id' => 1,
         ];
     }

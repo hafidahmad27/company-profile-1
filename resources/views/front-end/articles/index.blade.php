@@ -1,6 +1,10 @@
-@extends('front-end.layouts.app')
+@extends('layouts.front-end.app')
 
 @section('title', $page->title)
+
+@push('styles')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+@endpush
 
 @section('content')
     @if (!empty($section->subtitle))
@@ -22,8 +26,8 @@
                     {{ $articleCategory->name ?? '-' }} ({{ $count }})
                 </button> --}}
                 <a class="nav-link {{ $articleCategory->id == $defaultArticleCategoryId ? 'active' : '' }}"
-                    href="{{ request()->fullUrlWithQuery(['tab' => $articleCategory->id]) }}" role="tab" aria-controls=""
-                    aria-selected="true">
+                    href="{{ request()->fullUrlWithQuery(['tab' => $articleCategory->id]) }}" role="tab"
+                    aria-controls="" aria-selected="true">
                     {{ $articleCategory->name ?? '-' }} ({{ $count }})
                 </a>
             </li>
@@ -85,7 +89,3 @@
         @endforeach
     </div>
 @endsection
-
-@push('styles')
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-@endpush

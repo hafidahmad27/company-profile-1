@@ -16,8 +16,8 @@ class UserSeeder extends Seeder
     {
         User::factory()->create([
             'name' => 'Admin',
-            'email' => 'admin@hfd.com',
-            'password' => '$2y$12$CaXICDebBAKn8t7rTsj2n..fubcvpnXvqLXBqjpIyHoXF8Qn4po7O',
+            'email' => 'hfdofficial1@gmail.com',
+            'password' => '$2y$12$hKRDBW7teNmiuMzToYoiRe8RRGMG.yJR9UfiOsrYETwfLptWQqTEm',
         ]);
     }
 }

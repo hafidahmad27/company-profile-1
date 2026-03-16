@@ -1,4 +1,8 @@
-@extends('front-end.layouts.app')
+@extends('layouts.front-end.app')
+
+@push('styles')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+@endpush
 
 @section('content')
     <section id="carousel">
@@ -205,7 +209,3 @@
         </div>
     </section>
 @endsection
-
-@push('styles')
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-@endpush

@@ -9,14 +9,14 @@
         HFD Corp
     </title>
 
-    @include('front-end.layouts.partials.meta')
+    @include('layouts.front-end.partials.meta')
 
-    @include('front-end.layouts.partials.styles')
+    @include('layouts.front-end.partials.styles')
     @stack('styles')
 </head>
 
 <body class="d-flex flex-column min-vh-100">
-    @include('front-end.layouts.partials.navbar')
+    @include('layouts.front-end.partials.navbar')
 
     @hasSection('title')
         <div class="container-fluid bg-primary">
@@ -33,7 +33,7 @@
                     @endif
                 </h2>
 
-                @include('front-end.layouts.partials.breadcrumb')
+                @include('layouts.front-end.partials.breadcrumb')
             </div>
         </div>
     @endif
@@ -42,9 +42,9 @@
         @yield('content')
     </div>
 
-    @include('front-end.layouts.partials.footer')
+    @include('layouts.front-end.partials.footer')
 
-    @include('front-end.layouts.partials.scripts')
+    @include('layouts.front-end.partials.scripts')
     @stack('scripts')
 </body>
 
