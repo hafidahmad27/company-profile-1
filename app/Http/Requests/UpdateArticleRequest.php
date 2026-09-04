@@ -11,7 +11,7 @@ class UpdateArticleRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,11 @@ class UpdateArticleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'article_category_id' => 'nullable|exists:article_categories,id',
+            'title' => 'required|string|max:255|unique:articles,title,' . $this->route('article'),
+            'content' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'user_id' => 'exists:users,id',
         ];
     }
 }

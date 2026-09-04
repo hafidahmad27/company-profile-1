@@ -3,65 +3,76 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Models\ArticleCategory;
 use App\Http\Requests\StoreArticleCategoryRequest;
 use App\Http\Requests\UpdateArticleCategoryRequest;
+use App\Services\ArticleCategoryService;
 
 class ArticleCategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    protected ArticleCategoryService $articleCategoryService;
+
+    public function __construct(ArticleCategoryService $articleCategoryService)
+    {
+        $this->articleCategoryService = $articleCategoryService;
+    }
+
     public function index()
     {
-        return view('back-end.article-categories.index');
+        $articleCategories = $this->articleCategoryService->getCategories();
+
+        return view('back-end.article-categories.index', compact('articleCategories'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('back-end.article-categories.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreArticleCategoryRequest $request)
     {
-        //
+        $validatedData = $request->validated();
+        $message = $this->articleCategoryService->create($validatedData);
+
+        return back()
+            ->with('success', $message);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(ArticleCategory $articleCategory)
+    public function show(int $id)
     {
-        //
+        $articleCategory = $this->articleCategoryService->getCategoryDetail($id);
+
+        return view('back-end.article-categories.show', compact('articleCategory'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(ArticleCategory $articleCategory)
+    public function edit(int $id)
     {
-        //
+        $articleCategory = $this->articleCategoryService->getCategoryDetail($id);
+
+        return view('back-end.article-categories.edit', compact('articleCategory'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateArticleCategoryRequest $request, ArticleCategory $articleCategory)
+    public function update(UpdateArticleCategoryRequest $request, int $id)
     {
-        //
+        $validatedData = $request->validated();
+        $message = $this->articleCategoryService->update($id, $validatedData);
+
+        return redirect()->route('be.article-categories.index')
+            ->with('success', $message);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(ArticleCategory $articleCategory)
+    public function destroy(int $id)
     {
-        //
+        $message = $this->articleCategoryService->delete($id);
+
+        return back()
+            ->with('success', $message);
+    }
+
+    public function toggleActive(int $id)
+    {
+        $message = $this->articleCategoryService->setActiveStatus($id);
+
+        return back()
+            ->with('success', $message);
     }
 }

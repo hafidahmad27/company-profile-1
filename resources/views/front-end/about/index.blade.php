@@ -3,9 +3,9 @@
 @section('title', $page->title)
 
 @section('content')
-    {{-- @if (!empty($aboutPreview->subtitle))
+    {{-- @if (!empty($sectionAboutPreview->subtitle))
         <p class="text-center" style="text-align: justify">
-            {{ $aboutPreview->subtitle }}
+            {{ $sectionAboutPreview->subtitle }}
         </p>
     @endif --}}
 

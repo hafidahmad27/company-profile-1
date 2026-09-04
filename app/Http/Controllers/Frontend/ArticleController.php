@@ -37,7 +37,7 @@ class ArticleController extends Controller
         return view('front-end.articles.index', compact('page', 'section', 'articleCategories', 'articles', 'defaultArticleCategoryId'));
     }
 
-    public function show($category_slug, $slug)
+    public function show(string $category_slug, string $slug)
     {
         $page = Page::where('slug', 'articles')->where('is_active', 1)->firstOrFail();
         $section = Section::join('pages', 'sections.page_id', '=', 'pages.id')

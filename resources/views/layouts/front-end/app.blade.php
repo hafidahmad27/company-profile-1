@@ -6,7 +6,7 @@
         @hasSection('title')
             @yield('title') &ndash;
         @endif
-        HFD Corp
+        {{ $setting->site_name ?? config('app.name') }}
     </title>
 
     @include('layouts.front-end.partials.meta')

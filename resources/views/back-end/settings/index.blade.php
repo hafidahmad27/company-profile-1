@@ -1,12 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Backend - Settings - Index</title>
-</head>
-<body>
-    <h1>Backend - Settings - Index</h1>
-</body>
-</html>
+@extends('layouts.back-end.app1')
+
+@section('title', 'Settings')
+
+@section('content')
+    <div class="page-heading">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-12 col-md-6 order-md-1 order-last">
+                    <h3>@yield('title')</h3>
+                    <p class="text-subtitle text-muted">
+                        {{--  --}}
+                    </p>
+                </div>
+                <div class="col-12 col-md-6 order-md-2 order-first">
+                    @include('layouts.back-end.partials.breadcrumb')
+                </div>
+            </div>
+        </div>
+
+        <!-- // Basic multiple Column Form section start -->
+        <section id="multiple-column-form">
+            <div class="row match-height">
+                <div class="col-12">
+                    <div class="card">
+                        {{-- <div class="card-header">
+                            <h4 class="card-title">Multiple Column</h4>
+                        </div> --}}
+                        <div class="card-content">
+                            <div class="card-body">
+                                @if (empty($setting->site_name) || empty($setting->address) || empty($setting->phone) || empty($setting->email))
+                                    <div class="alert alert-info" role="alert">
+                                        Harap mengisi kolom-kolom berikut terlebih dahulu
+                                        {{-- <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button> --}}
+                                    </div>
+                                @endif
+                                @if (session('success'))
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        {!! session('success') !!}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                    </div>
+                                @endif
+                                @include('back-end.settings._form', [
+                                    'action' => route('be.settings.update', $setting->id),
+                                    'method' => 'PUT',
+                                    'submitLabel' => '<i class="bi bi-arrow-repeat"></i> Update',
+                                ])
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- // Basic multiple Column Form section end -->
+    </div>
+@endsection

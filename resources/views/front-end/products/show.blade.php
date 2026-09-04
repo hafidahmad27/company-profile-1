@@ -8,8 +8,7 @@
 
         </div>
         <div class="col-sm-8">
-            <img src="{{ Str::startsWith($product->image, ['http://', 'https://']) ? $product->image : asset('storage/' . $product->image) }}"
-                class="img-fluid w-100" alt="Gambar">
+            <img src="{{ asset('storage/' . $product->image) }}" class="img-fluid w-100" alt="Gambar">
 
             <p class="text-end">
                 <small>

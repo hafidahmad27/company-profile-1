@@ -37,8 +37,8 @@
                     @forelse ($products[$productCategory->id] ?? [] as $product)
                         <div class="col">
                             <div class="card h-100 border-0">
-                                <img src="{{ Str::startsWith($product->image, ['http://', 'https://']) ? $product->image : asset('storage/' . $product->image) }}"
-                                    class="card-img-top rounded-4" style="height: 235px; object-fit: cover" alt="Gambar">
+                                <img src="{{ asset('storage/' . $product->image) }}" class="card-img-top rounded-4"
+                                    style="height: 235px; object-fit: cover" alt="Gambar">
                                 {{-- <div class="card-body"> --}}
                                 {{-- <div class="d-flex mb-3"> --}}
                                 {{-- <div class="me-auto">

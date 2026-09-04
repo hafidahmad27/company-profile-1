@@ -11,7 +11,7 @@ class UpdateSettingRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,13 @@ class UpdateSettingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'site_name' => 'required|string|max:255|unique:settings,site_name,' . $this->route('setting'),
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'address' => 'required|string|max:255',
+            'phone' => 'required|string',
+            'email' => 'required|email',
+            'footer_about' => 'nullable|string',
+            'user_id' => 'exists:users,id',
         ];
     }
 }

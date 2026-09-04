@@ -15,8 +15,9 @@ use Illuminate\Support\Facades\Route;
 require __DIR__ . '/auth.php';
 
 // Route back-end
-Route::prefix('be')->middleware(['auth', 'verified'])->group(function () {
+Route::prefix('be')->name('be.')->middleware(['auth', 'verified'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
     Route::resource('products', ProductController::class)->only([
         'index',
         'create',
@@ -25,6 +26,7 @@ Route::prefix('be')->middleware(['auth', 'verified'])->group(function () {
         'update',
         'destroy'
     ]);
+
     Route::resource('product-categories', ProductCategoryController::class)->only([
         'index',
         'create',
@@ -33,22 +35,15 @@ Route::prefix('be')->middleware(['auth', 'verified'])->group(function () {
         'update',
         'destroy'
     ]);
-    Route::resource('articles', ArticleController::class)->only([
-        'index',
-        'create',
-        'store',
-        'edit',
-        'update',
-        'destroy'
-    ]);
-    Route::resource('article-categories', ArticleCategoryController::class)->only([
-        'index',
-        'create',
-        'store',
-        'edit',
-        'update',
-        'destroy'
-    ]);
+
+    Route::resource('articles', ArticleController::class);
+    Route::patch('articles/{article}/togglePublish', [ArticleController::class, 'togglePublish'])
+        ->name('article.togglePublish');
+
+    Route::resource('article-categories', ArticleCategoryController::class);
+    Route::patch('article-categories/{article_category}/toggleActive', [ArticleCategoryController::class, 'toggleActive'])
+        ->name('article-categories.toggleActive');
+
     Route::resource('pages', PageController::class)->only([
         'index',
         'create',
@@ -57,6 +52,7 @@ Route::prefix('be')->middleware(['auth', 'verified'])->group(function () {
         'update',
         'destroy'
     ]);
+
     Route::resource('sections', SectionController::class)->only([
         'index',
         'create',
@@ -65,15 +61,14 @@ Route::prefix('be')->middleware(['auth', 'verified'])->group(function () {
         'update',
         'destroy'
     ]);
+
+
     Route::resource('settings', SettingController::class)->only([
         'index',
-        'create',
-        'store',
-        'edit',
-        'update',
-        'destroy'
+        'update'
     ]);
     Route::prefix('profile')->group(function () {
+        Route::get('dashboard', [ProfileController::class, 'index'])->name('profile.dashboard');
         Route::get('/', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/', [ProfileController::class, 'destroy'])->name('profile.destroy');

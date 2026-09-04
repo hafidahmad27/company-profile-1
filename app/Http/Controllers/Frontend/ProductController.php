@@ -37,7 +37,7 @@ class ProductController extends Controller
         return view('front-end.products.index', compact('page', 'section', 'productCategories', 'products', 'defaultProductCategoryId'));
     }
 
-    public function show($category_slug, $slug)
+    public function show(string $category_slug, string $slug)
     {
         $page = Page::where('slug', 'products')->where('is_active', 1)->firstOrFail();
         $section = Section::join('pages', 'sections.page_id', '=', 'pages.id')

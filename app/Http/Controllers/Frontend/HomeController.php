@@ -33,20 +33,23 @@ class HomeController extends Controller
 
     private function about()
     {
-        $about = Section::join('pages', 'sections.page_id', '=', 'pages.id')
-            ->where('section_key', 'about')->first();
-        $aboutPreview = Section::where('section_key', 'about-preview')
+        $sectionAboutPreview = Section::where('section_key', 'about-preview')
             ->where('sections.is_active', 1)->first();
 
-        return compact('about', 'aboutPreview');
+        return compact('sectionAboutPreview');
     }
 
     private function products()
     {
-        $sectionProduct = Section::join('pages', 'sections.page_id', '=', 'pages.id')
-            ->where('section_key', 'products')->first();
-        $sectionProductPreview = Section::join('pages', 'sections.page_id', '=', 'pages.id')
-            ->where('section_key', 'products-preview')->where('sections.is_active', 1)->first();
+        $product = Section::join('pages', 'sections.page_id', '=', 'pages.id')
+            ->where('section_key', 'products')
+            ->select('pages.slug', 'pages.title')
+            ->first();
+
+        $sectionProductPreview = Section::where('section_key', 'products-preview')
+            ->where('sections.is_active', 1)
+            ->select('title', 'subtitle', 'button_text', 'button_link', 'is_active')
+            ->first();
         $productCategoriesPreview = ProductCategory::where('is_active', 1)->get();
         $productsPreview = [];
 
@@ -63,15 +66,20 @@ class HomeController extends Controller
                 ->get();
         }
 
-        return compact('sectionProduct', 'sectionProductPreview', 'productCategoriesPreview', 'productsPreview');
+        return compact('product', 'sectionProductPreview', 'productCategoriesPreview', 'productsPreview');
     }
 
     private function articles()
     {
-        $sectionArticle = Section::join('pages', 'sections.page_id', '=', 'pages.id')
-            ->where('section_key', 'articles')->first();
-        $sectionArticlePreview = Section::join('pages', 'sections.page_id', '=', 'pages.id')
-            ->where('section_key', 'articles-preview')->where('sections.is_active', 1)->first();
+        $article = Section::join('pages', 'sections.page_id', '=', 'pages.id')
+            ->where('section_key', 'articles')
+            ->select('pages.slug', 'pages.title')
+            ->first();
+
+        $sectionArticlePreview = Section::where('section_key', 'articles-preview')
+            ->where('sections.is_active', 1)
+            ->select('title', 'subtitle', 'button_text', 'button_link', 'is_active')
+            ->first();
         $articleCategoriesPreview = ArticleCategory::where('is_active', 1)->get();
         $articlesPreview = [];
 
@@ -88,6 +96,6 @@ class HomeController extends Controller
                 ->get();
         }
 
-        return compact('sectionArticle', 'sectionArticlePreview', 'articleCategoriesPreview', 'articlesPreview');
+        return compact('article', 'sectionArticlePreview', 'articleCategoriesPreview', 'articlesPreview');
     }
 }

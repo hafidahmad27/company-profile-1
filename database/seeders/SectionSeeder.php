@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Page;
 use App\Models\Section;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -57,9 +56,9 @@ class SectionSeeder extends Seeder
             [
                 'page_id' => 1,
                 'section_key' => 'about-preview',
-                'title' => null,
-                'subtitle' => null,
-                'content' => null,
+                'title' => 'Tentang Kami',
+                // 'subtitle' => ucfirst(fake()->words(5, true)),
+                'content' => fake()->paragraphs(3, true),
                 'image' => null,
                 'button_text' => null,
                 'button_link' => null,
@@ -69,8 +68,8 @@ class SectionSeeder extends Seeder
             [
                 'page_id' => 1,
                 'section_key' => 'products-preview',
-                'title' => null,
-                'subtitle' => ucfirst(fake()->words(5, true)),
+                'title' => 'Produk Kami',
+                // 'subtitle' => ucfirst(fake()->words(5, true)),
                 'content' => null,
                 'image' => null,
                 'button_text' => 'Selengkapnya',
@@ -81,8 +80,8 @@ class SectionSeeder extends Seeder
             [
                 'page_id' => 1,
                 'section_key' => 'articles-preview',
-                'title' => null,
-                'subtitle' => ucfirst(fake()->words(5, true)),
+                'title' => 'Artikel Kami',
+                // 'subtitle' => ucfirst(fake()->words(5, true)),
                 'content' => null,
                 'image' => null,
                 'button_text' => 'Selengkapnya',

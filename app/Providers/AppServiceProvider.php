@@ -27,12 +27,16 @@ class AppServiceProvider extends ServiceProvider
         Carbon::setLocale('id');
         Paginator::useBootstrapFive();
 
+        View::composer('*', function ($view) {
+            $globalSetting = Setting::first() ?? new Setting;
+
+            $view->with('globalSetting', $globalSetting ?? new Setting);
+        });
+
         View::composer('front-end.*', function ($view) {
             $pages = Page::where('is_active', 1)->orderBy('order')->get();
-            $setting = Setting::first();
 
-            $view->with('pages', $pages)
-                ->with('setting', $setting);
+            $view->with('pages', $pages);
         });
     }
 }

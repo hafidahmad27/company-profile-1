@@ -41,8 +41,8 @@
                     @forelse ($articles[$articleCategory->id] ?? [] as $article)
                         <div class="col">
                             <div class="card h-100 border-0">
-                                <img src="{{ Str::startsWith($article->image, ['http://', 'https://']) ? $article->image : asset('storage/' . $article->image) }}"
-                                    class="card-img-top rounded-4" style="height: 235px; object-fit: cover" alt="Gambar">
+                                <img src="{{ $article->image_url }}" class="card-img-top rounded-4"
+                                    style="height: 235px; object-fit: cover" alt="{{ $article->image }}">
                                 {{-- <div class="card-body"> --}}
                                 <div class="d-flex mt-3 mb-3">
                                     <div class="me-auto">

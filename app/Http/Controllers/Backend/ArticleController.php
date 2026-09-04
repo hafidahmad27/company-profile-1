@@ -3,65 +3,82 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Article;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
+use App\Services\ArticleCategoryService;
+use App\Services\ArticleService;
 
 class ArticleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    protected ArticleService $articleService;
+    protected ArticleCategoryService $articleCategoryService;
+
+    public function __construct(ArticleService $articleService, ArticleCategoryService $articleCategoryService)
+    {
+        $this->articleService = $articleService;
+        $this->articleCategoryService = $articleCategoryService;
+    }
+
     public function index()
     {
-        return view('back-end.articles.index');
+        $articles = $this->articleService->getArticles();
+
+        return view('back-end.articles.index', compact('articles'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $articleCategoryOptions = $this->articleCategoryService->getCategoryOptions();
+
+        return view('back-end.articles.create', compact('articleCategoryOptions'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreArticleRequest $request)
     {
-        //
+        $validatedData = $request->validated();
+        $message = $this->articleService->create($validatedData);
+
+        return redirect()->route('be.articles.index')
+            ->with('success', $message);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Article $article)
+    public function show(int $id)
     {
-        //
+        $article = $this->articleService->getArticleDetail($id);
+
+        return view('back-end.articles.show', compact('article'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Article $article)
+    public function edit(int $id)
     {
-        //
+        $article = $this->articleService->getArticleDetail($id);
+        $articleCategoryOptions = $this->articleCategoryService->getCategoryOptions();
+
+        return view('back-end.articles.edit', compact('article', 'articleCategoryOptions'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateArticleRequest $request, Article $article)
+    public function update(UpdateArticleRequest $request, int $id)
     {
-        //
+        $validatedData = $request->validated();
+        $message = $this->articleService->update($id, $validatedData);
+
+        return redirect()->route('be.articles.index')
+            ->with('success', $message);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Article $article)
+    public function destroy(int $id)
     {
-        //
+        $message = $this->articleService->delete($id);
+
+        return back()
+            ->with('success', $message);
+    }
+
+    public function togglePublish(int $id)
+    {
+        $message = $this->articleService->setPublishedStatus($id);
+
+        return back()
+            ->with('success', $message);
     }
 }
