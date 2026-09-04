@@ -12,17 +12,17 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
-    public function index(): View
-    {
-        return view('back-end.profile.dashboard');
-    }
+    // public function index(): View
+    // {
+    //     return view('back-end.profile.dashboard');
+    // }
 
     /**
      * Display the user's profile form.
      */
-    public function edit(Request $request): View
+    public function index(Request $request): View
     {
-        return view('back-end.profile.edit', [
+        return view('back-end.profile.index', [
             'user' => $request->user(),
         ]);
     }
@@ -40,7 +40,7 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return Redirect::back()->with('status_profile', 'Profile updated');
     }
 
     /**

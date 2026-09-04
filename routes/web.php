@@ -68,8 +68,8 @@ Route::prefix('be')->name('be.')->middleware(['auth', 'verified'])->group(functi
         'update'
     ]);
     Route::prefix('profile')->group(function () {
-        Route::get('dashboard', [ProfileController::class, 'index'])->name('profile.dashboard');
-        Route::get('/', [ProfileController::class, 'edit'])->name('profile.edit');
+        // Route::get('dashboard', [ProfileController::class, 'index'])->name('profile.dashboard');
+        Route::get('/', [ProfileController::class, 'index'])->name('profile.index');
         Route::patch('/', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/', [ProfileController::class, 'destroy'])->name('profile.destroy');
     });

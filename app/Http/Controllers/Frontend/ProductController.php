@@ -47,7 +47,7 @@ class ProductController extends Controller
 
         $productCategory = ProductCategory::where('slug', $category_slug)->firstOrFail();
         $product = Product::join('product_categories', 'products.product_category_id', '=', 'product_categories.id')
-            ->join('users', 'products.user_id', '=', 'users.id')
+            ->leftJoin('users', 'products.user_id', '=', 'users.id')
             ->select(
                 'products.*',
                 'product_categories.name as category_name',

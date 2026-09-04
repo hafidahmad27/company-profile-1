@@ -1,48 +1,59 @@
-<section class="space-y-6">
-    <header>
-        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-            {{ __('Delete Account') }}
-        </h2>
-
-        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-            {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.') }}
-        </p>
-    </header>
-
-    <x-danger-button x-data=""
-        x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')">{{ __('Delete Account') }}</x-danger-button>
-
-    <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
-        <form method="post" action="{{ route('be.profile.destroy') }}" class="p-6">
-            @csrf
-            @method('delete')
-
-            <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                {{ __('Are you sure you want to delete your account?') }}
-            </h2>
-
-            <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.') }}
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            {{-- <div class="col-12 col-md-6 order-md-1 order-last"> --}}
+            <h3>Delete Account</h3>
+            <p class="text-subtitle text-muted">
+                Once your account is deleted, all of its resources and data will be permanently deleted. Before
+                deleting
+                your account, please download any data or information that you wish to retain.
             </p>
+            {{-- </div> --}}
+        </div>
+    </div>
+</div>
+{{-- <div class="col-12 col-md-12 d-flex justify-content-center mt-4"> --}}
+<button type="button" class="btn btn-danger block" data-bs-toggle="modal" data-bs-target="#default">
+    <i class="bi bi-trash"></i> Delete Account
+</button>
+{{-- </div> --}}
 
-            <div class="mt-6">
-                <x-input-label for="password" value="{{ __('Password') }}" class="sr-only" />
-
-                <x-text-input id="password" name="password" type="password" class="mt-1 block w-3/4"
-                    placeholder="{{ __('Password') }}" />
-
-                <x-input-error :messages="$errors->userDeletion->get('password')" class="mt-2" />
+<!--Basic Modal -->
+<div class="modal fade text-left" id="default" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel1">Are you sure you want to delete your account?</h5>
+                <button type="button" class="close rounded-pill" data-bs-dismiss="modal" aria-label="Close">
+                    <i data-feather="x"></i>
+                </button>
             </div>
-
-            <div class="mt-6 flex justify-end">
-                <x-secondary-button x-on:click="$dispatch('close')">
-                    {{ __('Cancel') }}
-                </x-secondary-button>
-
-                <x-danger-button class="ms-3">
-                    {{ __('Delete Account') }}
-                </x-danger-button>
-            </div>
-        </form>
-    </x-modal>
-</section>
+            <form action="{{ route('be.profile.destroy') }}" method="POST" enctype="multipart/form-data"
+                class="form">
+                @csrf
+                @method('DELETE')
+                <div class="modal-body">
+                    <p>Once your account is deleted, all of its resources and data will be permanently deleted. Please
+                        enter
+                        your password to confirm you would like to permanently delete your account.</p>
+                    {{-- <label for="password">Password: </label> --}}
+                    <div class="form-group">
+                        <input id="password" name="password" type="password" placeholder="Password"
+                            class="form-control" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="bx bx-x d-block d-sm-none"></i>
+                        <span class="d-none d-sm-block">Cancel</span>
+                    </button>
+                    <button type="submit" class="btn btn-outline-danger ms-1" data-bs-dismiss="modal">
+                        <i class="bx bx-check d-block d-sm-none"></i>
+                        <span class="d-none d-sm-block">Delete Account</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -638,9 +638,12 @@
                     class="sidebar-item 
                     {{ request()->is('be/settings') ? 'active' : '' }}
                     {{ request()->is('be/settings/*') ? 'active' : '' }} 
+
+                    {{ request()->is('be/profile') ? 'active' : '' }}
+                    {{ request()->is('be/profile/*') ? 'active' : '' }}
                     has-sub">
                     <a href="#" class='sidebar-link'>
-                        <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                        <i class="bi bi-gear"></i>
                         <span>Settings</span>
                     </a>
                     <ul class="submenu">
@@ -659,7 +662,7 @@
                             {{ request()->is('be/profile') ? 'active' : '' }}
                             {{ request()->is('be/profile/*') ? 'active' : '' }}
                             ">
-                            <a href="{{ route('be.profile.edit') }}" class='submenu-link'>
+                            <a href="{{ route('be.profile.index') }}" class='submenu-link'>
                                 {{-- <i class="bi bi-person"></i> --}}
                                 <span>Profile</span>
                             </a>

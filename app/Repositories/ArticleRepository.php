@@ -17,7 +17,7 @@ class ArticleRepository
     public function getAll()
     {
         return $this->article->join('article_categories', 'articles.article_category_id', '=', 'article_categories.id')
-            ->join('users', 'articles.user_id', '=', 'users.id')
+            ->leftJoin('users', 'articles.user_id', '=', 'users.id')
             ->select(
                 'articles.*',
                 'article_categories.name as category_name',
@@ -30,7 +30,7 @@ class ArticleRepository
     public function getDetail(int $id)
     {
         return $this->article->join('article_categories', 'articles.article_category_id', '=', 'article_categories.id')
-            ->join('users', 'articles.user_id', '=', 'users.id')
+            ->leftJoin('users', 'articles.user_id', '=', 'users.id')
             ->select(
                 'articles.*',
                 'article_categories.name as category_name',

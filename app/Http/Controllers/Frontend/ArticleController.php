@@ -47,7 +47,7 @@ class ArticleController extends Controller
 
         $articleCategory = ArticleCategory::where('slug', $category_slug)->firstOrFail();
         $article = Article::join('article_categories', 'articles.article_category_id', '=', 'article_categories.id')
-            ->join('users', 'articles.user_id', '=', 'users.id')
+            ->leftJoin('users', 'articles.user_id', '=', 'users.id')
             ->select(
                 'articles.*',
                 'article_categories.name as category_name',
