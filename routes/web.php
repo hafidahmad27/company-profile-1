@@ -41,17 +41,8 @@ Route::prefix('be')->name('be.')->middleware(['auth', 'verified'])->group(functi
         ->name('article.togglePublish');
 
     Route::resource('article-categories', ArticleCategoryController::class);
-    Route::patch('article-categories/{article_category}/toggleActive', [ArticleCategoryController::class, 'toggleActive'])
-        ->name('article-categories.toggleActive');
-
-    Route::resource('pages', PageController::class)->only([
-        'index',
-        'create',
-        'store',
-        'edit',
-        'update',
-        'destroy'
-    ]);
+    Route::patch('article-categories/{article_category}/updateActiveStatus', [ArticleCategoryController::class, 'updateActiveStatus'])
+        ->name('article-categories.updateActiveStatus');
 
     Route::resource('sections', SectionController::class)->only([
         'index',
@@ -67,6 +58,10 @@ Route::prefix('be')->name('be.')->middleware(['auth', 'verified'])->group(functi
         'index',
         'update'
     ]);
+    Route::prefix('pages')->name('pages.')->group(function () {
+        Route::get('/', [PageController::class, 'index'])->name('index');
+        Route::put('bulkUpdate', [PageController::class, 'bulkUpdate'])->name('bulkUpdate');
+    });
     Route::prefix('profile')->group(function () {
         // Route::get('dashboard', [ProfileController::class, 'index'])->name('profile.dashboard');
         Route::get('/', [ProfileController::class, 'index'])->name('profile.index');

@@ -9,5 +9,6 @@ class Page extends Model
 {
     /** @use HasFactory<\Database\Factories\PageFactory> */
     use HasFactory;
-    public $timestamps = false;
+
+    protected $guarded = [];
 }

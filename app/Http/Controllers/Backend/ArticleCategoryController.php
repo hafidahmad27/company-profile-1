@@ -68,7 +68,7 @@ class ArticleCategoryController extends Controller
             ->with('success', $message);
     }
 
-    public function toggleActive(int $id)
+    public function updateActiveStatus(int $id)
     {
         $message = $this->articleCategoryService->setActiveStatus($id);
 

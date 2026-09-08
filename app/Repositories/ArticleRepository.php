@@ -16,7 +16,7 @@ class ArticleRepository
 
     public function getAll()
     {
-        return $this->article->join('article_categories', 'articles.article_category_id', '=', 'article_categories.id')
+        return $this->article->leftJoin('article_categories', 'articles.article_category_id', '=', 'article_categories.id')
             ->leftJoin('users', 'articles.user_id', '=', 'users.id')
             ->select(
                 'articles.*',
@@ -29,7 +29,7 @@ class ArticleRepository
 
     public function getDetail(int $id)
     {
-        return $this->article->join('article_categories', 'articles.article_category_id', '=', 'article_categories.id')
+        return $this->article->leftJoin('article_categories', 'articles.article_category_id', '=', 'article_categories.id')
             ->leftJoin('users', 'articles.user_id', '=', 'users.id')
             ->select(
                 'articles.*',
@@ -60,10 +60,10 @@ class ArticleRepository
         return $this->getById($id)->delete();
     }
 
-    public function getPageName()
+    public function getFolderByPageSlug()
     {
         // return (new Article())->getTable();
-        $page = Page::where('slug', 'articles')->firstOrFail();
+        $page = Page::where('id', '4')->firstOrFail();
         return $page->slug;
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdatePageRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class UpdatePageRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +22,28 @@ class UpdatePageRequest extends FormRequest
      */
     public function rules(): array
     {
+        $rules = [];
+
+        foreach ($this->input('pages', []) as $id => $page) {
+            $rules["pages.$id.title"] = [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('pages', 'title')->ignore($id),
+            ];
+            $rules["pages.$id.order"] = ['required', 'integer'];
+            $rules["pages.$id.is_active"] = ['boolean'];
+        }
+
+        return $rules;
+    }
+
+    public function attributes(): array
+    {
         return [
-            //
+            'pages.*.title'     => 'title',
+            'pages.*.order'     => 'order',
+            'pages.*.is_active' => 'is active',
         ];
     }
 }

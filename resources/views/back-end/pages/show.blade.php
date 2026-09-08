@@ -1,13 +1,13 @@
 @extends('layouts.back-end.app')
 
-@section('title', 'Article Category')
+@section('title', 'Detail Page - ' . ($page->title ?? '-'))
 
 @section('content')
     <div class="page-heading">
         <div class="page-title">
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>Tambah @yield('title')</h3>
+                    <h3>@yield('title')</h3>
                     <p class="text-subtitle text-muted">
                         {{--  --}}
                     </p>
@@ -28,18 +28,7 @@
                         </div> --}}
                         <div class="card-content">
                             <div class="card-body">
-                                @if (session('success'))
-                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                        {!! session('success') !!}
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                            aria-label="Close"></button>
-                                    </div>
-                                @endif
-                                @include('back-end.article-categories._form', [
-                                    'action' => route('be.article-categories.store'),
-                                    'method' => 'POST',
-                                    'submitLabel' => '<i class="bi bi-plus-lg"></i> Add',
-                                ])
+
                             </div>
                         </div>
                     </div>

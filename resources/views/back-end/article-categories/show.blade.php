@@ -1,6 +1,6 @@
 @extends('layouts.back-end.app')
 
-@section('title', 'Article Categories')
+@section('title', 'Article Category')
 
 @section('content')
     <div class="page-heading">

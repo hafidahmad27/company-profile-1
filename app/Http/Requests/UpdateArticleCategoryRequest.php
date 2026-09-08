@@ -23,6 +23,7 @@ class UpdateArticleCategoryRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255|unique:article_categories,name',
+            'is_active' => 'boolean',
         ];
     }
 }

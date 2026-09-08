@@ -43,7 +43,7 @@ class ArticleService
         if (!empty($data['image'])) {
             // generate path sesuai tabel + slug kategori
             $uploadPath = $this->generateUploadPath(
-                $this->articleRepo->getPageName(),
+                $this->articleRepo->getFolderByPageSlug(),
                 $articleCategory->slug
             );
             // upload file ke storage
@@ -67,7 +67,7 @@ class ArticleService
 
         // generate path sesuai tabel + slug kategori
         $uploadPath = $this->generateUploadPath(
-            $this->articleRepo->getPageName(),
+            $this->articleRepo->getFolderByPageSlug(),
             $articleCategory->slug
         );
         // cek apakah ada file baru
@@ -112,8 +112,8 @@ class ArticleService
     public function setPublishedStatus(int $id)
     {
         $article = $this->articleRepo->getById($id);
-
         $isPublished = $article->is_published ? 0 : 1;
+
         $this->articleRepo->update($id,  [
             'is_published' => $isPublished,
             'published_at' => $isPublished ? now() : null,

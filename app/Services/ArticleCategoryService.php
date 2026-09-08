@@ -52,9 +52,11 @@ class ArticleCategoryService
     public function setActiveStatus(int $id)
     {
         $articleCategory = $this->articleCategoryRepo->getById($id);
-
         $isActive = $articleCategory->is_active ? 0 : 1;
-        $this->articleCategoryRepo->update($id, ['is_active' => $isActive]);
+
+        $this->articleCategoryRepo->update($id, [
+            'is_active' => $isActive
+        ]);
 
         return $isActive
             ? 'Kategori berhasil diaktifkan.'

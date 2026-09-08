@@ -29,7 +29,7 @@
                 <div class="card-header">
                     <h5 class="card-title">
                         <a href="{{ route('be.article-categories.create') }}" class="btn btn-primary">
-                            <i class="bi bi-plus"></i> Add @yield('title')
+                            <i class="bi bi-plus"></i> Add
                         </a>
                     </h5>
                 </div>
@@ -44,7 +44,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Article Category</th>
+                                <th>Category</th>
                                 <th class="text-center">Is Active?</th>
                                 <th class="text-center">Action</th>
                             </tr>
@@ -56,28 +56,21 @@
                                     <td>{{ ++$i }}</td>
                                     <td>{{ $articleCategory->name }}</td>
                                     <td class="text-center">
-                                        <span class="badge bg-{{ $articleCategory->is_active ? 'success' : 'danger' }}">
-                                            <i
-                                                class="bi {{ $articleCategory->is_active ? 'bi-check-circle' : 'bi-x-circle' }}"></i>
-                                        </span>
-                                    </td>
-                                    <td class="text-center">
                                         <form
-                                            action="{{ route('be.article-categories.toggleActive', $articleCategory->id) }}"
-                                            class="d-inline" method="POST">
+                                            action="{{ route('be.article-categories.updateActiveStatus', $articleCategory->id) }}"
+                                            method="POST">
                                             @csrf
                                             @method('PATCH')
-                                            <button type="submit" class="btn btn-warning btn-sm">
-                                                <i
-                                                    class="bi {{ $articleCategory->is_active ? 'bi-toggle-on' : 'bi-toggle-off' }}"></i>
-                                            </button>
+                                            <input type="checkbox" {{ $articleCategory->is_active ? 'checked' : '' }}
+                                                onchange="this.form.submit()">
                                         </form>
-                                        {{-- |
-                                        <a href="{{ route('be.article-categories.show', $articleCategory->id) }}"
+                                    </td>
+                                    <td class="text-center">
+                                        {{-- <a href="{{ route('be.article-categories.show', $articleCategory->id) }}"
                                             class="btn btn-info btn-sm">
                                             <i class="bi bi-eye"></i>
-                                        </a> --}}
-                                        |
+                                        </a>
+                                        | --}}
                                         <a href="{{ route('be.article-categories.edit', $articleCategory->id) }}"
                                             class="btn btn-primary btn-sm">
                                             <i class="bi bi-pencil"></i>

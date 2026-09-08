@@ -29,7 +29,7 @@
                 <div class="card-header">
                     <h5 class="card-title">
                         <a href="{{ route('be.articles.create') }}" class="btn btn-primary">
-                            <i class="bi bi-plus"></i> Add @yield('title')
+                            <i class="bi bi-plus"></i> Add
                         </a>
                     </h5>
                 </div>
@@ -48,8 +48,8 @@
                                 <th>Title</th>
                                 <th>Content</th>
                                 <th>Image</th>
+                                <th>Status</th>
                                 <th>Published At</th>
-                                <th>Is Published?</th>
                                 {{-- <th>Views</th> --}}
                                 <th>Author</th>
                                 <th class="text-center">Action</th>
@@ -67,13 +67,12 @@
                                         <img src="{{ $article->image_url }}" width="100" height="100"
                                             class="img-thumbnail">
                                     </td>
-                                    <td>{{ $article->published_at }}</td>
-                                    <td align="right">
-                                        <span class="badge bg-{{ $article->is_published ? 'success' : 'danger' }}">
-                                            <i
-                                                class="bi {{ $article->is_published ? 'bi-check-circle' : 'bi-x-circle' }}"></i>
+                                    <td align="center">
+                                        <span class="badge text-bg-{{ $article->is_published ? 'success' : 'info' }}">
+                                            {{ $article->is_published ? 'Published' : 'Draft' }}
                                         </span>
                                     </td>
+                                    <td>{{ $article->published_at }}</td>
                                     {{-- <td align="right">{{ $article->views }}</td> --}}
                                     <td>{{ $article->user_name }}</td>
                                     <td class="text-center">
