@@ -17,8 +17,7 @@
             <div class="carousel-inner">
                 @foreach ($carouselSlides as $key => $slide)
                     <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                        <img src="{{ Str::startsWith($slide->image, ['http://', 'https://']) ? $slide->image : $slide->image_url }}"
-                            class="d-block w-100" alt="Gambar">
+                        <img src="{{ $slide->image_url }}" class="d-block w-100">
                         {{-- <div class="carousel-caption d-block">
                             <h5>{{ $slide->title }}</h5>
                             <p>{{ $slide->subtitle }}</p>
@@ -50,6 +49,12 @@
             <p class="mt-4" style="text-align: justify">
                 {{ $sectionAboutPreview->content ?? '-' }}
             </p>
+            @if ($sectionAboutPreview->image)
+                <div class="text-center">
+                    <img src="{{ $sectionAboutPreview->image_url }}" class="card-img-top rounded-4"
+                        style="height: 235px; object-fit: cover">
+                </div>
+            @endif
         </section>
     @endif
 
@@ -60,6 +65,15 @@
                 <p class="mt-4">
                     {{ $sectionProductPreview->subtitle ?? null }}
                 </p>
+                <p class="mt-4">
+                    {{ $sectionProductPreview->content ?? null }}
+                </p>
+                @if ($sectionProductPreview->image)
+                    <div class="text-center">
+                        <img src="{{ $sectionProductPreview->image_url }}" class="card-img-top rounded-4"
+                            style="height: 235px; object-fit: cover">
+                    </div>
+                @endif
             </div>
 
             <ul class="nav nav-tabs justify-content-center" id="productsTab" role="tablist">
@@ -81,9 +95,8 @@
                             @forelse ($productsPreview[$productCategoryPreview->id] ?? [] as $productPreview)
                                 <div class="col">
                                     <div class="card h-100 border-0">
-                                        <img src="{{ asset('storage/' . $productPreview->image) }}"
-                                            class="card-img-top rounded-4" style="height: 235px; object-fit: cover"
-                                            alt="Gambar">
+                                        <img src="{{ $productPreview->image_url }}" class="card-img-top rounded-4"
+                                            style="height: 235px; object-fit: cover">
                                         <div class="card-body">
                                             {{-- <div class="d-flex mb-3">
                                             <div class="me-auto">
@@ -138,6 +151,15 @@
                 <p class="mt-4">
                     {{ $sectionArticlePreview->subtitle ?? null }}
                 </p>
+                <p class="mt-4">
+                    {{ $sectionArticlePreview->content ?? null }}
+                </p>
+                @if ($sectionArticlePreview->image)
+                    <div class="text-center">
+                        <img src="{{ $sectionArticlePreview->image_url }}" class="card-img-top rounded-4"
+                            style="height: 235px; object-fit: cover">
+                    </div>
+                @endif
             </div>
 
             <ul class="nav nav-tabs justify-content-center" id="articlesTab" role="tablist">
@@ -154,7 +176,8 @@
             <div class="tab-content" id="articlesTabContent">
                 @foreach ($articleCategoriesPreview as $articleCategoryPreview)
                     <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}"
-                        id="articles-{{ $articleCategoryPreview->id }}" role="tabpanel" aria-labelledby="" tabindex="0">
+                        id="articles-{{ $articleCategoryPreview->id }}" role="tabpanel" aria-labelledby=""
+                        tabindex="0">
                         <div class="row row-cols-1 row-cols-md-3 justify-content-center g-4 mt-0">
                             @forelse ($articlesPreview[$articleCategoryPreview->id] ?? [] as $articlePreview)
                                 <div class="col">

@@ -44,14 +44,14 @@ Route::prefix('be')->name('be.')->middleware(['auth', 'verified'])->group(functi
     Route::patch('article-categories/{article_category}/updateActiveStatus', [ArticleCategoryController::class, 'updateActiveStatus'])
         ->name('article-categories.updateActiveStatus');
 
-    Route::resource('sections', SectionController::class)->only([
-        'index',
-        'create',
-        'store',
-        'edit',
-        'update',
-        'destroy'
-    ]);
+    // Route::resource('sections', SectionController::class)->only([
+    //     'index',
+    //     'create',
+    //     'store',
+    //     'edit',
+    //     'update',
+    //     'destroy'
+    // ]);
 
 
     Route::resource('settings', SettingController::class)->only([
@@ -61,6 +61,11 @@ Route::prefix('be')->name('be.')->middleware(['auth', 'verified'])->group(functi
     Route::prefix('pages')->name('pages.')->group(function () {
         Route::get('/', [PageController::class, 'index'])->name('index');
         Route::put('bulkUpdate', [PageController::class, 'bulkUpdate'])->name('bulkUpdate');
+        Route::get('{page}', [PageController::class, 'show'])->name('show');
+
+        Route::prefix('sections')->name('sections.')->group(function () {
+            Route::put('bulkUpdate', [PageController::class, 'bulkUpdateSection'])->name('bulkUpdate');
+        });
     });
     Route::prefix('profile')->group(function () {
         // Route::get('dashboard', [ProfileController::class, 'index'])->name('profile.dashboard');

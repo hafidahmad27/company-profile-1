@@ -21,6 +21,7 @@ class SectionRepository
                 'sections.*',
             )
             ->where('page_id', $pageId)
+            ->orderBy('order', 'desc')
             ->get();
     }
 

@@ -3,9 +3,19 @@
 @section('title', $page->title)
 
 @section('content')
-    @if (!empty($section->subtitle))
-        <p class="text-center" style="text-align: justify">
-            {{ $section->subtitle }}
+    <p class="text-center" style="text-align: justify">
+        {{ $section->subtitle ?? null }}
+    </p>
+
+    @if ($section->image)
+        <div class="text-center mb-4">
+            <img src="{{ $section->image_url }}" class="card-img-top rounded-4" style="height: 235px; object-fit: cover">
+        </div>
+    @endif
+
+    @if ($section->content)
+        <p style="text-align: justify">
+            {!! nl2br(e($section->content ?? '-')) !!}
         </p>
     @endif
 
@@ -22,8 +32,8 @@
                     {{ $productCategory->name ?? '-' }} ({{ $count }})
                 </button> --}}
                 <a class="nav-link {{ $productCategory->id == $defaultProductCategoryId ? 'active' : '' }}"
-                    href="{{ request()->fullUrlWithQuery(['tab' => $productCategory->id]) }}" role="tab" aria-controls=""
-                    aria-selected="true">
+                    href="{{ request()->fullUrlWithQuery(['tab' => $productCategory->id]) }}" role="tab"
+                    aria-controls="" aria-selected="true">
                     {{ $productCategory->name ?? '-' }} ({{ $count }})
                 </a>
             </li>
@@ -37,8 +47,8 @@
                     @forelse ($products[$productCategory->id] ?? [] as $product)
                         <div class="col">
                             <div class="card h-100 border-0">
-                                <img src="{{ asset('storage/' . $product->image) }}" class="card-img-top rounded-4"
-                                    style="height: 235px; object-fit: cover" alt="Gambar">
+                                <img src="{{ $product->image_url }}" class="card-img-top rounded-4"
+                                    style="height: 235px; object-fit: cover">
                                 {{-- <div class="card-body"> --}}
                                 {{-- <div class="d-flex mb-3"> --}}
                                 {{-- <div class="me-auto">

@@ -48,7 +48,6 @@ class HomeController extends Controller
 
         $sectionProductPreview = Section::where('section_key', 'products-preview')
             ->where('sections.is_active', 1)
-            ->select('title', 'subtitle', 'button_text', 'button_link', 'is_active')
             ->first();
         $productCategoriesPreview = ProductCategory::where('is_active', 1)->get();
         $productsPreview = [];
@@ -78,7 +77,6 @@ class HomeController extends Controller
 
         $sectionArticlePreview = Section::where('section_key', 'articles-preview')
             ->where('sections.is_active', 1)
-            ->select('title', 'subtitle', 'button_text', 'button_link', 'is_active')
             ->first();
         $articleCategoriesPreview = ArticleCategory::where('is_active', 1)->get();
         $articlesPreview = [];

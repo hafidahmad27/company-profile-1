@@ -13,7 +13,7 @@
                     </p>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
-                    @include('layouts.back-end.partials.breadcrumb')
+                    @include('layouts.back-end.partials._breadcrumb')
                 </div>
             </div>
         </div>
@@ -35,7 +35,7 @@
                                             aria-label="Close"></button>
                                     </div>
                                 @endif
-                                @include('back-end.profile.partials.update-profile-information-form')
+                                @include('back-end.profile.partials._update-profile-information-form')
                             </div>
                         </div>
                     </div>
@@ -54,7 +54,7 @@
                                             aria-label="Close"></button>
                                     </div>
                                 @endif
-                                @include('back-end.profile.partials.update-password-form')
+                                @include('back-end.profile.partials._update-password-form')
                             </div>
                         </div>
                     </div>
@@ -66,7 +66,7 @@
                         </div> --}}
                         <div class="card-content">
                             <div class="card-body">
-                                @include('back-end.profile.partials.delete-user-form')
+                                @include('back-end.profile.partials._delete-user-form')
                             </div>
                         </div>
                     </div>

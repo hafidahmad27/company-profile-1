@@ -10,15 +10,15 @@
         @endif
     </title>
 
-    @include('layouts.back-end.partials.meta')
+    @include('layouts.back-end.partials._meta')
 
-    @include('layouts.back-end.partials.styles')
+    @include('layouts.back-end.partials._styles')
     @stack('styles')
 </head>
 
 <body class="d-flex flex-column min-vh-100">
     <div id="app">
-        @include('layouts.back-end.partials.sidebar')
+        @include('layouts.back-end.partials._sidebar')
 
         <div id="main">
             <header class="mb-3">
@@ -31,11 +31,11 @@
                 @yield('content')
             </div>
 
-            @include('layouts.back-end.partials.footer')
+            @include('layouts.back-end.partials._footer')
         </div>
     </div>
 
-    @include('layouts.back-end.partials.scripts')
+    @include('layouts.back-end.partials._scripts')
     @stack('scripts')
 </body>
 

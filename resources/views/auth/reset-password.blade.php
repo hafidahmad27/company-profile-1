@@ -10,9 +10,9 @@
         @endif
     </title>
 
-    @include('layouts.back-end.partials.meta')
+    @include('layouts.back-end.partials._meta')
 
-    @include('layouts.back-end.partials.styles')
+    @include('layouts.back-end.partials._styles')
     <link rel="stylesheet" href="{{ asset('mazer/assets/compiled/css/auth.css') }}">
 </head>
 
@@ -103,7 +103,7 @@
         </div>
     </div>
 
-    @include('layouts.back-end.partials.scripts')
+    @include('layouts.back-end.partials._scripts')
 </body>
 
 </html>

@@ -19,7 +19,7 @@
                     </p>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
-                    @include('layouts.back-end.partials.breadcrumb')
+                    @include('layouts.back-end.partials._breadcrumb')
                 </div>
             </div>
         </div>
@@ -49,6 +49,7 @@
                                     <th>Title Page</th>
                                     <th class="text-center">Is Active?</th>
                                     <th>URL</th>
+                                    <th>Detail</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -75,6 +76,12 @@
                                                 value="1" {{ $page->is_active ? 'checked' : '' }}>
                                         </td>
                                         <td>{{ Str::startsWith($page->slug, '/') ? $page->slug : '/' . $page->slug }}</td>
+                                        <td>
+                                            <a href="{{ route('be.pages.show', $page->id) }}"
+                                                class="btn btn-primary btn-sm">
+                                                <i class="bi bi-list-nested"></i>
+                                            </a>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

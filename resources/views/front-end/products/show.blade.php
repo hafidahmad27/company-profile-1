@@ -8,7 +8,7 @@
 
         </div>
         <div class="col-sm-8">
-            <img src="{{ asset('storage/' . $product->image) }}" class="img-fluid w-100" alt="Gambar">
+            <img src="{{ $product->image_url }}" class="img-fluid w-100">
 
             <p class="text-end">
                 <small>

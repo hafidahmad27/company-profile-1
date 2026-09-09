@@ -19,7 +19,7 @@
                     </p>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
-                    @include('layouts.back-end.partials.breadcrumb')
+                    @include('layouts.back-end.partials._breadcrumb')
                 </div>
             </div>
         </div>

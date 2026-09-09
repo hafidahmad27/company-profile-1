@@ -24,7 +24,6 @@ class SectionSeeder extends Seeder
                 'button_text' => null,
                 'button_link' => null,
                 'order' => 1,
-                'is_active' => true,
                 'user_id' => 1,
             ],
             [
@@ -37,7 +36,6 @@ class SectionSeeder extends Seeder
                 'button_text' => null,
                 'button_link' => null,
                 'order' => 2,
-                'is_active' => true,
                 'user_id' => 1,
             ],
             [
@@ -50,7 +48,6 @@ class SectionSeeder extends Seeder
                 'button_text' => null,
                 'button_link' => null,
                 'order' => 3,
-                'is_active' => true,
                 'user_id' => 1,
             ],
             [
@@ -62,7 +59,6 @@ class SectionSeeder extends Seeder
                 'image' => null,
                 'button_text' => null,
                 'button_link' => null,
-                'is_active' => false,
                 'user_id' => 1,
             ],
             [
@@ -74,7 +70,6 @@ class SectionSeeder extends Seeder
                 'image' => null,
                 'button_text' => 'Selengkapnya',
                 'button_link' => 'products',
-                'is_active' => true,
                 'user_id' => 1,
             ],
             [
@@ -86,7 +81,6 @@ class SectionSeeder extends Seeder
                 'image' => null,
                 'button_text' => 'Selengkapnya',
                 'button_link' => 'articles',
-                'is_active' => true,
                 'user_id' => 1,
             ],
 
@@ -99,7 +93,6 @@ class SectionSeeder extends Seeder
                 'image' => null,
                 'button_text' => null,
                 'button_link' => null,
-                'is_active' => true,
                 'user_id' => 1,
             ],
 
@@ -112,7 +105,6 @@ class SectionSeeder extends Seeder
                 'image' => null,
                 'button_text' => null,
                 'button_link' => null,
-                'is_active' => true,
                 'user_id' => 1,
             ],
 
@@ -125,7 +117,6 @@ class SectionSeeder extends Seeder
                 'image' => null,
                 'button_text' => null,
                 'button_link' => null,
-                'is_active' => true,
                 'user_id' => 1,
             ],
         ]);

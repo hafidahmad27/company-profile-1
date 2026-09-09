@@ -9,14 +9,14 @@
         {{ $globalSetting->site_name ?? '-' }}
     </title>
 
-    @include('layouts.front-end.partials.meta')
+    @include('layouts.front-end.partials._meta')
 
-    @include('layouts.front-end.partials.styles')
+    @include('layouts.front-end.partials._styles')
     @stack('styles')
 </head>
 
 <body class="d-flex flex-column min-vh-100">
-    @include('layouts.front-end.partials.navbar')
+    @include('layouts.front-end.partials._navbar')
 
     @hasSection('title')
         <div class="container-fluid bg-primary">
@@ -33,7 +33,7 @@
                     @endif
                 </h2>
 
-                @include('layouts.front-end.partials.breadcrumb')
+                @include('layouts.front-end.partials._breadcrumb')
             </div>
         </div>
     @endif
@@ -42,9 +42,9 @@
         @yield('content')
     </div>
 
-    @include('layouts.front-end.partials.footer')
+    @include('layouts.front-end.partials._footer')
 
-    @include('layouts.front-end.partials.scripts')
+    @include('layouts.front-end.partials._scripts')
     @stack('scripts')
 </body>
 
