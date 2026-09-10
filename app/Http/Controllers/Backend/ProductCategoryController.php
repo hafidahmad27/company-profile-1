@@ -3,65 +3,76 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Models\ProductCategory;
 use App\Http\Requests\StoreProductCategoryRequest;
 use App\Http\Requests\UpdateProductCategoryRequest;
+use App\Services\ProductCategoryService;
 
 class ProductCategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    protected ProductCategoryService $productCategoryService;
+
+    public function __construct(ProductCategoryService $productCategoryService)
+    {
+        $this->productCategoryService = $productCategoryService;
+    }
+
     public function index()
     {
-        return view('back-end.product-categories.index');
+        $productCategories = $this->productCategoryService->getCategories();
+
+        return view('back-end.product-categories.index', compact('productCategories'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('back-end.product-categories.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreProductCategoryRequest $request)
     {
-        //
+        $validatedData = $request->validated();
+        $message = $this->productCategoryService->create($validatedData);
+
+        return back()
+            ->with('success', $message);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(ProductCategory $productCategory)
+    public function show(int $id)
     {
-        //
+        $productCategory = $this->productCategoryService->getCategoryDetail($id);
+
+        return view('back-end.product-categories.show', compact('productCategory'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(ProductCategory $productCategory)
+    public function edit(int $id)
     {
-        //
+        $productCategory = $this->productCategoryService->getCategoryDetail($id);
+
+        return view('back-end.product-categories.edit', compact('productCategory'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateProductCategoryRequest $request, ProductCategory $productCategory)
+    public function update(UpdateProductCategoryRequest $request, int $id)
     {
-        //
+        $validatedData = $request->validated();
+        $message = $this->productCategoryService->update($id, $validatedData);
+
+        return redirect()->route('be.product-categories.index')
+            ->with('success', $message);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(ProductCategory $productCategory)
+    public function destroy(int $id)
     {
-        //
+        $message = $this->productCategoryService->delete($id);
+
+        return back()
+            ->with('success', $message);
+    }
+
+    public function updateActiveStatus(int $id)
+    {
+        $message = $this->productCategoryService->setActiveStatus($id);
+
+        return back()
+            ->with('success', $message);
     }
 }

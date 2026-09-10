@@ -11,7 +11,7 @@ class UpdateProductRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,12 @@ class UpdateProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'product_category_id' => 'nullable|exists:product_categories,id',
+            'name' => 'required|string|max:255|unique:products,name,' . $this->route('product'),
+            'description' => 'nullable|string',
+            'price' => 'nullable|integer',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'user_id' => 'exists:users,id',
         ];
     }
 }

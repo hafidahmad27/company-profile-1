@@ -3,65 +3,82 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Services\ProductCategoryService;
+use App\Services\ProductService;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    protected ProductService $productService;
+    protected ProductCategoryService $productCategoryService;
+
+    public function __construct(ProductService $productService, ProductCategoryService $productCategoryService)
+    {
+        $this->productService = $productService;
+        $this->productCategoryService = $productCategoryService;
+    }
+
     public function index()
     {
-        return view('back-end.products.index');
+        $products = $this->productService->getProducts();
+
+        return view('back-end.products.index', compact('products'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $productCategoryOptions = $this->productCategoryService->getCategoryOptions();
+
+        return view('back-end.products.create', compact('productCategoryOptions'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreProductRequest $request)
     {
-        //
+        $validatedData = $request->validated();
+        $message = $this->productService->create($validatedData);
+
+        return redirect()->route('be.products.index')
+            ->with('success', $message);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Product $product)
+    public function show(int $id)
     {
-        //
+        $product = $this->productService->getProductDetail($id);
+
+        return view('back-end.products.show', compact('product'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Product $product)
+    public function edit(int $id)
     {
-        //
+        $product = $this->productService->getProductDetail($id);
+        $productCategoryOptions = $this->productCategoryService->getCategoryOptions();
+
+        return view('back-end.products.edit', compact('product', 'productCategoryOptions'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateProductRequest $request, Product $product)
+    public function update(UpdateProductRequest $request, int $id)
     {
-        //
+        $validatedData = $request->validated();
+        $message = $this->productService->update($id, $validatedData);
+
+        return redirect()->route('be.products.index')
+            ->with('success', $message);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Product $product)
+    public function destroy(int $id)
     {
-        //
+        $message = $this->productService->delete($id);
+
+        return back()
+            ->with('success', $message);
+    }
+
+    public function togglePublish(int $id)
+    {
+        $message = $this->productService->setPublishedStatus($id);
+
+        return back()
+            ->with('success', $message);
     }
 }

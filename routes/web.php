@@ -18,23 +18,13 @@ require __DIR__ . '/auth.php';
 Route::prefix('be')->name('be.')->middleware(['auth', 'verified'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::resource('products', ProductController::class)->only([
-        'index',
-        'create',
-        'store',
-        'edit',
-        'update',
-        'destroy'
-    ]);
+    Route::resource('products', ProductController::class);
+    Route::patch('products/{product}/togglePublish', [ProductController::class, 'togglePublish'])
+        ->name('product.togglePublish');
 
-    Route::resource('product-categories', ProductCategoryController::class)->only([
-        'index',
-        'create',
-        'store',
-        'edit',
-        'update',
-        'destroy'
-    ]);
+    Route::resource('product-categories', ProductCategoryController::class);
+    Route::patch('product-categories/{product_category}/updateActiveStatus', [ProductCategoryController::class, 'updateActiveStatus'])
+        ->name('product-categories.updateActiveStatus');
 
     Route::resource('articles', ArticleController::class);
     Route::patch('articles/{article}/togglePublish', [ArticleController::class, 'togglePublish'])

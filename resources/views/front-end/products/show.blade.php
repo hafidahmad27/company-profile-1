@@ -13,7 +13,7 @@
             <p class="text-end">
                 <small>
                     {{ $product->user_name ?? '-' }} &dash;
-                    {{ $product->published_at->locale('id')->translatedFormat('l, d F Y | H:i') }}
+                    {{ $product->published_at ? $product->published_at->locale('id')->translatedFormat('l, d F Y | H:i') : '-' }}
                 </small>
             </p>
 

@@ -338,6 +338,24 @@
                 </li> --}}
                 <hr>
                 <li
+                    class="sidebar-item {{ request()->is('be/product-categories') ? 'active' : '' }}
+                    {{ request()->is('be/product-categories/*') ? 'active' : '' }}">
+                    <a href="{{ route('be.product-categories.index') }}" class='sidebar-link'>
+                        <i class="bi bi-table"></i>
+                        <span>Product Categories</span>
+                    </a>
+                </li>
+
+                <li
+                    class="sidebar-item {{ request()->is('be/products') ? 'active' : '' }}
+                    {{ request()->is('be/products/*') ? 'active' : '' }}">
+                    <a href="{{ route('be.products.index') }}" class='sidebar-link'>
+                        <i class="bi bi-tags"></i>
+                        <span>Products</span>
+                    </a>
+                </li>
+
+                <li
                     class="sidebar-item {{ request()->is('be/article-categories') ? 'active' : '' }}
                     {{ request()->is('be/article-categories/*') ? 'active' : '' }}">
                     <a href="{{ route('be.article-categories.index') }}" class='sidebar-link'>
