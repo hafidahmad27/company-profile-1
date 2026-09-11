@@ -28,6 +28,14 @@
                         </div> --}}
                         <div class="card-content">
                             <div class="card-body">
+                                @if (session('success'))
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        {!! session('success') !!}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                    </div>
+                                @endif
+
                                 @php
                                     $grouped = $sections->groupBy('section_key');
                                 @endphp

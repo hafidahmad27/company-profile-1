@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Models\Page;
+use App\Models\Section;
 use App\Models\Setting;
+use App\Observers\SectionObserver;
 use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
@@ -24,6 +26,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // load Observer class
+        Section::observe(SectionObserver::class);
+
         Carbon::setLocale('id');
         Paginator::useBootstrapFive();
 

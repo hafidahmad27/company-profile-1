@@ -53,9 +53,16 @@ class PageService
 
     public function bulkUpdateSection(array $data)
     {
+        $sectionKey = null;
+
         foreach ($data as $id => $item) {
             $section = $this->sectionRepo->getById($id);
             $oldPath = $section->image;
+
+            // simpan section_key dari loop pertama
+            if ($sectionKey === null) {
+                $sectionKey = $section->section_key;
+            }
 
             // generate path sesuai section_key
             $uploadPath = $this->generateUploadPath(
@@ -94,7 +101,9 @@ class PageService
             ]);
         }
 
-        return 'Sections updated successfully.';
+        // return pesan dengan judul section
+        $title = $sectionKey ? ucwords(str_replace('-', ' ', $sectionKey)) : 'Section';
+        return $title . ' updated successfully.';
     }
 
     public function setActiveStatus(int $id)
