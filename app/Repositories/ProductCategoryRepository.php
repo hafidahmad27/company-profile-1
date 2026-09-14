@@ -15,7 +15,7 @@ class ProductCategoryRepository
 
     public function getAll()
     {
-        return $this->productCategory->orderBy('id', 'desc')->get();
+        return $this->productCategory->get();
     }
 
     public function getActive()

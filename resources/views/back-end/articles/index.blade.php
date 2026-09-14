@@ -28,9 +28,20 @@
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title">
-                        <a href="{{ route('be.articles.create') }}" class="btn btn-primary">
-                            <i class="bi bi-plus"></i> Add
-                        </a>
+                        <div class="d-flex">
+                            <a href="{{ route('be.articles.create') }}" class="btn btn-primary">
+                                <i class="bi bi-plus"></i> Add
+                            </a>
+                            <div class="ms-auto">
+                                <button type="button" class="btn btn-outline-success block ms-auto" data-bs-toggle="modal"
+                                    data-bs-target="#default">
+                                    <i class="bi bi-arrow-bar-up"></i> Import
+                                </button>
+                                <a href="{{ route('be.articles.export') }}" class="btn btn-outline-secondary">
+                                    <i class="bi bi-file-earmark-excel-fill"></i> Export
+                                </a>
+                            </div>
+                        </div>
                     </h5>
                 </div>
                 <div class="card-body">
@@ -51,7 +62,7 @@
                                 <th>Status</th>
                                 <th>Published At</th>
                                 {{-- <th>Views</th> --}}
-                                <th>Author</th>
+                                {{-- <th>Author</th> --}}
                                 <th class="text-center">Action</th>
                             </tr>
                         </thead>
@@ -74,7 +85,7 @@
                                     </td>
                                     <td>{{ $article->published_at }}</td>
                                     {{-- <td align="right">{{ $article->views }}</td> --}}
-                                    <td>{{ $article->user_name }}</td>
+                                    {{-- <td>{{ $article->user_name }}</td> --}}
                                     <td class="text-center">
                                         <form action="{{ route('be.article.togglePublish', $article->id) }}"
                                             class="d-inline" method="POST">
@@ -111,6 +122,44 @@
                             @endforeach
                         </tbody>
                     </table>
+
+                    <!--Basic Modal -->
+                    <div class="modal fade text-left @if ($errors->has('file')) show @endif" id="default"
+                        tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true"
+                        @if ($errors->has('file')) style="display:block;" @endif>
+                        <div class="modal-dialog modal-dialog-scrollable" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="myModalLabel1">Import @yield('title')
+                                    </h5>
+                                    <button type="button" class="close rounded-pill" data-bs-dismiss="modal"
+                                        aria-label="Close">
+                                        <i data-feather="x"></i>
+                                    </button>
+                                </div>
+                                <form action="{{ route('be.articles.import') }}" method="POST"
+                                    enctype="multipart/form-data" class="form">
+                                    @csrf
+                                    <div class="modal-body">
+                                        <input class="form-control @error('file') is-invalid @enderror" type="file"
+                                            id="file" name="file">
+                                        @error('file')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="modal-footer">
+                                        <div class="form-group me-auto">
+                                            <a href="{{ route('be.articles.downloadTemplate') }}">download template</a>
+                                        </div>
+                                        <button type="submit" class="btn btn-outline-success ms-1" data-bs-dismiss="modal">
+                                            <i class="bx bx-check d-block d-sm-none"></i>
+                                            <span class="d-none d-sm-block"><i class="bi bi-arrow-bar-up"></i> Import</span>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -118,6 +167,15 @@
 @endsection
 
 @push('scripts')
+    @if ($errors->has('file'))
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                var modal = new bootstrap.Modal(document.getElementById('default'));
+                modal.show();
+            });
+        </script>
+    @endif
+
     <script src="{{ asset('mazer/assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>
     <script src="{{ asset('mazer/assets/static/js/pages/simple-datatables.js') }}"></script>
 @endpush

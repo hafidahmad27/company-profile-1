@@ -43,7 +43,7 @@ class ProductService
         if (!empty($data['image'])) {
             // generate path sesuai tabel + slug kategori
             $uploadPath = $this->generateUploadPath(
-                $this->productRepo->getFolderByPageSlug(),
+                $this->productRepo->getPageSlug(),
                 $productCategory->slug
             );
             // upload file ke storage
@@ -67,7 +67,7 @@ class ProductService
 
         // generate path sesuai tabel + slug kategori
         $uploadPath = $this->generateUploadPath(
-            $this->productRepo->getFolderByPageSlug(),
+            $this->productRepo->getPageSlug(),
             $productCategory->slug
         );
         // cek apakah ada file baru

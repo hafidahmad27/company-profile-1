@@ -7,6 +7,7 @@ use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 use App\Services\ArticleCategoryService;
 use App\Services\ArticleService;
+use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
@@ -80,5 +81,35 @@ class ArticleController extends Controller
 
         return back()
             ->with('success', $message);
+    }
+
+    public function import(Request $request)
+    {
+        try {
+            $request->validate([
+                'file' => 'required|mimes:xls,xlsx|max:2048',
+            ]);
+            $file = $request->file('file');
+            $message = $this->articleService->import($file);
+
+            return back()
+                ->with('success', $message);
+        } catch (\Illuminate\Database\QueryException $e) {
+            if ($e->getCode() === '23000') {
+                return back()
+                    ->withErrors(['file' => 'Ada judul artikel yang sudah ada.']);
+            }
+            throw $e;
+        }
+    }
+
+    public function export()
+    {
+        return $this->articleService->export();
+    }
+
+    public function downloadTemplate()
+    {
+        return $this->articleService->downloadTemplate();
     }
 }

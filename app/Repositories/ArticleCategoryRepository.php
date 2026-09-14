@@ -15,7 +15,7 @@ class ArticleCategoryRepository
 
     public function getAll()
     {
-        return $this->articleCategory->orderBy('id', 'desc')->get();
+        return $this->articleCategory->get();
     }
 
     public function getActive()
@@ -26,6 +26,11 @@ class ArticleCategoryRepository
     public function getById(int $id)
     {
         return $this->articleCategory->findOrFail($id);
+    }
+
+    public function getIdByName(string $name)
+    {
+        return $this->articleCategory->where('name', $name)->value('id');
     }
 
     public function create(array $data)

@@ -60,7 +60,7 @@ class ProductRepository
         return $this->getById($id)->delete();
     }
 
-    public function getFolderByPageSlug()
+    public function getPageSlug()
     {
         // return (new Product())->getTable();
         $page = Page::where('id', '3')->firstOrFail();

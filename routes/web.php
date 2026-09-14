@@ -18,31 +18,24 @@ require __DIR__ . '/auth.php';
 Route::prefix('be')->name('be.')->middleware(['auth', 'verified'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::resource('products', ProductController::class);
-    Route::patch('products/{product}/togglePublish', [ProductController::class, 'togglePublish'])
-        ->name('product.togglePublish');
-
     Route::resource('product-categories', ProductCategoryController::class);
     Route::patch('product-categories/{product_category}/updateActiveStatus', [ProductCategoryController::class, 'updateActiveStatus'])
         ->name('product-categories.updateActiveStatus');
 
-    Route::resource('articles', ArticleController::class);
-    Route::patch('articles/{article}/togglePublish', [ArticleController::class, 'togglePublish'])
-        ->name('article.togglePublish');
+    Route::patch('products/{product}/togglePublish', [ProductController::class, 'togglePublish'])
+        ->name('product.togglePublish');
+    Route::resource('products', ProductController::class);
 
     Route::resource('article-categories', ArticleCategoryController::class);
     Route::patch('article-categories/{article_category}/updateActiveStatus', [ArticleCategoryController::class, 'updateActiveStatus'])
         ->name('article-categories.updateActiveStatus');
 
-    // Route::resource('sections', SectionController::class)->only([
-    //     'index',
-    //     'create',
-    //     'store',
-    //     'edit',
-    //     'update',
-    //     'destroy'
-    // ]);
-
+    Route::post('articles/import', [ArticleController::class, 'import'])->name('articles.import');
+    Route::get('articles/export', [ArticleController::class, 'export'])->name('articles.export');
+    Route::get('articles/downloadTemplate', [ArticleController::class, 'downloadTemplate'])->name('articles.downloadTemplate');
+    Route::patch('articles/{article}/togglePublish', [ArticleController::class, 'togglePublish'])
+        ->name('article.togglePublish');
+    Route::resource('articles', ArticleController::class);
 
     Route::resource('settings', SettingController::class)->only([
         'index',

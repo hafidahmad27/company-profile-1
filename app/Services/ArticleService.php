@@ -2,21 +2,27 @@
 
 namespace App\Services;
 
+use App\Exports\ArticlesDataExport;
+use App\Exports\ArticlesTemplateExport;
+use App\Imports\ArticlesImport;
 use App\Repositories\ArticleCategoryRepository;
 use App\Repositories\ArticleRepository;
 use App\Traits\GenerateUploadPathTrait;
+use Illuminate\Http\UploadedFile;
 
 class ArticleService
 {
     use GenerateUploadPathTrait;
 
     protected FileUploadService $fileUploadService;
+    protected ImportExportService $importExportService;
     protected ArticleRepository $articleRepo;
     protected ArticleCategoryRepository $articleCategoryRepo;
 
-    public function __construct(FileUploadService $fileUploadService, ArticleRepository $articleRepo, ArticleCategoryRepository $articleCategoryRepo)
+    public function __construct(FileUploadService $fileUploadService, ImportExportService $importExportService, ArticleRepository $articleRepo, ArticleCategoryRepository $articleCategoryRepo)
     {
         $this->fileUploadService = $fileUploadService;
+        $this->importExportService = $importExportService;
         $this->articleRepo = $articleRepo;
         $this->articleCategoryRepo = $articleCategoryRepo;
     }
@@ -43,7 +49,7 @@ class ArticleService
         if (!empty($data['image'])) {
             // generate path sesuai tabel + slug kategori
             $uploadPath = $this->generateUploadPath(
-                $this->articleRepo->getFolderByPageSlug(),
+                $this->articleRepo->getPageSlug(),
                 $articleCategory->slug
             );
             // upload file ke storage
@@ -67,7 +73,7 @@ class ArticleService
 
         // generate path sesuai tabel + slug kategori
         $uploadPath = $this->generateUploadPath(
-            $this->articleRepo->getFolderByPageSlug(),
+            $this->articleRepo->getPageSlug(),
             $articleCategory->slug
         );
         // cek apakah ada file baru
@@ -122,5 +128,30 @@ class ArticleService
         return $isPublished
             ? 'Artikel berhasil dipublikasikan.'
             : 'Artikel berhasil disembunyikan.';
+    }
+
+    public function import(UploadedFile $file)
+    {
+        $import = new ArticlesImport($this->articleRepo, $this->articleCategoryRepo);
+
+        $this->importExportService->import($import, $file);
+
+        return 'Article Imported successfully.';
+    }
+
+    public function export()
+    {
+        $export = new ArticlesDataExport($this->articleRepo, $this->articleCategoryRepo);
+        $page = $this->articleRepo->getPageSlug();
+
+        return $this->importExportService->export($export, $page . '_data.xlsx');
+    }
+
+    public function downloadTemplate()
+    {
+        $template = new ArticlesTemplateExport($this->articleCategoryRepo);
+        $page = $this->articleRepo->getPageSlug();
+
+        return $this->importExportService->export($template, 'format_import_' . $page . '.xlsx');
     }
 }

@@ -45,6 +45,13 @@ class ArticleRepository
         return $this->article->findOrFail($id);
     }
 
+    public function getByCategory(int $id)
+    {
+        return $this->article->where('article_category_id', $id)
+            ->orderBy('id', 'desc')
+            ->get();
+    }
+
     public function create(array $data)
     {
         return $this->article->create($data);
@@ -55,12 +62,17 @@ class ArticleRepository
         return $this->getById($id)->update($data);
     }
 
+    public function updateOrCreate(array $conditions, array $data)
+    {
+        return $this->article->updateOrCreate($conditions, $data);
+    }
+
     public function delete(int $id)
     {
         return $this->getById($id)->delete();
     }
 
-    public function getFolderByPageSlug()
+    public function getPageSlug()
     {
         // return (new Article())->getTable();
         $page = Page::where('id', '4')->firstOrFail();
