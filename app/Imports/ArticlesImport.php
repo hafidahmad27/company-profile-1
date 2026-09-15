@@ -2,6 +2,7 @@
 
 namespace App\Imports;
 
+use App\Imports\Sheets\ArticlesByCategorySheet;
 use App\Repositories\ArticleCategoryRepository;
 use App\Repositories\ArticleRepository;
 use Maatwebsite\Excel\Concerns\Import;
@@ -28,7 +29,11 @@ class ArticlesImport implements Import, WithMultipleSheets
         $articleCategories = $this->articleCategoryRepo->getAll();
 
         foreach ($articleCategories as $articleCategory) {
-            $sheets[$articleCategory->name] = new ArticlesSheetImport($articleCategory->name, $this->articleRepo, $this->articleCategoryRepo);
+            $sheets[$articleCategory->name] = new ArticlesByCategorySheet(
+                $articleCategory->id,
+                $this->articleRepo,
+                $this->articleCategoryRepo
+            );
         }
 
         return $sheets;

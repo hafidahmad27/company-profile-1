@@ -45,7 +45,7 @@ class ArticleRepository
         return $this->article->findOrFail($id);
     }
 
-    public function getByCategory(int $id)
+    public function getByCategoryId(int $id)
     {
         return $this->article->where('article_category_id', $id)
             ->orderBy('id', 'desc')

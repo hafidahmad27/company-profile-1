@@ -2,8 +2,7 @@
 
 namespace App\Services;
 
-use App\Exports\ArticlesDataExport;
-use App\Exports\ArticlesTemplateExport;
+use App\Exports\ArticlesExport;
 use App\Imports\ArticlesImport;
 use App\Repositories\ArticleCategoryRepository;
 use App\Repositories\ArticleRepository;
@@ -139,19 +138,12 @@ class ArticleService
         return 'Article Imported successfully.';
     }
 
-    public function export()
+    public function export(bool $isTemplate = false)
     {
-        $export = new ArticlesDataExport($this->articleRepo, $this->articleCategoryRepo);
+        $export = new ArticlesExport($this->articleRepo, $this->articleCategoryRepo, $isTemplate);
         $page = $this->articleRepo->getPageSlug();
+        $filename = $page . ($isTemplate ? '_template.xlsx' : '_data.xlsx');
 
-        return $this->importExportService->export($export, $page . '_data.xlsx');
-    }
-
-    public function downloadTemplate()
-    {
-        $template = new ArticlesTemplateExport($this->articleCategoryRepo);
-        $page = $this->articleRepo->getPageSlug();
-
-        return $this->importExportService->export($template, 'format_import_' . $page . '.xlsx');
+        return $this->importExportService->export($export, $filename);
     }
 }

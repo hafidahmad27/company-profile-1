@@ -97,19 +97,17 @@ class ArticleController extends Controller
         } catch (\Illuminate\Database\QueryException $e) {
             if ($e->getCode() === '23000') {
                 return back()
-                    ->withErrors(['file' => 'Ada judul artikel yang sudah ada.']);
+                    ->withErrors(['file' => $e->getMessage()]);
             }
             throw $e;
         }
     }
 
-    public function export()
+    public function export(Request $request)
     {
-        return $this->articleService->export();
-    }
+        // ambil flag dari query string, default false
+        $isTemplate = $request->boolean('isTemplate', false);
 
-    public function downloadTemplate()
-    {
-        return $this->articleService->downloadTemplate();
+        return $this->articleService->export($isTemplate);
     }
 }

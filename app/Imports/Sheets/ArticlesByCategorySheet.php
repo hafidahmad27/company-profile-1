@@ -1,23 +1,22 @@
 <?php
 
-namespace App\Imports;
+namespace App\Imports\Sheets;
 
 use App\Repositories\ArticleRepository;
 use App\Repositories\ArticleCategoryRepository;
 use Maatwebsite\Excel\Concerns\OnEachRow;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
-use Maatwebsite\Excel\Concerns\WithTitle;
 use Maatwebsite\Excel\Row;
 
-class ArticlesSheetImport implements OnEachRow, WithTitle, WithHeadingRow
+class ArticlesByCategorySheet implements OnEachRow, WithHeadingRow
 {
-    protected string $articleCategoryName;
+    protected int $articleCategoryId;
     protected ArticleRepository $articleRepo;
     protected ArticleCategoryRepository $articleCategoryRepo;
 
-    public function __construct(string $articleCategoryName, ArticleRepository $articleRepo, ArticleCategoryRepository $articleCategoryRepo)
+    public function __construct(int $articleCategoryId, ArticleRepository $articleRepo, ArticleCategoryRepository $articleCategoryRepo)
     {
-        $this->articleCategoryName = $articleCategoryName;
+        $this->articleCategoryId = $articleCategoryId;
         $this->articleRepo = $articleRepo;
         $this->articleCategoryRepo = $articleCategoryRepo;
     }
@@ -26,21 +25,14 @@ class ArticlesSheetImport implements OnEachRow, WithTitle, WithHeadingRow
     {
         $data = $row->toArray();
 
-        $articleCategoryId = $this->articleCategoryRepo->getIdByName($this->articleCategoryName);
-
         $this->articleRepo->updateOrCreate(
             [
                 'title' => $data['title'],
-                'article_category_id' => $articleCategoryId,
+                'article_category_id' => $this->articleCategoryId,
             ],
             [
                 'content' => $data['content']
             ]
         );
-    }
-
-    public function title(): string
-    {
-        return $this->articleCategoryName;
     }
 }

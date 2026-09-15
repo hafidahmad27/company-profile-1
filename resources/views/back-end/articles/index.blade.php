@@ -149,7 +149,8 @@
                                     </div>
                                     <div class="modal-footer">
                                         <div class="form-group me-auto">
-                                            <a href="{{ route('be.articles.downloadTemplate') }}">download template</a>
+                                            <a href="{{ route('be.articles.export', ['isTemplate' => 1]) }}">download
+                                                template</a>
                                         </div>
                                         <button type="submit" class="btn btn-outline-success ms-1" data-bs-dismiss="modal">
                                             <i class="bx bx-check d-block d-sm-none"></i>

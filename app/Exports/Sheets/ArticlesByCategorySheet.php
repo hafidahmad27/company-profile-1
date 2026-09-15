@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Exports;
+namespace App\Exports\Sheets;
 
 use App\Repositories\ArticleCategoryRepository;
 use App\Repositories\ArticleRepository;
 use Illuminate\Support\Enumerable;
+use Maatwebsite\Excel\Concerns\Export;
+use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
@@ -15,17 +17,21 @@ use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class ArticlesByCategoryDataExport implements FromCollection, WithTitle, WithHeadings, ShouldAutoSize, WithColumnWidths, WithStyles
+class ArticlesByCategorySheet implements FromCollection, Export, WithHeadings, WithTitle, ShouldAutoSize, WithColumnWidths, WithStyles
 {
+    use Exportable;
+
     protected int $articleCategoryId;
     protected ArticleCategoryRepository $articleCategoryRepo;
     protected ArticleRepository $articleRepo;
+    protected bool $isTemplate;
 
-    public function __construct(int $articleCategoryId, ArticleCategoryRepository $articleCategoryRepo, ArticleRepository $articleRepo)
+    public function __construct(int $articleCategoryId, ArticleCategoryRepository $articleCategoryRepo, ArticleRepository $articleRepo, bool $isTemplate = false)
     {
         $this->articleCategoryId = $articleCategoryId;
         $this->articleCategoryRepo = $articleCategoryRepo;
         $this->articleRepo = $articleRepo;
+        $this->isTemplate = $isTemplate;
     }
 
     public function headings(): array
@@ -35,7 +41,11 @@ class ArticlesByCategoryDataExport implements FromCollection, WithTitle, WithHea
 
     public function collection(): Enumerable
     {
-        return $this->articleRepo->getByCategory($this->articleCategoryId)
+        if ($this->isTemplate) {
+            return collect([]);
+        }
+
+        return $this->articleRepo->getByCategoryId($this->articleCategoryId)
             ->map(fn($article) => [
                 'title'   => $article->title,
                 'content' => $article->content,

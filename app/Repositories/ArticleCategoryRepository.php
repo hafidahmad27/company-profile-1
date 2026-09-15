@@ -28,11 +28,6 @@ class ArticleCategoryRepository
         return $this->articleCategory->findOrFail($id);
     }
 
-    public function getIdByName(string $name)
-    {
-        return $this->articleCategory->where('name', $name)->value('id');
-    }
-
     public function create(array $data)
     {
         return $this->articleCategory->create($data);
