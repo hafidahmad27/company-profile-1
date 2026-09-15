@@ -131,7 +131,7 @@ class ArticleService
 
     public function import(UploadedFile $file)
     {
-        $import = new ArticlesImport($this->articleRepo, $this->articleCategoryRepo);
+        $import = new ArticlesImport($this->articleRepo, $this->articleCategoryRepo, $file);
 
         $this->importExportService->import($import, $file);
 
