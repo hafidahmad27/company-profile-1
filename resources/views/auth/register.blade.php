@@ -3,7 +3,7 @@
 
 <head>
     <title>
-        {{ $globalSetting->site_name ?? '-' }}
+        {{ $globalSetting->name ?? '-' }}
         ::
         Register
     </title>
@@ -25,7 +25,7 @@
                             <img src="{{ $globalSetting->logo_url ?? asset('mazer/assets/compiled/svg/logo.svg') }}"
                                 width="60%" alt="Logo">
                         </a>
-                        <h5 class="mt-4">{{ $globalSetting->site_name }}</h5>
+                        <h5 class="mt-4">{{ $globalSetting->name }}</h5>
                     </div>
                     <hr class="my-4">
                     {{-- </div> --}}

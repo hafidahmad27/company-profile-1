@@ -657,8 +657,8 @@
                     {{ request()->is('be/pages') ? 'active' : '' }}
                     {{ request()->is('be/pages/*') ? 'active' : '' }} 
 
-                    {{ request()->is('be/settings') ? 'active' : '' }}
-                    {{ request()->is('be/settings/*') ? 'active' : '' }} 
+                    {{ request()->is('be/companies') ? 'active' : '' }}
+                    {{ request()->is('be/companies/*') ? 'active' : '' }} 
 
                     {{ request()->is('be/profile') ? 'active' : '' }}
                     {{ request()->is('be/profile/*') ? 'active' : '' }}
@@ -680,10 +680,10 @@
                         </li>
                         <li
                             class="submenu-item 
-                            {{ request()->is('be/settings') ? 'active' : '' }}
-                            {{ request()->is('be/settings/*') ? 'active' : '' }}
+                            {{ request()->is('be/companies') ? 'active' : '' }}
+                            {{ request()->is('be/companies/*') ? 'active' : '' }}
                             ">
-                            <a href="{{ route('be.settings.index') }}" class='submenu-link'>
+                            <a href="{{ route('be.companies.index') }}" class='submenu-link'>
                                 {{-- <i class="bi bi-gear"></i> --}}
                                 <span>Company</span>
                             </a>

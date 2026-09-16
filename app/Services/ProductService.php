@@ -2,21 +2,26 @@
 
 namespace App\Services;
 
+use App\Exports\ProductsExport;
+use App\Imports\ProductsImport;
 use App\Repositories\ProductCategoryRepository;
 use App\Repositories\ProductRepository;
 use App\Traits\GenerateUploadPathTrait;
+use Illuminate\Http\UploadedFile;
 
 class ProductService
 {
     use GenerateUploadPathTrait;
 
     protected FileUploadService $fileUploadService;
+    protected ImportExportService $importExportService;
     protected ProductRepository $productRepo;
     protected ProductCategoryRepository $productCategoryRepo;
 
-    public function __construct(FileUploadService $fileUploadService, ProductRepository $productRepo, ProductCategoryRepository $productCategoryRepo)
+    public function __construct(FileUploadService $fileUploadService, ImportExportService $importExportService, ProductRepository $productRepo, ProductCategoryRepository $productCategoryRepo)
     {
         $this->fileUploadService = $fileUploadService;
+        $this->importExportService = $importExportService;
         $this->productRepo = $productRepo;
         $this->productCategoryRepo = $productCategoryRepo;
     }
@@ -122,5 +127,23 @@ class ProductService
         return $isPublished
             ? 'Product berhasil dipublikasikan.'
             : 'Product berhasil disembunyikan.';
+    }
+
+    public function import(UploadedFile $file)
+    {
+        $import = new ProductsImport($this->productRepo, $this->productCategoryRepo, $file);
+
+        $this->importExportService->import($import, $file);
+
+        return 'Products Imported successfully.';
+    }
+
+    public function export(bool $isTemplate = false)
+    {
+        $export = new ProductsExport($this->productRepo, $this->productCategoryRepo, $isTemplate);
+        $page = $this->productRepo->getPageSlug();
+        $filename = $page . ($isTemplate ? '_template.xlsx' : '_data.xlsx');
+
+        return $this->importExportService->export($export, $filename);
     }
 }

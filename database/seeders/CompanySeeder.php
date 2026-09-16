@@ -2,19 +2,19 @@
 
 namespace Database\Seeders;
 
-use App\Models\Setting;
+use App\Models\Company;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class SettingSeeder extends Seeder
+class CompanySeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Setting::factory()->create([
-            // 'site_name' => 'HFD Corp',
+        Company::factory()->create([
+            // 'name' => 'HFD Corp',
             // 'logo' => null,
             // 'address' => fake()->address(),
             // 'phone' => '012345678910',

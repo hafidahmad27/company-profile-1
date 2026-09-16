@@ -45,6 +45,13 @@ class ProductRepository
         return $this->product->findOrFail($id);
     }
 
+    public function getByCategoryId(int $id)
+    {
+        return $this->product->where('product_category_id', $id)
+            ->orderBy('id', 'desc')
+            ->get();
+    }
+
     public function create(array $data)
     {
         return $this->product->create($data);
@@ -53,6 +60,11 @@ class ProductRepository
     public function update(int $id, array $data)
     {
         return $this->getById($id)->update($data);
+    }
+
+    public function updateOrCreate(array $conditions, array $data)
+    {
+        return $this->product->updateOrCreate($conditions, $data);
     }
 
     public function delete(int $id)

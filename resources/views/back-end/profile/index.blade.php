@@ -59,18 +59,18 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12">
-                    <div class="card">
-                        {{-- <div class="card-header">
+                {{-- <div class="col-12">
+                    <div class="card"> --}}
+                {{-- <div class="card-header">
                             <h4 class="card-title">Multiple Column</h4>
                         </div> --}}
-                        <div class="card-content">
+                {{-- <div class="card-content">
                             <div class="card-body">
                                 @include('back-end.profile.partials._delete-user-form')
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </section>
         <!-- // Basic multiple Column Form section end -->

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateSettingRequest extends FormRequest
+class UpdateCompanyRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,7 @@ class UpdateSettingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'site_name' => 'required|string|max:255|unique:settings,site_name,' . $this->route('setting'),
+            'name' => 'required|string|max:255|unique:companies,name,' . $this->route('company'),
             'logo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'address' => 'required|string|max:255',
             'phone' => 'required|string',

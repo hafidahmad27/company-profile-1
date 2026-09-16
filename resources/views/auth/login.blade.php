@@ -3,7 +3,7 @@
 
 <head>
     <title>
-        {{ $globalSetting->site_name ?? '-' }}
+        {{ $globalSetting->name ?? '-' }}
         :: Login
         @hasSection('title')
             @yield('title')
@@ -26,7 +26,7 @@
                         <a href="">
                             <img src="{{ $globalSetting->logo_url }}" width="60%" alt="Logo">
                         </a>
-                        <h5 class="mt-4">{{ $globalSetting->site_name }}</h5>
+                        <h5 class="mt-4">{{ $globalSetting->name }}</h5>
                     </div>
                     <hr class="my-4">
                     {{-- </div> --}}
@@ -73,14 +73,14 @@
                         </div> --}}
                         <button class="btn btn-primary btn-block btn-lg shadow-lg mt-2">Log in</button>
                     </form>
-                    <div class="text-center mt-4 text-lg fs-6">
+                    {{-- <div class="text-center mt-4 text-lg fs-6">
                         <p class="text-gray-600">Don't have an account? <a href="{{ route('register') }}"
                                 class="font-bold">Sign
                                 up</a>.</p>
                         @if (Route::has('password.request'))
                             <p><a class="font-bold" href="{{ route('password.request') }}">Forgot password?</a>.</p>
                         @endif
-                    </div>
+                    </div> --}}
                 </div>
             </div>
             {{-- <div class="col-lg-7 d-none d-lg-block">

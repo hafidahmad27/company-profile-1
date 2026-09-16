@@ -6,9 +6,8 @@ use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\PageController;
 use App\Http\Controllers\Backend\ProductCategoryController;
 use App\Http\Controllers\Backend\ProductController;
-use App\Http\Controllers\Backend\SectionController;
-use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\ProfileController;
+use App\Http\Controllers\Backend\CompanyController;
 use Illuminate\Support\Facades\Route;
 
 // Include auth
@@ -22,6 +21,8 @@ Route::prefix('be')->name('be.')->middleware(['auth', 'verified'])->group(functi
     Route::patch('product-categories/{product_category}/updateActiveStatus', [ProductCategoryController::class, 'updateActiveStatus'])
         ->name('product-categories.updateActiveStatus');
 
+    Route::post('products/import', [ProductController::class, 'import'])->name('products.import');
+    Route::get('products/export', [ProductController::class, 'export'])->name('products.export');
     Route::patch('products/{product}/togglePublish', [ProductController::class, 'togglePublish'])
         ->name('product.togglePublish');
     Route::resource('products', ProductController::class);
@@ -32,12 +33,11 @@ Route::prefix('be')->name('be.')->middleware(['auth', 'verified'])->group(functi
 
     Route::post('articles/import', [ArticleController::class, 'import'])->name('articles.import');
     Route::get('articles/export', [ArticleController::class, 'export'])->name('articles.export');
-    Route::get('articles/downloadTemplate', [ArticleController::class, 'downloadTemplate'])->name('articles.downloadTemplate');
     Route::patch('articles/{article}/togglePublish', [ArticleController::class, 'togglePublish'])
         ->name('article.togglePublish');
     Route::resource('articles', ArticleController::class);
 
-    Route::resource('settings', SettingController::class)->only([
+    Route::resource('companies', CompanyController::class)->only([
         'index',
         'update'
     ]);
@@ -54,7 +54,7 @@ Route::prefix('be')->name('be.')->middleware(['auth', 'verified'])->group(functi
         // Route::get('dashboard', [ProfileController::class, 'index'])->name('profile.dashboard');
         Route::get('/', [ProfileController::class, 'index'])->name('profile.index');
         Route::patch('/', [ProfileController::class, 'update'])->name('profile.update');
-        Route::delete('/', [ProfileController::class, 'destroy'])->name('profile.destroy');
+        // Route::delete('/', [ProfileController::class, 'destroy'])->name('profile.destroy');
     });
 });
 

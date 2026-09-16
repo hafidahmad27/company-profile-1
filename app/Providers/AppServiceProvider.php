@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use App\Models\Page;
 use App\Models\Section;
-use App\Models\Setting;
+use App\Models\Company;
 use App\Observers\SectionObserver;
 use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
@@ -33,9 +33,9 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrapFive();
 
         View::composer('*', function ($view) {
-            $globalSetting = Setting::first() ?? new Setting;
+            $globalSetting = Company::first() ?? new Company;
 
-            $view->with('globalSetting', $globalSetting ?? new Setting);
+            $view->with('globalSetting', $globalSetting ?? new Company);
         });
 
         View::composer('front-end.*', function ($view) {

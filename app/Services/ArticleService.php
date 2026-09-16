@@ -135,7 +135,7 @@ class ArticleService
 
         $this->importExportService->import($import, $file);
 
-        return 'Article Imported successfully.';
+        return 'Articles Imported successfully.';
     }
 
     public function export(bool $isTemplate = false)

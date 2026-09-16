@@ -39,9 +39,9 @@
     </section>
 
     @if ($sectionAboutPreview?->is_active == 1)
-        <section id="about" style="margin-top: 8%">
+        <section id="about" style="margin-top: 6%">
             <div class="text-center mb-4">
-                <h3>{{ $sectionAboutPreview->title ?? '-' }}</h3>
+                <h3 class="fw-bold">{{ $sectionAboutPreview->title ?? '-' }}</h3>
                 <p class="mt-4">
                     {{ $sectionAboutPreview->subtitle ?? null }}
                 </p>
@@ -65,9 +65,9 @@
     @endif
 
     @if ($sectionProductPreview?->is_active == 1)
-        <section id="products" style="margin-top: 8%">
+        <section id="products" style="margin-top: 6%">
             <div class="text-center mb-4">
-                <h3>{{ $sectionProductPreview->title ?? '-' }}</h3>
+                <h3 class="fw-bold">{{ $sectionProductPreview->title ?? '-' }}</h3>
                 <p class="mt-4">
                     {{ $sectionProductPreview->subtitle ?? null }}
                 </p>
@@ -151,9 +151,9 @@
     @endif
 
     @if ($sectionArticlePreview?->is_active == 1)
-        <section id="articles" style="margin-top: 8%">
+        <section id="articles" style="margin-top: 6%">
             <div class="text-center mb-4">
-                <h3>{{ $sectionArticlePreview->title ?? '-' }}</h3>
+                <h3 class="fw-bold">{{ $sectionArticlePreview->title ?? '-' }}</h3>
                 <p class="mt-4">
                     {{ $sectionArticlePreview->subtitle ?? null }}
                 </p>

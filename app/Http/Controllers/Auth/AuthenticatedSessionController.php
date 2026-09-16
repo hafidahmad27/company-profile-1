@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
-use App\Repositories\SettingRepository;
+use App\Repositories\CompanyRepository;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,11 +12,11 @@ use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
 {
-    protected SettingRepository $settingRepo;
+    protected CompanyRepository $companyRepo;
 
-    public function __construct(SettingRepository $settingRepo)
+    public function __construct(CompanyRepository $companyRepo)
     {
-        $this->settingRepo = $settingRepo;
+        $this->companyRepo = $companyRepo;
     }
 
     /**
@@ -36,10 +36,10 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        $setting = $this->settingRepo->getFirst();
+        $company = $this->companyRepo->getFirst();
 
-        if (empty($setting->site_name) || empty($setting->address) || empty($setting->phone) || empty($setting->email)) {
-            return redirect()->route('be.settings.index');
+        if (empty($company->name) || empty($company->address) || empty($company->phone) || empty($company->email)) {
+            return redirect()->route('be.companies.index');
         }
 
         return redirect()->intended(route('be.dashboard', absolute: false));

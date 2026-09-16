@@ -7,6 +7,7 @@ use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Services\ProductCategoryService;
 use App\Services\ProductService;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -80,5 +81,33 @@ class ProductController extends Controller
 
         return back()
             ->with('success', $message);
+    }
+
+    public function import(Request $request)
+    {
+        try {
+            $request->validate([
+                'file' => 'required|mimes:xls,xlsx|max:2048',
+            ]);
+            $file = $request->file('file');
+            $message = $this->productService->import($file);
+
+            return back()
+                ->with('success', $message);
+        } catch (\Illuminate\Database\QueryException $e) {
+            if ($e->getCode() === '23000') {
+                return back()
+                    ->withErrors(['file' => $e->getMessage()]);
+            }
+            throw $e;
+        }
+    }
+
+    public function export(Request $request)
+    {
+        // ambil flag dari query string, default false
+        $isTemplate = $request->boolean('isTemplate', false);
+
+        return $this->productService->export($isTemplate);
     }
 }

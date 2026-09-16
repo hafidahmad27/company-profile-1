@@ -3,7 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Section;
-use App\Models\Setting;
+use App\Models\Company;
 use Illuminate\Support\Str;
 
 class SectionObserver
@@ -24,16 +24,16 @@ class SectionObserver
         // menyamakan isi beberapa field mengambil dari 'content' about kalau yang diupdate adalah section_key 'about'
         if ($section->section_key === 'about' && $section->wasChanged('content')) {
             $aboutPreview = Section::where('section_key', 'about-preview')->first();
-            $setting = Setting::first();
+            $company = Company::first();
 
             if ($aboutPreview && $aboutPreview->content == null) {
                 $aboutPreview->update([
                     'content' => $section->content
                 ]);
             }
-            if ($setting && $setting->footer_about == null) {
-                $setting->update([
-                    'footer_about' => Str::limit($section->content, 255, '')
+            if ($company && $company->footer_about == null) {
+                $company->update([
+                    'footer_about' => Str::limit($section->content, 170, '')
                 ]);
             }
         }

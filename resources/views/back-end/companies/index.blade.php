@@ -28,7 +28,7 @@
                         </div> --}}
                         <div class="card-content">
                             <div class="card-body">
-                                @if (empty($setting->site_name) || empty($setting->address) || empty($setting->phone) || empty($setting->email))
+                                @if (empty($company->name) || empty($company->address) || empty($company->phone) || empty($company->email))
                                     <div class="alert alert-info" role="alert">
                                         Harap mengisi kolom-kolom berikut terlebih dahulu
                                         {{-- <button type="button" class="btn-close" data-bs-dismiss="alert"
@@ -42,8 +42,8 @@
                                             aria-label="Close"></button>
                                     </div>
                                 @endif
-                                @include('back-end.settings._form', [
-                                    'action' => route('be.settings.update', $setting->id),
+                                @include('back-end.companies._form', [
+                                    'action' => route('be.companies.update', $company->id),
                                     'method' => 'PUT',
                                     'submitLabel' => '<i class="bi bi-arrow-repeat"></i> Update',
                                 ])

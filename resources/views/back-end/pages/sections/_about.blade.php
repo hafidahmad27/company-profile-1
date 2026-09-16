@@ -1,6 +1,6 @@
 <thead>
     {{-- <th>Order</th> --}}
-    <th>Subtitle</th>
+    <th style="width: 33%">Subtitle</th>
     <th>Content</th>
     {{-- <th>Image</th> --}}
     {{-- <th class="text-center">Is Active?</th> --}}
@@ -18,7 +18,7 @@
                     value="{{ old('sections.' . $section->id . '.subtitle', $section->subtitle) }}" class="form-control">
             </td>
             <td>
-                <textarea name="sections[{{ $section->id }}][content]" class="form-control">{{ old('sections.' . $section->id . '.content', $section->content) }}</textarea>
+                <textarea rows="6" name="sections[{{ $section->id }}][content]" class="form-control">{{ old('sections.' . $section->id . '.content', $section->content) }}</textarea>
             </td>
             {{-- <td>
                 <div class="d-flex align-items-center gap-3">

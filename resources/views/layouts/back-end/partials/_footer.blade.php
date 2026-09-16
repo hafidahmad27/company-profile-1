@@ -1,7 +1,7 @@
 <footer>
     <div class="footer clearfix mb-0 text-muted">
         <div class="float-start">
-            <p>Copyright &copy; {{ date('Y') }} {{ $globalSetting->site_name ?? '-' }}. All Rights Reserved.</p>
+            <p>Copyright &copy; {{ date('Y') }} {{ $globalSetting->name ?? '-' }}. All Rights Reserved.</p>
         </div>
         <div class="float-end">
             <p>Template by
