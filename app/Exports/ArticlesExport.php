@@ -6,13 +6,10 @@ use App\Exports\Sheets\ArticlesByCategorySheet;
 use App\Repositories\ArticleCategoryRepository;
 use App\Repositories\ArticleRepository;
 use Maatwebsite\Excel\Concerns\Export;
-use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 
 class ArticlesExport implements Export, WithMultipleSheets
 {
-    use Exportable;
-
     protected ArticleRepository $articleRepo;
     protected ArticleCategoryRepository $articleCategoryRepo;
     protected bool $isTemplate;

@@ -57,7 +57,7 @@
                 <div class="form-group">
                     <label class="form-label">Footer About</label>
                     <textarea class="form-control @error('footer_about') is-invalid @enderror" id="footer_about" name="footer_about"
-                        rows="3">{{ old('footer_about', $setting->footer_about ?? null) }}</textarea>
+                        maxlength="255" rows="3">{{ old('footer_about', $setting->footer_about ?? null) }}</textarea>
                     @error('footer_about')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror

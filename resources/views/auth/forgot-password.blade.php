@@ -3,7 +3,7 @@
 
 <head>
     <title>
-        {{ $globalSetting->site_name ?? '' }}
+        {{ $globalSetting->site_name ?? '-' }}
         :: Forgot Password
         @hasSection('title')
             @yield('title')

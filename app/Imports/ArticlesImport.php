@@ -7,15 +7,12 @@ use App\Repositories\ArticleCategoryRepository;
 use App\Repositories\ArticleRepository;
 use Illuminate\Http\UploadedFile;
 use Maatwebsite\Excel\Concerns\Import;
-use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
 class ArticlesImport implements Import, WithMultipleSheets
 {
-    use Importable;
-
     protected ArticleRepository $articleRepo;
     protected ArticleCategoryRepository $articleCategoryRepo;
     protected Spreadsheet $spreadsheet;

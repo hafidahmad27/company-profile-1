@@ -24,7 +24,7 @@ class ArticlesByCategorySheet implements OnEachRow, WithHeadingRow
 
         $this->articleRepo->updateOrCreate(
             [
-                'title' => $data['title'],
+                'title' => $data['title'] ?? 'Untitled',
                 'article_category_id' => $this->articleCategoryId,
             ],
             [

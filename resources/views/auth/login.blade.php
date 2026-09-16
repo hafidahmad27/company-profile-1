@@ -3,7 +3,7 @@
 
 <head>
     <title>
-        {{ $globalSetting->site_name ?? '' }}
+        {{ $globalSetting->site_name ?? '-' }}
         :: Login
         @hasSection('title')
             @yield('title')
@@ -24,8 +24,7 @@
                     {{-- <div class="auth-logo"> --}}
                     <div class="text-center">
                         <a href="">
-                            <img src="{{ $globalSetting->logo_url ?? asset('mazer/assets/compiled/svg/logo.svg') }}"
-                                width="60%" alt="Logo">
+                            <img src="{{ $globalSetting->logo_url }}" width="60%" alt="Logo">
                         </a>
                         <h5 class="mt-4">{{ $globalSetting->site_name }}</h5>
                     </div>

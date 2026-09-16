@@ -3,7 +3,7 @@
 
 <head>
     <title>
-        {{ $globalSetting->site_name ?? '' }}
+        {{ $globalSetting->site_name ?? '-' }}
         ::
         @hasSection('title')
             @yield('title')

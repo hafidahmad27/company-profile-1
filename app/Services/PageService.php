@@ -94,8 +94,8 @@ class PageService
                 'subtitle'     => $item['subtitle'] ?? null,
                 'content'      => $item['content'] ?? null,
                 'image'        => $item['image'] ?? null,
-                'button_text'  => $item['button_text'] ?? null,
-                'button_link'  => $item['button_link'] ?? null,
+                // 'button_text'  => $item['button_text'] ?? null,
+                // 'button_link'  => $item['button_link'] ?? null,
                 'order'        => $item['order'] ?? null,
                 'is_active'    => !empty($item['is_active']) ? 1 : 0,
             ]);

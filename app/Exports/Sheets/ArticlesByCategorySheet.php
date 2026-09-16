@@ -5,8 +5,6 @@ namespace App\Exports\Sheets;
 use App\Repositories\ArticleCategoryRepository;
 use App\Repositories\ArticleRepository;
 use Illuminate\Support\Enumerable;
-use Maatwebsite\Excel\Concerns\Export;
-use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
@@ -17,10 +15,8 @@ use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class ArticlesByCategorySheet implements FromCollection, Export, WithHeadings, WithTitle, ShouldAutoSize, WithColumnWidths, WithStyles
+class ArticlesByCategorySheet implements FromCollection, WithHeadings, WithTitle, ShouldAutoSize, WithColumnWidths, WithStyles
 {
-    use Exportable;
-
     protected int $articleCategoryId;
     protected ArticleCategoryRepository $articleCategoryRepo;
     protected ArticleRepository $articleRepo;

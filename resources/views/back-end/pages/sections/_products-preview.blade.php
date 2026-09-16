@@ -1,11 +1,11 @@
 <thead>
     {{-- <th>Order</th> --}}
     <th>Title</th>
-    {{-- <th>Subtitle</th> --}}
+    <th>Subtitle</th>
     {{-- <th>Content</th> --}}
     {{-- <th>Image</th> --}}
-    <th>Button Text</th>
-    <th>Button Link</th>
+    {{-- <th>Button Text</th> --}}
+    {{-- <th>Button Link</th> --}}
     <th class="text-center">Is Active?</th>
 </thead>
 
@@ -20,11 +20,10 @@
                 <input type="text" name="sections[{{ $section->id }}][title]"
                     value="{{ old('sections.' . $section->id . '.title', $section->title) }}" class="form-control">
             </td>
-            {{-- <td>
+            <td>
                 <input type="text" name="sections[{{ $section->id }}][subtitle]"
-                    value="{{ old('sections.' . $section->id . '.subtitle', $section->subtitle) }}"
-                    class="form-control">
-            </td> --}}
+                    value="{{ old('sections.' . $section->id . '.subtitle', $section->subtitle) }}" class="form-control">
+            </td>
             {{-- <td>
                 <textarea name="sections[{{ $section->id }}][content]" class="form-control">{{ old('sections.' . $section->id . '.content', $section->content) }}</textarea>
             </td> --}}
@@ -40,16 +39,16 @@
                     @enderror
                 </div>
             </td> --}}
-            <td>
+            {{-- <td>
                 <input type="text" name="sections[{{ $section->id }}][button_text]"
                     value="{{ old('sections.' . $section->id . '.button_text', $section->button_text) }}"
                     class="form-control">
-            </td>
-            <td>
+            </td> --}}
+            {{-- <td>
                 <input type="text" name="sections[{{ $section->id }}][button_link]"
                     value="{{ old('sections.' . $section->id . '.button_link', $section->button_link) }}"
                     class="form-control">
-            </td>
+            </td> --}}
             <td class="text-center">
                 <input type="checkbox" name="sections[{{ $section->id }}][is_active]" value="1"
                     {{ $section->is_active ? 'checked' : '' }}>

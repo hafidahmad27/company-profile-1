@@ -20,9 +20,9 @@ class DatabaseSeeder extends Seeder
             PageSeeder::class,
             SectionSeeder::class,
             ProductCategorySeeder::class,
-            ProductSeeder::class,
+            // ProductSeeder::class,
             ArticleCategorySeeder::class,
-            ArticleSeeder::class,
+            // ArticleSeeder::class,
         ]);
     }
 }

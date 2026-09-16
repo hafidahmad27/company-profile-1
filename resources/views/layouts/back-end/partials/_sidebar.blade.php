@@ -654,11 +654,11 @@
 
                 <li
                     class="sidebar-item 
-                    {{ request()->is('be/settings') ? 'active' : '' }}
-                    {{ request()->is('be/settings/*') ? 'active' : '' }} 
-
                     {{ request()->is('be/pages') ? 'active' : '' }}
                     {{ request()->is('be/pages/*') ? 'active' : '' }} 
+
+                    {{ request()->is('be/settings') ? 'active' : '' }}
+                    {{ request()->is('be/settings/*') ? 'active' : '' }} 
 
                     {{ request()->is('be/profile') ? 'active' : '' }}
                     {{ request()->is('be/profile/*') ? 'active' : '' }}
@@ -670,22 +670,22 @@
                     <ul class="submenu">
                         <li
                             class="submenu-item 
-                            {{ request()->is('be/settings') ? 'active' : '' }}
-                            {{ request()->is('be/settings/*') ? 'active' : '' }}
-                            ">
-                            <a href="{{ route('be.settings.index') }}" class='submenu-link'>
-                                {{-- <i class="bi bi-gear"></i> --}}
-                                <span>Company</span>
-                            </a>
-                        </li>
-                        <li
-                            class="submenu-item 
                             {{ request()->is('be/pages') ? 'active' : '' }}
                             {{ request()->is('be/pages/*') ? 'active' : '' }}
                             ">
                             <a href="{{ route('be.pages.index') }}" class='submenu-link'>
                                 {{-- <i class="bi bi-gear"></i> --}}
                                 <span>Page</span>
+                            </a>
+                        </li>
+                        <li
+                            class="submenu-item 
+                            {{ request()->is('be/settings') ? 'active' : '' }}
+                            {{ request()->is('be/settings/*') ? 'active' : '' }}
+                            ">
+                            <a href="{{ route('be.settings.index') }}" class='submenu-link'>
+                                {{-- <i class="bi bi-gear"></i> --}}
+                                <span>Company</span>
                             </a>
                         </li>
                         <li

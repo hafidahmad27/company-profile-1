@@ -55,6 +55,12 @@
                         style="height: 235px; object-fit: cover">
                 </div>
             @endif
+            <div class="d-grid gap-2 col-2 mx-auto text-center mt-4">
+                <a href="{{ url($sectionAboutPreview->button_link ?? '/') }}"
+                    class="btn btn-primary">{{ $sectionAboutPreview->button_text ?? '-' }}
+                    <i class="bi bi-chevron-double-right"></i>
+                </a>
+            </div>
         </section>
     @endif
 
