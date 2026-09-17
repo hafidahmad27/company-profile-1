@@ -73,7 +73,7 @@
                                     <td>{{ ++$i }}</td>
                                     <td>{{ $article->category_name }}</td>
                                     <td>{{ $article->title }}</td>
-                                    <td>{{ Str::limit($article->content, 100) }}</td>
+                                    <td align="justify">{{ Str::limit($article->content, 100) }}</td>
                                     <td align="center">
                                         <img src="{{ $article->image_url }}" width="100" height="100"
                                             class="img-thumbnail">

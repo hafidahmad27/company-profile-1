@@ -3,7 +3,7 @@
 
 <head>
     <title>
-        {{ $globalSetting->name ?? '-' }}
+        {{ $companySetting->name ?? '-' }}
         ::
         @hasSection('title')
             @yield('title')

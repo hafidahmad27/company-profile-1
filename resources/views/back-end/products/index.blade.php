@@ -62,7 +62,7 @@
                                 <th>Image</th>
                                 <th>Status</th>
                                 <th>Published At</th>
-                                <th>Author</th>
+                                {{-- <th>Author</th> --}}
                                 <th class="text-center">Action</th>
                             </tr>
                         </thead>
@@ -73,8 +73,8 @@
                                     <td>{{ ++$i }}</td>
                                     <td>{{ $product->category_name }}</td>
                                     <td>{{ $product->name }}</td>
-                                    <td>{{ Str::limit($product->description, 100) }}</td>
-                                    <td>{{ number_format($product->price, 0, ',', '.') }}</td>
+                                    <td align="justify">{{ Str::limit($product->description, 100) }}</td>
+                                    <td align="right">{{ number_format($product->price, 0, ',', '.') }}</td>
                                     <td align="center">
                                         <img src="{{ $product->image_url }}" width="100" height="100"
                                             class="img-thumbnail">
@@ -85,7 +85,7 @@
                                         </span>
                                     </td>
                                     <td>{{ $product->published_at }}</td>
-                                    <td>{{ $product->user_name }}</td>
+                                    {{-- <td>{{ $product->user_name }}</td> --}}
                                     <td class="text-center">
                                         <form action="{{ route('be.product.togglePublish', $product->id) }}"
                                             class="d-inline" method="POST">
@@ -154,7 +154,8 @@
                                         </div>
                                         <button type="submit" class="btn btn-outline-success ms-1" data-bs-dismiss="modal">
                                             <i class="bx bx-check d-block d-sm-none"></i>
-                                            <span class="d-none d-sm-block"><i class="bi bi-arrow-bar-up"></i> Import</span>
+                                            <span class="d-none d-sm-block"><i class="bi bi-arrow-bar-up"></i>
+                                                Import</span>
                                         </button>
                                     </div>
                                 </form>
@@ -168,6 +169,15 @@
 @endsection
 
 @push('scripts')
+    @if ($errors->has('file'))
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                var modal = new bootstrap.Modal(document.getElementById('default'));
+                modal.show();
+            });
+        </script>
+    @endif
+
     <script src="{{ asset('mazer/assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>
     <script src="{{ asset('mazer/assets/static/js/pages/simple-datatables.js') }}"></script>
 @endpush

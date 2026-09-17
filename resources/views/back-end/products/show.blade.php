@@ -29,7 +29,7 @@
                         <div class="card-content">
                             <div class="card-body">
                                 <div class="row">
-                                    <img src="{{ $product->image_url }}" class="img-fluid w-100">
+                                    <img src="{{ $product->image_url }}" class="img-fluid w-100" alt="Gambar">
 
                                     <p class="text-end">
                                         <small>
@@ -47,7 +47,7 @@
                                     <div class="form-group">
                                         <span class="badge text-bg-secondary">{{ $product->category_name ?? '-' }}</span>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" style="text-align: justify">
                                         {!! nl2br(e($product->description ?? '-')) !!}
                                     </div>
                                 </div>

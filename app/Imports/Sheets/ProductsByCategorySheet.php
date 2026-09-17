@@ -24,10 +24,11 @@ class ProductsByCategorySheet implements OnEachRow, WithHeadingRow
 
         $this->productRepo->updateOrCreate(
             [
-                'name' => $data['name'] ?? ('Untitled-' . uniqid()),
-                'product_category_id' => $this->productCategoryId,
+                'id' => $data['id']
             ],
             [
+                'product_category_id' => $this->productCategoryId,
+                'name' => $data['name'] ?? ('Untitled-' . uniqid()),
                 'price' => $data['price'],
                 'description' => $data['description']
             ]

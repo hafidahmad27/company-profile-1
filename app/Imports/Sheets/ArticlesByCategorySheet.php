@@ -24,10 +24,11 @@ class ArticlesByCategorySheet implements OnEachRow, WithHeadingRow
 
         $this->articleRepo->updateOrCreate(
             [
-                'title' => $data['title'] ?? ('Untitled-' . uniqid()),
-                'article_category_id' => $this->articleCategoryId,
+                'id' => $data['id']
             ],
             [
+                'article_category_id' => $this->articleCategoryId,
+                'title' => $data['title'] ?? ('Untitled-' . uniqid()),
                 'content' => $data['content']
             ]
         );

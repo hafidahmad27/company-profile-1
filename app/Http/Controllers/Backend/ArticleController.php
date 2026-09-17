@@ -39,7 +39,7 @@ class ArticleController extends Controller
         $validatedData = $request->validated();
         $message = $this->articleService->create($validatedData);
 
-        return redirect()->route('be.articles.index')
+        return back()
             ->with('success', $message);
     }
 

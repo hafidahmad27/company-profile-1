@@ -6,7 +6,7 @@
         @hasSection('title')
             @yield('title') &ndash;
         @endif
-        {{ $globalSetting->name ?? '-' }}
+        {{ $companySetting->name ?? '-' }}
     </title>
 
     @include('layouts.front-end.partials._meta')

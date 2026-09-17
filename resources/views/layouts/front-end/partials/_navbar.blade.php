@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-expand-sm bg-secondary sticky-top" style="border-bottom: 3px solid #0D6EFD">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
-            <img src="{{ $globalSetting->logo_url }}" width="90" class="d-inline-block align-text-top">
+            <img src="{{ $companySetting->logo_url }}" width="90" class="d-inline-block align-text-top">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

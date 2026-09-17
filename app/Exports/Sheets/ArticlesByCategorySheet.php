@@ -8,14 +8,17 @@ use Illuminate\Support\Enumerable;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
+use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use Maatwebsite\Excel\Concerns\WithTitle;
+use Maatwebsite\Excel\Events\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
+use PhpOffice\PhpSpreadsheet\Style\Protection;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class ArticlesByCategorySheet implements FromCollection, WithHeadings, WithTitle, ShouldAutoSize, WithColumnWidths, WithStyles
+class ArticlesByCategorySheet implements FromCollection, WithHeadings, WithEvents, WithTitle, ShouldAutoSize, WithColumnWidths, WithStyles
 {
     protected int $articleCategoryId;
     protected ArticleCategoryRepository $articleCategoryRepo;
@@ -32,7 +35,7 @@ class ArticlesByCategorySheet implements FromCollection, WithHeadings, WithTitle
 
     public function headings(): array
     {
-        return ['TITLE', 'CONTENT'];
+        return ['ID', 'TITLE', 'CONTENT'];
     }
 
     public function collection(): Enumerable
@@ -43,9 +46,39 @@ class ArticlesByCategorySheet implements FromCollection, WithHeadings, WithTitle
 
         return $this->articleRepo->getByCategoryId($this->articleCategoryId)
             ->map(fn($article) => [
+                'id'      => $article->id,
                 'title'   => $article->title,
                 'content' => $article->content,
             ]);
+    }
+
+    public function registerEvents(): array
+    {
+        return [
+            AfterSheet::class => function (AfterSheet $event) {
+                // Hide kolom A (ID)
+                $event->sheet->getDelegate()
+                    ->getColumnDimension('A') // Kolom A = id
+                    ->setVisible(false);
+
+                // Unlock semua cell dulu
+                $event->sheet->getDelegate()
+                    ->getStyle('A:Z')
+                    ->getProtection()
+                    ->setLocked(Protection::PROTECTION_UNPROTECTED);
+
+                // Lock kolom A (ID)
+                $event->sheet->getDelegate()
+                    ->getStyle('A:A')
+                    ->getProtection()
+                    ->setLocked(Protection::PROTECTION_PROTECTED);
+
+                // Aktifkan proteksi sheet
+                $event->sheet->getDelegate()
+                    ->getProtection()
+                    ->setSheet(true);
+            },
+        ];
     }
 
     public function title(): string
@@ -58,8 +91,8 @@ class ArticlesByCategorySheet implements FromCollection, WithHeadings, WithTitle
     public function columnWidths(): array
     {
         return [
-            'A' => 50, // kolom title
-            'B' => 100 // kolom content
+            'B' => 50, // kolom title
+            'C' => 100 // kolom content
         ];
     }
 

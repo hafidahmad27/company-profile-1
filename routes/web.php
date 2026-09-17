@@ -37,6 +37,7 @@ Route::prefix('be')->name('be.')->middleware(['auth', 'verified'])->group(functi
         ->name('article.togglePublish');
     Route::resource('articles', ArticleController::class);
 
+    // Settings
     Route::resource('companies', CompanyController::class)->only([
         'index',
         'update'

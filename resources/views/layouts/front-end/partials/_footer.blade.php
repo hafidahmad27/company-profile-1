@@ -3,10 +3,10 @@
         <div class="row">
             <div class="col-md-4 col-sm-4">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{ $globalSetting->logo_url }}" width="90" class="d-inline-block align-text-top">
+                    <img src="{{ $companySetting->logo_url }}" width="90" class="d-inline-block align-text-top">
                 </a>
                 <p class="mt-3" style="text-align: justify">
-                    {!! nl2br(e($globalSetting->footer_about ?? '-')) !!}
+                    {!! nl2br(e($companySetting->footer_about ?? '-')) !!}
                 </p>
             </div>
             <div class="col-md-4 col-sm-4 text-center">
@@ -24,21 +24,31 @@
             <div class="col-md-4 col-sm-4">
                 <h5 class="mb-3 fw-bold">Hubungi Kami</h5>
                 <p class="mb-2" style="text-align: justify">
-                    {!! nl2br(e($globalSetting->address ?? '-')) !!}
+                    {!! nl2br(e($companySetting->address ?? '-')) !!}
                 </p>
                 <a class="d-block mb-2 text-white text-decoration-none"
-                    href="tel:{{ $globalSetting->phone }}">{{ $globalSetting->phone ?? '-' }}</a>
+                    href="tel:{{ $companySetting->phone }}">{{ $companySetting->phone ?? '-' }}</a>
                 <a class="d-block text-white text-decoration-none"
-                    href="mailto:{{ $globalSetting->email }}">{{ $globalSetting->email ?? '-' }}</a>
+                    href="mailto:{{ $companySetting->email }}">{{ $companySetting->email ?? '-' }}</a>
             </div>
         </div>
     </div>
 </div>
 
 <div class="container-fluid bg-dark text-white">
-    <div class="row py-3">
-        <div class="text-center">
-            Copyright &copy; {{ date('Y') }} {{ $globalSetting->name ?? '-' }}. All Rights Reserved.
+    <div class="row align-items-center py-3">
+        <div class="col">
+
+        </div>
+        <div class="col text-center">
+            Copyright &copy; {{ date('Y') }}
+            {{ $companySetting->name ?? '-' }}.
+            All Rights Reserved.
+        </div>
+        <div class="col text-end">
+            <span class="text-secondary" style="font-size: 10pt">
+                Designed & Developed by HFD Dev
+            </span>
         </div>
     </div>
 </div>

@@ -33,9 +33,9 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrapFive();
 
         View::composer('*', function ($view) {
-            $globalSetting = Company::first() ?? new Company;
+            $companySetting = Company::first() ?? new Company;
 
-            $view->with('globalSetting', $globalSetting ?? new Company);
+            $view->with('companySetting', $companySetting ?? new Company);
         });
 
         View::composer('front-end.*', function ($view) {
