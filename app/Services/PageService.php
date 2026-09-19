@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Repositories\PageRepository;
 use App\Repositories\SectionRepository;
 use App\Traits\GenerateUploadPathTrait;
+use Illuminate\Support\Str;
 
 class PageService
 {
@@ -102,7 +103,7 @@ class PageService
         }
 
         // return pesan dengan judul section
-        $title = $sectionKey ? ucwords(str_replace('-', ' ', $sectionKey)) : 'Section';
+        $title = $sectionKey ? Str::headline($sectionKey) : 'Section';
         return $title . ' updated successfully.';
     }
 
