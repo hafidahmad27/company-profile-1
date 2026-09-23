@@ -5,239 +5,236 @@
 @endpush
 
 @section('content')
-    <section id="carousel">
-        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-                @foreach ($carouselSlides as $key => $slide)
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ $key }}"
-                        class="{{ $key == 0 ? 'active' : '' }}" aria-current=""
-                        aria-label="Slide {{ $key + 1 }}"></button>
-                @endforeach
-            </div>
+    @php
+        $productPath = $product?->slug ?: 'products';
+        $articlePath = $article?->slug ?: 'articles';
+    @endphp
+
+    <section class="hero-section" aria-label="Pesan utama">
+        <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+            @if ($carouselSlides->count() > 1)
+                <div class="carousel-indicators">
+                    @foreach ($carouselSlides as $key => $slide)
+                        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="{{ $key }}"
+                            class="{{ $loop->first ? 'active' : '' }}" aria-current="{{ $loop->first ? 'true' : 'false' }}"
+                            aria-label="Slide {{ $key + 1 }}"></button>
+                    @endforeach
+                </div>
+            @endif
+
             <div class="carousel-inner">
-                @foreach ($carouselSlides as $key => $slide)
-                    <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                        <img src="{{ $slide->image_url }}" class="d-block w-100">
-                        {{-- <div class="carousel-caption d-block">
-                            <h5>{{ $slide->title }}</h5>
-                            <p>{{ $slide->subtitle }}</p>
-                        </div> --}}
+                @forelse ($carouselSlides as $slide)
+                    <div class="carousel-item hero-slide {{ $loop->first ? 'active' : '' }}">
+                        <div class="hero-slide__glow"></div>
+                        @if ($slide->image_url)
+                            <img src="{{ $slide->image_url }}" class="hero-slide__image" alt="{{ $slide->title ?: 'Company profile' }}"
+                                loading="{{ $loop->first ? 'eager' : 'lazy' }}" onerror="this.remove()">
+                        @endif
+                        <div class="hero-slide__content">
+                            <span class="eyebrow eyebrow--light"><i class="bi bi-stars me-2"></i>Company profile</span>
+                            <h1>{{ $slide->title ?: ($companySetting->name ?: 'Membangun solusi yang berdampak') }}</h1>
+                            <p>{{ $slide->subtitle ?: 'Menghadirkan produk, layanan, dan informasi terbaik untuk membantu Anda tumbuh lebih jauh.' }}</p>
+                            <div class="d-flex flex-wrap gap-3 mt-4">
+                                <a href="{{ url('products') }}" class="btn btn-light btn-lg px-4">Jelajahi Produk <i class="bi bi-arrow-up-right ms-2"></i></a>
+                                <a href="{{ url('about') }}" class="btn btn-outline-light btn-lg px-4">Tentang Kami</a>
+                            </div>
+                        </div>
                     </div>
-                @endforeach
+                @empty
+                    <div class="carousel-item hero-slide active">
+                        <div class="hero-slide__glow"></div>
+                        <div class="hero-slide__content">
+                            <span class="eyebrow eyebrow--light"><i class="bi bi-stars me-2"></i>Company profile</span>
+                            <h1>{{ $companySetting->name ?: 'Membangun solusi yang berdampak' }}</h1>
+                            <p>Menghadirkan produk, layanan, dan informasi terbaik untuk membantu Anda tumbuh lebih jauh.</p>
+                            <div class="d-flex flex-wrap gap-3 mt-4">
+                                <a href="{{ url('products') }}" class="btn btn-light btn-lg px-4">Jelajahi Produk <i class="bi bi-arrow-up-right ms-2"></i></a>
+                                <a href="{{ url('about') }}" class="btn btn-outline-light btn-lg px-4">Tentang Kami</a>
+                            </div>
+                        </div>
+                    </div>
+                @endforelse
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
+
+            @if ($carouselSlides->count() > 1)
+                <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev" aria-label="Sebelumnya">
+                    <span class="hero-control"><i class="bi bi-arrow-left"></i></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next" aria-label="Berikutnya">
+                    <span class="hero-control"><i class="bi bi-arrow-right"></i></span>
+                </button>
+            @endif
         </div>
     </section>
 
     @if ($sectionAboutPreview?->is_active == 1)
-        <section id="about" style="margin-top: 6%">
-            <div class="text-center mb-4">
-                <h3 class="fw-bold">{{ $sectionAboutPreview->title ?? '-' }}</h3>
-                <p class="mt-4">
-                    {{ $sectionAboutPreview->subtitle ?? null }}
-                </p>
-            </div>
-            <p class="mt-4" style="text-align: justify">
-                {{ $sectionAboutPreview->content ?? '-' }}
-            </p>
-            @if ($sectionAboutPreview->image)
-                <div class="text-center">
-                    <img src="{{ $sectionAboutPreview->image_url }}" class="card-img-top rounded-4"
-                        style="height: 235px; object-fit: cover">
+        <section id="about" class="content-section about-section">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6">
+                    <span class="eyebrow">Tentang kami</span>
+                    <h2 class="section-title">{{ $sectionAboutPreview->title ?: 'Lebih dekat dengan kami' }}</h2>
+                    <p class="section-lead">{{ $sectionAboutPreview->subtitle ?: 'Kami hadir untuk memberikan solusi yang relevan, sederhana, dan berdampak.' }}</p>
+                    <p class="section-copy">{{ $sectionAboutPreview->content ?: 'Kenali lebih jauh perjalanan, nilai, dan komitmen kami dalam menghadirkan pengalaman terbaik untuk pelanggan.' }}</p>
+                    <a href="{{ url($sectionAboutPreview->button_link ?: 'about') }}" class="btn btn-primary btn-lg px-4">
+                        {{ $sectionAboutPreview->button_text ?: 'Selengkapnya' }} <i class="bi bi-arrow-up-right ms-2"></i>
+                    </a>
                 </div>
-            @endif
-            <div class="d-grid gap-2 col-2 mx-auto text-center mt-4">
-                <a href="{{ url($sectionAboutPreview->button_link ?? '/') }}"
-                    class="btn btn-primary">{{ $sectionAboutPreview->button_text ?? '-' }}
-                    <i class="bi bi-chevron-double-right"></i>
-                </a>
+                <div class="col-lg-6">
+                    <div class="about-visual">
+                        @if ($sectionAboutPreview->image_url)
+                            <img src="{{ $sectionAboutPreview->image_url }}" alt="Tentang {{ $companySetting->name ?: 'kami' }}" onerror="this.remove()">
+                        @endif
+                        <div class="about-visual__content">
+                            <span class="about-visual__icon"><i class="bi bi-lightbulb"></i></span>
+                            <strong>{{ $companySetting->name ?: 'HFD Company' }}</strong>
+                            <span>Bergerak bersama menuju masa depan yang lebih baik.</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     @endif
 
     @if ($sectionProductPreview?->is_active == 1)
-        <section id="products" style="margin-top: 6%">
-            <div class="text-center mb-4">
-                <h3 class="fw-bold">{{ $sectionProductPreview->title ?? '-' }}</h3>
-                <p class="mt-4">
-                    {{ $sectionProductPreview->subtitle ?? null }}
-                </p>
-                <p class="mt-4">
-                    {{ $sectionProductPreview->content ?? null }}
-                </p>
-                @if ($sectionProductPreview->image)
-                    <div class="text-center">
-                        <img src="{{ $sectionProductPreview->image_url }}" class="card-img-top rounded-4"
-                            style="height: 235px; object-fit: cover">
-                    </div>
-                @endif
+        <section id="products" class="content-section section-muted">
+            <div class="section-heading text-center">
+                <span class="eyebrow">Yang kami tawarkan</span>
+                <h2 class="section-title">{{ $sectionProductPreview->title ?: 'Produk pilihan kami' }}</h2>
+                <p class="section-lead mx-auto">{{ $sectionProductPreview->subtitle ?: 'Temukan produk yang dirancang untuk menjawab kebutuhan Anda.' }}</p>
             </div>
 
-            <ul class="nav nav-tabs justify-content-center" id="productsTab" role="tablist">
-                @foreach ($productCategoriesPreview as $productCategoryPreview)
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link {{ $loop->first ? 'active' : '' }}" data-bs-toggle="tab"
-                            data-bs-target="#products-{{ $productCategoryPreview->id }}" type="button" role="tab"
-                            aria-controls="" aria-selected="true">
-                            {{ $productCategoryPreview->name ?? '-' }}
-                        </button>
-                    </li>
-                @endforeach
-            </ul>
-            <div class="tab-content" id="productsTabContent">
-                @foreach ($productCategoriesPreview as $productCategoryPreview)
-                    <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}"
-                        id="products-{{ $productCategoryPreview->id }}" role="tabpanel" aria-labelledby="" tabindex="0">
-                        <div class="row row-cols-1 row-cols-md-4 justify-content-center g-4 mt-0">
-                            @forelse ($productsPreview[$productCategoryPreview->id] ?? [] as $productPreview)
-                                <div class="col">
-                                    <div class="card h-100 border-0">
-                                        <img src="{{ $productPreview->image_url }}" class="card-img-top rounded-4"
-                                            style="height: 235px; object-fit: cover">
-                                        <div class="card-body">
-                                            {{-- <div class="d-flex mb-3">
-                                            <div class="me-auto">
-                                                <span
-                                                    class="badge text-bg-secondary">{{ $productCategoryPreview->name ?? '-' }}</span>
+            @if ($productCategoriesPreview->isNotEmpty())
+                <ul class="nav nav-pills content-tabs justify-content-center mb-4" id="productsTab" role="tablist">
+                    @foreach ($productCategoriesPreview as $category)
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link {{ $loop->first ? 'active' : '' }}" data-bs-toggle="pill"
+                                data-bs-target="#products-{{ $category->id }}" type="button" role="tab"
+                                aria-selected="{{ $loop->first ? 'true' : 'false' }}">{{ $category->name }}</button>
+                        </li>
+                    @endforeach
+                </ul>
+                <div class="tab-content">
+                    @foreach ($productCategoriesPreview as $category)
+                        <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="products-{{ $category->id }}" role="tabpanel">
+                            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+                                @forelse ($productsPreview[$category->id] ?? [] as $productPreview)
+                                    <div class="col">
+                                        <article class="content-card h-100">
+                                            <div class="content-card__media">
+                                                @if ($productPreview->image_url)
+                                                    <img src="{{ $productPreview->image_url }}" alt="{{ $productPreview->name }}" onerror="this.remove()">
+                                                @endif
+                                                <span class="content-card__placeholder"><i class="bi bi-box-seam"></i></span>
                                             </div>
-                                            <small class="text-body-secondary">
-
-                                            </small>
-                                        </div> --}}
-                                            <h5 class="card-title text-center">
-                                                <a class="text-decoration-none"
-                                                    href="{{ url($product->slug . '/' . $productPreview->category_slug . '/' . $productPreview->slug) }}">{{ $productPreview->name ?? '-' }}
-                                                </a>
-                                            </h5>
-                                            {{-- <span class="badge text-bg-info">Rp
-                                            {{ number_format($productPreview->price, 0, ',', '.') }}</span> --}}
-                                            {{-- <p class="card-text mt-2" style="text-align: justify">
-                                            {{ $productPreview->description ?? '-' }}
-                                        </p> --}}
-                                        </div>
-                                        {{-- <div class="card-footer text-end">
-                                        <small class="text-body-secondary">
-                                            
-                                        </small>
-                                    </div> --}}
+                                            <div class="content-card__body">
+                                                <span class="card-kicker">{{ $category->name }}</span>
+                                                <h3>{{ $productPreview->name }}</h3>
+                                                <a href="{{ url($productPath . '/' . $productPreview->category_slug . '/' . $productPreview->slug) }}" class="stretched-link" aria-label="Lihat {{ $productPreview->name }}"></a>
+                                            </div>
+                                        </article>
                                     </div>
-                                </div>
-                            @empty
-                                <p class="text-center">Belum ada {{ Str::lower($product->title) ?? '-' }}</p>
-                            @endforelse
+                                @empty
+                                    <div class="col-12">
+                                        <div class="empty-state">
+                                            <span class="empty-state__icon"><i class="bi bi-box2-heart"></i></span>
+                                            <h3>Produk sedang disiapkan</h3>
+                                            <p>Koleksi produk untuk kategori {{ $category->name }} akan segera tersedia.</p>
+                                        </div>
+                                    </div>
+                                @endforelse
+                            </div>
                         </div>
-                    </div>
-                    {{-- <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0">
-                ...
-            </div> --}}
-                @endforeach
-            </div>
-            <div class="d-grid gap-2 col-2 mx-auto text-center mt-2">
-                <a href="{{ url($sectionProductPreview->button_link ?? '/') }}"
-                    class="btn btn-primary">{{ $sectionProductPreview->button_text ?? '-' }}
-                    <i class="bi bi-chevron-double-right"></i>
+                    @endforeach
+                </div>
+            @endif
+
+            <div class="text-center mt-5">
+                <a href="{{ url($sectionProductPreview->button_link ?: 'products') }}" class="btn btn-primary px-4">
+                    {{ $sectionProductPreview->button_text ?: 'Lihat semua produk' }} <i class="bi bi-arrow-right ms-2"></i>
                 </a>
             </div>
         </section>
     @endif
 
     @if ($sectionArticlePreview?->is_active == 1)
-        <section id="articles" style="margin-top: 6%">
-            <div class="text-center mb-4">
-                <h3 class="fw-bold">{{ $sectionArticlePreview->title ?? '-' }}</h3>
-                <p class="mt-4">
-                    {{ $sectionArticlePreview->subtitle ?? null }}
-                </p>
-                <p class="mt-4">
-                    {{ $sectionArticlePreview->content ?? null }}
-                </p>
-                @if ($sectionArticlePreview->image)
-                    <div class="text-center">
-                        <img src="{{ $sectionArticlePreview->image_url }}" class="card-img-top rounded-4"
-                            style="height: 235px; object-fit: cover">
-                    </div>
-                @endif
+        <section id="articles" class="content-section">
+            <div class="section-heading text-center">
+                <span class="eyebrow">Wawasan terbaru</span>
+                <h2 class="section-title">{{ $sectionArticlePreview->title ?: 'Artikel & informasi' }}</h2>
+                <p class="section-lead mx-auto">{{ $sectionArticlePreview->subtitle ?: 'Baca cerita, tips, dan informasi terbaru dari kami.' }}</p>
             </div>
 
-            <ul class="nav nav-tabs justify-content-center" id="articlesTab" role="tablist">
-                @foreach ($articleCategoriesPreview as $articleCategoryPreview)
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link {{ $loop->first ? 'active' : '' }}" data-bs-toggle="tab"
-                            data-bs-target="#articles-{{ $articleCategoryPreview->id }}" type="button" role="tab"
-                            aria-controls="" aria-selected="true">
-                            {{ $articleCategoryPreview->name ?? '-' }}
-                        </button>
-                    </li>
-                @endforeach
-            </ul>
-            <div class="tab-content" id="articlesTabContent">
-                @foreach ($articleCategoriesPreview as $articleCategoryPreview)
-                    <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}"
-                        id="articles-{{ $articleCategoryPreview->id }}" role="tabpanel" aria-labelledby=""
-                        tabindex="0">
-                        <div class="row row-cols-1 row-cols-md-3 justify-content-center g-4 mt-0">
-                            @forelse ($articlesPreview[$articleCategoryPreview->id] ?? [] as $articlePreview)
-                                <div class="col">
-                                    <div class="card h-100 border-0">
-                                        <img src="{{ $articlePreview->image_url }}" class="card-img-top rounded-4"
-                                            style="height: 235px; object-fit: cover" alt="{{ $articlePreview->image }}">
-                                        {{-- <div class="card-body"> --}}
-                                        <div class="d-flex mt-3 mb-3">
-                                            <div class="me-auto">
-                                                <span
-                                                    class="badge text-bg-secondary">{{ $articleCategoryPreview->name ?? '-' }}</span>
+            @if ($articleCategoriesPreview->isNotEmpty())
+                <ul class="nav nav-pills content-tabs justify-content-center mb-4" id="articlesTab" role="tablist">
+                    @foreach ($articleCategoriesPreview as $category)
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link {{ $loop->first ? 'active' : '' }}" data-bs-toggle="pill"
+                                data-bs-target="#articles-{{ $category->id }}" type="button" role="tab"
+                                aria-selected="{{ $loop->first ? 'true' : 'false' }}">{{ $category->name }}</button>
+                        </li>
+                    @endforeach
+                </ul>
+                <div class="tab-content">
+                    @foreach ($articleCategoriesPreview as $category)
+                        <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="articles-{{ $category->id }}" role="tabpanel">
+                            <div class="row row-cols-1 row-cols-md-3 g-4">
+                                @forelse ($articlesPreview[$category->id] ?? [] as $articlePreview)
+                                    <div class="col">
+                                        <article class="content-card content-card--article h-100">
+                                            <div class="content-card__media">
+                                                @if ($articlePreview->image_url)
+                                                    <img src="{{ $articlePreview->image_url }}" alt="{{ $articlePreview->title }}" onerror="this.remove()">
+                                                @endif
+                                                <span class="content-card__placeholder"><i class="bi bi-journal-text"></i></span>
                                             </div>
-                                            <small class="text-body-secondary">
-                                                {{ $articlePreview->published_at ? $articlePreview->published_at->diffForHumans() : '-' }}
-                                            </small>
-                                        </div>
-                                        <h5 class="card-title">
-                                            <a class="text-decoration-none"
-                                                href="{{ url($article->slug . '/' . $articlePreview->category_slug . '/' . $articlePreview->slug) }}">{{ $articlePreview->title ?? '-' }}</a>
-                                        </h5>
-                                        <p class="card-text" style="text-align: justify">
-                                            {{ Str::limit($articlePreview->content, 150, '...') ?? '-' }}
-                                            <a class="text-decoration-none"
-                                                href="{{ url($article->slug . '/' . $articlePreview->category_slug . '/' . $articlePreview->slug) }}">Selengkapnya</a>
-                                            <br>
-                                            <span class="text-body-secondary float-end" style="font-size: 8pt"><i
-                                                    class="bi bi-eye-fill"></i>
-                                                {{ $articlePreview->views ?? '-' }}</span>
-                                        </p>
-                                        {{-- </div> --}}
-                                        {{-- <div class="card-footer text-end">
-                                        <small class="text-body-secondary">
-                                            <i class="bi bi-eye-fill"></i> {{ $articlePreview->views ?? '-' }}
-                                        </small>
-                                    </div> --}}
+                                            <div class="content-card__body">
+                                                <div class="d-flex justify-content-between gap-2 mb-2">
+                                                    <span class="card-kicker">{{ $category->name }}</span>
+                                                    <small class="card-meta">{{ $articlePreview->published_at?->diffForHumans() ?: 'Terbaru' }}</small>
+                                                </div>
+                                                <h3>{{ $articlePreview->title }}</h3>
+                                                <p>{{ Str::limit($articlePreview->content, 100) }}</p>
+                                                <a href="{{ url($articlePath . '/' . $articlePreview->category_slug . '/' . $articlePreview->slug) }}" class="card-link">Baca selengkapnya <i class="bi bi-arrow-up-right"></i></a>
+                                            </div>
+                                        </article>
                                     </div>
-                                </div>
-                            @empty
-                                <p class="text-center">Belum ada {{ Str::lower($article->title) ?? '-' }}</p>
-                            @endforelse
+                                @empty
+                                    <div class="col-12">
+                                        <div class="empty-state">
+                                            <span class="empty-state__icon"><i class="bi bi-journal-richtext"></i></span>
+                                            <h3>Artikel segera hadir</h3>
+                                            <p>Ikuti terus informasi terbaru dari {{ $companySetting->name ?: 'kami' }}.</p>
+                                        </div>
+                                    </div>
+                                @endforelse
+                            </div>
                         </div>
-                    </div>
-                    {{-- <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0">
-                ...
-            </div> --}}
-                @endforeach
-            </div>
-            <div class="d-grid gap-2 col-2 mx-auto text-center mt-3">
-                <a href="{{ url($sectionArticlePreview->button_link ?? '/') }}"
-                    class="btn btn-primary">{{ $sectionArticlePreview->button_text ?? '-' }}
-                    <i class="bi bi-chevron-double-right"></i>
+                    @endforeach
+                </div>
+            @endif
+
+            <div class="text-center mt-5">
+                <a href="{{ url($sectionArticlePreview->button_link ?: 'articles') }}" class="btn btn-outline-primary px-4">
+                    {{ $sectionArticlePreview->button_text ?: 'Baca semua artikel' }} <i class="bi bi-arrow-right ms-2"></i>
                 </a>
             </div>
         </section>
     @endif
 
+    <section class="cta-section content-section">
+        <div class="row align-items-center g-4">
+            <div class="col-lg-8">
+                <span class="eyebrow eyebrow--light">Mari berkolaborasi</span>
+                <h2>Siap menemukan peluang berikutnya?</h2>
+                <p>Hubungi kami dan mulai percakapan untuk kebutuhan Anda.</p>
+            </div>
+            <div class="col-lg-4 text-lg-end">
+                @if ($companySetting->email)
+                    <a href="mailto:{{ $companySetting->email }}" class="btn btn-light btn-lg px-4">Hubungi kami <i class="bi bi-envelope ms-2"></i></a>
+                @else
+                    <a href="{{ url('about') }}" class="btn btn-light btn-lg px-4">Kenali kami <i class="bi bi-arrow-right ms-2"></i></a>
+                @endif
+            </div>
+        </div>
+    </section>
 @endsection

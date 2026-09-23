@@ -55,7 +55,7 @@ Route::prefix('be')->name('be.')->middleware(['auth', 'verified'])->group(functi
         // Route::get('dashboard', [ProfileController::class, 'index'])->name('profile.dashboard');
         Route::get('/', [ProfileController::class, 'index'])->name('profile.index');
         Route::patch('/', [ProfileController::class, 'update'])->name('profile.update');
-        // Route::delete('/', [ProfileController::class, 'destroy'])->name('profile.destroy');
+        Route::delete('/', [ProfileController::class, 'destroy'])->name('profile.destroy');
     });
 });
 

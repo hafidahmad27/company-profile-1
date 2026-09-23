@@ -25,7 +25,7 @@ class CompanyRepository
                 'companies.*',
                 'users.email as user_email',
             )
-            ->firstOrFail();
+            ->first() ?? new Company;
     }
 
     public function update(int $id, array $data)

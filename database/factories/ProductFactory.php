@@ -24,7 +24,7 @@ class ProductFactory extends Factory
             'name' => ucwords($name),
             'slug' => Str::slug($name),
             'description' => fake()->text(),
-            'price' => fake()->randomFloat(2, 10000, 99990000),
+            'price' => fake()->numberBetween(10000, 99990000),
             'published_at' => fake()->dateTimeBetween('-2 days', 'now'),
             'is_published' => true,
             'user_id' => 1,

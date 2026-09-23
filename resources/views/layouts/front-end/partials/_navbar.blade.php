@@ -1,18 +1,32 @@
-<nav class="navbar navbar-expand-lg navbar-expand-sm bg-secondary sticky-top" style="border-bottom: 3px solid #0D6EFD">
+@php
+    $brandLogo = $companySetting->logo_url ?: asset('mazer/assets/compiled/svg/logo.svg');
+@endphp
+
+<nav class="navbar navbar-expand-lg site-navbar sticky-top">
     <div class="container">
-        <a class="navbar-brand" href="{{ url('/') }}">
-            <img src="{{ $companySetting->logo_url }}" width="90" class="d-inline-block align-text-top">
+        <a class="navbar-brand site-brand" href="{{ url('/') }}" aria-label="{{ $companySetting->name ?? 'Beranda' }}">
+            <span class="site-brand__logo">
+                <img src="{{ $brandLogo }}" width="34" height="34" alt="">
+            </span>
+            <span class="site-brand__name">{{ $companySetting->name ?: 'HFD Company' }}</span>
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        <button class="navbar-toggler site-navbar__toggle" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"><i class="bi bi-list"></i></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
                 @foreach ($pages as $page)
+                    @php
+                        $pagePath = trim($page->slug, '/');
+                        $isActive = $pagePath === ''
+                            ? request()->is('/')
+                            : request()->is($pagePath) || request()->is($pagePath . '/*');
+                    @endphp
                     <li class="nav-item">
-                        <a class="nav-link fw-bold {{ ($page->slug == 'index' ? request()->is('/') : request()->is($page->slug . '*')) ? 'active text-primary' : 'text-light' }}"
-                            href="{{ $page->slug == 'index' ? url('/') : url($page->slug) }}">{{ $page->title }}
+                        <a class="nav-link site-navbar__link {{ $isActive ? 'active' : '' }}"
+                            href="{{ $pagePath === '' ? url('/') : url($page->slug) }}">
+                            {{ $page->title }}
                         </a>
                     </li>
                 @endforeach

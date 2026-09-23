@@ -40,7 +40,7 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
-        return Redirect::back()->with('status_profile', 'Profile updated');
+        return Redirect::route('be.profile.index')->with('status_profile', 'Profile updated');
     }
 
     /**
@@ -61,6 +61,6 @@ class ProfileController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return Redirect::to('/login');
+        return Redirect::to('/');
     }
 }

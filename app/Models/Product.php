@@ -36,7 +36,11 @@ class Product extends Model
     protected function imageUrl(): Attribute
     {
         return Attribute::make(
-            get: fn() => $this->image ? Storage::url($this->image) : null,
+            get: fn() => $this->image
+                ? (Str::startsWith($this->image, ['http://', 'https://', '/'])
+                    ? $this->image
+                    : Storage::url($this->image))
+                : null,
         );
     }
 

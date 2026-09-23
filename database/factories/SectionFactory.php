@@ -17,7 +17,11 @@ class SectionFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'section_key' => 'about-preview',
+            'title' => fake()->sentence(3),
+            'subtitle' => fake()->sentence(8),
+            'content' => fake()->paragraph(),
+            'is_active' => true,
         ];
     }
 }

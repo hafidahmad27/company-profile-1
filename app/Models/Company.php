@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class Company extends Model
 {
@@ -29,7 +30,11 @@ class Company extends Model
     protected function logoUrl(): Attribute
     {
         return Attribute::make(
-            get: fn() => $this->logo ? Storage::url($this->logo) : null,
+            get: fn() => $this->logo
+                ? (Str::startsWith($this->logo, ['http://', 'https://', '/'])
+                    ? $this->logo
+                    : Storage::url($this->logo))
+                : null,
         );
     }
 }

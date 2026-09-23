@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="id">
 
 <head>
     <title>
@@ -15,13 +15,15 @@
     @stack('styles')
 </head>
 
-<body class="d-flex flex-column min-vh-100">
+<body class="d-flex flex-column min-vh-100 site-body">
     @include('layouts.front-end.partials._navbar')
 
     @hasSection('title')
-        <div class="container-fluid bg-primary">
-            <div class="row py-3">
-                <h2 class="text-center text-light fw-bold mt-3 pb-2">
+        <div class="page-heading">
+            <div class="container">
+                <div class="row py-4">
+                <p class="page-heading__eyebrow mb-2">{{ $companySetting->name ?? 'Company profile' }}</p>
+                <h2 class="text-center text-white fw-bold mb-2">
                     @if (request()->segment(1) && empty(request()->segment(2)))
                         {{ $page->title }}
                     @elseif ($page->slug === 'products')
@@ -34,13 +36,14 @@
                 </h2>
 
                 @include('layouts.front-end.partials._breadcrumb')
+                </div>
             </div>
         </div>
     @endif
 
-    <div class="container mt-3 flex-grow-1">
+    <main class="container site-main flex-grow-1">
         @yield('content')
-    </div>
+    </main>
 
     @include('layouts.front-end.partials._footer')
 

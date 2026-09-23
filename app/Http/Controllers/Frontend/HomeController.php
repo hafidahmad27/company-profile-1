@@ -8,6 +8,7 @@ use App\Models\ArticleCategory;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\Section;
+use Illuminate\Database\Eloquent\Collection;
 
 class HomeController extends Controller
 {
@@ -50,20 +51,7 @@ class HomeController extends Controller
             ->where('sections.is_active', 1)
             ->first();
         $productCategoriesPreview = ProductCategory::where('is_active', 1)->get();
-        $productsPreview = [];
-
-        foreach ($productCategoriesPreview as $category) {
-            $productsPreview[$category->id] = Product::join('product_categories', 'products.product_category_id', '=', 'product_categories.id')
-                ->select(
-                    'product_categories.slug as category_slug',
-                    'products.*'
-                )
-                ->where('product_category_id', $category->id)
-                ->where('is_published', 1)
-                ->orderBy('published_at', 'desc')
-                ->limit(4)
-                ->get();
-        }
+        $productsPreview = $this->productPreviews($productCategoriesPreview);
 
         return compact('product', 'sectionProductPreview', 'productCategoriesPreview', 'productsPreview');
     }
@@ -79,21 +67,52 @@ class HomeController extends Controller
             ->where('sections.is_active', 1)
             ->first();
         $articleCategoriesPreview = ArticleCategory::where('is_active', 1)->get();
-        $articlesPreview = [];
+        $articlesPreview = $this->articlePreviews($articleCategoriesPreview);
 
-        foreach ($articleCategoriesPreview as $category) {
-            $articlesPreview[$category->id] = Article::join('article_categories', 'articles.article_category_id', '=', 'article_categories.id')
-                ->select(
-                    'article_categories.slug as category_slug',
-                    'articles.*'
-                )
-                ->where('article_category_id', $category->id)
-                ->where('is_published', 1)
-                ->orderBy('published_at', 'desc')
+        return compact('article', 'sectionArticlePreview', 'articleCategoriesPreview', 'articlesPreview');
+    }
+
+    private function productPreviews(Collection $categories): array
+    {
+        $previews = [];
+
+        foreach ($categories as $category) {
+            $previews[$category->id] = Product::join(
+                'product_categories',
+                'products.product_category_id',
+                '=',
+                'product_categories.id',
+            )
+                ->select('product_categories.slug as category_slug', 'products.*')
+                ->where('products.product_category_id', $category->id)
+                ->where('products.is_published', 1)
+                ->latest('products.published_at')
+                ->limit(4)
+                ->get();
+        }
+
+        return $previews;
+    }
+
+    private function articlePreviews(Collection $categories): array
+    {
+        $previews = [];
+
+        foreach ($categories as $category) {
+            $previews[$category->id] = Article::join(
+                'article_categories',
+                'articles.article_category_id',
+                '=',
+                'article_categories.id',
+            )
+                ->select('article_categories.slug as category_slug', 'articles.*')
+                ->where('articles.article_category_id', $category->id)
+                ->where('articles.is_published', 1)
+                ->latest('articles.published_at')
                 ->limit(3)
                 ->get();
         }
 
-        return compact('article', 'sectionArticlePreview', 'articleCategoriesPreview', 'articlesPreview');
+        return $previews;
     }
 }
