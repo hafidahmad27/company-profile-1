@@ -50,7 +50,7 @@
                                                     data-bs-target="#{{ $key }}" type="button" role="tab"
                                                     aria-controls="{{ $key }}"
                                                     aria-selected="{{ $loop->first ? 'true' : 'false' }}">
-                                                    {{ ucwords(str_replace('-', ' ', $key)) }}
+                                                    {{ Str::headline($key) }}
                                                 </button>
                                             </li>
                                         @endforeach
@@ -75,7 +75,7 @@
                                                 <div class="text-center mt-3">
                                                     <button type="submit" class="btn btn-primary">
                                                         <i class="bi bi-arrow-repeat"></i> Update
-                                                        {{ ucwords(str_replace('-', ' ', $key)) }}
+                                                        {{ Str::headline($key) }}
                                                     </button>
                                                 </div>
                                             </form>

@@ -680,6 +680,8 @@
 
                 {{-- <li class="sidebar-title">Settings</li> --}}
 
+                <hr>
+
                 <li
                     class="sidebar-item 
                     {{ request()->is('be/pages') ? 'active' : '' }}

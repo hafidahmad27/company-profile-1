@@ -12,9 +12,9 @@
             <div class="col text-end">
                 <span class="text-secondary">
                     Developed by HFD Dev | Template by
-                    <span class="text-danger">
+                    {{-- <span class="text-danger">
                         <i class="bi bi-heart-fill icon-mid"></i>
-                    </span>
+                    </span> --}}
                     <a href="https://saugi.me">Saugi</a>
                 </span>
             </div>
