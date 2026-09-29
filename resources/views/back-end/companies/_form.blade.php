@@ -58,10 +58,10 @@
             <div class="row">
                 {{-- <div class="col-md-6 col-6"> --}}
                 <div class="form-group">
-                    <label class="form-label">Footer About</label>
-                    <textarea class="form-control @error('footer_about') is-invalid @enderror" id="footer_about" name="footer_about"
-                        maxlength="255" rows="2">{{ old('footer_about', $company->footer_about ?? null) }}</textarea>
-                    @error('footer_about')
+                    <label class="form-label">Headline</label>
+                    <textarea class="form-control @error('headline') is-invalid @enderror" id="headline" name="headline" maxlength="255"
+                        rows="1">{{ old('headline', $company->headline ?? null) }}</textarea>
+                    @error('headline')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>

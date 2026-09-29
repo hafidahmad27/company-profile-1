@@ -19,7 +19,7 @@ class CompanySeeder extends Seeder
             // 'address' => fake()->address(),
             // 'phone' => '012345678910',
             // 'email' => 'hfdefghijklmno@gmail.com',
-            // 'footer_about' => 'HFD Corp is a lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla vitae ad sit, tempora accusamus accusantium necessitatibus dignissimos libero adipisci quo.',
+            // 'headline' => 'HFD Corp is a lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla vitae ad sit, tempora accusamus accusantium necessitatibus dignissimos libero adipisci quo.',
             'user_id' => 1,
         ]);
     }

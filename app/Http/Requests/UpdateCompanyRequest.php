@@ -27,7 +27,7 @@ class UpdateCompanyRequest extends FormRequest
             'address' => 'required|string|max:255',
             'phone' => 'required|string',
             'email' => 'required|email',
-            'footer_about' => 'nullable|string',
+            'headline' => 'nullable|string',
             'linkedin' => 'nullable|string',
             'facebook' => 'nullable|string',
             'instagram' => 'nullable|string',

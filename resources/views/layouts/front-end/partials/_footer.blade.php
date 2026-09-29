@@ -6,7 +6,7 @@
                     <img src="{{ $companySetting->logo_url }}" width="90" class="d-inline-block align-text-top">
                 </a>
                 <p class="mt-3" style="text-align: justify">
-                    {!! nl2br(e($companySetting->footer_about ?? '-')) !!}
+                    {!! nl2br(e(Str::headline($companySetting->headline ?? '-'))) !!}
                 </p>
                 <div class="d-flex gap-4 fs-4">
                     @if ($companySetting->linkedin)

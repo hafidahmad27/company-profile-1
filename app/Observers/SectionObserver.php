@@ -31,11 +31,11 @@ class SectionObserver
                     'content' => $section->content
                 ]);
             }
-            if ($company && $company->footer_about == null) {
-                $company->update([
-                    'footer_about' => Str::limit($section->content, 170, '')
-                ]);
-            }
+            // if ($company && $company->headline == null) {
+            //     $company->update([
+            //         'headline' => Str::limit($section->content, 170, '')
+            //     ]);
+            // }
         }
     }
 
