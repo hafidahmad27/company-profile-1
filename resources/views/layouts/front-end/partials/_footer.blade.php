@@ -14,7 +14,7 @@
                 <ul class="list-unstyled">
                     @foreach ($pages as $page)
                         <li>
-                            <a class="text-white text-decoration-none {{ $page->slug == 'index' ? request()->is('/') : request()->is($page->slug) }}"
+                            <a class="text-decoration-none {{ ($page->slug == 'index' ? request()->is('/') : request()->is($page->slug . '*')) ? 'active fw-bold text-primary' : 'text-light' }}"
                                 href="{{ $page->slug == 'index' ? url('/') : url($page->slug) }}">{{ $page->title }}
                             </a>
                         </li>
