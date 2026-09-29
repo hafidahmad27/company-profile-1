@@ -91,3 +91,31 @@
         <!-- // Basic multiple Column Form section end -->
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const activeTab = localStorage.getItem('activeSectionTab');
+
+            if (activeTab) {
+                const trigger = document.querySelector(
+                    `button[data-bs-target="${activeTab}"]`
+                );
+
+                if (trigger) {
+                    bootstrap.Tab.getOrCreateInstance(trigger).show();
+                }
+            }
+
+            document.querySelectorAll('#sectionTabs button[data-bs-toggle="tab"]')
+                .forEach(tab => {
+                    tab.addEventListener('shown.bs.tab', function(e) {
+                        localStorage.setItem(
+                            'activeSectionTab',
+                            e.target.dataset.bsTarget
+                        );
+                    });
+                });
+        });
+    </script>
+@endpush
