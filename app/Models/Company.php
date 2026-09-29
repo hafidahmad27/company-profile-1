@@ -24,12 +24,22 @@ class Company extends Model
     /**
      * Get logo URL.
      */
-    protected $appends = ['logo_url'];
-
     protected function logoUrl(): Attribute
     {
         return Attribute::make(
             get: fn() => $this->logo ? Storage::url($this->logo) : null,
+        );
+    }
+
+    /**
+     * Get WhatsApp Link.
+     */
+    protected function waLink(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->phone
+                ? 'https://wa.me/62' . ltrim($this->phone, '0')
+                : null,
         );
     }
 }

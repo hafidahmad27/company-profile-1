@@ -28,6 +28,11 @@ class UpdateCompanyRequest extends FormRequest
             'phone' => 'required|string',
             'email' => 'required|email',
             'footer_about' => 'nullable|string',
+            'linkedin' => 'nullable|string',
+            'facebook' => 'nullable|string',
+            'instagram' => 'nullable|string',
+            'tiktok' => 'nullable|string',
+            'youtube' => 'nullable|string',
             'user_id' => 'exists:users,id',
         ];
     }

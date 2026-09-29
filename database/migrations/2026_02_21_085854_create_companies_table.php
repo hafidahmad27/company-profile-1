@@ -19,6 +19,11 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
             $table->string('footer_about')->nullable();
+            $table->string('linkedin')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('tiktok')->nullable();
+            $table->string('youtube')->nullable();
             $table->foreignId('user_id')->nullable()->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('set null');

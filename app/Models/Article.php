@@ -31,8 +31,6 @@ class Article extends Model
     /**
      * Get image URL.
      */
-    protected $appends = ['image_url'];
-
     protected function imageUrl(): Attribute
     {
         return Attribute::make(

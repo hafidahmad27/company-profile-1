@@ -8,6 +8,38 @@
                 <p class="mt-3" style="text-align: justify">
                     {!! nl2br(e($companySetting->footer_about ?? '-')) !!}
                 </p>
+                <div class="d-flex gap-4 fs-4">
+                    @if ($companySetting->linkedin)
+                        <a class="text-light" target="_blank" href="{{ $companySetting->linkedin }}">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                    @endif
+                    @if ($companySetting->facebook)
+                        <a class="text-light" target="_blank" href="{{ $companySetting->facebook }}">
+                            <i class="bi bi-facebook"></i>
+                        </a>
+                    @endif
+                    @if ($companySetting->instagram)
+                        <a class="text-light" target="_blank" href="{{ $companySetting->instagram }}">
+                            <i class="bi bi-instagram"></i>
+                        </a>
+                    @endif
+                    @if ($companySetting->tiktok)
+                        <a class="text-light" target="_blank" href="{{ $companySetting->tiktok }}">
+                            <i class="bi bi-tiktok"></i>
+                        </a>
+                    @endif
+                    @if ($companySetting->youtube)
+                        <a class="text-light" target="_blank" href="{{ $companySetting->youtube }}">
+                            <i class="bi bi-youtube"></i>
+                        </a>
+                    @endif
+                    @if ($companySetting->phone)
+                        <a class="text-light" target="_blank" href="{{ $companySetting->wa_link }}">
+                            <i class="bi bi-whatsapp"></i>
+                        </a>
+                    @endif
+                </div>
             </div>
             <div class="col-md-4 col-sm-4 text-center">
                 <h5 class="mb-3 fw-bold">Navigasi</h5>
