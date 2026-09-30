@@ -28,7 +28,26 @@
             </header>
 
             <div class="flex-grow-1">
-                @yield('content')
+                <div class="page-heading">
+                    <div class="page-title">
+                        <div class="row">
+                            <div class="col-12 col-md-6 order-md-1 order-last">
+                                <h3>@yield('title')</h3>
+                                <p class="text-subtitle text-muted">
+                                    {{-- A sortable, searchable, paginated table without
+                                    dependencies thanks to simple-datatables. --}}
+                                </p>
+                            </div>
+                            @hasSection('hideBreadcrumb')
+                            @else
+                                <div class="col-12 col-md-6 order-md-2 order-first">
+                                    @include('layouts.back-end.partials._breadcrumb')
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                    @yield('content')
+                </div>
             </div>
 
             @include('layouts.back-end.partials._footer')

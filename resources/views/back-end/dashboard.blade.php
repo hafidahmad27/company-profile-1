@@ -1,12 +1,9 @@
 @extends('layouts.back-end.app')
 
 @section('title', 'Dashboard')
+@section('hideBreadcrumb', true)
 
 @section('content')
-    <div class="page-heading">
-        <h3>@yield('title')</h3>
-    </div>
-
     {{-- <div class="page-content">
         <section class="row">
             <div class="col-12 col-lg-9">
