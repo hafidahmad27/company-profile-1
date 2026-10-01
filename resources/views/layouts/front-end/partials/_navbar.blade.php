@@ -11,7 +11,7 @@
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 @foreach ($pages as $page)
                     <li class="nav-item">
-                        <a class="nav-link fw-bold {{ ($page->slug == 'index' ? request()->is('/') : request()->is($page->slug . '*')) ? 'active text-primary' : 'text-light' }}"
+                        <a class="nav-link fw-bold {{ $page->is_active ? (($page->slug == 'index' ? request()->is('/') : request()->is($page->slug . '*')) ? 'active text-primary' : 'text-light') : 'disabled opacity-50' }}"
                             href="{{ $page->slug == 'index' ? url('/') : url($page->slug) }}">{{ $page->title }}
                         </a>
                     </li>

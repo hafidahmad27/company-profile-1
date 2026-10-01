@@ -39,7 +39,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         View::composer('front-end.*', function ($view) {
-            $pages = Page::where('is_active', 1)->orderBy('order')->get();
+            $pages = Page::orderBy('order')->get();
 
             $view->with('pages', $pages);
         });

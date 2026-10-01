@@ -106,18 +106,4 @@ class PageService
         $title = $sectionKey ? Str::headline($sectionKey) : 'Section';
         return $title . ' updated successfully.';
     }
-
-    public function setActiveStatus(int $id)
-    {
-        $section = $this->sectionRepo->getById($id);
-        $isActive = $section->is_active ? 0 : 1;
-
-        $this->sectionRepo->update($id, [
-            'is_active' => $isActive
-        ]);
-
-        return $isActive
-            ? 'Section berhasil diaktifkan.'
-            : 'Section berhasil dinonaktifkan.';
-    }
 }
