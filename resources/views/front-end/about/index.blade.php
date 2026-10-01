@@ -9,7 +9,7 @@
 
     @if ($section->image)
         <div class="text-center mb-4">
-            <img src="{{ $section->image_url }}" class="card-img-top rounded-4" style="height: 235px; object-fit: cover">
+            <img src="{{ $section->image_url }}" class="card-img-top rounded-4">
         </div>
     @endif
 

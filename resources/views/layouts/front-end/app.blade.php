@@ -19,7 +19,8 @@
     @include('layouts.front-end.partials._navbar')
 
     @hasSection('title')
-        <div class="container-fluid bg-primary">
+        <div class="container-fluid {{ $section->image_url ? '' : 'bg-primary' }}"
+            @if ($section?->image_url) style="background-image: url('{{ $section->image_url }}'); background-size: 100%" @endif>
             <div class="row py-3">
                 <h2 class="text-center text-light fw-bold mt-3 pb-2">
                     @if (request()->segment(1) && empty(request()->segment(2)))

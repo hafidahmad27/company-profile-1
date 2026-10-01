@@ -7,11 +7,11 @@
         {{ $section->subtitle ?? null }}
     </p>
 
-    @if ($section->image)
+    {{-- @if ($section->image)
         <div class="text-center mb-4">
             <img src="{{ $section->image_url }}" class="card-img-top rounded-4" style="height: 235px; object-fit: cover">
         </div>
-    @endif
+    @endif --}}
 
     @if ($section->content)
         <p style="text-align: justify">
@@ -32,8 +32,8 @@
                     {{ $articleCategory->name ?? '-' }} ({{ $count }})
                 </button> --}}
                 <a class="nav-link {{ $articleCategory->id == $defaultArticleCategoryId ? 'active' : '' }}"
-                    href="{{ request()->fullUrlWithQuery(['tab' => $articleCategory->id]) }}" role="tab"
-                    aria-controls="" aria-selected="true">
+                    href="{{ request()->fullUrlWithQuery(['tab' => $articleCategory->id]) }}" role="tab" aria-controls=""
+                    aria-selected="true">
                     {{ $articleCategory->name ?? '-' }} ({{ $count }})
                 </a>
             </li>
