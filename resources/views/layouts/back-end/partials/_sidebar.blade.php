@@ -359,14 +359,16 @@
                                 <span>Product List</span>
                             </a>
                         </li>
-                        <li
-                            class="submenu-item 
+                        @if (auth()->user()->isSuperAdmin())
+                            <li
+                                class="submenu-item 
                             {{ request()->is('be/product-categories') ? 'active' : '' }}
                             {{ request()->is('be/product-categories/*') ? 'active' : '' }}">
-                            <a href="{{ route('be.product-categories.index') }}" class='submenu-link'>
-                                <span>Categories</span>
-                            </a>
-                        </li>
+                                <a href="{{ route('be.product-categories.index') }}" class='submenu-link'>
+                                    <span>Categories</span>
+                                </a>
+                            </li>
+                        @endif
                     </ul>
                 </li>
 
@@ -390,14 +392,16 @@
                                 <span>Article List</span>
                             </a>
                         </li>
-                        <li
-                            class="submenu-item 
+                        @if (auth()->user()->isSuperAdmin())
+                            <li
+                                class="submenu-item 
                             {{ request()->is('be/article-categories') ? 'active' : '' }}
                             {{ request()->is('be/article-categories/*') ? 'active' : '' }}">
-                            <a href="{{ route('be.article-categories.index') }}" class='submenu-link'>
-                                <span>Categories</span>
-                            </a>
-                        </li>
+                                <a href="{{ route('be.article-categories.index') }}" class='submenu-link'>
+                                    <span>Categories</span>
+                                </a>
+                            </li>
+                        @endif
                     </ul>
                 </li>
 
@@ -698,26 +702,28 @@
                         <span>Settings</span>
                     </a>
                     <ul class="submenu">
-                        <li
-                            class="submenu-item 
+                        @if (auth()->user()->isSuperAdmin())
+                            <li
+                                class="submenu-item 
                             {{ request()->is('be/pages') ? 'active' : '' }}
                             {{ request()->is('be/pages/*') ? 'active' : '' }}
                             ">
-                            <a href="{{ route('be.pages.index') }}" class='submenu-link'>
-                                {{-- <i class="bi bi-gear"></i> --}}
-                                <span>Pages</span>
-                            </a>
-                        </li>
-                        <li
-                            class="submenu-item 
+                                <a href="{{ route('be.pages.index') }}" class='submenu-link'>
+                                    {{-- <i class="bi bi-gear"></i> --}}
+                                    <span>Pages</span>
+                                </a>
+                            </li>
+                            <li
+                                class="submenu-item 
                             {{ request()->is('be/companies') ? 'active' : '' }}
                             {{ request()->is('be/companies/*') ? 'active' : '' }}
                             ">
-                            <a href="{{ route('be.companies.index') }}" class='submenu-link'>
-                                {{-- <i class="bi bi-gear"></i> --}}
-                                <span>Company</span>
-                            </a>
-                        </li>
+                                <a href="{{ route('be.companies.index') }}" class='submenu-link'>
+                                    {{-- <i class="bi bi-gear"></i> --}}
+                                    <span>Company</span>
+                                </a>
+                            </li>
+                        @endif
                         <li
                             class="submenu-item 
                             {{ request()->is('be/profile') ? 'active' : '' }}

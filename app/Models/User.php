@@ -45,4 +45,12 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Check role user.
+     */
+    public function isSuperAdmin(): bool
+    {
+        return $this->id === 1;
+    }
 }

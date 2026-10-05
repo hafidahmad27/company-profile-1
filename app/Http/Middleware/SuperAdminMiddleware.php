@@ -15,6 +15,8 @@ class SuperAdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
+        abort_if(!auth()->user()->isSuperAdmin(), 403, 'Unauthorized');
+
         return $next($request);
     }
 }

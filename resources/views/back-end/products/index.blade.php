@@ -8,145 +8,141 @@
 @endpush
 
 @section('content')
-    <section class="section">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="card-title">
-                    <div class="d-flex">
-                        <a href="{{ route('be.products.create') }}" class="btn btn-primary">
-                            <i class="bi bi-plus"></i> Add
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">
+                <div class="d-flex">
+                    <a href="{{ route('be.products.create') }}" class="btn btn-primary">
+                        <i class="bi bi-plus"></i> Add
+                    </a>
+                    <div class="ms-auto">
+                        <button type="button" class="btn btn-outline-success block ms-auto" data-bs-toggle="modal"
+                            data-bs-target="#default">
+                            <i class="bi bi-arrow-bar-up"></i> Import
+                        </button>
+                        <a href="{{ route('be.products.export') }}" class="btn btn-outline-secondary">
+                            <i class="bi bi-file-earmark-excel-fill"></i> Export
                         </a>
-                        <div class="ms-auto">
-                            <button type="button" class="btn btn-outline-success block ms-auto" data-bs-toggle="modal"
-                                data-bs-target="#default">
-                                <i class="bi bi-arrow-bar-up"></i> Import
-                            </button>
-                            <a href="{{ route('be.products.export') }}" class="btn btn-outline-secondary">
-                                <i class="bi bi-file-earmark-excel-fill"></i> Export
-                            </a>
-                        </div>
                     </div>
-                </h5>
-            </div>
-            <div class="card-body">
-                @if (session('success'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        {!! session('success') !!}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                @endif
-                <table class="table table-striped" id="table1">
-                    <thead>
+                </div>
+            </h5>
+        </div>
+        <div class="card-body">
+            @if (session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {!! session('success') !!}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+            <table class="table table-striped" id="table1">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Category</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Image</th>
+                        <th>Status</th>
+                        <th>Published At</th>
+                        <th class="text-center">Updated By</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @php $i = 0; @endphp
+                    @foreach ($products as $product)
                         <tr>
-                            <th>#</th>
-                            <th>Category</th>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Price</th>
-                            <th>Image</th>
-                            <th>Status</th>
-                            <th>Published At</th>
-                            {{-- <th>Author</th> --}}
-                            <th class="text-center">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php $i = 0; @endphp
-                        @foreach ($products as $product)
-                            <tr>
-                                <td>{{ ++$i }}</td>
-                                <td>{{ $product->category_name }}</td>
-                                <td>{{ $product->name }}</td>
-                                <td align="justify">{{ Str::limit($product->description, 100) }}</td>
-                                <td align="right">{{ number_format($product->price, 0, ',', '.') }}</td>
-                                <td align="center">
-                                    <img src="{{ $product->image_url }}" width="100" height="100"
-                                        class="img-thumbnail">
-                                </td>
-                                <td align="center">
-                                    <span class="badge text-bg-{{ $product->is_published ? 'success' : 'info' }}">
-                                        {{ $product->is_published ? 'Published' : 'Draft' }}
-                                    </span>
-                                </td>
-                                <td>{{ $product->published_at }}</td>
-                                {{-- <td>{{ $product->user_name }}</td> --}}
-                                <td class="text-center">
-                                    <form action="{{ route('be.product.togglePublish', $product->id) }}" class="d-inline"
+                            <td>{{ ++$i }}</td>
+                            <td>{{ $product->category_name }}</td>
+                            <td>{{ $product->name }}</td>
+                            <td align="justify">{{ Str::limit($product->description, 100) }}</td>
+                            <td align="right">{{ number_format($product->price, 0, ',', '.') }}</td>
+                            <td align="center">
+                                <img src="{{ $product->image_url }}" width="100" height="100" class="img-thumbnail">
+                            </td>
+                            <td align="center">
+                                <span class="badge text-bg-{{ $product->is_published ? 'success' : 'info' }}">
+                                    {{ $product->is_published ? 'Published' : 'Draft' }}
+                                </span>
+                            </td>
+                            <td>{{ $product->published_at }}</td>
+                            <td>{{ $product->user_name }}</td>
+                            <td class="text-center">
+                                <form action="{{ route('be.product.togglePublish', $product->id) }}" class="d-inline"
+                                    method="POST">
+                                    @csrf
+                                    @method('PATCH')
+                                    <button type="submit" class="btn btn-warning btn-sm">
+                                        <i
+                                            class="bi {{ $product->is_published ? 'bi-arrow-down-square' : 'bi-arrow-up-square-fill' }}"></i>
+                                    </button>
+                                </form>
+                                |
+                                <a href="{{ route('be.products.show', $product->id) }}" class="btn btn-info btn-sm">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+                                |
+                                <a href="{{ route('be.products.edit', $product->id) }}" class="btn btn-primary btn-sm">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                @if ($product->is_published == 0)
+                                    |
+                                    <form action="{{ route('be.products.destroy', $product->id) }}" class="d-inline"
                                         method="POST">
                                         @csrf
-                                        @method('PATCH')
-                                        <button type="submit" class="btn btn-warning btn-sm">
-                                            <i
-                                                class="bi {{ $product->is_published ? 'bi-arrow-down-square' : 'bi-arrow-up-square-fill' }}"></i>
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm">
+                                            <i class="bi bi-trash"></i>
                                         </button>
                                     </form>
-                                    |
-                                    <a href="{{ route('be.products.show', $product->id) }}" class="btn btn-info btn-sm">
-                                        <i class="bi bi-eye"></i>
-                                    </a>
-                                    |
-                                    <a href="{{ route('be.products.edit', $product->id) }}" class="btn btn-primary btn-sm">
-                                        <i class="bi bi-pencil"></i>
-                                    </a>
-                                    @if ($product->is_published == 0)
-                                        |
-                                        <form action="{{ route('be.products.destroy', $product->id) }}" class="d-inline"
-                                            method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
-                                        </form>
-                                    @endif
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                                @endif
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
 
-                <!--Basic Modal -->
-                <div class="modal fade text-left @if ($errors->has('file')) show @endif" id="default"
-                    tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true"
-                    @if ($errors->has('file')) style="display:block;" @endif>
-                    <div class="modal-dialog modal-dialog-scrollable" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="myModalLabel1">Import @yield('title')
-                                </h5>
-                                <button type="button" class="close rounded-pill" data-bs-dismiss="modal"
-                                    aria-label="Close">
-                                    <i data-feather="x"></i>
+            <!--Basic Modal -->
+            <div class="modal fade text-left @if ($errors->has('file')) show @endif" id="default" tabindex="-1"
+                role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true"
+                @if ($errors->has('file')) style="display:block;" @endif>
+                <div class="modal-dialog modal-dialog-scrollable" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="myModalLabel1">Import @yield('title')
+                            </h5>
+                            <button type="button" class="close rounded-pill" data-bs-dismiss="modal" aria-label="Close">
+                                <i data-feather="x"></i>
+                            </button>
+                        </div>
+                        <form action="{{ route('be.products.import') }}" method="POST" enctype="multipart/form-data"
+                            class="form">
+                            @csrf
+                            <div class="modal-body">
+                                <input class="form-control @error('file') is-invalid @enderror" type="file"
+                                    id="file" name="file">
+                                @error('file')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="modal-footer">
+                                <div class="form-group me-auto">
+                                    <a href="{{ route('be.products.export', ['isTemplate' => 1]) }}">download
+                                        template</a>
+                                </div>
+                                <button type="submit" class="btn btn-outline-success ms-1" data-bs-dismiss="modal">
+                                    <i class="bx bx-check d-block d-sm-none"></i>
+                                    <span class="d-none d-sm-block"><i class="bi bi-arrow-bar-up"></i>
+                                        Import</span>
                                 </button>
                             </div>
-                            <form action="{{ route('be.products.import') }}" method="POST" enctype="multipart/form-data"
-                                class="form">
-                                @csrf
-                                <div class="modal-body">
-                                    <input class="form-control @error('file') is-invalid @enderror" type="file"
-                                        id="file" name="file">
-                                    @error('file')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                <div class="modal-footer">
-                                    <div class="form-group me-auto">
-                                        <a href="{{ route('be.products.export', ['isTemplate' => 1]) }}">download
-                                            template</a>
-                                    </div>
-                                    <button type="submit" class="btn btn-outline-success ms-1" data-bs-dismiss="modal">
-                                        <i class="bx bx-check d-block d-sm-none"></i>
-                                        <span class="d-none d-sm-block"><i class="bi bi-arrow-bar-up"></i>
-                                            Import</span>
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 @endsection
 
 @push('scripts')

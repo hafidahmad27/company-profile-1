@@ -17,9 +17,11 @@ require __DIR__ . '/auth.php';
 Route::prefix('be')->name('be.')->middleware(['auth', 'verified'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::resource('product-categories', ProductCategoryController::class);
-    Route::patch('product-categories/{product_category}/updateActiveStatus', [ProductCategoryController::class, 'updateActiveStatus'])
-        ->name('product-categories.updateActiveStatus');
+    Route::middleware(['superadmin'])->group(function () {
+        Route::resource('product-categories', ProductCategoryController::class);
+        Route::patch('product-categories/{product_category}/updateActiveStatus', [ProductCategoryController::class, 'updateActiveStatus'])
+            ->name('product-categories.updateActiveStatus');
+    });
 
     Route::post('products/import', [ProductController::class, 'import'])->name('products.import');
     Route::get('products/export', [ProductController::class, 'export'])->name('products.export');
@@ -27,9 +29,11 @@ Route::prefix('be')->name('be.')->middleware(['auth', 'verified'])->group(functi
         ->name('product.togglePublish');
     Route::resource('products', ProductController::class);
 
-    Route::resource('article-categories', ArticleCategoryController::class);
-    Route::patch('article-categories/{article_category}/updateActiveStatus', [ArticleCategoryController::class, 'updateActiveStatus'])
-        ->name('article-categories.updateActiveStatus');
+    Route::middleware(['superadmin'])->group(function () {
+        Route::resource('article-categories', ArticleCategoryController::class);
+        Route::patch('article-categories/{article_category}/updateActiveStatus', [ArticleCategoryController::class, 'updateActiveStatus'])
+            ->name('article-categories.updateActiveStatus');
+    });
 
     Route::post('articles/import', [ArticleController::class, 'import'])->name('articles.import');
     Route::get('articles/export', [ArticleController::class, 'export'])->name('articles.export');
@@ -38,17 +42,19 @@ Route::prefix('be')->name('be.')->middleware(['auth', 'verified'])->group(functi
     Route::resource('articles', ArticleController::class);
 
     // Settings
-    Route::resource('companies', CompanyController::class)->only([
-        'index',
-        'update'
-    ]);
-    Route::prefix('pages')->name('pages.')->group(function () {
-        Route::get('/', [PageController::class, 'index'])->name('index');
-        Route::put('bulkUpdate', [PageController::class, 'bulkUpdate'])->name('bulkUpdate');
-        Route::get('{page}', [PageController::class, 'show'])->name('show');
+    Route::middleware(['superadmin'])->group(function () {
+        Route::resource('companies', CompanyController::class)->only([
+            'index',
+            'update'
+        ]);
+        Route::prefix('pages')->name('pages.')->group(function () {
+            Route::get('/', [PageController::class, 'index'])->name('index');
+            Route::put('bulkUpdate', [PageController::class, 'bulkUpdate'])->name('bulkUpdate');
+            Route::get('{page}', [PageController::class, 'show'])->name('show');
 
-        Route::prefix('sections')->name('sections.')->group(function () {
-            Route::put('bulkUpdate', [PageController::class, 'bulkUpdateSection'])->name('bulkUpdate');
+            Route::prefix('sections')->name('sections.')->group(function () {
+                Route::put('bulkUpdate', [PageController::class, 'bulkUpdateSection'])->name('bulkUpdate');
+            });
         });
     });
     Route::prefix('profile')->group(function () {
