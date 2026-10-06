@@ -60,6 +60,7 @@ class Product extends Model
     {
         return [
             'published_at' => 'datetime',
+            'updated_at' => 'datetime',
         ];
     }
 }

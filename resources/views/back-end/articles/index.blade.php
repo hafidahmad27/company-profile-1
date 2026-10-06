@@ -45,7 +45,7 @@
                         <th>Status</th>
                         <th>Published At</th>
                         {{-- <th>Views</th> --}}
-                        <th class="text-center">Updated By</th>
+                        <th class="text-center">Last Updated By</th>
                         <th class="text-center">Action</th>
                     </tr>
                 </thead>
@@ -65,9 +65,12 @@
                                     {{ $article->is_published ? 'Published' : 'Draft' }}
                                 </span>
                             </td>
-                            <td>{{ $article->published_at }}</td>
+                            <td>{{ $article->published_at?->format('d-m-Y H:i:s') }}</td>
                             {{-- <td align="right">{{ $article->views }}</td> --}}
-                            <td>{{ $article->user_name }}</td>
+                            <td>
+                                {{ $article->user_name }}, at: <br>
+                                {{ $article->updated_at?->format('d-m-Y H:i:s') }}
+                            </td>
                             <td class="text-center">
                                 <form action="{{ route('be.article.togglePublish', $article->id) }}" class="d-inline"
                                     method="POST">

@@ -45,7 +45,7 @@
                         <th>Image</th>
                         <th>Status</th>
                         <th>Published At</th>
-                        <th class="text-center">Updated By</th>
+                        <th class="text-center">Last Updated By</th>
                         <th class="text-center">Action</th>
                     </tr>
                 </thead>
@@ -66,8 +66,11 @@
                                     {{ $product->is_published ? 'Published' : 'Draft' }}
                                 </span>
                             </td>
-                            <td>{{ $product->published_at }}</td>
-                            <td>{{ $product->user_name }}</td>
+                            <td>{{ $product->published_at?->format('d-m-Y H:i:s') }}</td>
+                            <td>
+                                {{ $product->user_name }}, at: <br>
+                                {{ $product->updated_at?->format('d-m-Y H:i:s') }}
+                            </td>
                             <td class="text-center">
                                 <form action="{{ route('be.product.togglePublish', $product->id) }}" class="d-inline"
                                     method="POST">

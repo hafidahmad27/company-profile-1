@@ -53,4 +53,8 @@ class User extends Authenticatable
     {
         return $this->id === 1;
     }
+    public function isStaff(): bool
+    {
+        return $this->id === 2;
+    }
 }

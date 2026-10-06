@@ -334,76 +334,15 @@
 
                     </ul>
 
-
                 </li> --}}
 
                 <hr>
 
-                <li
-                    class="sidebar-item 
-                    {{ request()->is('be/products') ? 'active' : '' }}
-                    {{ request()->is('be/products/*') ? 'active' : '' }} 
-                    {{ request()->is('be/product-categories') ? 'active' : '' }}
-                    {{ request()->is('be/product-categories/*') ? 'active' : '' }} 
-                    has-sub">
-                    <a href="#" class='sidebar-link'>
-                        <i class="bi bi-tags"></i>
-                        <span>Products</span>
-                    </a>
-                    <ul class="submenu">
-                        <li
-                            class="submenu-item 
-                            {{ request()->is('be/products') ? 'active' : '' }}
-                            {{ request()->is('be/products/*') ? 'active' : '' }}">
-                            <a href="{{ route('be.products.index') }}" class='submenu-link'>
-                                <span>Product List</span>
-                            </a>
-                        </li>
-                        @if (auth()->user()->isSuperAdmin())
-                            <li
-                                class="submenu-item 
-                            {{ request()->is('be/product-categories') ? 'active' : '' }}
-                            {{ request()->is('be/product-categories/*') ? 'active' : '' }}">
-                                <a href="{{ route('be.product-categories.index') }}" class='submenu-link'>
-                                    <span>Categories</span>
-                                </a>
-                            </li>
-                        @endif
-                    </ul>
-                </li>
-
-                <li
-                    class="sidebar-item 
-                    {{ request()->is('be/articles') ? 'active' : '' }}
-                    {{ request()->is('be/articles/*') ? 'active' : '' }} 
-                    {{ request()->is('be/article-categories') ? 'active' : '' }}
-                    {{ request()->is('be/article-categories/*') ? 'active' : '' }} 
-                    has-sub">
-                    <a href="#" class='sidebar-link'>
-                        <i class="bi bi-layout-text-window-reverse"></i>
-                        <span>Articles</span>
-                    </a>
-                    <ul class="submenu">
-                        <li
-                            class="submenu-item 
-                            {{ request()->is('be/articles') ? 'active' : '' }}
-                            {{ request()->is('be/articles/*') ? 'active' : '' }}">
-                            <a href="{{ route('be.articles.index') }}" class='submenu-link'>
-                                <span>Article List</span>
-                            </a>
-                        </li>
-                        @if (auth()->user()->isSuperAdmin())
-                            <li
-                                class="submenu-item 
-                            {{ request()->is('be/article-categories') ? 'active' : '' }}
-                            {{ request()->is('be/article-categories/*') ? 'active' : '' }}">
-                                <a href="{{ route('be.article-categories.index') }}" class='submenu-link'>
-                                    <span>Categories</span>
-                                </a>
-                            </li>
-                        @endif
-                    </ul>
-                </li>
+                @if (auth()->user()->isSuperAdmin())
+                    @include('layouts.back-end.partials._sidebar-superadmin')
+                @elseif (auth()->user()->isStaff())
+                    @include('layouts.back-end.partials._sidebar-staff')
+                @endif
 
                 {{-- <li class="sidebar-item has-sub">
                     <a href="#" class='sidebar-link'>
@@ -684,70 +623,30 @@
 
                 {{-- <li class="sidebar-title">Settings</li> --}}
 
-                <hr>
-
-                <li
-                    class="sidebar-item 
-                    {{ request()->is('be/pages') ? 'active' : '' }}
-                    {{ request()->is('be/pages/*') ? 'active' : '' }} 
-
-                    {{ request()->is('be/companies') ? 'active' : '' }}
-                    {{ request()->is('be/companies/*') ? 'active' : '' }} 
-
-                    {{ request()->is('be/profile') ? 'active' : '' }}
-                    {{ request()->is('be/profile/*') ? 'active' : '' }}
-                    has-sub">
-                    <a href="#" class='sidebar-link'>
-                        <i class="bi bi-gear"></i>
-                        <span>Settings</span>
-                    </a>
-                    <ul class="submenu">
-                        @if (auth()->user()->isSuperAdmin())
-                            <li
-                                class="submenu-item 
-                            {{ request()->is('be/pages') ? 'active' : '' }}
-                            {{ request()->is('be/pages/*') ? 'active' : '' }}
-                            ">
-                                <a href="{{ route('be.pages.index') }}" class='submenu-link'>
-                                    {{-- <i class="bi bi-gear"></i> --}}
-                                    <span>Pages</span>
-                                </a>
-                            </li>
-                            <li
-                                class="submenu-item 
-                            {{ request()->is('be/companies') ? 'active' : '' }}
-                            {{ request()->is('be/companies/*') ? 'active' : '' }}
-                            ">
-                                <a href="{{ route('be.companies.index') }}" class='submenu-link'>
-                                    {{-- <i class="bi bi-gear"></i> --}}
-                                    <span>Company</span>
-                                </a>
-                            </li>
-                        @endif
-                        <li
-                            class="submenu-item 
-                            {{ request()->is('be/profile') ? 'active' : '' }}
-                            {{ request()->is('be/profile/*') ? 'active' : '' }}
-                            ">
-                            <a href="{{ route('be.profile.index') }}" class='submenu-link'>
-                                {{-- <i class="bi bi-person"></i> --}}
-                                <span>Profile</span>
-                            </a>
-                        </li>
-
-                    </ul>
-                </li>
-
                 {{-- <li class="sidebar-item">
                     <a href="{{ url('be/profile/dashboard') }}" class='sidebar-link'>
                         <i class="bi bi-puzzle"></i>
                         <span>Profile Dashboard</span>
                     </a>
                 </li> --}}
+
                 <hr>
+
                 <li
-                    class="sidebar-item {{ request()->is('be/logout') ? 'active' : '' }}
-                    {{ request()->is('be/logout/*') ? 'active' : '' }}">
+                    class="sidebar-item 
+                            {{ request()->is('be/profile') ? 'active' : '' }}
+                            {{ request()->is('be/profile/*') ? 'active' : '' }}
+                            ">
+                    <a href="{{ route('be.profile.index') }}" class='sidebar-link'>
+                        <i class="bi bi-person-gear"></i>
+                        <span>Profile</span>
+                    </a>
+                </li>
+                <li
+                    class="sidebar-item 
+                            {{ request()->is('be/logout') ? 'active' : '' }}
+                            {{ request()->is('be/logout/*') ? 'active' : '' }}
+                            ">
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <a href="" onclick="event.preventDefault(); this.closest('form').submit();"
