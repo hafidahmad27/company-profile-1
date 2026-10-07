@@ -1,8 +1,8 @@
 <thead>
     {{-- <th>Order</th> --}}
-    <th style="width: 33%">Subtitle</th>
+    <th>Subtitle</th>
     <th>Content</th>
-    <th>Hero Background Image</th>
+    <th style="width: 30%">Banner Background</th>
     {{-- <th class="text-center">Is Active?</th> --}}
 </thead>
 
@@ -21,9 +21,9 @@
                 <textarea rows="6" name="sections[{{ $section->id }}][content]" class="form-control">{{ old('sections.' . $section->id . '.content', $section->content) }}</textarea>
             </td>
             <td>
-                <div class="d-flex align-items-center gap-3">
+                <div class="form-group gap-3">
                     @if ($section->image)
-                        <img src="{{ $section->image_url }}" width="80" class="mt-2">
+                        <img src="{{ $section->image_url }}" alt="Image" class="img-thumbnail mt-2">
                     @endif
                     <input type="file" name="sections[{{ $section->id }}][image]"
                         class="form-control @error('sections.' . $section->id . '.image') is-invalid @enderror">

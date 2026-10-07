@@ -17,10 +17,10 @@ class HomeController extends Controller
             'front-end.index',
             array_merge(
                 $this->carousel(),
-                $this->about(),
-                $this->productBestSellers(),
-                $this->products(),
-                $this->articles()
+                $this->aboutPreview(),
+                $this->productBestSellersPreview(),
+                $this->productsPreview(),
+                $this->articlesPreview()
             )
         );
     }
@@ -32,7 +32,7 @@ class HomeController extends Controller
         return compact('carouselSlides');
     }
 
-    private function about()
+    private function aboutPreview()
     {
         $sectionAboutPreview = Section::where('section_key', 'about-preview')
             ->where('sections.is_active', 1)->first();
@@ -40,7 +40,7 @@ class HomeController extends Controller
         return compact('sectionAboutPreview');
     }
 
-    private function productBestSellers()
+    private function productBestSellersPreview()
     {
         $productBestSellers = Product::join('product_categories', 'products.product_category_id', '=', 'product_categories.id')
             ->select(
@@ -61,7 +61,7 @@ class HomeController extends Controller
         return compact('productBestSellers', 'sectionProductBestSellerPreview');
     }
 
-    private function products()
+    private function productsPreview()
     {
         $product = Section::join('pages', 'sections.page_id', '=', 'pages.id')
             ->where('section_key', 'products')
@@ -90,7 +90,7 @@ class HomeController extends Controller
         return compact('product', 'sectionProductPreview', 'productCategoriesPreview', 'productsPreview');
     }
 
-    private function articles()
+    private function articlesPreview()
     {
         $article = Section::join('pages', 'sections.page_id', '=', 'pages.id')
             ->where('section_key', 'articles')

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->enum('section_key', [
                 'carousel',
                 'about-preview',
+                'product-best-sellers-preview',
                 'products-preview',
                 'articles-preview',
                 'about',
