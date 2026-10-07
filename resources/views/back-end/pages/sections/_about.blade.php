@@ -2,7 +2,7 @@
     {{-- <th>Order</th> --}}
     <th style="width: 33%">Subtitle</th>
     <th>Content</th>
-    <th>Image</th>
+    <th>Hero Background Image</th>
     {{-- <th class="text-center">Is Active?</th> --}}
 </thead>
 

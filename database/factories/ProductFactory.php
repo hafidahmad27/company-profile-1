@@ -26,7 +26,8 @@ class ProductFactory extends Factory
             'description' => fake()->text(),
             'price' => fake()->randomFloat(2, 10000, 99990000),
             'published_at' => fake()->dateTimeBetween('-2 days', 'now'),
-            'is_published' => true,
+            'is_published' => fake()->boolean(),
+            'is_best_seller' => fake()->boolean(),
             'user_id' => 1,
         ];
     }

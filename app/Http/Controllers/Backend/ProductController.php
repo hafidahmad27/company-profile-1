@@ -110,4 +110,19 @@ class ProductController extends Controller
 
         return $this->productService->export($isTemplate);
     }
+
+    public function listBestSellers()
+    {
+        $bestSellers = $this->productService->getBestSellers();
+
+        return view('back-end.products.best-sellers.index', compact('bestSellers'));
+    }
+
+    public function setBestSeller(int $id)
+    {
+        $message = $this->productService->setBestSeller($id);
+
+        return back()
+            ->with('success', $message);
+    }
 }

@@ -1,7 +1,9 @@
 <li
     class="sidebar-item 
                     {{ request()->is('be/products') ? 'active' : '' }}
-                    {{ request()->is('be/products/*') ? 'active' : '' }} 
+                    {{ request()->is('be/products/*') ? 'active' : '' }}
+                    {{ request()->is('be/product-best-sellers') ? 'active' : '' }}
+                    {{ request()->is('be/product-best-sellers/*') ? 'active' : '' }} 
                     {{ request()->is('be/product-categories') ? 'active' : '' }}
                     {{ request()->is('be/product-categories/*') ? 'active' : '' }} 
                     has-sub">
@@ -13,9 +15,17 @@
         <li
             class="submenu-item 
                             {{ request()->is('be/products') ? 'active' : '' }}
-                            {{ request()->is('be/products/*') ? 'active' : '' }}">
+                            {{ request()->is('be/products/*') && !request()->is('be/products/best-sellers*') ? 'active' : '' }}">
             <a href="{{ route('be.products.index') }}" class='submenu-link'>
                 <span>Product List</span>
+            </a>
+        </li>
+        <li
+            class="submenu-item 
+                            {{ request()->is('be/products/best-sellers') ? 'active' : '' }}
+                            {{ request()->is('be/products/best-sellers/*') ? 'active' : '' }}">
+            <a href="{{ route('be.products.best-sellers.index') }}" class='submenu-link'>
+                <span>Best Sellers</span>
             </a>
         </li>
         {{-- <li

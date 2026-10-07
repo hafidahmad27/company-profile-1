@@ -146,4 +146,25 @@ class ProductService
 
         return $this->importExportService->export($export, $filename);
     }
+
+    public function getBestSellers()
+    {
+        $bestSellers = $this->productRepo->getBestSellers();
+
+        return $bestSellers;
+    }
+
+    public function setBestSeller(int $id)
+    {
+        $product = $this->productRepo->getById($id);
+        $isBestSeller = $product->is_best_seller ? 0 : 1;
+
+        $this->productRepo->update($id,  [
+            'is_best_seller' => $isBestSeller,
+        ]);
+
+        return $isBestSeller
+            ? 'Product berhasil ditandai sebagai Best Seller.'
+            : 'Product berhasil dihapus dari Best Seller.';
+    }
 }

@@ -29,6 +29,7 @@ class ProductController extends Controller
                 )
                 ->where('product_category_id', $category->id)
                 ->where('is_published', 1)
+                ->orderBy('is_best_seller', 'desc')
                 ->orderBy('published_at', 'desc')
                 ->paginate(6);
         }

@@ -23,7 +23,7 @@
 
                     <div class="form-group">
                         <span class="badge text-bg-info">Rp
-                            {{ number_format($product->price, 0, ',', '.') }}</span>
+                            {{ $product->price_formatted }}</span>
                     </div>
                     <div class="form-group">
                         <span class="badge text-bg-secondary">{{ $product->category_name ?? '-' }}</span>

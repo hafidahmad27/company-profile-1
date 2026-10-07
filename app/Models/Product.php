@@ -29,6 +29,15 @@ class Product extends Model
     }
 
     /**
+     * Get price formatted.
+     */
+    protected function priceFormatted(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => number_format($this->price, 0, ',', '.'),
+        );
+    }
+    /**
      * Get image URL.
      */
     protected function imageUrl(): Attribute

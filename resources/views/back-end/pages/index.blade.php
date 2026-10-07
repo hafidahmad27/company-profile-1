@@ -40,7 +40,7 @@
                             <tr>
                                 <td>
                                     <input type="number" name="pages[{{ $page->id }}][order]"
-                                        value="{{ old('pages.' . $page->id . '.order', $page->order) }}"
+                                        value="{{ old('pages.' . $page->id . '.order', $page->order) }}" min="1"
                                         class="form-control @error('pages.' . $page->id . '.order') is-invalid @enderror">
                                     @error('pages.' . $page->id . '.order')
                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -49,7 +49,8 @@
                                 <td>
                                     <input type="text" name="pages[{{ $page->id }}][title]"
                                         value="{{ old('pages.' . $page->id . '.title', $page->title) }}"
-                                        class="form-control @error('pages.' . $page->id . '.title') is-invalid @enderror">
+                                        class="form-control @error('pages.' . $page->id . '.title') is-invalid @enderror"
+                                        autofocus>
                                     @error('pages.' . $page->id . '.title')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror

@@ -60,8 +60,65 @@
         </section>
     @endif
 
+    @if ($sectionProductBestSellerPreview?->is_active == 1)
+        <section id="product-best-sellers" style="margin-top: 6%">
+            <div class="text-center mb-4">
+                <h3 class="fw-bold">{{ $sectionProductBestSellerPreview->title ?? '-' }}</h3>
+                <p class="mt-4">
+                    {{ $sectionProductBestSellerPreview->subtitle ?? null }}
+                </p>
+                <p class="mt-4">
+                    {{ $sectionProductBestSellerPreview->content ?? null }}
+                </p>
+                {{-- @if ($sectionProductBestSellerPreview->image)
+                    <div class="text-center">
+                        <img src="{{ $sectionProductBestSellerPreview->image_url }}" class="card-img-top rounded-4"
+                            style="height: 235px; object-fit: cover">
+                    </div>
+                @endif --}}
+            </div>
+
+            <div class="row row-cols-1 row-cols-md-4 justify-content-center g-4 mt-0">
+                @foreach ($productBestSellers as $productPreview)
+                    <div class="col">
+                        <div class="card h-100 border-0">
+                            <img src="{{ $productPreview->image_url }}" class="card-img-top rounded-4"
+                                style="height: 235px; object-fit: cover">
+                            <div class="card-body">
+                                <div class="d-flex mb-3">
+                                    <div class="me-auto">
+                                        <span
+                                            class="badge text-bg-secondary">{{ $productPreview->category_name ?? '-' }}</span>
+                                    </div>
+                                    {{-- <small class="text-body-secondary">
+
+                                    </small> --}}
+                                </div>
+                                <h5 class="card-title text-center">
+                                    <a class="text-decoration-none"
+                                        href="{{ url($product->slug . '/' . $productPreview->category_slug . '/' . $productPreview->slug) }}">{{ $productPreview->name ?? '-' }}
+                                    </a>
+                                </h5>
+                                {{-- <span class="badge text-bg-info">Rp
+                                            {{ $productPreview->price_formatted }}</span> --}}
+                                {{-- <p class="card-text mt-2" style="text-align: justify">
+                                            {{ $productPreview->description ?? '-' }}
+                                        </p> --}}
+                            </div>
+                            {{-- <div class="card-footer text-end">
+                                        <small class="text-body-secondary">
+                                            
+                                        </small>
+                                    </div> --}}
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </section>
+    @endif
+
     @if ($sectionProductPreview?->is_active == 1)
-        <section id="products" style="margin-top: 6%">
+        <section id="products" style="margin-top: 4%">
             <div class="text-center mb-4">
                 <h3 class="fw-bold">{{ $sectionProductPreview->title ?? '-' }}</h3>
                 <p class="mt-4">
@@ -115,10 +172,14 @@
                                                 </a>
                                             </h5>
                                             {{-- <span class="badge text-bg-info">Rp
-                                            {{ number_format($productPreview->price, 0, ',', '.') }}</span> --}}
+                                            {{ $productPreview->price_formatted }}</span> --}}
                                             {{-- <p class="card-text mt-2" style="text-align: justify">
-                                            {{ $productPreview->description ?? '-' }}
-                                        </p> --}}
+                                                {{ Str::limit($productPreview->description, 150, '...') ?? '-' }}
+                                                @if ($productPreview->description && Str::length($productPreview->description) > 150)
+                                                    <a class="text-decoration-none"
+                                                        href="{{ url($product->slug . '/' . $productPreview->category_slug . '/' . $productPreview->slug) }}">Selengkapnya</a>
+                                                @endif
+                                            </p> --}}
                                         </div>
                                         {{-- <div class="card-footer text-end">
                                         <small class="text-body-secondary">
@@ -202,8 +263,10 @@
                                         </h5>
                                         <p class="card-text" style="text-align: justify">
                                             {{ Str::limit($articlePreview->content, 150, '...') ?? '-' }}
-                                            <a class="text-decoration-none"
-                                                href="{{ url($article->slug . '/' . $articlePreview->category_slug . '/' . $articlePreview->slug) }}">Selengkapnya</a>
+                                            @if ($articlePreview->content && Str::length($articlePreview->content) > 150)
+                                                <a class="text-decoration-none"
+                                                    href="{{ url($article->slug . '/' . $articlePreview->category_slug . '/' . $articlePreview->slug) }}">Selengkapnya</a>
+                                            @endif
                                             <br>
                                             <span class="text-body-secondary float-end" style="font-size: 8pt"><i
                                                     class="bi bi-eye-fill"></i>
@@ -235,5 +298,4 @@
             </div>
         </section>
     @endif
-
 @endsection

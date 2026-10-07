@@ -40,6 +40,21 @@ class ProductRepository
             ->firstOrFail();
     }
 
+    public function getBestSellers()
+    {
+        return $this->product->join('product_categories', 'products.product_category_id', '=', 'product_categories.id')
+            ->leftJoin('users', 'products.user_id', '=', 'users.id')
+            ->select(
+                'products.*',
+                'product_categories.name as category_name',
+                'users.name as user_name',
+            )
+            ->where('is_published', 1)
+            ->orderBy('is_best_seller', 'desc')
+            ->orderBy('updated_at', 'desc')
+            ->get();
+    }
+
     public function getById(int $id)
     {
         return $this->product->findOrFail($id);

@@ -21,7 +21,7 @@
 
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">
-                    <span class="badge text-bg-info">Rp {{ number_format($product->price, 0, ',', '.') }}</span>
+                    <span class="badge text-bg-info">Rp {{ $product->price_formatted }}</span>
                 </li>
                 <li class="list-group-item">
                     <span class="badge text-bg-secondary">{{ $product->category_name ?? '-' }}</span>

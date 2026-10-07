@@ -1,8 +1,8 @@
 <thead>
     {{-- <th>Order</th> --}}
-    <th>Subtitle</th>
+    {{-- <th>Subtitle</th> --}}
     {{-- <th>Content</th> --}}
-    <th>Image</th>
+    <th>Hero Background Image</th>
     {{-- <th class="text-center">Is Active?</th> --}}
 </thead>
 
@@ -13,10 +13,10 @@
                 <input type="number" name="sections[{{ $section->id }}][order]"
                     value="{{ old('sections.' . $section->id . '.order', $section->order) }}" class="form-control">
             </td>             --}}
-            <td>
+            {{-- <td>
                 <input type="text" name="sections[{{ $section->id }}][subtitle]"
                     value="{{ old('sections.' . $section->id . '.subtitle', $section->subtitle) }}" class="form-control">
-            </td>
+            </td> --}}
             {{-- <td>
                 <textarea name="sections[{{ $section->id }}][content]" class="form-control">{{ old('sections.' . $section->id . '.content', $section->content) }}</textarea>
             </td> --}}

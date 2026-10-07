@@ -57,7 +57,7 @@
                             <td>{{ $product->category_name }}</td>
                             <td>{{ $product->name }}</td>
                             <td align="justify">{{ Str::limit($product->description, 100) }}</td>
-                            <td align="right">{{ number_format($product->price, 0, ',', '.') }}</td>
+                            <td align="right">{{ $product->price_formatted }}</td>
                             <td align="center">
                                 <img src="{{ $product->image_url }}" width="100" height="100" class="img-thumbnail">
                             </td>

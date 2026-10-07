@@ -32,7 +32,7 @@ return new class extends Migration
             $table->string('button_text')->nullable();
             $table->string('button_link')->nullable();
             $table->unsignedTinyInteger('order')->nullable();
-            $table->boolean('is_active')->unsigned()->default(true);
+            $table->boolean('is_active')->unsigned()->default(1);
             $table->foreignId('user_id')->nullable()->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('set null');

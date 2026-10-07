@@ -22,7 +22,8 @@ return new class extends Migration
             $table->unsignedInteger('price')->nullable();
             $table->string('image')->nullable();
             $table->dateTime('published_at')->nullable();
-            $table->boolean('is_published')->unsigned()->default(false);
+            $table->boolean('is_published')->unsigned()->default(0);
+            $table->boolean('is_best_seller')->unsigned()->default(0);
             $table->foreignId('user_id')->nullable()->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('set null');

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->text('content')->nullable();
             $table->string('image')->nullable();
             $table->dateTime('published_at')->nullable();
-            $table->boolean('is_published')->unsigned()->default(false);
+            $table->boolean('is_published')->unsigned()->default(0);
             $table->unsignedInteger('views')->default(0);
             $table->foreignId('user_id')->nullable()->constrained()
                 ->onUpdate('cascade')

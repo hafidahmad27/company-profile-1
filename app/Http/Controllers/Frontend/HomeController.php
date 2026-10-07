@@ -18,6 +18,7 @@ class HomeController extends Controller
             array_merge(
                 $this->carousel(),
                 $this->about(),
+                $this->productBestSellers(),
                 $this->products(),
                 $this->articles()
             )
@@ -37,6 +38,27 @@ class HomeController extends Controller
             ->where('sections.is_active', 1)->first();
 
         return compact('sectionAboutPreview');
+    }
+
+    private function productBestSellers()
+    {
+        $productBestSellers = Product::join('product_categories', 'products.product_category_id', '=', 'product_categories.id')
+            ->select(
+                'product_categories.name as category_name',
+                'product_categories.slug as category_slug',
+                'products.*'
+            )
+            ->where('is_best_seller', 1)
+            ->where('is_published', 1)
+            ->orderBy('published_at', 'desc')
+            // ->limit(4)
+            ->get();
+
+        $sectionProductBestSellerPreview = Section::where('section_key', 'product-best-sellers-preview')
+            ->where('sections.is_active', 1)
+            ->first();
+
+        return compact('productBestSellers', 'sectionProductBestSellerPreview');
     }
 
     private function products()

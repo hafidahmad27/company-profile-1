@@ -31,7 +31,7 @@
                     aria-selected="true">
                     {{ $articleCategory->name ?? '-' }} ({{ $count }})
                 </button> --}}
-                <a class="nav-link {{ $articleCategory->id == $defaultArticleCategoryId ? 'active' : '' }}"
+                <a class="nav-link {{ $articleCategory->id == $defaultArticleCategoryId ? 'fw-bold active' : '' }}"
                     href="{{ request()->fullUrlWithQuery(['tab' => $articleCategory->id]) }}" role="tab" aria-controls=""
                     aria-selected="true">
                     {{ $articleCategory->name ?? '-' }} ({{ $count }})
@@ -59,15 +59,17 @@
                                     </small>
                                 </div>
                                 <h5 class="card-title">
-                                    <a class="text-decoration-none"
+                                    <a class="text-decoration-none fw-bold"
                                         href="{{ url(url()->current() . '/' . $article->category_slug . '/' . $article->slug) }}">
                                         {{ $article->title ?? '-' }}
                                     </a>
                                 </h5>
                                 <p class="card-text" style="text-align: justify">
                                     {{ Str::limit($article->content, 150, '...') ?? '-' }}
-                                    <a class="text-decoration-none"
-                                        href="{{ url(url()->current() . '/' . $article->category_slug . '/' . $article->slug) }}">Selengkapnya</a>
+                                    @if ($article->content && Str::length($article->content) > 150)
+                                        <a class="text-decoration-none"
+                                            href="{{ url(url()->current() . '/' . $article->category_slug . '/' . $article->slug) }}">Selengkapnya</a>
+                                    @endif
                                     <br>
                                     <span class="text-body-secondary float-end" style="font-size: 8pt"><i
                                             class="bi bi-eye-fill"></i>

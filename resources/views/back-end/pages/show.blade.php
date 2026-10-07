@@ -1,6 +1,6 @@
 @extends('layouts.back-end.app')
 
-@section('title', 'Detail Page - ' . ($page ?? '-'))
+@section('title', 'Page: ' . ($page ?? '-'))
 
 @section('content')
     <div class="card">

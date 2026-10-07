@@ -23,6 +23,10 @@ Route::prefix('be')->name('be.')->middleware(['auth', 'verified'])->group(functi
             ->name('product-categories.updateActiveStatus');
     });
 
+    Route::get('products/best-sellers', [ProductController::class, 'listBestSellers'])->name('products.best-sellers.index');
+    Route::patch('products/best-sellers/{product}/setBestSeller', [ProductController::class, 'setBestSeller'])
+        ->name('products.best-sellers.setBestSeller');
+
     Route::post('products/import', [ProductController::class, 'import'])->name('products.import');
     Route::get('products/export', [ProductController::class, 'export'])->name('products.export');
     Route::patch('products/{product}/togglePublish', [ProductController::class, 'togglePublish'])
