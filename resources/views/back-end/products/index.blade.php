@@ -44,7 +44,6 @@
                         <th>Price</th>
                         <th>Image</th>
                         <th>Status</th>
-                        <th>Published At</th>
                         <th class="text-center">Last Updated By</th>
                         <th class="text-center">Action</th>
                     </tr>
@@ -65,11 +64,16 @@
                                 <span class="badge text-bg-{{ $product->is_published ? 'success' : 'info' }}">
                                     {{ $product->is_published ? 'Published' : 'Draft' }}
                                 </span>
+                                <br>
+                                <span style="font-size: 9pt">
+                                    {{ $product->published_at?->format('d-m-Y H:i:s') }}
+                                </span>
                             </td>
-                            <td>{{ $product->published_at?->format('d-m-Y H:i:s') }}</td>
                             <td>
-                                {{ $product->user_name }}, at: <br>
-                                {{ $product->updated_at?->format('d-m-Y H:i:s') }}
+                                {{ $product->user_name }} <br>
+                                <span style="font-size: 9pt">
+                                    {{ $product->updated_at?->format('d-m-Y H:i:s') }}
+                                </span>
                             </td>
                             <td class="text-center">
                                 <form action="{{ route('be.product.togglePublish', $product->id) }}" class="d-inline"

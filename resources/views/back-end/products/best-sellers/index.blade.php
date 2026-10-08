@@ -46,8 +46,10 @@
                                 </form>
                             </td>
                             <td>
-                                {{ $product->user_name }}, at: <br>
-                                {{ $product->updated_at?->format('d-m-Y H:i:s') }}
+                                {{ $product->user_name }} <br>
+                                <span style="font-size: 9pt">
+                                    {{ $product->updated_at?->format('d-m-Y H:i:s') }}
+                                </span>
                             </td>
                         </tr>
                     @endforeach

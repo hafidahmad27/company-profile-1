@@ -1,5 +1,9 @@
 @extends('layouts.front-end.app')
 
+@push('styles')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
+@endpush
+
 @section('content')
     <section id="carousel">
         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
@@ -78,47 +82,72 @@
                 @endif --}}
             </div>
 
-            <div class="row row-cols-1 row-cols-md-4 justify-content-center g-4 mt-0">
-                @foreach ($productBestSellers as $productPreview)
-                    <div class="col">
-                        <div class="card h-100 border-0">
-                            <img src="{{ $productPreview->image_url }}" class="card-img-top rounded-4"
-                                style="height: 235px; object-fit: cover">
-                            <div class="card-body">
-                                <div class="d-flex mb-3">
-                                    <div class="me-auto">
-                                        <span
-                                            class="badge text-bg-secondary">{{ $productPreview->category_name ?? '-' }}</span>
-                                    </div>
-                                    {{-- <small class="text-body-secondary">
+            <div class="swiper bestSellerSwiper">
+                <div class="swiper-wrapper">
+                    {{-- <div class="row row-cols-1 row-cols-md-4 justify-content-center g-4 mt-0"> --}}
+                    @php
+                        $totalBestSeller = count($productBestSellers);
+                    @endphp
+
+                    @foreach ($productBestSellers as $productPreview)
+                        <div class="swiper-slide">
+                            <div class="card h-100 border-0">
+                                <img src="{{ $productPreview->image_url }}" class="card-img-top rounded-4"
+                                    style="height: 235px; object-fit: cover">
+                                <div class="card-body">
+                                    <div class="d-flex mb-3">
+                                        <div class="me-auto">
+                                            <span
+                                                class="badge text-bg-secondary">{{ $productPreview->category_name ?? '-' }}</span>
+                                        </div>
+                                        {{-- <small class="text-body-secondary">
 
                                     </small> --}}
-                                </div>
-                                <h5 class="card-title text-center">
-                                    <a class="text-decoration-none"
-                                        href="{{ url($product->slug . '/' . $productPreview->category_slug . '/' . $productPreview->slug) }}">{{ $productPreview->name ?? '-' }}
-                                    </a>
-                                </h5>
-                                {{-- <span class="badge text-bg-info">Rp
+                                    </div>
+                                    <h5 class="card-title text-center">
+                                        <a class="text-decoration-none"
+                                            href="{{ url($product->slug . '/' . $productPreview->category_slug . '/' . $productPreview->slug) }}">{{ $productPreview->name ?? '-' }}
+                                        </a>
+                                    </h5>
+                                    {{-- <span class="badge text-bg-info">Rp
                                             {{ $productPreview->price_formatted }}</span> --}}
-                                {{-- <p class="card-text mt-2" style="text-align: justify">
+                                    {{-- <p class="card-text mt-2" style="text-align: justify">
                                             {{ $productPreview->description ?? '-' }}
                                         </p> --}}
-                            </div>
-                            {{-- <div class="card-footer text-end">
+                                </div>
+                                {{-- <div class="card-footer text-end">
                                         <small class="text-body-secondary">
                                             
                                         </small>
                                     </div> --}}
+                            </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                    {{-- </div> --}}
+                </div>
+
+                <div class="swiper-button-prev bestSellerPrev"></div>
+                <div class="swiper-button-next bestSellerNext"></div>
             </div>
+
+            <style>
+                .bestSellerSwiper {
+                    padding: 10px 5px;
+                }
+
+                .bestSellerPrev,
+                .bestSellerNext {
+                    background: #fff;
+                    padding: 1%;
+                    border-radius: 50%;
+                    transform: translateY(-145%);
+                }
+            </style>
         </section>
     @endif
 
     @if ($sectionProductPreview?->is_active == 1)
-        <section id="products" style="margin-top: 4%">
+        <section id="products" style="margin-top: 3%">
             <div class="text-center mb-4">
                 <h3 class="fw-bold">{{ $sectionProductPreview->title ?? '-' }}</h3>
                 <p class="mt-4">
@@ -299,3 +328,40 @@
         </section>
     @endif
 @endsection
+
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+        new Swiper('.bestSellerSwiper', {
+            spaceBetween: 24,
+            // loop: true,
+
+            autoplay: {
+                delay: 3000,
+                pauseOnMouseEnter: true,
+            },
+
+            navigation: {
+                nextEl: '.bestSellerNext',
+                prevEl: '.bestSellerPrev',
+            },
+
+            breakpoints: {
+                0: {
+                    slidesPerView: Math.min(1, {{ $totalBestSeller ?? 0 }}),
+                },
+                576: {
+                    slidesPerView: Math.min(2, {{ $totalBestSeller ?? 0 }}),
+                },
+                768: {
+                    slidesPerView: Math.min(3, {{ $totalBestSeller ?? 0 }}),
+                },
+                1200: {
+                    slidesPerView: Math.min(4, {{ $totalBestSeller ?? 0 }}),
+                }
+            }
+        });
+    </script>
+@endpush

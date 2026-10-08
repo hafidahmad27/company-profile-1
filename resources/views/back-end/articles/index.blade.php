@@ -43,7 +43,6 @@
                         <th>Content</th>
                         <th>Image</th>
                         <th>Status</th>
-                        <th>Published At</th>
                         {{-- <th>Views</th> --}}
                         <th class="text-center">Last Updated By</th>
                         <th class="text-center">Action</th>
@@ -64,12 +63,17 @@
                                 <span class="badge text-bg-{{ $article->is_published ? 'success' : 'info' }}">
                                     {{ $article->is_published ? 'Published' : 'Draft' }}
                                 </span>
+                                <br>
+                                <span style="font-size: 9pt">
+                                    {{ $article->published_at?->format('d-m-Y H:i:s') }}
+                                </span>
                             </td>
-                            <td>{{ $article->published_at?->format('d-m-Y H:i:s') }}</td>
                             {{-- <td align="right">{{ $article->views }}</td> --}}
                             <td>
-                                {{ $article->user_name }}, at: <br>
-                                {{ $article->updated_at?->format('d-m-Y H:i:s') }}
+                                {{ $article->user_name }} <br>
+                                <span style="font-size: 9pt">
+                                    {{ $article->updated_at?->format('d-m-Y H:i:s') }}
+                                </span>
                             </td>
                             <td class="text-center">
                                 <form action="{{ route('be.article.togglePublish', $article->id) }}" class="d-inline"

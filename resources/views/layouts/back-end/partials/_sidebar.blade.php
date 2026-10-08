@@ -7,8 +7,9 @@
         </div>
         {{-- <div class="sidebar-header position-relative"> --}}
         <div class="sidebar-header d-flex justify-content-center">
-            <div class="d-flex justify-content-between align-items-center">
-                <div class="theme-toggle d-flex gap-2  align-items-center">
+            <div class="d-flex gap-2 justify-content-between align-items-center">
+                <span class="form-check-label" style="font-size: 10pt">{{ Str::upper(auth()->user()->name) }}</span>
+                <div class="theme-toggle d-flex gap-1 align-items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                         aria-hidden="true" role="img" class="iconify iconify--system-uicons" width="20"
                         height="20" preserveAspectRatio="xMidYMid meet" viewBox="0 0 21 21">
