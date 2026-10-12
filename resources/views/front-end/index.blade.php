@@ -6,362 +6,40 @@
 
 @section('content')
     <section id="carousel">
-        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-                @foreach ($carouselSlides as $key => $slide)
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ $key }}"
-                        class="{{ $key == 0 ? 'active' : '' }}" aria-current=""
-                        aria-label="Slide {{ $key + 1 }}"></button>
-                @endforeach
-            </div>
-            <div class="carousel-inner">
-                @foreach ($carouselSlides as $key => $slide)
-                    <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                        <img src="{{ $slide->image_url }}" class="d-block w-100">
-                        {{-- <div class="carousel-caption d-block">
-                            <h5>{{ $slide->title }}</h5>
-                            <p>{{ $slide->subtitle }}</p>
-                        </div> --}}
-                    </div>
-                @endforeach
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
+        @include('front-end.home.sections._carousel')
     </section>
 
     @if ($sectionAboutPreview?->is_active == 1)
         <section id="about" style="margin-top: 6%">
-            <div class="text-center mb-4">
-                <h3 class="fw-bold">{{ $sectionAboutPreview->title ?? '-' }}</h3>
-                <p class="mt-4">
-                    {{ $sectionAboutPreview->subtitle ?? null }}
-                </p>
-            </div>
-            <p class="mt-4" style="text-align: justify">
-                {{ $sectionAboutPreview->content ?? '-' }}
-            </p>
-            @if ($sectionAboutPreview->image)
-                <div class="text-center">
-                    <img src="{{ $sectionAboutPreview->image_url }}" class="card-img-top rounded-4"
-                        style="height: 235px; object-fit: cover">
-                </div>
-            @endif
-            <div class="d-grid gap-2 col-2 mx-auto text-center mt-4">
-                <a href="{{ url($sectionAboutPreview->button_link ?? '/') }}"
-                    class="btn btn-primary">{{ $sectionAboutPreview->button_text ?? '-' }}
-                    <i class="bi bi-chevron-double-right"></i>
-                </a>
-            </div>
+            @include('front-end.home.sections._about-preview')
+        </section>
+    @endif
+
+    @if ($sectionProductCategoryBestSellersPreview?->is_active == 1)
+        <section id="product-category-best-sellers" style="margin-top: 6%">
+            @include('front-end.home.sections._product-category-best-sellers-preview')
         </section>
     @endif
 
     @if ($sectionProductBestSellerPreview?->is_active == 1)
         <section id="product-best-sellers" style="margin-top: 6%">
-            <div class="text-center mb-4">
-                <h3 class="fw-bold">{{ $sectionProductBestSellerPreview->title ?? '-' }}</h3>
-                <p class="mt-4">
-                    {{ $sectionProductBestSellerPreview->subtitle ?? null }}
-                </p>
-                <p class="mt-4">
-                    {{ $sectionProductBestSellerPreview->content ?? null }}
-                </p>
-                {{-- @if ($sectionProductBestSellerPreview->image)
-                    <div class="text-center">
-                        <img src="{{ $sectionProductBestSellerPreview->image_url }}" class="card-img-top rounded-4"
-                            style="height: 235px; object-fit: cover">
-                    </div>
-                @endif --}}
-            </div>
-
-            <div class="swiper bestSellerSwiper">
-                <div class="swiper-wrapper">
-                    {{-- <div class="row row-cols-1 row-cols-md-4 justify-content-center g-4 mt-0"> --}}
-                    @php
-                        $totalBestSeller = count($productBestSellers);
-                    @endphp
-
-                    @foreach ($productBestSellers as $productPreview)
-                        <div class="swiper-slide">
-                            <div class="card h-100 border-0">
-                                <img src="{{ $productPreview->image_url }}" class="card-img-top rounded-4"
-                                    style="height: 235px; object-fit: cover">
-                                <div class="card-body">
-                                    <div class="d-flex mb-3">
-                                        <div class="me-auto">
-                                            <span
-                                                class="badge text-bg-secondary">{{ $productPreview->category_name ?? '-' }}</span>
-                                        </div>
-                                        {{-- <small class="text-body-secondary">
-
-                                    </small> --}}
-                                    </div>
-                                    <h5 class="card-title text-center">
-                                        <a class="text-decoration-none"
-                                            href="{{ url($product->slug . '/' . $productPreview->category_slug . '/' . $productPreview->slug) }}">{{ $productPreview->name ?? '-' }}
-                                        </a>
-                                    </h5>
-                                    {{-- <span class="badge text-bg-info">Rp
-                                            {{ $productPreview->price_formatted }}</span> --}}
-                                    {{-- <p class="card-text mt-2" style="text-align: justify">
-                                            {{ $productPreview->description ?? '-' }}
-                                        </p> --}}
-                                </div>
-                                {{-- <div class="card-footer text-end">
-                                        <small class="text-body-secondary">
-                                            
-                                        </small>
-                                    </div> --}}
-                            </div>
-                        </div>
-                    @endforeach
-                    {{-- </div> --}}
-                </div>
-
-                <div class="swiper-button-prev bestSellerPrev"></div>
-                <div class="swiper-button-next bestSellerNext"></div>
-            </div>
-
-            <style>
-                .bestSellerSwiper {
-                    padding: 10px 5px;
-                }
-
-                .bestSellerPrev,
-                .bestSellerNext {
-                    background: #fff;
-                    padding: 1%;
-                    border-radius: 50%;
-                    transform: translateY(-145%);
-                }
-            </style>
+            @include('front-end.home.sections._product-best-sellers-preview')
         </section>
     @endif
 
     @if ($sectionProductPreview?->is_active == 1)
         <section id="products" style="margin-top: 3%">
-            <div class="text-center mb-4">
-                <h3 class="fw-bold">{{ $sectionProductPreview->title ?? '-' }}</h3>
-                <p class="mt-4">
-                    {{ $sectionProductPreview->subtitle ?? null }}
-                </p>
-                <p class="mt-4">
-                    {{ $sectionProductPreview->content ?? null }}
-                </p>
-                @if ($sectionProductPreview->image)
-                    <div class="text-center">
-                        <img src="{{ $sectionProductPreview->image_url }}" class="card-img-top rounded-4"
-                            style="height: 235px; object-fit: cover">
-                    </div>
-                @endif
-            </div>
-
-            <ul class="nav nav-tabs justify-content-center" id="productsTab" role="tablist">
-                @foreach ($productCategoriesPreview as $productCategoryPreview)
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link {{ $loop->first ? 'active' : '' }}" data-bs-toggle="tab"
-                            data-bs-target="#products-{{ $productCategoryPreview->id }}" type="button" role="tab"
-                            aria-controls="" aria-selected="true">
-                            {{ $productCategoryPreview->name ?? '-' }}
-                        </button>
-                    </li>
-                @endforeach
-            </ul>
-            <div class="tab-content" id="productsTabContent">
-                @foreach ($productCategoriesPreview as $productCategoryPreview)
-                    <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}"
-                        id="products-{{ $productCategoryPreview->id }}" role="tabpanel" aria-labelledby="" tabindex="0">
-                        <div class="row row-cols-1 row-cols-md-4 justify-content-center g-4 mt-0">
-                            @forelse ($productsPreview[$productCategoryPreview->id] ?? [] as $productPreview)
-                                <div class="col">
-                                    <div class="card h-100 border-0">
-                                        <img src="{{ $productPreview->image_url }}" class="card-img-top rounded-4"
-                                            style="height: 235px; object-fit: cover">
-                                        <div class="card-body">
-                                            {{-- <div class="d-flex mb-3">
-                                            <div class="me-auto">
-                                                <span
-                                                    class="badge text-bg-secondary">{{ $productCategoryPreview->name ?? '-' }}</span>
-                                            </div>
-                                            <small class="text-body-secondary">
-
-                                            </small>
-                                        </div> --}}
-                                            <h5 class="card-title text-center">
-                                                <a class="text-decoration-none"
-                                                    href="{{ url($product->slug . '/' . $productPreview->category_slug . '/' . $productPreview->slug) }}">{{ $productPreview->name ?? '-' }}
-                                                </a>
-                                            </h5>
-                                            {{-- <span class="badge text-bg-info">Rp
-                                            {{ $productPreview->price_formatted }}</span> --}}
-                                            {{-- <p class="card-text mt-2" style="text-align: justify">
-                                                {{ Str::limit($productPreview->description, 150, '...') ?? '-' }}
-                                                @if ($productPreview->description && Str::length($productPreview->description) > 150)
-                                                    <a class="text-decoration-none"
-                                                        href="{{ url($product->slug . '/' . $productPreview->category_slug . '/' . $productPreview->slug) }}">Selengkapnya</a>
-                                                @endif
-                                            </p> --}}
-                                        </div>
-                                        {{-- <div class="card-footer text-end">
-                                        <small class="text-body-secondary">
-                                            
-                                        </small>
-                                    </div> --}}
-                                    </div>
-                                </div>
-                            @empty
-                                <p class="text-center">Belum ada {{ Str::lower($product->title) ?? '-' }}</p>
-                            @endforelse
-                        </div>
-                    </div>
-                    {{-- <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0">
-                ...
-            </div> --}}
-                @endforeach
-            </div>
-            <div class="d-grid gap-2 col-2 mx-auto text-center mt-2">
-                <a href="{{ url($sectionProductPreview->button_link ?? '/') }}"
-                    class="btn btn-primary">{{ $sectionProductPreview->button_text ?? '-' }}
-                    <i class="bi bi-chevron-double-right"></i>
-                </a>
-            </div>
+            @include('front-end.home.sections._products-preview')
         </section>
     @endif
 
     @if ($sectionArticlePreview?->is_active == 1)
         <section id="articles" style="margin-top: 6%">
-            <div class="text-center mb-4">
-                <h3 class="fw-bold">{{ $sectionArticlePreview->title ?? '-' }}</h3>
-                <p class="mt-4">
-                    {{ $sectionArticlePreview->subtitle ?? null }}
-                </p>
-                <p class="mt-4">
-                    {{ $sectionArticlePreview->content ?? null }}
-                </p>
-                @if ($sectionArticlePreview->image)
-                    <div class="text-center">
-                        <img src="{{ $sectionArticlePreview->image_url }}" class="card-img-top rounded-4"
-                            style="height: 235px; object-fit: cover">
-                    </div>
-                @endif
-            </div>
-
-            <ul class="nav nav-tabs justify-content-center" id="articlesTab" role="tablist">
-                @foreach ($articleCategoriesPreview as $articleCategoryPreview)
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link {{ $loop->first ? 'active' : '' }}" data-bs-toggle="tab"
-                            data-bs-target="#articles-{{ $articleCategoryPreview->id }}" type="button" role="tab"
-                            aria-controls="" aria-selected="true">
-                            {{ $articleCategoryPreview->name ?? '-' }}
-                        </button>
-                    </li>
-                @endforeach
-            </ul>
-            <div class="tab-content" id="articlesTabContent">
-                @foreach ($articleCategoriesPreview as $articleCategoryPreview)
-                    <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}"
-                        id="articles-{{ $articleCategoryPreview->id }}" role="tabpanel" aria-labelledby=""
-                        tabindex="0">
-                        <div class="row row-cols-1 row-cols-md-3 justify-content-center g-4 mt-0">
-                            @forelse ($articlesPreview[$articleCategoryPreview->id] ?? [] as $articlePreview)
-                                <div class="col">
-                                    <div class="card h-100 border-0">
-                                        <img src="{{ $articlePreview->image_url }}" class="card-img-top rounded-4"
-                                            style="height: 235px; object-fit: cover" alt="{{ $articlePreview->image }}">
-                                        {{-- <div class="card-body"> --}}
-                                        <div class="d-flex mt-3 mb-3">
-                                            <div class="me-auto">
-                                                <span
-                                                    class="badge text-bg-secondary">{{ $articleCategoryPreview->name ?? '-' }}</span>
-                                            </div>
-                                            <small class="text-body-secondary">
-                                                {{ $articlePreview->published_at ? $articlePreview->published_at->diffForHumans() : '-' }}
-                                            </small>
-                                        </div>
-                                        <h5 class="card-title">
-                                            <a class="text-decoration-none"
-                                                href="{{ url($article->slug . '/' . $articlePreview->category_slug . '/' . $articlePreview->slug) }}">{{ $articlePreview->title ?? '-' }}</a>
-                                        </h5>
-                                        <p class="card-text" style="text-align: justify">
-                                            {{ Str::limit($articlePreview->content, 150, '...') ?? '-' }}
-                                            @if ($articlePreview->content && Str::length($articlePreview->content) > 150)
-                                                <a class="text-decoration-none"
-                                                    href="{{ url($article->slug . '/' . $articlePreview->category_slug . '/' . $articlePreview->slug) }}">Selengkapnya</a>
-                                            @endif
-                                            <br>
-                                            <span class="text-body-secondary float-end" style="font-size: 8pt"><i
-                                                    class="bi bi-eye-fill"></i>
-                                                {{ $articlePreview->views ?? '-' }}</span>
-                                        </p>
-                                        {{-- </div> --}}
-                                        {{-- <div class="card-footer text-end">
-                                        <small class="text-body-secondary">
-                                            <i class="bi bi-eye-fill"></i> {{ $articlePreview->views ?? '-' }}
-                                        </small>
-                                    </div> --}}
-                                    </div>
-                                </div>
-                            @empty
-                                <p class="text-center">Belum ada {{ Str::lower($article->title) ?? '-' }}</p>
-                            @endforelse
-                        </div>
-                    </div>
-                    {{-- <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0">
-                ...
-            </div> --}}
-                @endforeach
-            </div>
-            <div class="d-grid gap-2 col-2 mx-auto text-center mt-3">
-                <a href="{{ url($sectionArticlePreview->button_link ?? '/') }}"
-                    class="btn btn-primary">{{ $sectionArticlePreview->button_text ?? '-' }}
-                    <i class="bi bi-chevron-double-right"></i>
-                </a>
-            </div>
+            @include('front-end.home.sections._articles-preview')
         </section>
     @endif
 @endsection
 
-@push('scripts')
+@prepend('scripts')
     <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
-
-    <!-- Initialize Swiper -->
-    <script>
-        new Swiper('.bestSellerSwiper', {
-            spaceBetween: 24,
-            // loop: true,
-
-            autoplay: {
-                delay: 3000,
-                pauseOnMouseEnter: true,
-            },
-
-            navigation: {
-                nextEl: '.bestSellerNext',
-                prevEl: '.bestSellerPrev',
-            },
-
-            breakpoints: {
-                0: {
-                    slidesPerView: Math.min(1, {{ $totalBestSeller ?? 0 }}),
-                },
-                576: {
-                    slidesPerView: Math.min(2, {{ $totalBestSeller ?? 0 }}),
-                },
-                768: {
-                    slidesPerView: Math.min(3, {{ $totalBestSeller ?? 0 }}),
-                },
-                1200: {
-                    slidesPerView: Math.min(4, {{ $totalBestSeller ?? 0 }}),
-                }
-            }
-        });
-    </script>
-@endpush
+@endprepend

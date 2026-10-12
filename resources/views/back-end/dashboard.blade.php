@@ -267,7 +267,7 @@
     </div> --}}
 @endsection
 
-@push('scripts')
+@prepend('scripts')
     <script src="{{ asset('mazer/assets/extensions/apexcharts/apexcharts.min.js') }}"></script>
     <script src="{{ asset('mazer/assets/static/js/pages/dashboard.js') }}"></script>
-@endpush
+@endprepend

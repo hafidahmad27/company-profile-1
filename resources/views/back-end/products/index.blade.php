@@ -152,7 +152,7 @@
     </div>
 @endsection
 
-@push('scripts')
+@prepend('scripts')
     @if ($errors->has('file'))
         <script>
             document.addEventListener("DOMContentLoaded", function() {
@@ -164,4 +164,4 @@
 
     <script src="{{ asset('mazer/assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>
     <script src="{{ asset('mazer/assets/static/js/pages/simple-datatables.js') }}"></script>
-@endpush
+@endprepend

@@ -25,6 +25,7 @@
                         <th>#</th>
                         <th>Category</th>
                         <th>Name</th>
+                        <th>Image</th>
                         <th class="text-center">Is Best Seller?</th>
                         <th class="text-center">Last Updated By</th>
                     </tr>
@@ -36,6 +37,9 @@
                             <td>{{ ++$i }}</td>
                             <td>{{ $product->category_name }}</td>
                             <td>{{ $product->name }}</td>
+                            <td align="center">
+                                <img src="{{ $product->image_url }}" width="100" height="100" class="img-thumbnail">
+                            </td>
                             <td class="text-center">
                                 <form action="{{ route('be.products.best-sellers.setBestSeller', $product->id) }}"
                                     method="POST">
@@ -59,7 +63,7 @@
     </div>
 @endsection
 
-@push('scripts')
+@prepend('scripts')
     <script src="{{ asset('mazer/assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>
     <script src="{{ asset('mazer/assets/static/js/pages/simple-datatables.js') }}"></script>
-@endpush
+@endprepend
