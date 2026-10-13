@@ -21,12 +21,13 @@
             <div class="swiper-slide">
                 <div class="card h-100 border-0 overflow-hidden rounded-4">
                     <img src="{{ $productCategoryBestSeller->image_url }}" class="card-img-top bg-image bg-primary"
-                        style="height: 235px; object-fit: cover; filter: blur(3px) brightness(50%); transform: scale(1.08);">
+                        style="height: 235px; object-fit: cover; filter: brightness(30%); transform: scale(1.08);">
 
                     <div class="card-img-overlay d-flex justify-content-center align-items-center">
-                        <h5 class="card-title text-light text-center fw-bold">
+                        <a href="{{ url('products?tab=' . $productCategoryBestSeller->product_category_id) }}"
+                            class="card-title fs-3 text-light text-center text-decoration-none fw-bold">
                             {{ $productCategoryBestSeller->category_name ?? '-' }}
-                        </h5>
+                        </a>
                     </div>
                 </div>
             </div>

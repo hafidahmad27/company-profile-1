@@ -37,8 +37,10 @@
                                 href="{{ url($product->slug . '/' . $productBestSeller->category_slug . '/' . $productBestSeller->slug) }}">{{ $productBestSeller->name ?? '-' }}
                             </a>
                         </h5>
-                        {{-- <span class="badge text-bg-info">Rp
-                                            {{ $productBestSeller->price_formatted }}</span> --}}
+                        {{-- <div class="text-end">
+                            <span class="badge text-bg-info">Rp
+                                {{ $productBestSeller->price_formatted }}</span>
+                        </div> --}}
                         {{-- <p class="card-text mt-2" style="text-align: justify">
                                             {{ $productBestSeller->description ?? '-' }}
                                         </p> --}}

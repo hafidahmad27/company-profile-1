@@ -15,7 +15,7 @@ class ArticleCategoryRepository
 
     public function getAll()
     {
-        return $this->articleCategory->get();
+        return $this->articleCategory->orderBy('name', 'asc')->get();
     }
 
     public function getActive()

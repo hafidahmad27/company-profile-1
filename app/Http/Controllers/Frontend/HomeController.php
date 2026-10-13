@@ -8,6 +8,7 @@ use App\Models\ArticleCategory;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\Section;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -21,6 +22,8 @@ class HomeController extends Controller
                 $this->productCategoryBestSellersPreview(),
                 $this->productBestSellersPreview(),
                 $this->productsPreview(),
+                $this->articleCategoryPopularPreview(),
+                $this->articlePopularPreview(),
                 $this->articlesPreview()
             )
         );
@@ -28,7 +31,7 @@ class HomeController extends Controller
 
     private function carousel()
     {
-        $carouselSlides = Section::where('section_key', 'carousel')->where('is_active', 1)->orderBy('order')->get();
+        $carouselSlides = Section::where('section_key', 'carousel')->where('is_active', 1)->orderBy('order', 'asc')->get();
 
         return compact('carouselSlides');
     }
@@ -73,7 +76,7 @@ class HomeController extends Controller
             ->where('is_best_seller', 1)
             ->where('is_published', 1)
             ->orderBy('published_at', 'desc')
-            // ->limit(4)
+            // ->take(4)
             ->get();
 
         $sectionProductBestSellerPreview = Section::where('section_key', 'product-best-sellers-preview')
@@ -105,11 +108,51 @@ class HomeController extends Controller
                 ->where('product_category_id', $category->id)
                 ->where('is_published', 1)
                 ->orderBy('published_at', 'desc')
-                ->limit(4)
+                ->take(4)
                 ->get();
         }
 
         return compact('product', 'sectionProductPreview', 'productCategoriesPreview', 'productsPreview');
+    }
+
+    private function articleCategoryPopularPreview()
+    {
+        $articleCategoryPopular = Article::join('article_categories', 'articles.article_category_id', '=', 'article_categories.id')
+            ->select(
+                'article_categories.name as category_name',
+                'articles.article_category_id',
+                'articles.image'
+            )
+            ->where('is_published', 1)
+            ->groupBy('article_category_id')
+            ->orderBy('category_name', 'asc')
+            ->get();
+
+        $sectionArticleCategoryPopularPreview = Section::where('section_key', 'article-category-popular-preview')
+            ->where('sections.is_active', 1)
+            ->first();
+
+        return compact('articleCategoryPopular', 'sectionArticleCategoryPopularPreview');
+    }
+
+    private function articlePopularPreview()
+    {
+        $articlePopular = Article::join('article_categories', 'articles.article_category_id', '=', 'article_categories.id')
+            ->select(
+                'article_categories.name as category_name',
+                'article_categories.slug as category_slug',
+                'articles.*'
+            )
+            ->where('is_published', 1)
+            ->orderBy('views', 'desc')
+            ->take(5)
+            ->get();
+
+        $sectionArticlePopularPreview = Section::where('section_key', 'article-popular-preview')
+            ->where('sections.is_active', 1)
+            ->first();
+
+        return compact('articlePopular', 'sectionArticlePopularPreview');
     }
 
     private function articlesPreview()
@@ -122,7 +165,7 @@ class HomeController extends Controller
         $sectionArticlePreview = Section::where('section_key', 'articles-preview')
             ->where('sections.is_active', 1)
             ->first();
-        $articleCategoriesPreview = ArticleCategory::where('is_active', 1)->get();
+        $articleCategoriesPreview = ArticleCategory::where('is_active', 1)->orderBy('name', 'asc')->get();
         $articlesPreview = [];
 
         foreach ($articleCategoriesPreview as $category) {
@@ -134,7 +177,7 @@ class HomeController extends Controller
                 ->where('article_category_id', $category->id)
                 ->where('is_published', 1)
                 ->orderBy('published_at', 'desc')
-                ->limit(3)
+                ->take(3)
                 ->get();
         }
 

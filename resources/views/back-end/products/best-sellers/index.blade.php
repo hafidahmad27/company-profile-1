@@ -24,10 +24,10 @@
                     <tr>
                         <th>#</th>
                         <th>Category</th>
-                        <th>Name</th>
+                        <th>Product Name</th>
                         <th>Image</th>
                         <th class="text-center">Is Best Seller?</th>
-                        <th class="text-center">Last Updated By</th>
+                        {{-- <th class="text-center">Last Updated By</th> --}}
                     </tr>
                 </thead>
                 <tbody>
@@ -38,7 +38,7 @@
                             <td>{{ $product->category_name }}</td>
                             <td>{{ $product->name }}</td>
                             <td align="center">
-                                <img src="{{ $product->image_url }}" width="100" height="100" class="img-thumbnail">
+                                <img src="{{ $product->image_url }}" width="50" height="50" class="img-thumbnail">
                             </td>
                             <td class="text-center">
                                 <form action="{{ route('be.products.best-sellers.setBestSeller', $product->id) }}"
@@ -49,12 +49,12 @@
                                         onchange="this.form.submit()">
                                 </form>
                             </td>
-                            <td>
+                            {{-- <td>
                                 {{ $product->user_name }} <br>
                                 <span style="font-size: 9pt">
                                     {{ $product->updated_at?->format('d-m-Y H:i:s') }}
                                 </span>
-                            </td>
+                            </td> --}}
                         </tr>
                     @endforeach
                 </tbody>

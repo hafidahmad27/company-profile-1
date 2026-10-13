@@ -58,6 +58,12 @@ class ArticleController extends Controller
             ->where('is_published', 1)
             ->firstOrFail();
 
+        $key = 'article_viewed_' . $article->id;
+        if (!session()->has($key)) {
+            $article->increment('views');
+            session()->put($key, true);
+        }
+
         return view('front-end.articles.show', compact('page', 'section', 'articleCategory', 'article'));
     }
 }

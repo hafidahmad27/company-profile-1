@@ -33,6 +33,18 @@
         </section>
     @endif
 
+    @if ($sectionArticleCategoryPopularPreview?->is_active == 1)
+        <section id="article-category-popular" style="margin-top: 6%">
+            @include('front-end.home.sections._article-category-popular-preview')
+        </section>
+    @endif
+
+    @if ($sectionArticlePopularPreview?->is_active == 1)
+        <section id="article-popular" style="margin-top: 6%">
+            @include('front-end.home.sections._article-popular-preview')
+        </section>
+    @endif
+
     @if ($sectionArticlePreview?->is_active == 1)
         <section id="articles" style="margin-top: 6%">
             @include('front-end.home.sections._articles-preview')

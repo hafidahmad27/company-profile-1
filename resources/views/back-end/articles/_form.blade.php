@@ -46,7 +46,7 @@
         @if ($article->image ?? null)
             <img src="{{ $article->image_url }}" alt="{{ $article->title }}" class="img-thumbnail">
         @endif
-        <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image">
+        <input type="file" name="image" id="image" class="form-control @error('image') is-invalid @enderror">
         @error('image')
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror

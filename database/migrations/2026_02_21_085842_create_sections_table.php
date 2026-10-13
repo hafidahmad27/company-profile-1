@@ -22,6 +22,8 @@ return new class extends Migration
                 'product-category-best-sellers-preview',
                 'product-best-sellers-preview',
                 'products-preview',
+                'article-category-popular-preview',
+                'article-popular-preview',
                 'articles-preview',
                 'about',
                 'products',

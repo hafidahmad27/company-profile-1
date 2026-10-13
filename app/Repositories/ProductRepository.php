@@ -51,7 +51,8 @@ class ProductRepository
             )
             ->where('is_published', 1)
             ->orderBy('is_best_seller', 'desc')
-            ->orderBy('updated_at', 'desc')
+            ->orderBy('category_name', 'asc')
+            // ->orderBy('updated_at', 'desc')
             ->get();
     }
 

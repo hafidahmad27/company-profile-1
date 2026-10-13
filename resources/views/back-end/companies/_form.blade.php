@@ -136,8 +136,8 @@
             <div class="form-group">
                 <label for="formFile" class="form-label">Logo</label>
                 <img src="{{ $company->logo_url }}" class="img-thumbnail">
-                <input class="form-control @error('logo') is-invalid @enderror" type="file" id="logo"
-                    name="logo">
+                <input type="file" name="logo" id="logo"
+                    class="form-control @error('logo') is-invalid @enderror">
                 @error('logo')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror

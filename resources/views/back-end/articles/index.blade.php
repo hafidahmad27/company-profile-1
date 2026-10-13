@@ -26,6 +26,7 @@
                     </div>
                 </div>
             </h5>
+            @include('back-end.articles._import')
         </div>
         <div class="card-body">
             @if (session('success'))
@@ -43,7 +44,7 @@
                         <th>Content</th>
                         <th>Image</th>
                         <th>Status</th>
-                        {{-- <th>Views</th> --}}
+                        <th>Views</th>
                         <th class="text-center">Last Updated By</th>
                         <th class="text-center">Action</th>
                     </tr>
@@ -68,7 +69,7 @@
                                     {{ $article->published_at?->format('d-m-Y H:i:s') }}
                                 </span>
                             </td>
-                            {{-- <td align="right">{{ $article->views }}</td> --}}
+                            <td align="right">{{ $article->views }}</td>
                             <td>
                                 {{ $article->user_name }} <br>
                                 <span style="font-size: 9pt">
@@ -109,58 +110,11 @@
                     @endforeach
                 </tbody>
             </table>
-
-            <!--Basic Modal -->
-            <div class="modal fade text-left @if ($errors->has('file')) show @endif" id="default" tabindex="-1"
-                role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true"
-                @if ($errors->has('file')) style="display:block;" @endif>
-                <div class="modal-dialog modal-dialog-scrollable" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="myModalLabel1">Import @yield('title')
-                            </h5>
-                            <button type="button" class="close rounded-pill" data-bs-dismiss="modal" aria-label="Close">
-                                <i data-feather="x"></i>
-                            </button>
-                        </div>
-                        <form action="{{ route('be.articles.import') }}" method="POST" enctype="multipart/form-data"
-                            class="form">
-                            @csrf
-                            <div class="modal-body">
-                                <input class="form-control @error('file') is-invalid @enderror" type="file"
-                                    id="file" name="file">
-                                @error('file')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="modal-footer">
-                                <div class="form-group me-auto">
-                                    <a href="{{ route('be.articles.export', ['isTemplate' => 1]) }}">download
-                                        template</a>
-                                </div>
-                                <button type="submit" class="btn btn-outline-success ms-1" data-bs-dismiss="modal">
-                                    <i class="bx bx-check d-block d-sm-none"></i>
-                                    <span class="d-none d-sm-block"><i class="bi bi-arrow-bar-up"></i> Import</span>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 @endsection
 
 @prepend('scripts')
-    @if ($errors->has('file'))
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                var modal = new bootstrap.Modal(document.getElementById('default'));
-                modal.show();
-            });
-        </script>
-    @endif
-
     <script src="{{ asset('mazer/assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>
     <script src="{{ asset('mazer/assets/static/js/pages/simple-datatables.js') }}"></script>
 @endprepend
