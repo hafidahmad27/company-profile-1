@@ -67,13 +67,13 @@
                                 </span>
                                 <br>
                                 <span style="font-size: 9pt">
-                                    {{ $product->published_at?->format('d-m-Y H:i:s') }}
+                                    {{ $product->published_at?->format('d-m-Y H:i:s') ?? 'null' }}
                                 </span>
                             </td>
                             <td>
                                 {{ $product->user_name }} <br>
                                 <span style="font-size: 9pt">
-                                    {{ $product->updated_at?->format('d-m-Y H:i:s') }}
+                                    {{ $product->updated_at?->format('d-m-Y H:i:s') ?? 'null' }}
                                 </span>
                             </td>
                             <td class="text-center">

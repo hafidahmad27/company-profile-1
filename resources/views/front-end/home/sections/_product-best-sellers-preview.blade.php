@@ -22,29 +22,28 @@
                 <div class="card h-100 border-0">
                     <img src="{{ $productBestSeller->image_url }}" class="card-img-top rounded-4"
                         style="height: 235px; object-fit: cover">
-                    <div class="card-body">
-                        <div class="d-flex mb-3">
-                            <div class="me-auto">
-                                <span
-                                    class="badge text-bg-secondary">{{ $productBestSeller->category_name ?? '-' }}</span>
-                            </div>
-                            {{-- <small class="text-body-secondary">
+                    {{-- <div class="card-body"> --}}
+                    <div class="d-flex mt-3 mb-3">
+                        <div class="me-auto">
+                            <span class="badge text-bg-secondary">{{ $productBestSeller->category_name ?? '-' }}</span>
+                        </div>
+                        {{-- <small class="text-body-secondary">
 
                                     </small> --}}
-                        </div>
-                        <h5 class="card-title text-center">
-                            <a class="text-decoration-none"
-                                href="{{ url($product->slug . '/' . $productBestSeller->category_slug . '/' . $productBestSeller->slug) }}">{{ $productBestSeller->name ?? '-' }}
-                            </a>
-                        </h5>
-                        {{-- <div class="text-end">
+                    </div>
+                    <h5 class="card-title text-center">
+                        <a class="text-decoration-none"
+                            href="{{ url($product->slug . '/' . $productBestSeller->category_slug . '/' . $productBestSeller->slug) }}">{{ $productBestSeller->name ?? '-' }}
+                        </a>
+                    </h5>
+                    {{-- <div class="text-end">
                             <span class="badge text-bg-info">Rp
                                 {{ $productBestSeller->price_formatted }}</span>
                         </div> --}}
-                        {{-- <p class="card-text mt-2" style="text-align: justify">
+                    {{-- <p class="card-text mt-2" style="text-align: justify">
                                             {{ $productBestSeller->description ?? '-' }}
                                         </p> --}}
-                    </div>
+                    {{-- </div> --}}
                     {{-- <div class="card-footer text-end">
                                         <small class="text-body-secondary">
                                             

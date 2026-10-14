@@ -159,7 +159,7 @@ class ProductService
         $product = $this->productRepo->getById($id);
         $isBestSeller = $product->is_best_seller ? 0 : 1;
 
-        $this->productRepo->update($id,  [
+        $this->productRepo->updateWithoutTimestamp($id, [
             'is_best_seller' => $isBestSeller,
         ]);
 

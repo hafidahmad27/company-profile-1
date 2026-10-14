@@ -83,6 +83,13 @@ class ProductRepository
         return $this->product->updateOrCreate($conditions, $data);
     }
 
+    public function updateWithoutTimestamp(int $id, array $data)
+    {
+        return $this->product->withoutTimestamps(function () use ($id, $data) {
+            return $this->update($id, $data);
+        });
+    }
+
     public function delete(int $id)
     {
         return $this->getById($id)->delete();

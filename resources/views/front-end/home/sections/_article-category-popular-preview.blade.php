@@ -17,16 +17,16 @@
 <div class="swiper popularArticleCategorySwiper">
     <div class="swiper-wrapper">
         {{-- <div class="row row-cols-1 row-cols-md-4 justify-content-center g-4 mt-0"> --}}
-        @foreach ($articleCategoryPopular as $articleCategoryPopular)
+        @foreach ($articleCategoryPopular as $articleCategoryPopuler)
             <div class="swiper-slide">
                 <div class="card h-100 border-0 overflow-hidden rounded-4">
-                    <img src="{{ $articleCategoryPopular->image_url }}" class="card-img-top bg-image bg-primary"
+                    <img src="{{ $articleCategoryPopuler->image_url }}" class="card-img-top bg-image bg-primary"
                         style="height: 235px; object-fit: cover; filter: brightness(30%); transform: scale(1.08);">
 
                     <div class="card-img-overlay d-flex justify-content-center align-items-center">
-                        <a href="{{ url('articles?tab=' . $articleCategoryPopular->article_category_id) }}"
+                        <a href="{{ url('articles?tab=' . $articleCategoryPopuler->article_category_id) }}"
                             class="card-title fs-3 text-light text-center text-decoration-none fw-bold">
-                            {{ $articleCategoryPopular->category_name ?? '-' }}
+                            {{ $articleCategoryPopuler->category_name ?? '-' }}
                         </a>
                     </div>
                 </div>

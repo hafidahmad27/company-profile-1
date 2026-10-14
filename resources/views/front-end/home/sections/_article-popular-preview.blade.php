@@ -23,7 +23,7 @@
                     <img src="{{ $articlePopular->image_url }}" class="card-img-top rounded-4"
                         style="height: 235px; object-fit: cover">
                     {{-- <div class="card-body"> --}}
-                    <div class="d-flex mb-3">
+                    <div class="d-flex mt-3 mb-3">
                         <div class="me-auto">
                             <span class="badge text-bg-secondary">{{ $articlePopular->category_name ?? '-' }}</span>
                         </div>

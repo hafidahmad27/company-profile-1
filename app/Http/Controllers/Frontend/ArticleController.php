@@ -60,7 +60,10 @@ class ArticleController extends Controller
 
         $key = 'article_viewed_' . $article->id;
         if (!session()->has($key)) {
-            $article->increment('views');
+            Article::withoutTimestamps(function () use ($article) {
+                $article->increment('views');
+            });
+
             session()->put($key, true);
         }
 

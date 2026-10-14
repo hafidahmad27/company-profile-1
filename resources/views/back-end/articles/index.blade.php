@@ -66,14 +66,14 @@
                                 </span>
                                 <br>
                                 <span style="font-size: 9pt">
-                                    {{ $article->published_at?->format('d-m-Y H:i:s') }}
+                                    {{ $article->published_at?->format('d-m-Y H:i:s') ?? 'null' }}
                                 </span>
                             </td>
                             <td align="right">{{ $article->views }}</td>
                             <td>
                                 {{ $article->user_name }} <br>
                                 <span style="font-size: 9pt">
-                                    {{ $article->updated_at?->format('d-m-Y H:i:s') }}
+                                    {{ $article->updated_at?->format('d-m-Y H:i:s') ?? 'null' }}
                                 </span>
                             </td>
                             <td class="text-center">

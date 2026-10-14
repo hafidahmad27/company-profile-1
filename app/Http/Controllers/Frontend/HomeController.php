@@ -8,7 +8,6 @@ use App\Models\ArticleCategory;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\Section;
-use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -76,7 +75,7 @@ class HomeController extends Controller
             ->where('is_best_seller', 1)
             ->where('is_published', 1)
             ->orderBy('published_at', 'desc')
-            // ->take(4)
+            // ->take(5)
             ->get();
 
         $sectionProductBestSellerPreview = Section::where('section_key', 'product-best-sellers-preview')

@@ -15,8 +15,6 @@ class Article extends Model
 
     protected $guarded = [];
 
-    public $timestamps = false;
-
     protected static function booted()
     {
         static::creating(function ($model) {
