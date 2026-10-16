@@ -1,5 +1,8 @@
 <div class="text-center mb-4">
-    <h3 class="fw-bold">{{ $sectionProductBestSellerPreview->title ?? '-' }}</h3>
+    <h3 class="fw-bold">
+        {{ $sectionProductBestSellerPreview->title ?? '-' }}
+        {{-- ({{ count($productBestSellers) }}) --}}
+    </h3>
     <p class="mt-4">
         {{ $sectionProductBestSellerPreview->subtitle ?? null }}
     </p>

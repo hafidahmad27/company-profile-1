@@ -25,9 +25,8 @@
                         <th>#</th>
                         <th>Category</th>
                         <th>Product Name</th>
-                        <th>Image</th>
+                        <th class="text-center">Image</th>
                         <th class="text-center">Is Best Seller?</th>
-                        {{-- <th class="text-center">Last Updated By</th> --}}
                     </tr>
                 </thead>
                 <tbody>
@@ -49,12 +48,6 @@
                                         onchange="this.form.submit()">
                                 </form>
                             </td>
-                            {{-- <td>
-                                {{ $product->user_name }} <br>
-                                <span style="font-size: 9pt">
-                                    {{ $product->updated_at?->format('d-m-Y H:i:s') ?? 'null' }}
-                                </span>
-                            </td> --}}
                         </tr>
                     @endforeach
                 </tbody>

@@ -40,6 +40,50 @@ class ArticleRepository
             ->firstOrFail();
     }
 
+    public function getArticlePopular()
+    {
+        return $this->article->leftJoin('article_categories', 'articles.article_category_id', '=', 'article_categories.id')
+            ->select(
+                'article_categories.name as category_name',
+                'article_categories.slug as category_slug',
+                'articles.*'
+            )
+            ->where('is_published', 1)
+            ->orderBy('views', 'desc')
+            ->take(5)
+            ->get();
+    }
+
+    public function getTotalArticle()
+    {
+        return $this->article->where('is_published', 1)->count();
+    }
+
+    public function getTotalArticleCategory()
+    {
+        return $this->article->join('article_categories', 'articles.article_category_id', '=', 'article_categories.id')
+            ->selectRaw('COUNT(DISTINCT article_category_id) as total_category')
+            ->where('is_published', 1)
+            ->value('total_category');
+    }
+
+    // public function getTotalArticleCategoryPopular()
+    // {
+    //     return $this->article->join('article_categories', 'articles.article_category_id', '=', 'article_categories.id')
+    //         ->selectRaw('COUNT(DISTINCT article_category_id) as total_popular_category')
+    //         ->where('is_published', 1)
+    //         ->where('views', '>=', 5)
+    //         ->value('total_popular_category');
+    // }
+
+    public function getTotalViews()
+    {
+        return $this->article->leftJoin('article_categories', 'articles.article_category_id', '=', 'article_categories.id')
+            ->selectRaw('SUM(views) as total_views')
+            ->where('is_published', 1)
+            ->value('total_views');
+    }
+
     public function getById(int $id)
     {
         return $this->article->findOrFail($id);

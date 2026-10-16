@@ -27,6 +27,7 @@
                         <a href="{{ url('products?tab=' . $productCategoryBestSeller->product_category_id) }}"
                             class="card-title fs-3 text-light text-center text-decoration-none fw-bold">
                             {{ $productCategoryBestSeller->category_name ?? '-' }}
+                            {{-- ({{ $productCategoryBestSeller->total_best_seller ?? '-' }}) --}}
                         </a>
                     </div>
                 </div>

@@ -1,5 +1,8 @@
 <div class="text-center mb-4">
-    <h3 class="fw-bold">{{ $sectionArticlePopularPreview->title ?? '-' }}</h3>
+    <h3 class="fw-bold">
+        {{ $sectionArticlePopularPreview->title ?? '-' }}
+        {{-- ({{ $articlePopular->count() }}) --}}
+    </h3>
     <p class="mt-4">
         {{ $sectionArticlePopularPreview->subtitle ?? null }}
     </p>

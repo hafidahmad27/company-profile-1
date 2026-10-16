@@ -27,6 +27,7 @@
                         <a href="{{ url('articles?tab=' . $articleCategoryPopuler->article_category_id) }}"
                             class="card-title fs-3 text-light text-center text-decoration-none fw-bold">
                             {{ $articleCategoryPopuler->category_name ?? '-' }}
+                            {{-- ({{ $articleCategoryPopuler->total ?? '-' }}) --}}
                         </a>
                     </div>
                 </div>
