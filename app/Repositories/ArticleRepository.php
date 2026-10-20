@@ -54,9 +54,40 @@ class ArticleRepository
             ->get();
     }
 
+    // public function getArticleViewsPerMonth()
+    // {
+    //     return $this->article->join('article_categories', 'articles.article_category_id', '=', 'article_categories.id')
+    //         ->selectRaw('
+    //             MONTHNAME(published_at) as month_name, 
+    //             SUM(views) as total,
+    //             article_categories.name as category_name
+    //         ')
+    //         ->where('is_published', 1)
+    //         ->groupByRaw('
+    //             MONTH(published_at),
+    //             article_categories.name
+    //         ')
+    //         ->orderByRaw('MONTH(published_at)')
+    //         ->get();
+    // }
+
+    public function getArticleByCategory()
+    {
+        return $this->article->join('article_categories', 'articles.article_category_id', '=', 'article_categories.id')
+            ->selectRaw('COUNT(articles.id) as total_article, article_categories.name as category_name')
+            ->where('is_published', 1)
+            ->groupBy('article_category_id')
+            ->get();
+    }
+
     public function getTotalArticle()
     {
         return $this->article->where('is_published', 1)->count();
+    }
+
+    public function getTotalArticleDraft()
+    {
+        return $this->article->where('is_published', 0)->count();
     }
 
     public function getTotalArticleCategory()

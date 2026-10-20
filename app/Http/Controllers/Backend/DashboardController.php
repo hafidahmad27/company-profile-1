@@ -21,17 +21,69 @@ class DashboardController extends Controller
     {
         $totalProduct = $this->productRepo->getTotalProduct();
         $totalProductBestSeller = $this->productRepo->getTotalProductBestSeller();
+        $productTopBestSellers = $this->productRepo->getTopBestSellers();
         $totalProductCategory = $this->productRepo->getTotalProductCategory();
-        $totalProductCategoryBestSeller = $this->productRepo->getTotalProductCategoryBestSeller();
+        // $totalProductCategoryBestSeller = $this->productRepo->getTotalProductCategoryBestSeller();
+        $totalProductDraft = $this->productRepo->getTotalProductDraft();
 
         $totalArticle = $this->articleRepo->getTotalArticle();
+        $articlePopular = $this->articleRepo->getArticlePopular();
         $totalArticleCategory = $this->articleRepo->getTotalArticleCategory();
         // $totalArticleCategoryPopular = $this->articleRepo->getTotalArticleCategoryPopular();
-        $totalArticleViews = $this->articleRepo->getTotalViews();
+        // $totalArticleViews = $this->articleRepo->getTotalViews();
+        $totalArticleDraft = $this->articleRepo->getTotalArticleDraft();
 
-        $productTopBestSellers = $this->productRepo->getTopBestSellers();
-        $articlePopular = $this->articleRepo->getArticlePopular();
+        // Pie Chart
+        $productByCategory = $this->productRepo->getProductByCategory();
+        $articleByCategory = $this->articleRepo->getArticleByCategory();
 
-        return view('back-end.dashboard', compact('totalProduct', 'totalProductBestSeller', 'totalProductCategory', 'totalProductCategoryBestSeller', 'totalArticle', 'totalArticleCategory', 'totalArticleViews', 'productTopBestSellers', 'articlePopular'));
+        // Bar Chart
+        // $articleViewsPerMonth = $this->articleRepo->getArticleViewsPerMonth();
+
+        // $articleViewLabels = $articleViewsPerMonth
+        //     ->pluck('month_name')
+        //     ->unique()
+        //     ->values();
+
+        // $articleViewDatasets = [];
+
+        // $categories = $articleViewsPerMonth
+        //     ->pluck('category_name')
+        //     ->unique();
+
+        // foreach ($categories as $category) {
+        //     $data = [];
+
+        //     foreach ($articleViewLabels as $month) {
+        //         $data[] = $articleViewsPerMonth
+        //             ->where('month_name', $month)
+        //             ->where('category_name', $category)
+        //             ->sum('total');
+        //     }
+
+        //     $articleViewDatasets[] = [
+        //         'label' => $category,
+        //         'data' => $data,
+        //     ];
+        // }
+
+        return view('back-end.dashboard', compact(
+            'totalProduct',
+            'totalProductBestSeller',
+            'productTopBestSellers',
+            'totalProductCategory',
+            // 'totalProductCategoryBestSeller',
+            'totalProductDraft',
+            'totalArticle',
+            'articlePopular',
+            'totalArticleCategory',
+            // 'totalArticleCategoryPopular'
+            // 'totalArticleViews',
+            'totalArticleDraft',
+            'productByCategory',
+            'articleByCategory',
+            // 'articleViewLabels',
+            // 'articleViewDatasets'
+        ));
     }
 }

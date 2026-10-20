@@ -69,9 +69,23 @@ class ProductRepository
             ->get();
     }
 
+    public function getProductByCategory()
+    {
+        return $this->product->join('product_categories', 'products.product_category_id', '=', 'product_categories.id')
+            ->selectRaw('COUNT(products.id) as total_product, product_categories.name as category_name')
+            ->where('is_published', 1)
+            ->groupBy('product_category_id')
+            ->get();
+    }
+
     public function getTotalProduct()
     {
         return $this->product->where('is_published', 1)->count();
+    }
+
+    public function getTotalProductDraft()
+    {
+        return $this->product->where('is_published', 0)->count();
     }
 
     public function getTotalProductCategory()

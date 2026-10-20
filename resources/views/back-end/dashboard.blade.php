@@ -43,7 +43,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-6 col-lg-3 col-md-6">
+                    {{-- <div class="col-6 col-lg-3 col-md-6">
                         <div class="card">
                             <div class="card-body px-4 py-4-5">
                                 <div class="row">
@@ -59,7 +59,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="col-6 col-lg-3 col-md-6">
                         <div class="card">
                             <div class="card-body px-4 py-4-5">
@@ -83,8 +83,25 @@
                             <div class="card-body px-4 py-4-5">
                                 <div class="row">
                                     <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                                        <div class="stats-icon red mb-2">
+                                        <div class="stats-icon purple mb-2">
                                             <i class="iconly-boldPaper"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
+                                        <h6 class="text-muted font-semibold">Draft Product</h6>
+                                        <h6 class="font-extrabold mb-0">{{ $totalProductDraft ?? '-' }}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body px-4 py-4-5">
+                                <div class="row">
+                                    <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
+                                        <div class="stats-icon red mb-2">
+                                            <i class="iconly-boldDocument"></i>
                                         </div>
                                     </div>
                                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
@@ -105,7 +122,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                        <h6 class="text-muted font-semibold">Total Article Popular</h6>
+                                        <h6 class="text-muted font-semibold">Article Popular</h6>
                                         <h6 class="font-extrabold mb-0">
                                             {{ $articlePopular->count() ?? '-' }}</h6>
                                     </div>
@@ -131,7 +148,7 @@
                             </div>
                         </div>
                     </div> --}}
-                    <div class="col-6 col-lg-3 col-md-6">
+                    {{-- <div class="col-6 col-lg-3 col-md-6">
                         <div class="card">
                             <div class="card-body px-4 py-4-5">
                                 <div class="row">
@@ -147,7 +164,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="col-6 col-lg-3 col-md-6">
                         <div class="card">
                             <div class="card-body px-4 py-4-5">
@@ -166,40 +183,23 @@
                             </div>
                         </div>
                     </div>
-                    {{-- <div class="col-6 col-lg-3 col-md-6">
+                    <div class="col-6 col-lg-3 col-md-6">
                         <div class="card">
                             <div class="card-body px-4 py-4-5">
                                 <div class="row">
                                     <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                                        <div class="stats-icon blue mb-2">
-                                            <i class="iconly-boldProfile"></i>
+                                        <div class="stats-icon red mb-2">
+                                            <i class="iconly-boldPaper"></i>
                                         </div>
                                     </div>
                                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                        <h6 class="text-muted font-semibold">Followers</h6>
-                                        <h6 class="font-extrabold mb-0">183.000</h6>
+                                        <h6 class="text-muted font-semibold">Draft Article</h6>
+                                        <h6 class="font-extrabold mb-0">{{ $totalArticleDraft ?? '-' }}</h6>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div> --}}
-                    {{-- <div class="col-6 col-lg-3 col-md-6">
-                        <div class="card">
-                            <div class="card-body px-4 py-4-5">
-                                <div class="row">
-                                    <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                                        <div class="stats-icon green mb-2">
-                                            <i class="iconly-boldAdd-User"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                        <h6 class="text-muted font-semibold">Following</h6>
-                                        <h6 class="font-extrabold mb-0">80.000</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
+                    </div>
                 </div>
 
                 <div class="row">
@@ -267,18 +267,48 @@
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col-6 col-lg-6 col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Product By Category</h4>
+                            </div>
+                            <div class="card-body">
+                                <div>
+                                    <canvas id="productByCategoryChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg-6 col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Article By Category</h4>
+                            </div>
+                            <div class="card-body">
+                                <div>
+                                    <canvas id="articleByCategoryChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 {{-- <div class="row">
                     <div class="col-12 col-lg-12 col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Visitors Profile</h4>
+                                <h4 class="card-title">Article Views</h4>
                             </div>
                             <div class="card-body">
-                                <div id="chart-visitors-profile"></div>
+                                <div>
+                                    <canvas id="articleViewsChart"></canvas>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div> --}}
+
                 {{-- <div class="row">
                     <div class="col-12">
                         <div class="card">
@@ -457,19 +487,107 @@
                     </div>
                 </div> --}}
             {{-- <div class="card">
-                    <div class="card-header">
-                        <h4>Visitors Profile</h4>
-                    </div>
-                    <div class="card-body">
-                        <div id="chart-visitors-profile"></div>
-                    </div>
-                </div> --}}
+                <div class="card-header">
+                    <h4>Visitors Profile</h4>
+                </div>
+                <div class="card-body">
+                    <div id="chart-visitors-profile"></div>
+                </div>
+            </div> --}}
             {{-- </div> --}}
         </section>
     </div>
 @endsection
 
+@push('scripts')
+    <script>
+        const productByCategoryCtx = document.getElementById('productByCategoryChart');
+        const productCategoryLabels = @json($productByCategory->pluck('category_name'));
+        const productTotals = @json($productByCategory->pluck('total_product'));
+
+        const articleByCategoryCtx = document.getElementById('articleByCategoryChart');
+        const articleCategoryLabels = @json($articleByCategory->pluck('category_name'));
+        const articleTotals = @json($articleByCategory->pluck('total_article'));
+
+        // const articleViewsCtx = document.getElementById('articleViewsChart');
+        // const labels = ($articleViewLabels);
+        // const datasets = ($articleViewDatasets);
+
+        new Chart(productByCategoryCtx, {
+            type: 'pie',
+            data: {
+                labels: productCategoryLabels,
+                datasets: [{
+                    label: 'Product',
+                    data: productTotals,
+                    borderWidth: 1
+                }]
+            },
+            plugins: [ChartDataLabels],
+            options: {
+                plugins: {
+                    datalabels: {
+                        color: '#fff',
+                        formatter: (value, context) => {
+                            const data = context.chart.data.datasets[0].data;
+                            const total = data.reduce((a, b) => a + b, 0);
+                            const percentage = (value / total * 100).toFixed(1);
+
+                            return percentage + '%';
+                        }
+                    }
+                }
+            }
+        });
+
+        new Chart(articleByCategoryCtx, {
+            type: 'pie',
+            data: {
+                labels: articleCategoryLabels,
+                datasets: [{
+                    label: 'Article',
+                    data: articleTotals,
+                    borderWidth: 1
+                }]
+            },
+            plugins: [ChartDataLabels],
+            options: {
+                plugins: {
+                    datalabels: {
+                        color: '#fff',
+                        formatter: (value, context) => {
+                            const data = context.chart.data.datasets[0].data;
+                            const total = data.reduce((a, b) => a + b, 0);
+                            const percentage = (value / total * 100).toFixed(1);
+
+                            return percentage + '%';
+                        }
+                    }
+                }
+            }
+        });
+
+        // new Chart(articleViewsCtx, {
+        //     type: 'bar',
+        //     data: {
+        //         labels,
+        //         datasets
+        //     },
+        //     options: {
+        //         scales: {
+        //             y: {
+        //                 beginAtZero: true
+        //             }
+        //         }
+        //     },
+        // });
+    </script>
+@endpush
+
 @prepend('scripts')
-    <script src="{{ asset('mazer/assets/extensions/apexcharts/apexcharts.min.js') }}"></script>
-    <script src="{{ asset('mazer/assets/static/js/pages/dashboard.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
+    {{-- <script src="{{ asset('mazer/assets/extensions/apexcharts/apexcharts.min.js') }}"></script>
+    <script src="{{ asset('mazer/assets/static/js/pages/dashboard.js') }}"></script> --}}
 @endprepend
