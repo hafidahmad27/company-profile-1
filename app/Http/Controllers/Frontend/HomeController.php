@@ -46,6 +46,10 @@ class HomeController extends Controller
 
     private function productCategoryBestSellersPreview()
     {
+        $hasBestSellerProduct = Product::where('is_published', 1)
+            ->where('products.is_best_seller', 1)
+            ->exists();
+
         $productCategoryBestSellers = Product::join('product_categories', 'products.product_category_id', '=', 'product_categories.id')
             ->select(
                 'product_categories.name as category_name',
@@ -54,7 +58,9 @@ class HomeController extends Controller
                 'products.image'
             )
             ->where('is_published', 1)
-            ->where('is_best_seller', 1)
+            ->when($hasBestSellerProduct, function ($query) {
+                $query->where('products.is_best_seller', 1);
+            })
             ->groupBy('product_category_id')
             ->orderBy('category_name', 'asc')
             ->get();
@@ -68,6 +74,10 @@ class HomeController extends Controller
 
     private function productBestSellersPreview()
     {
+        $hasBestSellerProduct = Product::where('is_published', 1)
+            ->where('products.is_best_seller', 1)
+            ->exists();
+
         $productBestSellers = Product::leftJoin('product_categories', 'products.product_category_id', '=', 'product_categories.id')
             ->select(
                 'product_categories.name as category_name',
@@ -75,7 +85,9 @@ class HomeController extends Controller
                 'products.*'
             )
             ->where('is_published', 1)
-            ->where('is_best_seller', 1)
+            ->when($hasBestSellerProduct, function ($query) {
+                $query->where('products.is_best_seller', 1);
+            })
             ->orderBy('category_name', 'asc')
             // ->orderBy('published_at', 'desc')
             // ->take(5)
@@ -98,7 +110,14 @@ class HomeController extends Controller
         $sectionProductPreview = Section::where('section_key', 'products-preview')
             ->where('sections.is_active', 1)
             ->first();
-        $productCategoriesPreview = ProductCategory::where('is_active', 1)->get();
+        $productCategoriesPreview = ProductCategory::join('products', 'products.product_category_id', '=', 'product_categories.id')
+            ->where('products.is_published', 1)
+            ->select(
+                'product_categories.*',
+            )
+            ->distinct()
+            ->orderBy('product_categories.name', 'asc')
+            ->get();
         $productsPreview = [];
 
         foreach ($productCategoriesPreview as $category) {
@@ -119,6 +138,10 @@ class HomeController extends Controller
 
     private function articleCategoryPopularPreview()
     {
+        $hasPopularArticle = Article::where('is_published', 1)
+            ->where('views', '>=', 5)
+            ->exists();
+
         $articleCategoryPopular = Article::join('article_categories', 'articles.article_category_id', '=', 'article_categories.id')
             ->select(
                 'article_categories.name as category_name',
@@ -127,6 +150,9 @@ class HomeController extends Controller
                 'articles.image'
             )
             ->where('is_published', 1)
+            ->when($hasPopularArticle, function ($query) {
+                $query->where('articles.views', '>=', 5);
+            })
             ->groupBy('article_category_id')
             ->orderBy('category_name', 'asc')
             ->get();
@@ -168,7 +194,14 @@ class HomeController extends Controller
         $sectionArticlePreview = Section::where('section_key', 'articles-preview')
             ->where('sections.is_active', 1)
             ->first();
-        $articleCategoriesPreview = ArticleCategory::where('is_active', 1)->orderBy('name', 'asc')->get();
+        $articleCategoriesPreview = ArticleCategory::join('articles', 'articles.article_category_id', '=', 'article_categories.id')
+            ->where('articles.is_published', 1)
+            ->select(
+                'article_categories.*',
+            )
+            ->distinct()
+            ->orderBy('article_categories.name', 'asc')
+            ->get();
         $articlesPreview = [];
 
         foreach ($articleCategoriesPreview as $category) {

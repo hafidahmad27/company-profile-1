@@ -70,7 +70,7 @@
                                 </span>
                             </td>
                             <td align="right">{{ $article->views }}</td>
-                            <td>
+                            <td align="center">
                                 {{ $article->user_name }} <br>
                                 <span style="font-size: 9pt">
                                     {{ $article->updated_at?->format('d-m-Y H:i:s') ?? 'null' }}

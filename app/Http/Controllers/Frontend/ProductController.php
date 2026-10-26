@@ -18,7 +18,14 @@ class ProductController extends Controller
             ->where('sections.is_active', 1)
             ->firstOrFail();
 
-        $productCategories = ProductCategory::where('is_active', 1)->get();
+        $productCategories = ProductCategory::join('products', 'products.product_category_id', '=', 'product_categories.id')
+            ->where('products.is_published', 1)
+            ->select(
+                'product_categories.*',
+            )
+            ->distinct()
+            ->orderBy('product_categories.name', 'asc')
+            ->get();
         $products = [];
 
         foreach ($productCategories as $category) {

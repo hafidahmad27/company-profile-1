@@ -70,7 +70,7 @@
                                     {{ $product->published_at?->format('d-m-Y H:i:s') ?? 'null' }}
                                 </span>
                             </td>
-                            <td>
+                            <td align="center">
                                 {{ $product->user_name }} <br>
                                 <span style="font-size: 9pt">
                                     {{ $product->updated_at?->format('d-m-Y H:i:s') ?? 'null' }}

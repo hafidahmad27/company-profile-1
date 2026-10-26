@@ -40,7 +40,7 @@ class ArticleRepository
             ->firstOrFail();
     }
 
-    public function getArticlePopular()
+    public function getArticlePopular(int $limit)
     {
         return $this->article->leftJoin('article_categories', 'articles.article_category_id', '=', 'article_categories.id')
             ->select(
@@ -50,7 +50,7 @@ class ArticleRepository
             )
             ->where('is_published', 1)
             ->orderBy('views', 'desc')
-            ->take(5)
+            ->take($limit)
             ->get();
     }
 
@@ -80,14 +80,9 @@ class ArticleRepository
             ->get();
     }
 
-    public function getTotalArticle()
+    public function getTotalArticleByStatus(int $status)
     {
-        return $this->article->where('is_published', 1)->count();
-    }
-
-    public function getTotalArticleDraft()
-    {
-        return $this->article->where('is_published', 0)->count();
+        return $this->article->where('is_published', $status)->count();
     }
 
     public function getTotalArticleCategory()

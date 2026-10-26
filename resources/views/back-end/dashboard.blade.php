@@ -15,12 +15,12 @@
                                 <div class="row">
                                     <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
                                         <div class="stats-icon purple mb-2">
-                                            <i class="iconly-boldBookmark"></i>
+                                            <i class="iconly-boldStar"></i>
                                         </div>
                                     </div>
                                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                        <h6 class="text-muted font-semibold">Total Product</h6>
-                                        <h6 class="font-extrabold mb-0">{{ $totalProduct ?? '-' }}</h6>
+                                        <h6 class="text-muted font-semibold">Product Best Seller</h6>
+                                        <h6 class="font-extrabold mb-0">{{ $totalProductBestSeller ?? '-' }}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -32,12 +32,12 @@
                                 <div class="row">
                                     <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
                                         <div class="stats-icon purple mb-2">
-                                            <i class="iconly-boldStar"></i>
+                                            <i class="iconly-boldBookmark"></i>
                                         </div>
                                     </div>
                                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                        <h6 class="text-muted font-semibold">Product Best Seller</h6>
-                                        <h6 class="font-extrabold mb-0">{{ $totalProductBestSeller ?? '-' }}</h6>
+                                        <h6 class="text-muted font-semibold">Total Product</h6>
+                                        <h6 class="font-extrabold mb-0">{{ $totalProduct ?? '-' }}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -101,12 +101,13 @@
                                 <div class="row">
                                     <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
                                         <div class="stats-icon red mb-2">
-                                            <i class="iconly-boldDocument"></i>
+                                            <i class="iconly-boldStar"></i>
                                         </div>
                                     </div>
                                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                        <h6 class="text-muted font-semibold">Total Article</h6>
-                                        <h6 class="font-extrabold mb-0">{{ $totalArticle ?? '-' }}</h6>
+                                        <h6 class="text-muted font-semibold">Article Popular</h6>
+                                        <h6 class="font-extrabold mb-0">
+                                            {{ $articlePopular->count() ?? '-' }}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -118,13 +119,12 @@
                                 <div class="row">
                                     <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
                                         <div class="stats-icon red mb-2">
-                                            <i class="iconly-boldStar"></i>
+                                            <i class="iconly-boldDocument"></i>
                                         </div>
                                     </div>
                                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                        <h6 class="text-muted font-semibold">Article Popular</h6>
-                                        <h6 class="font-extrabold mb-0">
-                                            {{ $articlePopular->count() ?? '-' }}</h6>
+                                        <h6 class="text-muted font-semibold">Total Article</h6>
+                                        <h6 class="font-extrabold mb-0">{{ $totalArticle ?? '-' }}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -271,7 +271,7 @@
                     <div class="col-6 col-lg-6 col-md-6">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Product By Category</h4>
+                                <h4 class="card-title">Products by Category</h4>
                             </div>
                             <div class="card-body">
                                 <div>
@@ -283,7 +283,7 @@
                     <div class="col-6 col-lg-6 col-md-6">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Article By Category</h4>
+                                <h4 class="card-title">Articles by Category</h4>
                             </div>
                             <div class="card-body">
                                 <div>

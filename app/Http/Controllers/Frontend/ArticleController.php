@@ -18,7 +18,14 @@ class ArticleController extends Controller
             ->where('sections.is_active', 1)
             ->firstOrFail();
 
-        $articleCategories = ArticleCategory::where('is_active', 1)->get();
+        $articleCategories = ArticleCategory::join('articles', 'articles.article_category_id', '=', 'article_categories.id')
+            ->where('articles.is_published', 1)
+            ->select(
+                'article_categories.*',
+            )
+            ->distinct()
+            ->orderBy('article_categories.name', 'asc')
+            ->get();
         $articles = [];
 
         foreach ($articleCategories as $category) {

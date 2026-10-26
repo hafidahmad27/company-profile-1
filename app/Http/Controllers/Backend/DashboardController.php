@@ -19,19 +19,19 @@ class DashboardController extends Controller
 
     public function index()
     {
-        $totalProduct = $this->productRepo->getTotalProduct();
+        $totalProduct = $this->productRepo->getTotalProductByStatus(1);
         $totalProductBestSeller = $this->productRepo->getTotalProductBestSeller();
         $productTopBestSellers = $this->productRepo->getTopBestSellers();
         $totalProductCategory = $this->productRepo->getTotalProductCategory();
         // $totalProductCategoryBestSeller = $this->productRepo->getTotalProductCategoryBestSeller();
-        $totalProductDraft = $this->productRepo->getTotalProductDraft();
+        $totalProductDraft = $this->productRepo->getTotalProductByStatus(0);
 
-        $totalArticle = $this->articleRepo->getTotalArticle();
-        $articlePopular = $this->articleRepo->getArticlePopular();
+        $totalArticle = $this->articleRepo->getTotalArticleByStatus(1);
+        $articlePopular = $this->articleRepo->getArticlePopular(5);
         $totalArticleCategory = $this->articleRepo->getTotalArticleCategory();
         // $totalArticleCategoryPopular = $this->articleRepo->getTotalArticleCategoryPopular();
         // $totalArticleViews = $this->articleRepo->getTotalViews();
-        $totalArticleDraft = $this->articleRepo->getTotalArticleDraft();
+        $totalArticleDraft = $this->articleRepo->getTotalArticleByStatus(0);
 
         // Pie Chart
         $productByCategory = $this->productRepo->getProductByCategory();

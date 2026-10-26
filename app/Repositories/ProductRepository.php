@@ -78,14 +78,9 @@ class ProductRepository
             ->get();
     }
 
-    public function getTotalProduct()
+    public function getTotalProductByStatus(int $status)
     {
-        return $this->product->where('is_published', 1)->count();
-    }
-
-    public function getTotalProductDraft()
-    {
-        return $this->product->where('is_published', 0)->count();
+        return $this->product->where('is_published', $status)->count();
     }
 
     public function getTotalProductCategory()
