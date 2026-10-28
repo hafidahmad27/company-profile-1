@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Frontend\AboutController;
 use App\Http\Controllers\Frontend\ArticleController;
+use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -20,4 +21,9 @@ Route::prefix('products')->group(function () {
 Route::prefix('articles')->group(function () {
     Route::get('/', [ArticleController::class, 'index']);
     Route::get('{category_slug}/{slug}', [ArticleController::class, 'show']);
+});
+
+Route::prefix('contact')->name('contact.')->group(function () {
+    Route::get('/', [ContactController::class, 'index']);
+    Route::post('store', [ContactController::class, 'store'])->name('store');
 });

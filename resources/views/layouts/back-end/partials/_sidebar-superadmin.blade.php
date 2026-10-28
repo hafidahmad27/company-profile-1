@@ -70,6 +70,27 @@
     </ul>
 </li>
 
+<li
+    class="sidebar-item 
+                    {{ request()->is('be/contact-messages') ? 'active' : '' }}
+                    {{ request()->is('be/contact-messages/*') ? 'active' : '' }} 
+                    has-sub">
+    <a href="#" class='sidebar-link'>
+        <i class="bi bi-envelope"></i>
+        <span>Contact Messages</span>
+    </a>
+    <ul class="submenu">
+        <li
+            class="submenu-item 
+                            {{ request()->is('be/contact-messages') ? 'active' : '' }}
+                            {{ request()->is('be/contact-messages/*') ? 'active' : '' }}">
+            <a href="{{ route('be.contact-messages.index') }}" class='submenu-link'>
+                <span>Inbox</span>
+            </a>
+        </li>
+    </ul>
+</li>
+
 <hr>
 
 <li

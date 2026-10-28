@@ -94,7 +94,7 @@
                                 <a href="{{ route('be.articles.edit', $article->id) }}" class="btn btn-primary btn-sm">
                                     <i class="bi bi-pencil"></i>
                                 </a>
-                                @if ($article->is_published == 0)
+                                @if ($article->is_published == 0 && auth()->user()->isSuperAdmin())
                                     |
                                     <form action="{{ route('be.articles.destroy', $article->id) }}" class="d-inline"
                                         method="POST">

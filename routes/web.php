@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\ProductCategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Backend\CompanyController;
+use App\Http\Controllers\Backend\ContactMessageController;
 use Illuminate\Support\Facades\Route;
 
 // Include auth
@@ -15,35 +16,39 @@ require __DIR__ . '/auth.php';
 
 // Route back-end
 Route::prefix('be')->name('be.')->middleware(['auth', 'verified'])->group(function () {
+    // Dashboard
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
+    // Products
     Route::middleware(['superadmin'])->group(function () {
         Route::resource('product-categories', ProductCategoryController::class);
         Route::patch('product-categories/{product_category}/updateActiveStatus', [ProductCategoryController::class, 'updateActiveStatus'])
             ->name('product-categories.updateActiveStatus');
     });
-
     Route::get('products/best-sellers', [ProductController::class, 'listBestSellers'])->name('products.best-sellers.index');
     Route::patch('products/best-sellers/{product}/setBestSeller', [ProductController::class, 'setBestSeller'])
         ->name('products.best-sellers.setBestSeller');
-
     Route::post('products/import', [ProductController::class, 'import'])->name('products.import');
     Route::get('products/export', [ProductController::class, 'export'])->name('products.export');
     Route::patch('products/{product}/togglePublish', [ProductController::class, 'togglePublish'])
         ->name('product.togglePublish');
     Route::resource('products', ProductController::class);
 
+    // Articles
     Route::middleware(['superadmin'])->group(function () {
         Route::resource('article-categories', ArticleCategoryController::class);
         Route::patch('article-categories/{article_category}/updateActiveStatus', [ArticleCategoryController::class, 'updateActiveStatus'])
             ->name('article-categories.updateActiveStatus');
     });
-
     Route::post('articles/import', [ArticleController::class, 'import'])->name('articles.import');
     Route::get('articles/export', [ArticleController::class, 'export'])->name('articles.export');
     Route::patch('articles/{article}/togglePublish', [ArticleController::class, 'togglePublish'])
         ->name('article.togglePublish');
     Route::resource('articles', ArticleController::class);
+
+    // Contact Message
+    Route::resource('contact-messages', ContactMessageController::class)
+        ->only(['index', 'show']);
 
     // Settings
     Route::middleware(['superadmin'])->group(function () {
@@ -61,6 +66,8 @@ Route::prefix('be')->name('be.')->middleware(['auth', 'verified'])->group(functi
             });
         });
     });
+
+    // Profile
     Route::prefix('profile')->group(function () {
         // Route::get('dashboard', [ProfileController::class, 'index'])->name('profile.dashboard');
         Route::get('/', [ProfileController::class, 'index'])->name('profile.index');

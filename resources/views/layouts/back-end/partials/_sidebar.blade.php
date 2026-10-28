@@ -631,8 +631,6 @@
                     </a>
                 </li> --}}
 
-                <hr>
-
                 <li
                     class="sidebar-item 
                             {{ request()->is('be/profile') ? 'active' : '' }}
@@ -643,6 +641,9 @@
                         <span>Profile</span>
                     </a>
                 </li>
+
+                <hr>
+
                 <li
                     class="sidebar-item 
                             {{ request()->is('be/logout') ? 'active' : '' }}

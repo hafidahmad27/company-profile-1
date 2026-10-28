@@ -16,14 +16,16 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('logo')->nullable();
             $table->string('address')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('email')->nullable();
+            $table->text('map_embed')->nullable();
             $table->string('headline')->nullable();
-            $table->string('linkedin')->nullable();
-            $table->string('facebook')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('whatsapp')->nullable();
             $table->string('instagram')->nullable();
             $table->string('tiktok')->nullable();
             $table->string('youtube')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('linkedin')->nullable();
             $table->foreignId('user_id')->nullable()->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('set null');

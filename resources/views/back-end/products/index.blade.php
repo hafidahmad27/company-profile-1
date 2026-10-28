@@ -94,7 +94,7 @@
                                 <a href="{{ route('be.products.edit', $product->id) }}" class="btn btn-primary btn-sm">
                                     <i class="bi bi-pencil"></i>
                                 </a>
-                                @if ($product->is_published == 0)
+                                @if ($product->is_published == 0 && auth()->user()->isSuperAdmin())
                                     |
                                     <form action="{{ route('be.products.destroy', $product->id) }}" class="d-inline"
                                         method="POST">

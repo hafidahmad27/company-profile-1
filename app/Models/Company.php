@@ -32,13 +32,37 @@ class Company extends Model
     }
 
     /**
-     * Get WhatsApp Link.
+     * Get Email Link.
      */
-    protected function waLink(): Attribute
+    protected function emailLink(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->email
+                ? 'mailto:' . $this->email
+                : null,
+        );
+    }
+
+    /**
+     * Get Phone Link.
+     */
+    protected function phoneLink(): Attribute
     {
         return Attribute::make(
             get: fn() => $this->phone
-                ? 'https://wa.me/62' . ltrim($this->phone, '0')
+                ? 'tel:' . $this->phone
+                : null,
+        );
+    }
+
+    /**
+     * Get WhatsApp Link.
+     */
+    protected function whatsappLink(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->whatsapp
+                ? 'https://wa.me/62' . ltrim($this->whatsapp, '0')
                 : null,
         );
     }

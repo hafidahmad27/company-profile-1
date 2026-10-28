@@ -44,7 +44,7 @@
             <div class="tab-pane fade {{ $productCategory->id == $defaultProductCategoryId ? 'show active' : '' }}"
                 id="products-{{ $productCategory->id }}" role="tabpanel" aria-labelledby="" tabindex="0">
                 <div class="row row-cols-1 row-cols-md-3 justify-content-center g-5 mt-0">
-                    @forelse ($products[$productCategory->id] ?? [] as $product)
+                    @foreach ($products[$productCategory->id] ?? [] as $product)
                         <div class="col">
                             <div class="card h-100 border-0">
                                 <img src="{{ $product->image_url }}" class="card-img-top rounded-4"
@@ -89,9 +89,7 @@
                                 </div> --}}
                             </div>
                         </div>
-                    @empty
-                        <p class="text-center">Belum ada {{ Str::lower($page->title) ?? '-' }}</p>
-                    @endforelse
+                    @endforeach
                 </div>
                 <div class="d-flex justify-content-center mt-4">
                     {{ $products[$productCategory->id]->withQueryString()->links() }}

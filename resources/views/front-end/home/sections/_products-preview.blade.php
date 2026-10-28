@@ -30,7 +30,7 @@
         <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}"
             id="products-{{ $productCategoryPreview->id }}" role="tabpanel" aria-labelledby="" tabindex="0">
             <div class="row row-cols-1 row-cols-md-4 justify-content-center g-4 mt-0">
-                @forelse ($productsPreview[$productCategoryPreview->id] ?? [] as $productPreview)
+                @foreach ($productsPreview[$productCategoryPreview->id] ?? [] as $productPreview)
                     <div class="col">
                         <div class="card h-100 border-0">
                             <img src="{{ $productPreview->image_url }}" class="card-img-top rounded-4"
@@ -67,9 +67,7 @@
                                     </div> --}}
                         </div>
                     </div>
-                @empty
-                    <p class="text-center">Belum ada {{ Str::lower($product->title) ?? '-' }}</p>
-                @endforelse
+                @endforeach
             </div>
         </div>
         {{-- <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0">

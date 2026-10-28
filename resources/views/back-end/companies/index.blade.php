@@ -9,7 +9,7 @@
                         </div> --}}
         <div class="card-content">
             <div class="card-body">
-                @if (empty($company->name) || empty($company->address) || empty($company->phone) || empty($company->email))
+                @if (empty($company->name) || empty($company->address) || empty($company->email))
                     <div class="alert alert-info" role="alert">
                         Harap mengisi kolom-kolom berikut terlebih dahulu
                         {{-- <button type="button" class="btn-close" data-bs-dismiss="alert"
