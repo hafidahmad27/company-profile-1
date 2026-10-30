@@ -1,6 +1,6 @@
 @extends('layouts.front-end.app')
 
-@section('title', $page->title)
+@section('title', $section->title)
 
 @section('content')
     <p class="text-center" style="text-align: justify">

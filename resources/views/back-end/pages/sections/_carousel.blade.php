@@ -5,7 +5,6 @@
     {{-- <th>Content</th> --}}
     <th>Image</th>
     {{-- <th>Button Text</th> --}}
-    {{-- <th>Button Link</th> --}}
     <th class="text-center">Is Active?</th>
 </thead>
 
@@ -43,11 +42,6 @@
             {{-- <td>
                 <input type="text" name="sections[{{ $section->id }}][button_text]"
                     value="{{ old('sections.' . $section->id . '.button_text', $section->button_text) }}"
-                    class="form-control">
-            </td> --}}
-            {{-- <td>
-                <input type="text" name="sections[{{ $section->id }}][button_link]"
-                    value="{{ old('sections.' . $section->id . '.button_link', $section->button_link) }}"
                     class="form-control">
             </td> --}}
             <td class="text-center">

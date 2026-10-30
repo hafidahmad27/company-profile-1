@@ -35,7 +35,6 @@ class UpdateSectionRequest extends FormRequest
             $rules["sections.$id.content"]     = ['nullable', 'string'];
             $rules["sections.$id.image"]       = ['nullable', 'image', 'mimes:jpg,jpeg,png', 'max:2048'];
             // $rules["sections.$id.button_text"] = ['nullable', 'string', 'max:255'];
-            // $rules["sections.$id.button_link"] = ['nullable', 'string', 'max:255'];
             $rules["sections.$id.order"]    = ['nullable', 'integer'];
             $rules["sections.$id.is_active"] = ['boolean'];
         }
@@ -51,7 +50,6 @@ class UpdateSectionRequest extends FormRequest
             'sections.*.content'     => 'content',
             'sections.*.image'       => 'image',
             // 'sections.*.button_text' => 'button text',
-            // 'sections.*.button_link' => 'button link',
             'sections.*.order'       => 'order',
             'sections.*.is_active'   => 'is active',
         ];

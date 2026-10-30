@@ -220,13 +220,17 @@
                                         </thead>
                                         <tbody>
                                             @php $i = 0; @endphp
-                                            @foreach ($productTopBestSellers as $productTopBestSeller)
+                                            @forelse ($productTopBestSellers as $productTopBestSeller)
                                                 <tr>
                                                     <td align="right">{{ ++$i }}</td>
                                                     <td>{{ $productTopBestSeller->category_name }}</td>
                                                     <td>{{ $productTopBestSeller->name }}</td>
                                                 </tr>
-                                            @endforeach
+                                            @empty
+                                                <td colspan="3" class="text-center">
+                                                    No data available
+                                                </td>
+                                            @endforelse
                                         </tbody>
                                     </table>
                                 </div>

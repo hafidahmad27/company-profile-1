@@ -30,9 +30,8 @@ class Company extends Model
             get: fn() => $this->logo ? Storage::url($this->logo) : null,
         );
     }
-
     /**
-     * Get Email Link.
+     * Get email link.
      */
     protected function emailLink(): Attribute
     {
@@ -42,9 +41,8 @@ class Company extends Model
                 : null,
         );
     }
-
     /**
-     * Get Phone Link.
+     * Get phone link.
      */
     protected function phoneLink(): Attribute
     {
@@ -54,9 +52,8 @@ class Company extends Model
                 : null,
         );
     }
-
     /**
-     * Get WhatsApp Link.
+     * Get whatsApp link.
      */
     protected function whatsappLink(): Attribute
     {

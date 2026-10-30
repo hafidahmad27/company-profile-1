@@ -22,7 +22,7 @@ class ContactMessage extends Model
     }
 
     /**
-     * Get Subject with headline.
+     * Get subject with headline.
      */
     protected function subjectHeadline(): Attribute
     {
@@ -30,9 +30,8 @@ class ContactMessage extends Model
             get: fn() => $this->subject ? Str::headline($this->subject) : null,
         );
     }
-
     /**
-     * Get Email Link.
+     * Get email link.
      */
     protected function emailLink(): Attribute
     {
@@ -42,9 +41,8 @@ class ContactMessage extends Model
                 : null,
         );
     }
-
     /**
-     * Get Phone Link.
+     * Get phone link.
      */
     protected function phoneLink(): Attribute
     {
@@ -56,7 +54,7 @@ class ContactMessage extends Model
     }
 
     /**
-     * Get WhatsApp Link.
+     * Get whatsApp link.
      */
     protected function whatsappLink(): Attribute
     {

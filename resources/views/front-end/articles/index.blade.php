@@ -1,6 +1,6 @@
 @extends('layouts.front-end.app')
 
-@section('title', $page->title)
+@section('title', $section->title)
 
 @section('content')
     <p class="text-center" style="text-align: justify">
@@ -60,7 +60,7 @@
                                 </div>
                                 <h5 class="card-title">
                                     <a class="text-decoration-none fw-bold"
-                                        href="{{ url(url()->current() . '/' . $article->category_slug . '/' . $article->slug) }}">
+                                        href="{{ route('articles.show', ['category_slug' => $article->category_slug, 'slug' => $article->slug]) }}">
                                         {{ $article->title ?? '-' }}
                                     </a>
                                 </h5>
@@ -68,7 +68,7 @@
                                     {{ Str::limit($article->content, 150, '...') ?? '-' }}
                                     @if ($article->content && Str::length($article->content) > 150)
                                         <a class="text-decoration-none"
-                                            href="{{ url(url()->current() . '/' . $article->category_slug . '/' . $article->slug) }}">Selengkapnya</a>
+                                            href="{{ route('articles.show', ['category_slug' => $article->category_slug, 'slug' => $article->slug]) }}">Selengkapnya</a>
                                     @endif
                                     <br>
                                     <span class="text-body-secondary float-end" style="font-size: 8pt"><i

@@ -23,14 +23,10 @@
             @if ($section?->image_url) style="background-image: url('{{ $section->image_url }}'); background-size: 100%" @endif>
             <div class="row py-3">
                 <h2 class="text-center text-light fw-bold mt-3 pb-2">
-                    @if (request()->segment(1) && empty(request()->segment(2)))
-                        {{ $page->title }}
-                    @elseif ($page->slug === 'products')
-                        {{ $productCategory->name ?? '-' }}
-                    @elseif ($page->slug === 'articles')
-                        {{ $articleCategory->name ?? '-' }}
+                    @if (request()->segment(1) && request()->segment(2))
+                        {{ Str::headline(request()->segment(2)) }}
                     @else
-                        {{ $page->title }}
+                        {{ $section->title ?? '-' }}
                     @endif
                 </h2>
 

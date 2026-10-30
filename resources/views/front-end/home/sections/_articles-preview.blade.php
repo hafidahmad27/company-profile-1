@@ -47,13 +47,13 @@
                             </div>
                             <h5 class="card-title">
                                 <a class="text-decoration-none"
-                                    href="{{ url($article->slug . '/' . $articlePreview->category_slug . '/' . $articlePreview->slug) }}">{{ $articlePreview->title ?? '-' }}</a>
+                                    href="{{ route('articles.show', ['category_slug' => $articlePreview->category_slug, 'slug' => $articlePreview->slug]) }}">{{ $articlePreview->title ?? '-' }}</a>
                             </h5>
                             <p class="card-text" style="text-align: justify">
                                 {{ Str::limit($articlePreview->content, 150, '...') ?? '-' }}
                                 @if ($articlePreview->content && Str::length($articlePreview->content) > 150)
                                     <a class="text-decoration-none"
-                                        href="{{ url($article->slug . '/' . $articlePreview->category_slug . '/' . $articlePreview->slug) }}">Selengkapnya</a>
+                                        href="{{ route('articles.show', ['category_slug' => $articlePreview->category_slug, 'slug' => $articlePreview->slug]) }}">Selengkapnya</a>
                                 @endif
                                 <br>
                                 <span class="text-body-secondary float-end" style="font-size: 8pt"><i
@@ -78,8 +78,7 @@
 </div>
 
 <div class="d-grid gap-2 col-2 mx-auto text-center mt-3">
-    <a href="{{ url($sectionArticlePreview->button_link ?? '/') }}"
-        class="btn btn-primary">{{ $sectionArticlePreview->button_text ?? '-' }}
+    <a href="{{ route('articles.index') }}" class="btn btn-primary">{{ $sectionArticlePreview->button_text ?? '-' }}
         <i class="bi bi-chevron-double-right"></i>
     </a>
 </div>

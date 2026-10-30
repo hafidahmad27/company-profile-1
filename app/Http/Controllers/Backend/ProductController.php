@@ -29,7 +29,7 @@ class ProductController extends Controller
 
     public function create()
     {
-        $productCategoryOptions = $this->productCategoryService->getCategoryOptions();
+        $productCategoryOptions = $this->productCategoryService->getActiveCategories();
 
         return view('back-end.products.create', compact('productCategoryOptions'));
     }
@@ -53,7 +53,7 @@ class ProductController extends Controller
     public function edit(int $id)
     {
         $product = $this->productService->getProductDetail($id);
-        $productCategoryOptions = $this->productCategoryService->getCategoryOptions();
+        $productCategoryOptions = $this->productCategoryService->getActiveCategories();
 
         return view('back-end.products.edit', compact('product', 'productCategoryOptions'));
     }

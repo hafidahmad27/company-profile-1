@@ -34,7 +34,7 @@
                     <div class="form-group">
                         <label>Phone</label>
                         <input type="number" id="phone" class="form-control @error('phone') is-invalid @enderror"
-                            min="0" name="phone" placeholder=""
+                            min="0" name="phone" placeholder="ex: 08xxx"
                             value="{{ old('phone', $company->phone ?? null) }}">
                         @error('phone')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -46,7 +46,7 @@
                         <label>WhatsApp</label>
                         <input type="number" id="whatsapp"
                             class="form-control @error('whatsapp') is-invalid @enderror" min="0" name="whatsapp"
-                            placeholder="" value="{{ old('whatsapp', $company->whatsapp ?? null) }}">
+                            placeholder="ex: 08xxx" value="{{ old('whatsapp', $company->whatsapp ?? null) }}">
                         @error('whatsapp')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

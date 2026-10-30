@@ -47,7 +47,7 @@
                                         </div> --}}
                                 <h5 class="card-title text-center">
                                     <a class="text-decoration-none"
-                                        href="{{ url($product->slug . '/' . $productPreview->category_slug . '/' . $productPreview->slug) }}">{{ $productPreview->name ?? '-' }}
+                                        href="{{ route('products.show', ['category_slug' => $productPreview->category_slug, 'slug' => $productPreview->slug]) }}">{{ $productPreview->name ?? '-' }}
                                     </a>
                                 </h5>
                                 {{-- <span class="badge text-bg-info">Rp
@@ -56,7 +56,7 @@
                                                 {{ Str::limit($productPreview->description, 150, '...') ?? '-' }}
                                                 @if ($productPreview->description && Str::length($productPreview->description) > 150)
                                                     <a class="text-decoration-none"
-                                                        href="{{ url($product->slug . '/' . $productPreview->category_slug . '/' . $productPreview->slug) }}">Selengkapnya</a>
+                                                        href="{{ route('products.show', ['category_slug' => $productPreview->category_slug, 'slug' => $productPreview->slug]) }}">Selengkapnya</a>
                                                 @endif
                                             </p> --}}
                             </div>
@@ -77,8 +77,7 @@
 </div>
 
 <div class="d-grid gap-2 col-2 mx-auto text-center mt-2">
-    <a href="{{ url($sectionProductPreview->button_link ?? '/') }}"
-        class="btn btn-primary">{{ $sectionProductPreview->button_text ?? '-' }}
+    <a href="{{ route('products.index') }}" class="btn btn-primary">{{ $sectionProductPreview->button_text ?? '-' }}
         <i class="bi bi-chevron-double-right"></i>
     </a>
 </div>

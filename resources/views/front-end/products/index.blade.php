@@ -1,6 +1,6 @@
 @extends('layouts.front-end.app')
 
-@section('title', $page->title)
+@section('title', $section->title)
 
 @section('content')
     <p class="text-center" style="text-align: justify">
@@ -43,7 +43,7 @@
         @foreach ($productCategories as $productCategory)
             <div class="tab-pane fade {{ $productCategory->id == $defaultProductCategoryId ? 'show active' : '' }}"
                 id="products-{{ $productCategory->id }}" role="tabpanel" aria-labelledby="" tabindex="0">
-                <div class="row row-cols-1 row-cols-md-3 justify-content-center g-5 mt-0">
+                <div class="row row-cols-1 row-cols-md-3 justify-content-center g-4 mt-0">
                     @foreach ($products[$productCategory->id] ?? [] as $product)
                         <div class="col">
                             <div class="card h-100 border-0">
@@ -60,7 +60,7 @@
                                 {{-- </div> --}}
                                 <h5 class="card-title mt-3">
                                     <a class="text-decoration-none fw-bold"
-                                        href="{{ url(url()->current() . '/' . $product->category_slug . '/' . $product->slug) }}">{{ $product->name ?? '-' }}</a>
+                                        href="{{ route('products.show', ['category_slug' => $product->category_slug, 'slug' => $product->slug]) }}">{{ $product->name ?? '-' }}</a>
                                 </h5>
                                 <div class="d-flex">
                                     <div class="me-auto">
@@ -78,7 +78,7 @@
                                     {{ Str::limit($product->description, 150, '...') ?? '-' }}
                                     @if ($product->description && Str::length($product->description) > 150)
                                         <a class="text-decoration-none"
-                                            href="{{ url(url()->current() . '/' . $product->category_slug . '/' . $product->slug) }}">Selengkapnya</a>
+                                            href="{{ route('products.show', ['category_slug' => $product->category_slug, 'slug' => $product->slug]) }}">Selengkapnya</a>
                                     @endif
                                 </p>
                                 {{-- </div> --}}

@@ -39,9 +39,21 @@ class AppServiceProvider extends ServiceProvider
         });
 
         View::composer('front-end.*', function ($view) {
-            $pages = Page::orderBy('order')->get();
+            $pages = Page::orderBy('order', 'asc')->get();
+            $section = Section::join('pages', 'sections.page_id', '=', 'pages.id')
+                ->select(
+                    'sections.*',
+                    'pages.title',
+                    'pages.slug'
+                )
+                ->where('pages.slug', request()->segment(1))
+                ->where('sections.is_active', 1)
+                ->first();
 
-            $view->with('pages', $pages);
+            $view->with([
+                'pages' => $pages,
+                'section' => $section
+            ]);
         });
     }
 }

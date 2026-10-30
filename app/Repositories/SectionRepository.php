@@ -13,14 +13,9 @@ class SectionRepository
         $this->section = $section;
     }
 
-    public function getAllById(int $pageId)
+    public function getAllByPageId(int $pageId)
     {
-        return $this->section->join('pages', 'sections.page_id', '=', 'pages.id')
-            ->select(
-                'pages.title as title_page',
-                'sections.*',
-            )
-            ->where('page_id', $pageId)
+        return $this->section->where('page_id', $pageId)
             ->orderBy('order', 'desc')
             ->get();
     }

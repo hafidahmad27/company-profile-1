@@ -13,7 +13,7 @@
                 <small>{{ $article->user_name ?? '-' }}</small> &dash; <span
                     class="badge text-bg-secondary">{{ $article->category_name ?? '-' }}</span>
                 <br>
-                <small>{{ $article->published_at->locale('id')->translatedFormat('l, d F Y | H:i') }}</small>
+                <small>{{ $article->published_at ? $article->published_at->locale('id')->translatedFormat('l, d F Y | H:i') : '-' }}</small>
             </p>
             <img src="{{ $article->image_url }}" class="img-fluid w-100">
             <p class="mt-3" style="text-align: justify">

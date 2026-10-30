@@ -5,19 +5,11 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\ArticleCategory;
-use App\Models\Page;
-use App\Models\Section;
 
 class ArticleController extends Controller
 {
     public function index()
     {
-        $page = Page::where('slug', 'articles')->where('is_active', 1)->firstOrFail();
-        $section = Section::join('pages', 'sections.page_id', '=', 'pages.id')
-            ->where('pages.slug', 'articles')
-            ->where('sections.is_active', 1)
-            ->firstOrFail();
-
         $articleCategories = ArticleCategory::join('articles', 'articles.article_category_id', '=', 'article_categories.id')
             ->where('articles.is_published', 1)
             ->select(
@@ -41,17 +33,11 @@ class ArticleController extends Controller
         }
         $defaultArticleCategoryId = $articleCategories->isNotEmpty() ? request()->get('tab', $articleCategories->first()->id) : null;
 
-        return view('front-end.articles.index', compact('page', 'section', 'articleCategories', 'articles', 'defaultArticleCategoryId'));
+        return view('front-end.articles.index', compact('articleCategories', 'articles', 'defaultArticleCategoryId'));
     }
 
     public function show(string $category_slug, string $slug)
     {
-        $page = Page::where('slug', 'articles')->where('is_active', 1)->firstOrFail();
-        $section = Section::join('pages', 'sections.page_id', '=', 'pages.id')
-            ->where('pages.slug', 'articles')
-            ->where('sections.is_active', 1)
-            ->firstOrFail();
-
         $articleCategory = ArticleCategory::where('slug', $category_slug)->firstOrFail();
         $article = Article::join('article_categories', 'articles.article_category_id', '=', 'article_categories.id')
             ->leftJoin('users', 'articles.user_id', '=', 'users.id')
@@ -74,6 +60,6 @@ class ArticleController extends Controller
             session()->put($key, true);
         }
 
-        return view('front-end.articles.show', compact('page', 'section', 'articleCategory', 'article'));
+        return view('front-end.articles.show', compact('articleCategory', 'article'));
     }
 }

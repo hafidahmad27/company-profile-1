@@ -36,7 +36,7 @@
                     </div>
                     <h5 class="card-title text-center">
                         <a class="text-decoration-none"
-                            href="{{ url($product->slug . '/' . $productBestSeller->category_slug . '/' . $productBestSeller->slug) }}">{{ $productBestSeller->name ?? '-' }}
+                            href="{{ route('products.show', ['category_slug' => $productBestSeller->category_slug, 'slug' => $productBestSeller->slug]) }}">{{ $productBestSeller->name ?? '-' }}
                         </a>
                     </h5>
                     {{-- <div class="text-end">

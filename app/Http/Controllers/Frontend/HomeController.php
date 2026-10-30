@@ -46,6 +46,10 @@ class HomeController extends Controller
 
     private function productCategoryBestSellersPreview()
     {
+        $sectionProductCategoryBestSellersPreview = Section::where('section_key', 'product-category-best-sellers-preview')
+            ->where('sections.is_active', 1)
+            ->first();
+
         $hasBestSellerProduct = Product::where('is_published', 1)
             ->where('products.is_best_seller', 1)
             ->exists();
@@ -65,15 +69,15 @@ class HomeController extends Controller
             ->orderBy('category_name', 'asc')
             ->get();
 
-        $sectionProductCategoryBestSellersPreview = Section::where('section_key', 'product-category-best-sellers-preview')
-            ->where('sections.is_active', 1)
-            ->first();
-
-        return compact('productCategoryBestSellers', 'sectionProductCategoryBestSellersPreview');
+        return compact('sectionProductCategoryBestSellersPreview', 'productCategoryBestSellers');
     }
 
     private function productBestSellersPreview()
     {
+        $sectionProductBestSellerPreview = Section::where('section_key', 'product-best-sellers-preview')
+            ->where('sections.is_active', 1)
+            ->first();
+
         $hasBestSellerProduct = Product::where('is_published', 1)
             ->where('products.is_best_seller', 1)
             ->exists();
@@ -93,23 +97,15 @@ class HomeController extends Controller
             // ->take(5)
             ->get();
 
-        $sectionProductBestSellerPreview = Section::where('section_key', 'product-best-sellers-preview')
-            ->where('sections.is_active', 1)
-            ->first();
-
-        return compact('productBestSellers', 'sectionProductBestSellerPreview');
+        return compact('sectionProductBestSellerPreview', 'productBestSellers');
     }
 
     private function productsPreview()
     {
-        $product = Section::join('pages', 'sections.page_id', '=', 'pages.id')
-            ->where('section_key', 'products')
-            ->select('pages.slug', 'pages.title')
-            ->first();
-
         $sectionProductPreview = Section::where('section_key', 'products-preview')
             ->where('sections.is_active', 1)
             ->first();
+
         $productCategoriesPreview = ProductCategory::join('products', 'products.product_category_id', '=', 'product_categories.id')
             ->where('products.is_published', 1)
             ->select(
@@ -133,11 +129,15 @@ class HomeController extends Controller
                 ->get();
         }
 
-        return compact('product', 'sectionProductPreview', 'productCategoriesPreview', 'productsPreview');
+        return compact('sectionProductPreview', 'productCategoriesPreview', 'productsPreview');
     }
 
     private function articleCategoryPopularPreview()
     {
+        $sectionArticleCategoryPopularPreview = Section::where('section_key', 'article-category-popular-preview')
+            ->where('sections.is_active', 1)
+            ->first();
+
         $hasPopularArticle = Article::where('is_published', 1)
             ->where('views', '>=', 5)
             ->exists();
@@ -157,15 +157,15 @@ class HomeController extends Controller
             ->orderBy('category_name', 'asc')
             ->get();
 
-        $sectionArticleCategoryPopularPreview = Section::where('section_key', 'article-category-popular-preview')
-            ->where('sections.is_active', 1)
-            ->first();
-
-        return compact('articleCategoryPopular', 'sectionArticleCategoryPopularPreview');
+        return compact('sectionArticleCategoryPopularPreview', 'articleCategoryPopular');
     }
 
     private function articlePopularPreview()
     {
+        $sectionArticlePopularPreview = Section::where('section_key', 'article-popular-preview')
+            ->where('sections.is_active', 1)
+            ->first();
+
         $articlePopular = Article::join('article_categories', 'articles.article_category_id', '=', 'article_categories.id')
             ->select(
                 'article_categories.name as category_name',
@@ -177,23 +177,15 @@ class HomeController extends Controller
             ->take(5)
             ->get();
 
-        $sectionArticlePopularPreview = Section::where('section_key', 'article-popular-preview')
-            ->where('sections.is_active', 1)
-            ->first();
-
-        return compact('articlePopular', 'sectionArticlePopularPreview');
+        return compact('sectionArticlePopularPreview', 'articlePopular');
     }
 
     private function articlesPreview()
     {
-        $article = Section::join('pages', 'sections.page_id', '=', 'pages.id')
-            ->where('section_key', 'articles')
-            ->select('pages.slug', 'pages.title')
-            ->first();
-
         $sectionArticlePreview = Section::where('section_key', 'articles-preview')
             ->where('sections.is_active', 1)
             ->first();
+
         $articleCategoriesPreview = ArticleCategory::join('articles', 'articles.article_category_id', '=', 'article_categories.id')
             ->where('articles.is_published', 1)
             ->select(
@@ -217,6 +209,6 @@ class HomeController extends Controller
                 ->get();
         }
 
-        return compact('article', 'sectionArticlePreview', 'articleCategoriesPreview', 'articlesPreview');
+        return compact('sectionArticlePreview', 'articleCategoriesPreview', 'articlesPreview');
     }
 }

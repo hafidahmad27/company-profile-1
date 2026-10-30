@@ -57,7 +57,7 @@
                                     class="btn btn-primary btn-sm">
                                     <i class="bi bi-pencil"></i>
                                 </a>
-                                |
+                                {{-- |
                                 <form action="{{ route('be.article-categories.destroy', $articleCategory->id) }}"
                                     class="d-inline" method="POST">
                                     @csrf
@@ -65,7 +65,7 @@
                                     <button type="submit" class="btn btn-danger btn-sm">
                                         <i class="bi bi-trash"></i>
                                     </button>
-                                </form>
+                                </form> --}}
                             </td>
                         </tr>
                     @endforeach

@@ -27,7 +27,7 @@ class ArticlesImport implements Import, WithMultipleSheets
     public function sheets(): array
     {
         $sheets = [];
-        $articleCategories = $this->articleCategoryRepo->getAll();
+        $articleCategories = $this->articleCategoryRepo->getActive();
 
         foreach ($articleCategories as $articleCategory) {
             $worksheet = $this->spreadsheet->getSheetByName($articleCategory->name);

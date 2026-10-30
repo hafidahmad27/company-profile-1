@@ -23,7 +23,7 @@ class ProductCategoryService
         return $this->productCategoryRepo->getById($id);
     }
 
-    public function getCategoryOptions()
+    public function getActiveCategories()
     {
         return $this->productCategoryRepo->getActive();
     }

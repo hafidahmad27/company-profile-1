@@ -1,5 +1,5 @@
 <div class="container-fluid bg-secondary text-white mt-5">
-    <div class="container py-4">
+    <div class="container py-5">
         <div class="row">
             <div class="col-md-3 col-sm-3">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -73,22 +73,22 @@
             @endif
         </div>
     </div>
-</div>
 
-<div class="container-fluid bg-dark text-white">
-    <div class="row align-items-center py-3">
-        <div class="col">
+    <div class="container border-top border-3 py-4">
+        <div class="row align-items-center">
+            <div class="col-sm-3">
 
-        </div>
-        <div class="col text-center">
-            Copyright &copy; {{ date('Y') }}
-            {{ $companySetting->name ?? '-' }}.
-            All Rights Reserved.
-        </div>
-        <div class="col text-end">
-            <span class="text-secondary" style="font-size: 10pt">
-                Designed & Developed by HFD Dev
-            </span>
+            </div>
+            <div class="col-sm-6 text-center">
+                Copyright &copy; {{ date('Y') }}
+                {{ $companySetting->name ?? '-' }}.
+                All Rights Reserved.
+            </div>
+            <div class="col-sm-3 text-end">
+                <span class="text-dark opacity-25" style="font-size: 10pt">
+                    Designed & Developed by HFD Dev
+                </span>
+            </div>
         </div>
     </div>
 </div>

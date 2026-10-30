@@ -3,21 +3,13 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Page;
 use App\Models\Product;
 use App\Models\ProductCategory;
-use App\Models\Section;
 
 class ProductController extends Controller
 {
     public function index()
     {
-        $page = Page::where('slug', 'products')->where('is_active', 1)->firstOrFail();
-        $section = Section::join('pages', 'sections.page_id', '=', 'pages.id')
-            ->where('pages.slug', 'products')
-            ->where('sections.is_active', 1)
-            ->firstOrFail();
-
         $productCategories = ProductCategory::join('products', 'products.product_category_id', '=', 'product_categories.id')
             ->where('products.is_published', 1)
             ->select(
@@ -42,17 +34,11 @@ class ProductController extends Controller
         }
         $defaultProductCategoryId = $productCategories->isNotEmpty() ? request()->get('tab', $productCategories->first()->id) : null;
 
-        return view('front-end.products.index', compact('page', 'section', 'productCategories', 'products', 'defaultProductCategoryId'));
+        return view('front-end.products.index', compact('productCategories', 'products', 'defaultProductCategoryId'));
     }
 
     public function show(string $category_slug, string $slug)
     {
-        $page = Page::where('slug', 'products')->where('is_active', 1)->firstOrFail();
-        $section = Section::join('pages', 'sections.page_id', '=', 'pages.id')
-            ->where('pages.slug', 'products')
-            ->where('sections.is_active', 1)
-            ->firstOrFail();
-
         $productCategory = ProductCategory::where('slug', $category_slug)->firstOrFail();
         $product = Product::join('product_categories', 'products.product_category_id', '=', 'product_categories.id')
             ->leftJoin('users', 'products.user_id', '=', 'users.id')
@@ -66,6 +52,6 @@ class ProductController extends Controller
             ->where('is_published', 1)
             ->firstOrFail();
 
-        return view('front-end.products.show', compact('page', 'section', 'productCategory', 'product'));
+        return view('front-end.products.show', compact('productCategory', 'product'));
     }
 }

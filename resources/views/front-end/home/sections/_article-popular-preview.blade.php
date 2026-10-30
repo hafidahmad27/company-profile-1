@@ -36,14 +36,14 @@
                     </div>
                     <h5 class="card-title text-center">
                         <a class="text-decoration-none"
-                            href="{{ url($article->slug . '/' . $articlePopular->category_slug . '/' . $articlePopular->slug) }}">{{ $articlePopular->title ?? '-' }}
+                            href="{{ route('articles.show', ['category_slug' => $articlePopular->category_slug, 'slug' => $articlePopular->slug]) }}">{{ $articlePopular->title ?? '-' }}
                         </a>
                     </h5>
                     <p class="card-text" style="text-align: justify">
                         {{-- {{ Str::limit($articlePopular->content, 150, '...') ?? '-' }}
                         @if ($articlePopular->content && Str::length($articlePopular->content) > 150)
                             <a class="text-decoration-none"
-                                href="{{ url($article->slug . '/' . $articlePopular->category_slug . '/' . $articlePopular->slug) }}">Selengkapnya</a>
+                                href="{{ route('articles.show', ['category_slug' => $articlePopular->category_slug, 'slug' => $articlePopular->slug]) }}">Selengkapnya</a>
                         @endif
                         <br> --}}
                         <span class="text-body-secondary float-end" style="font-size: 8pt"><i

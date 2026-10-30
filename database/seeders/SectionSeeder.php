@@ -22,7 +22,6 @@ class SectionSeeder extends Seeder
                 // 'content' => null,
                 'image' => 'https://placehold.co/1100x500/light/blue',
                 // 'button_text' => null,
-                // 'button_link' => null,
                 'order' => 1,
                 'user_id' => 1,
             ],
@@ -34,7 +33,6 @@ class SectionSeeder extends Seeder
                 // 'content' => null,
                 'image' => 'https://placehold.co/1100x500/grey/black',
                 // 'button_text' => null,
-                // 'button_link' => null,
                 'order' => 2,
                 'user_id' => 1,
             ],
@@ -46,7 +44,6 @@ class SectionSeeder extends Seeder
                 // 'content' => null,
                 'image' => 'https://placehold.co/1100x500/black/light',
                 // 'button_text' => null,
-                // 'button_link' => null,
                 'order' => 3,
                 'user_id' => 1,
             ],
@@ -58,7 +55,6 @@ class SectionSeeder extends Seeder
                 // 'content' => fake()->paragraphs(3, true),
                 // 'image' => null,
                 'button_text' => 'Selengkapnya',
-                'button_link' => 'about',
                 'user_id' => 1,
             ],
             [
@@ -69,7 +65,6 @@ class SectionSeeder extends Seeder
                 // 'content' => null,
                 // 'image' => null,
                 'button_text' => null,
-                'button_link' => null,
                 'user_id' => 1,
             ],
             [
@@ -80,7 +75,6 @@ class SectionSeeder extends Seeder
                 // 'content' => null,
                 // 'image' => null,
                 'button_text' => null,
-                'button_link' => null,
                 'user_id' => 1,
             ],
             [
@@ -91,7 +85,6 @@ class SectionSeeder extends Seeder
                 // 'content' => null,
                 // 'image' => null,
                 'button_text' => 'Selengkapnya',
-                'button_link' => 'products',
                 'user_id' => 1,
             ],
             [
@@ -102,7 +95,6 @@ class SectionSeeder extends Seeder
                 // 'content' => null,
                 // 'image' => null,
                 'button_text' => null,
-                'button_link' => null,
                 'user_id' => 1,
             ],
             [
@@ -113,7 +105,6 @@ class SectionSeeder extends Seeder
                 // 'content' => null,
                 // 'image' => null,
                 'button_text' => null,
-                'button_link' => null,
                 'user_id' => 1,
             ],
             [
@@ -124,7 +115,6 @@ class SectionSeeder extends Seeder
                 // 'content' => null,
                 // 'image' => null,
                 'button_text' => 'Selengkapnya',
-                'button_link' => 'articles',
                 'user_id' => 1,
             ],
 
@@ -136,7 +126,6 @@ class SectionSeeder extends Seeder
                 // 'content' => fake()->paragraphs(3, true),
                 // 'image' => null,
                 // 'button_text' => null,
-                // 'button_link' => null,
                 'user_id' => 1,
             ],
 
@@ -148,7 +137,6 @@ class SectionSeeder extends Seeder
                 // 'content' => null,
                 // 'image' => null,
                 // 'button_text' => null,
-                // 'button_link' => null,
                 'user_id' => 1,
             ],
 
@@ -160,7 +148,6 @@ class SectionSeeder extends Seeder
                 // 'content' => null,
                 // 'image' => null,
                 // 'button_text' => null,
-                // 'button_link' => null,
                 'user_id' => 1,
             ],
         ]);

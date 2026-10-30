@@ -29,7 +29,7 @@ class ArticleController extends Controller
 
     public function create()
     {
-        $articleCategoryOptions = $this->articleCategoryService->getCategoryOptions();
+        $articleCategoryOptions = $this->articleCategoryService->getActiveCategories();
 
         return view('back-end.articles.create', compact('articleCategoryOptions'));
     }
@@ -53,7 +53,7 @@ class ArticleController extends Controller
     public function edit(int $id)
     {
         $article = $this->articleService->getArticleDetail($id);
-        $articleCategoryOptions = $this->articleCategoryService->getCategoryOptions();
+        $articleCategoryOptions = $this->articleCategoryService->getActiveCategories();
 
         return view('back-end.articles.edit', compact('article', 'articleCategoryOptions'));
     }

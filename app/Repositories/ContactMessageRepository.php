@@ -55,11 +55,4 @@ class ContactMessageRepository
     // {
     //     return $this->getById($id)->delete();
     // }
-
-    // public function getPageSlug()
-    // {
-    //     // return (new ContactMessage())->getTable();
-    //     $page = ContactMessage::where('id', '5')->firstOrFail();
-    //     return $page->slug;
-    // }
 }

@@ -23,7 +23,7 @@ class ArticleCategoryService
         return $this->articleCategoryRepo->getById($id);
     }
 
-    public function getCategoryOptions()
+    public function getActiveCategories()
     {
         return $this->articleCategoryRepo->getActive();
     }

@@ -27,7 +27,7 @@ class ProductsImport implements Import, WithMultipleSheets
     public function sheets(): array
     {
         $sheets = [];
-        $productCategories = $this->productCategoryRepo->getAll();
+        $productCategories = $this->productCategoryRepo->getActive();
 
         foreach ($productCategories as $productCategory) {
             $worksheet = $this->spreadsheet->getSheetByName($productCategory->name);

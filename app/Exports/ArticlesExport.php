@@ -24,7 +24,7 @@ class ArticlesExport implements Export, WithMultipleSheets
     public function sheets(): array
     {
         $sheets = [];
-        $articleCategories = $this->articleCategoryRepo->getAll();
+        $articleCategories = $this->articleCategoryRepo->getActive();
 
         foreach ($articleCategories as $articleCategory) {
             $sheets[$articleCategory->name] = new ArticlesByCategorySheet(
