@@ -1,7 +1,7 @@
 <div class="container-fluid bg-secondary text-white mt-5">
     <div class="container py-5">
         <div class="row">
-            <div class="col-md-3 col-sm-3">
+            <div class="col-12 col-sm-6 col-md-5 col-lg-4 mb-3">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="{{ $companySetting->logo_url }}" width="90" class="d-inline-block align-text-top"
                         alt="Logo">
@@ -9,7 +9,7 @@
                 <p class="mt-3" style="text-align: justify">
                     {!! nl2br(e(ucwords($companySetting->headline ?? '-'))) !!}
                 </p>
-                <div class="d-flex gap-4 fs-4">
+                <div class="d-flex flex-wrap gap-3 fs-4">
                     @if ($companySetting->instagram)
                         <a class="text-light" target="_blank" href="{{ $companySetting->instagram }}">
                             <i class="bi bi-instagram"></i>
@@ -43,7 +43,7 @@
                 </div>
             </div>
 
-            <div class="col-md-2 col-sm-2 px-5">
+            <div class="col-12 col-sm-6 col-md-3 col-lg-2">
                 <h5 class="mb-3 fw-bold">Navigasi</h5>
                 <ul class="list-unstyled">
                     @foreach ($pages as $page)
@@ -56,7 +56,7 @@
                 </ul>
             </div>
 
-            <div class="col-md-4 col-sm-4 px-5">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
                 <h5 class="mb-3 fw-bold">Hubungi Kami</h5>
                 <p class="mb-2" style="text-align: justify">
                     {!! nl2br(e($companySetting->address ?? '-')) !!}
@@ -68,7 +68,7 @@
             </div>
 
             @if ($companySetting->map_embed)
-                <div class="col-md-3 col-sm-3">
+                <div class="col-12 col-sm-6 col-md-12 col-lg-3">
                     {!! $companySetting->map_embed !!}
                 </div>
             @endif

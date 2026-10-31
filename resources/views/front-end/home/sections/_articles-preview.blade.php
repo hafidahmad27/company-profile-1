@@ -78,7 +78,7 @@
     @endforeach
 </div>
 
-<div class="d-grid gap-2 col-2 mx-auto text-center mt-3">
+<div class="d-flex justify-content-center mt-3">
     <a href="{{ route('articles.index') }}" class="btn btn-primary">{{ $sectionArticlePreview->button_text ?? '-' }}
         <i class="bi bi-chevron-double-right"></i>
     </a>

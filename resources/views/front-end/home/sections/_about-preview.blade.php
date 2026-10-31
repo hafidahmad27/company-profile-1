@@ -18,7 +18,7 @@
 @endif
 
 @if ($sectionAboutPreview->button_text)
-    <div class="d-grid gap-2 col-2 mx-auto text-center mt-4">
+    <div class="d-flex justify-content-center mt-4">
         <a href="{{ route('about.index') }}" class="btn btn-primary">{{ $sectionAboutPreview->button_text ?? '-' }}
             <i class="bi bi-chevron-double-right"></i>
         </a>
