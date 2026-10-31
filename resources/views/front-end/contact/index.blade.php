@@ -56,7 +56,7 @@
                                     <label>Phone</label>
                                     <input type="number" id="phone"
                                         class="form-control @error('phone') is-invalid @enderror" name="phone"
-                                        min="0" placeholder="ex: 08xxx" value="{{ old('phone') }}">
+                                        min="0" placeholder="ex: 03xxx" value="{{ old('phone') }}">
                                     @error('phone')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror

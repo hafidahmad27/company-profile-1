@@ -3,7 +3,8 @@
         <div class="row">
             <div class="col-md-3 col-sm-3">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{ $companySetting->logo_url }}" width="90" class="d-inline-block align-text-top">
+                    <img src="{{ $companySetting->logo_url }}" width="90" class="d-inline-block align-text-top"
+                        alt="Logo">
                 </a>
                 <p class="mt-3" style="text-align: justify">
                     {!! nl2br(e(ucwords($companySetting->headline ?? '-'))) !!}
@@ -46,7 +47,7 @@
                 <h5 class="mb-3 fw-bold">Navigasi</h5>
                 <ul class="list-unstyled">
                     @foreach ($pages as $page)
-                        <li>
+                        <li class="mb-1">
                             <a class="nav-link text-decoration-none {{ $page->is_active ? (($page->slug == 'index' ? request()->is('/') : request()->is($page->slug . '*')) ? 'active text-primary' : 'text-light') : 'disabled opacity-25' }}"
                                 href="{{ $page->slug == 'index' ? url('/') : url($page->slug) }}">{{ $page->title }}
                             </a>

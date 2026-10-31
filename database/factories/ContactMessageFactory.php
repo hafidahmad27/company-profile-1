@@ -19,12 +19,12 @@ class ContactMessageFactory extends Factory
         return [
             'name' => fake()->name(),
             'email' => fake()->email(),
-            'phone' => fake()->phoneNumber(),
-            'whatsapp' => fake()->phoneNumber(),
+            'phone' => '03' . fake()->numerify('########'), // 10 digit
+            'whatsapp' => '08' . fake()->numerify('##########'), // 12 digit
             'subject' => fake()->words(2, true),
             'message' => fake()->paragraphs(5, true),
             'is_read' => fake()->boolean(),
-            'user_id' => fake()->numberBetween(1, 2),
+            'user_id' => 1,
         ];
     }
 }

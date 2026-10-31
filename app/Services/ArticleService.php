@@ -140,11 +140,11 @@ class ArticleService
 
     public function export(bool $isTemplate = false)
     {
-        $articleCategories = $this->articleCategoryRepo->getActive();
+        // $articleCategories = $this->articleCategoryRepo->getActive();
 
-        if ($articleCategories->isEmpty()) {
-            return back()->with('error', 'No active categories found.');
-        }
+        // if ($articleCategories->isEmpty()) {
+        //     return back()->with('error', 'No active categories found.');
+        // }
 
         $export = new ArticlesExport($this->articleRepo, $this->articleCategoryRepo, $isTemplate);
         $page = $this->articleRepo->getPageSlug();

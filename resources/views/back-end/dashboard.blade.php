@@ -255,14 +255,18 @@
                                         </thead>
                                         <tbody>
                                             @php $i = 0; @endphp
-                                            @foreach ($articlePopular as $articlePopuler)
+                                            @forelse ($articlePopular as $articlePopuler)
                                                 <tr>
                                                     <td align="right">{{ ++$i }}</td>
                                                     <td>{{ $articlePopuler->category_name }}</td>
-                                                    <td>{{ $articlePopuler->title }}</td>
+                                                    <td align="justify">{{ $articlePopuler->title }}</td>
                                                     <td align="right">{{ $articlePopuler->views }}</td>
                                                 </tr>
-                                            @endforeach
+                                            @empty
+                                                <td colspan="4" class="text-center">
+                                                    No data available
+                                                </td>
+                                            @endforelse
                                         </tbody>
                                     </table>
                                 </div>

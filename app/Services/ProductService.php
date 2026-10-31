@@ -140,11 +140,11 @@ class ProductService
 
     public function export(bool $isTemplate = false)
     {
-        $productCategories = $this->productCategoryRepo->getActive();
+        // $productCategories = $this->productCategoryRepo->getActive();
 
-        if ($productCategories->isEmpty()) {
-            return back()->with('error', 'No active categories found.');
-        }
+        // if ($productCategories->isEmpty()) {
+        //     return back()->with('error', 'No active categories found.');
+        // }
 
         $export = new ProductsExport($this->productRepo, $this->productCategoryRepo, $isTemplate);
         $page = $this->productRepo->getPageSlug();

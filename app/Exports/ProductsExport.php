@@ -24,7 +24,7 @@ class ProductsExport implements Export, WithMultipleSheets
     public function sheets(): array
     {
         $sheets = [];
-        $productCategories = $this->productCategoryRepo->getActive();
+        $productCategories = $this->productCategoryRepo->getAll();
 
         foreach ($productCategories as $productCategory) {
             $sheets[$productCategory->name] = new ProductsByCategorySheet(

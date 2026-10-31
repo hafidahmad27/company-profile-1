@@ -1,3 +1,17 @@
+@push('styles')
+    <style>
+        .carousel-item {
+            height: calc(100vh - 90px);
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+@endpush
+
 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
         @foreach ($carouselSlides as $key => $slide)

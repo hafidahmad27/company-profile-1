@@ -17,7 +17,7 @@ class ArticleFactory extends Factory
      */
     public function definition(): array
     {
-        $title = fake()->words(5, true);
+        $title = fake()->words(fake()->numberBetween(4, 8), true);
 
         return [
             'article_category_id' => fake()->numberBetween(1, 3),

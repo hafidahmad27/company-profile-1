@@ -3,6 +3,7 @@
         {{ $sectionArticlePopularPreview->title ?? '-' }}
         {{-- ({{ $articlePopular->count() }}) --}}
     </h3>
+    <div class="d-inline-block border-bottom border-3 border-primary" style="width: 80px;"></div>
     <p class="mt-4">
         {{ $sectionArticlePopularPreview->subtitle ?? null }}
     </p>

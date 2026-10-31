@@ -39,6 +39,12 @@ class PageSeeder extends Seeder
                 'order' => 4,
                 'is_active' => true,
             ],
+            [
+                'title' => 'Contact',
+                'slug' => Str::slug('Contact'),
+                'order' => 5,
+                'is_active' => true,
+            ],
         ]);
     }
 }

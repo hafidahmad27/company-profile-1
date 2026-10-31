@@ -27,7 +27,8 @@ return new class extends Migration
                 'articles-preview',
                 'about',
                 'products',
-                'articles'
+                'articles',
+                'contact'
             ]);
             $table->string('title')->nullable();
             $table->string('subtitle')->nullable();

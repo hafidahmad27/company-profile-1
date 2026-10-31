@@ -23,8 +23,7 @@
                     {{-- <div class="auth-logo"> --}}
                     <div class="text-center">
                         <a href="">
-                            <img src="{{ $companySetting->logo_url ?? asset('mazer/assets/compiled/svg/logo.svg') }}"
-                                width="60%" alt="Logo">
+                            <img src="{{ $companySetting->logo_url }}" width="60%" alt="Logo">
                         </a>
                         <h5 class="mt-4">{{ $companySetting->name }}</h5>
                     </div>

@@ -21,7 +21,7 @@ Route::prefix('be')->name('be.')->middleware(['auth', 'verified'])->group(functi
 
     // Products
     Route::middleware(['superadmin'])->group(function () {
-        Route::resource('product-categories', ProductCategoryController::class);
+        Route::resource('product-categories', ProductCategoryController::class)->except(['destroy']);
         Route::patch('product-categories/{product_category}/updateActiveStatus', [ProductCategoryController::class, 'updateActiveStatus'])
             ->name('product-categories.updateActiveStatus');
     });
@@ -36,7 +36,7 @@ Route::prefix('be')->name('be.')->middleware(['auth', 'verified'])->group(functi
 
     // Articles
     Route::middleware(['superadmin'])->group(function () {
-        Route::resource('article-categories', ArticleCategoryController::class);
+        Route::resource('article-categories', ArticleCategoryController::class)->except(['destroy']);
         Route::patch('article-categories/{article_category}/updateActiveStatus', [ArticleCategoryController::class, 'updateActiveStatus'])
             ->name('article-categories.updateActiveStatus');
     });

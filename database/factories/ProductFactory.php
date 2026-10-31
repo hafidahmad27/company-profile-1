@@ -17,7 +17,7 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
-        $name = fake()->words(3, true);
+        $name = fake()->words(fake()->numberBetween(1, 3), true);
 
         return [
             'product_category_id' => fake()->numberBetween(1, 2),
