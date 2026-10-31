@@ -1,12 +1,12 @@
 <div class="container-fluid bg-secondary text-white mt-5">
     <div class="container py-5">
         <div class="row">
-            <div class="col-12 col-sm-6 col-md-5 col-lg-4 mb-3">
+            <div class="col-12 col-sm-12 col-md-5 col-lg-4 mb-3">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="{{ $companySetting->logo_url }}" width="90" class="d-inline-block align-text-top"
                         alt="Logo">
                 </a>
-                <p class="mt-3" style="text-align: justify">
+                <p class="mt-4" style="text-align: justify">
                     {!! nl2br(e(ucwords($companySetting->headline ?? '-'))) !!}
                 </p>
                 <div class="d-flex flex-wrap gap-3 fs-4">
@@ -68,7 +68,7 @@
             </div>
 
             @if ($companySetting->map_embed)
-                <div class="col-12 col-sm-6 col-md-12 col-lg-3">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-3">
                     {!! $companySetting->map_embed !!}
                 </div>
             @endif

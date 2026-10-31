@@ -12,7 +12,7 @@
     </p>
 
     <div class="row">
-        <div class="col-md-7 col-sm-7">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-7 mb-3">
             <div class="card bg-secondary p-4">
                 <div class="card-body">
                     <h4 class="card-title text-light fw-bold mb-5">Contact Form</h4>
@@ -104,7 +104,7 @@
             </div>
         </div>
 
-        <div class="col-md-5 col-sm-5">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-5">
             <div class="card border-3 border-primary" style="text-align: justify">
                 <div class="card-body p-4">
                     <div class="address d-flex align-items-start gap-3">

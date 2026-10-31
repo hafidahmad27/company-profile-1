@@ -43,6 +43,7 @@
                                 <span class="badge text-bg-{{ $contactMessage->is_read ? 'primary' : 'warning' }}">
                                     {{ $contactMessage->is_read ? 'Read' : 'Unread' }}
                                 </span>
+                                <br>
                                 @if ($contactMessage->is_read == 1)
                                     <span style="font-size: 9pt">
                                         {{ $contactMessage->user_name }} <br>

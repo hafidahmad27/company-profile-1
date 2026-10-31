@@ -1,4 +1,4 @@
-<div class="text-center mb-4">
+<div class="text-center mt-5 mb-4">
     <h3 class="fw-bold">{{ $sectionProductPreview->title ?? '-' }}</h3>
     <div class="d-inline-block border-bottom border-3 border-primary" style="width: 80px;"></div>
     <p class="mt-4">
