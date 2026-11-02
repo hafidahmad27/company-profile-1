@@ -74,7 +74,7 @@
 
         <div class="col-md-3">
             <div class="form-group">
-                <label for="formFile" class="form-label">Logo</label>
+                <label class="form-label">Logo</label><br>
                 <img src="{{ $company->logo_url }}" class="img-thumbnail">
                 <input type="file" name="logo" id="logo"
                     class="form-control @error('logo') is-invalid @enderror">

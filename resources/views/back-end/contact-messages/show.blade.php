@@ -5,13 +5,13 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <div class="d-flex">
-                <div class="col-sm-9">
+            <div class="row">
+                <div class="col-12 col-sm-9">
                     <h5 class="mb-0" style="text-align: justify">
                         {{ $contactMessage->subject_headline ?? '-' }}
                     </h5>
                 </div>
-                <div class="col-sm-2 ms-auto">
+                <div class="col-12 col-sm-3 text-sm-end">
                     <h6>
                         {{ $contactMessage->created_at?->locale('id')->translatedFormat('d M Y, H:i') ?? '-' }}
                     </h6>

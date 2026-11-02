@@ -6,7 +6,7 @@
     </p>
 </div>
 
-<p class="mt-4" style="text-align: justify">
+<p class="mt-4 text-md-center" style="text-align: justify">
     {{ $sectionAboutPreview->content ?? '-' }}
 </p>
 

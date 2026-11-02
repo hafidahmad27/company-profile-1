@@ -13,7 +13,7 @@
 
     <div class="row">
         <div class="col-12 col-sm-12 col-md-12 col-lg-7 mb-3">
-            <div class="card bg-secondary p-4">
+            <div class="card bg-secondary p-3">
                 <div class="card-body">
                     <h4 class="card-title text-light fw-bold mb-5">Contact Form</h4>
                     {{-- <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6> --}}
@@ -27,7 +27,7 @@
                                         aria-label="Close"></button>
                                 </div>
                             @endif
-                            <div class="col-md-6 col-6">
+                            <div class="col-12 col-md-6">
                                 <div class="form-group mb-3 text-light">
                                     <label>Name</label>
                                     <input type="text" id="name"
@@ -38,7 +38,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-6 col-6">
+                            <div class="col-12 col-md-6">
                                 <div class="form-group mb-3 text-light">
                                     <label>Email</label>
                                     <input type="email" id="email"
@@ -51,7 +51,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6 col-6">
+                            <div class="col-12 col-md-6">
                                 <div class="form-group mb-3 text-light">
                                     <label>Phone</label>
                                     <input type="number" id="phone"
@@ -62,7 +62,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-6 col-6">
+                            <div class="col-12 col-md-6">
                                 <div class="form-group mb-3 text-light">
                                     <label>WhatsApp</label>
                                     <input type="number" id="whatsapp"

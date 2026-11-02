@@ -203,7 +203,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-6 col-lg-6 col-md-6">
+                    <div class="col-12 col-lg-6 col-md-6">
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">Product Best Seller</h4>
@@ -237,7 +237,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-6 col-lg-6 col-md-6">
+                    <div class="col-12 col-lg-6 col-md-6">
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">TOP {{ $articlePopular->count() }} Article Popular</h4>
@@ -276,7 +276,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-6 col-lg-6 col-md-6">
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-6">
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">Products by Category</h4>
@@ -288,7 +288,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-6 col-lg-6 col-md-6">
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-6">
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">Articles by Category</h4>

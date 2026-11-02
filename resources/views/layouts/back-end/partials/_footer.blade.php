@@ -15,7 +15,7 @@
                     {{-- <span class="text-danger">
                         <i class="bi bi-heart-fill icon-mid"></i>
                     </span> --}}
-                    <a href="https://saugi.me">Saugi</a>
+                    <a href="https://saugi.me" target="_blank">Saugi</a>
                 </span>
             </div>
         </div>

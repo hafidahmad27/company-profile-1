@@ -18,12 +18,12 @@
 <body>
     <div id="auth">
         <div class="row h-100">
-            <div class="col-lg-4 col-md-4 col-4 mx-auto my-auto">
+            <div class="col-10 col-md-6 col-lg-5 col-xl-4 mx-auto my-auto">
                 <div id="auth-left">
                     {{-- <div class="auth-logo"> --}}
                     <div class="text-center">
                         <a href="">
-                            <img src="{{ $companySetting->logo_url }}" width="60%" alt="Logo">
+                            <img src="{{ $companySetting->logo_url }}" width="70%" alt="Logo">
                         </a>
                         <h5 class="mt-4">{{ $companySetting->name }}</h5>
                     </div>

@@ -5,7 +5,7 @@
     @endif
 
     <div class="row">
-        <div class="col-md-4 col-4">
+        <div class="col-12 col-md-4">
             <div class="form-group">
                 <label>Instagram</label>
                 <input type="url" id="instagram" class="form-control @error('instagram') is-invalid @enderror"
@@ -15,7 +15,7 @@
                 @enderror
             </div>
         </div>
-        <div class="col-md-4 col-4">
+        <div class="col-12 col-md-4">
             <div class="form-group">
                 <label>TikTok</label>
                 <input type="url" id="tiktok" class="form-control @error('tiktok') is-invalid @enderror"
@@ -25,7 +25,7 @@
                 @enderror
             </div>
         </div>
-        <div class="col-md-4 col-4">
+        <div class="col-12 col-md-4">
             <div class="form-group">
                 <label>YouTube</label>
                 <input type="url" id="youtube" class="form-control @error('youtube') is-invalid @enderror"
@@ -35,7 +35,7 @@
                 @enderror
             </div>
         </div>
-        <div class="col-md-4 col-4">
+        <div class="col-12 col-md-4">
             <div class="form-group">
                 <label>Facebook</label>
                 <input type="url" id="facebook" class="form-control @error('facebook') is-invalid @enderror"
@@ -45,7 +45,7 @@
                 @enderror
             </div>
         </div>
-        <div class="col-md-4 col-4">
+        <div class="col-12 col-md-4">
             <div class="form-group">
                 <label>LinkedIn</label>
                 <input type="url" id="linkedin" class="form-control @error('linkedin') is-invalid @enderror"
