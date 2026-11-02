@@ -23,8 +23,7 @@ class UpdateContactMessageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'is_read' => 'boolean',
-            'user_id' => 'exists:users,id',
+            'is_read' => 'boolean'
         ];
     }
 }

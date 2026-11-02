@@ -25,9 +25,18 @@ class CompanyController extends Controller
     public function update(UpdateCompanyRequest $request, int $id)
     {
         $validatedData = $request->validated();
-        $message = $this->companyService->update($id, $validatedData);
+        $this->companyService->update($id, $validatedData);
 
         return back()
-            ->with('success', $message);
+            ->with('success', 'Company updated successfully.');
+    }
+
+    public function updateSocialMedia(UpdateCompanyRequest $request, int $id)
+    {
+        $validatedData = $request->validated();
+        $this->companyService->update($id, $validatedData);
+
+        return back()
+            ->with('success', 'Social media company updated successfully.');
     }
 }

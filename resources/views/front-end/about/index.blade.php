@@ -3,7 +3,11 @@
 @section('title', $section->title)
 
 @section('content')
-    <p class="text-center" style="text-align: justify">
+    {{-- <p class="text-center">
+        {{ $section->title ?? null }}
+    </p> --}}
+
+    <p class="text-center py-3" style="font-size: 18pt">
         {{ $section->subtitle ?? null }}
     </p>
 

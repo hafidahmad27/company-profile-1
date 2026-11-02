@@ -1,8 +1,8 @@
 <thead>
     {{-- <th>Order</th> --}}
+    <th style="width: 30%">Banner Background</th>
     <th>Subtitle</th>
     <th>Content</th>
-    <th style="width: 30%">Banner Background</th>
     {{-- <th class="text-center">Is Active?</th> --}}
 </thead>
 
@@ -14,13 +14,6 @@
                     value="{{ old('sections.' . $section->id . '.order', $section->order) }}" class="form-control">
             </td> --}}
             <td>
-                <input type="text" name="sections[{{ $section->id }}][subtitle]"
-                    value="{{ old('sections.' . $section->id . '.subtitle', $section->subtitle) }}" class="form-control">
-            </td>
-            <td>
-                <textarea rows="6" name="sections[{{ $section->id }}][content]" class="form-control">{{ old('sections.' . $section->id . '.content', $section->content) }}</textarea>
-            </td>
-            <td>
                 <div class="form-group gap-3">
                     @if ($section->image)
                         <img src="{{ $section->image_url }}" alt="Image" class="img-thumbnail mt-2">
@@ -31,6 +24,14 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
+            </td>
+            <td>
+                <input type="text" name="sections[{{ $section->id }}][subtitle]"
+                    value="{{ old('sections.' . $section->id . '.subtitle', $section->subtitle) }}"
+                    class="form-control">
+            </td>
+            <td>
+                <textarea rows="6" name="sections[{{ $section->id }}][content]" class="form-control">{{ old('sections.' . $section->id . '.content', $section->content) }}</textarea>
             </td>
             {{-- <td class="text-center"> --}}
             <input type="hidden" name="sections[{{ $section->id }}][is_active]" value="1"

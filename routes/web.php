@@ -56,6 +56,8 @@ Route::prefix('be')->name('be.')->middleware(['auth', 'verified'])->group(functi
             'index',
             'update'
         ]);
+        Route::put('companies/{company}/social-media', [CompanyController::class, 'updateSocialMedia'])->name('companies.social-media.update');
+
         Route::prefix('pages')->name('pages.')->group(function () {
             Route::get('/', [PageController::class, 'index'])->name('index');
             Route::put('bulkUpdate', [PageController::class, 'bulkUpdate'])->name('bulkUpdate');

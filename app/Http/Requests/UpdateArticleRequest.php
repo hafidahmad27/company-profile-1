@@ -26,7 +26,6 @@ class UpdateArticleRequest extends FormRequest
             'title' => 'required|string|max:255|unique:articles,title,' . $this->route('article'),
             'content' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'user_id' => 'exists:users,id',
         ];
     }
 }

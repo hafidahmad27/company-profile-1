@@ -38,7 +38,5 @@ class CompanyService
         }
 
         $this->companyRepo->update($id, $data);
-
-        return 'Company updated successfully.';
     }
 }

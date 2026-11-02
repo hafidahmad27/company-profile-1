@@ -21,6 +21,16 @@ class UpdateCompanyRequest extends FormRequest
      */
     public function rules(): array
     {
+        if ($this->routeIs('be.companies.social-media.update')) {
+            return [
+                'instagram' => 'nullable|string',
+                'tiktok' => 'nullable|string',
+                'youtube' => 'nullable|string',
+                'facebook' => 'nullable|string',
+                'linkedin' => 'nullable|string',
+            ];
+        }
+
         return [
             'name' => 'required|string|max:255|unique:companies,name,' . $this->route('company'),
             'logo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
@@ -30,12 +40,6 @@ class UpdateCompanyRequest extends FormRequest
             'email' => 'required|email',
             'phone' => 'nullable|string',
             'whatsapp' => 'nullable|string',
-            'instagram' => 'nullable|string',
-            'tiktok' => 'nullable|string',
-            'youtube' => 'nullable|string',
-            'facebook' => 'nullable|string',
-            'linkedin' => 'nullable|string',
-            'user_id' => 'exists:users,id',
         ];
     }
 }

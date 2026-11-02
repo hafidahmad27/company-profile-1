@@ -3,9 +3,9 @@
 @section('title', $section->title)
 
 @section('content')
-    <p class="text-center" style="text-align: justify">
+    {{-- <p class="text-center">
         {{ $section->subtitle ?? null }}
-    </p>
+    </p> --}}
 
     {{-- @if ($section->image)
         <div class="text-center mb-4">

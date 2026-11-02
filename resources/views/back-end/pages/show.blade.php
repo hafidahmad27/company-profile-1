@@ -21,7 +21,7 @@
                 @endphp
 
                 @if ($grouped->count() > 1)
-                    {{-- tampilkan nav-tabs --}}
+                    {{-- tampilkan Nav tabs --}}
                     <ul class="nav nav-tabs" id="sectionTabs" role="tablist">
                         @foreach ($grouped as $key => $groupedSections)
                             <li class="nav-item" role="presentation">

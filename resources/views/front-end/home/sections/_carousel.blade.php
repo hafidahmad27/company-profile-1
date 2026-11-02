@@ -1,7 +1,7 @@
 @push('styles')
     <style>
         .carousel-item {
-            height: calc(100vh - 90px);
+            height: calc(100vh - 105px);
         }
 
         .carousel-item img {
