@@ -1,12 +1,12 @@
 <div class="container-fluid bg-secondary text-white mt-5">
     <div class="container py-5">
         <div class="row">
-            <div class="col-12 col-sm-12 col-md-5 col-lg-4 text-center text-lg-start mb-5">
+            <div class="col-12 col-sm-12 col-md-5 col-lg-4 text-center text-lg-start pe-lg-5 pe-md-5 mb-5">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{ $companySetting->logo_url }}" style="max-height: 50px"
-                        class="d-inline-block align-text-top" alt="Logo">
+                    <img src="{{ $companySetting->logo_url }}" width="100%" class="d-inline-block align-text-top"
+                        alt="Logo">
                 </a>
-                <p class="mt-3 text-center text-lg-start" style="text-align: justify">
+                <p class="mt-3 text-center text-md-justify text-lg-justify" style="text-align: justify">
                     {!! nl2br(e(ucwords($companySetting->headline ?? '-'))) !!}
                 </p>
                 <div class="d-flex justify-content-center justify-content-lg-start flex-wrap gap-3 fs-4">
@@ -68,24 +68,22 @@
             </div>
 
             @if ($companySetting->map_embed)
-                <div class="col-12 col-sm-12 col-md-12 col-lg-3">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-3 mb-5">
                     {!! $companySetting->map_embed !!}
                 </div>
             @endif
         </div>
-    </div>
 
-    <div class="container border-top border-3 py-4">
-        <div class="row align-items-center">
-            <div class="col-sm-3">
+        <div class="row align-items-center border-top border-3 pt-4">
+            <div class="col-12 col-lg-3">
 
             </div>
-            <div class="col-sm-6 text-center">
+            <div class="col-12 col-lg-6 text-center">
                 Copyright &copy; {{ date('Y') }}
                 {{ $companySetting->name ?? '-' }}.
                 All Rights Reserved.
             </div>
-            <div class="col-sm-3 text-end">
+            <div class="col-12 col-lg-3 text-center text-lg-end mt-2 mt-lg-0">
                 <span class="text-dark opacity-25" style="font-size: 10pt">
                     Designed & Developed by HFD Dev
                 </span>
