@@ -16,13 +16,13 @@ class ProductCategorySeeder extends Seeder
     {
         ProductCategory::factory()->createMany([
             [
-                'name' => 'Kategori Produk 1',
-                'slug' => Str::slug('Kategori Produk 1'),
+                'name' => 'Category 1',
+                'slug' => Str::slug('Category 1'),
                 'is_active' => true,
             ],
             [
-                'name' => 'Kategori Produk 2',
-                'slug' => Str::slug('Kategori Produk 2'),
+                'name' => 'Category 2',
+                'slug' => Str::slug('Category 2'),
                 'is_active' => true,
             ],
         ]);

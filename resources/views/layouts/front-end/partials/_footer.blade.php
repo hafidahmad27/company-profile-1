@@ -56,7 +56,7 @@
                 </ul>
             </div>
 
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-4 mb-4">
                 <h5 class="mb-3 fw-bold">Hubungi Kami</h5>
                 <p class="mb-2" style="text-align: justify">
                     {!! nl2br(e($companySetting->address ?? '-')) !!}
@@ -68,7 +68,7 @@
             </div>
 
             @if ($companySetting->map_embed)
-                <div class="col-12 col-sm-12 col-md-12 col-lg-3 mb-5">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-2 mb-5">
                     {!! $companySetting->map_embed !!}
                 </div>
             @endif

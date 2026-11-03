@@ -75,7 +75,11 @@
         <div class="col-md-3">
             <div class="form-group">
                 <label class="form-label">Logo</label><br>
-                <img src="{{ $company->logo_url }}" class="img-thumbnail">
+
+                @if ($company->logo_url)
+                    <img src="{{ $company->logo_url }}" class="img-thumbnail">
+                @endif
+
                 <input type="file" name="logo" id="logo"
                     class="form-control @error('logo') is-invalid @enderror">
                 @error('logo')

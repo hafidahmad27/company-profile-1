@@ -78,8 +78,11 @@
     @endforeach
 </div>
 
-<div class="d-flex justify-content-center mt-3">
-    <a href="{{ route('articles.index') }}" class="btn btn-primary">{{ $sectionArticlePreview->button_text ?? '-' }}
-        <i class="bi bi-chevron-double-right"></i>
-    </a>
-</div>
+@if ($articlesPreview)
+    <div class="d-flex justify-content-center mt-3">
+        <a href="{{ route('articles.index') }}"
+            class="btn btn-primary">{{ $sectionArticlePreview->button_text ?? '-' }}
+            <i class="bi bi-chevron-double-right"></i>
+        </a>
+    </div>
+@endif

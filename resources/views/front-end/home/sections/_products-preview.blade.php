@@ -77,8 +77,11 @@
     @endforeach
 </div>
 
-<div class="d-flex justify-content-center mt-2">
-    <a href="{{ route('products.index') }}" class="btn btn-primary">{{ $sectionProductPreview->button_text ?? '-' }}
-        <i class="bi bi-chevron-double-right"></i>
-    </a>
-</div>
+@if ($productsPreview)
+    <div class="d-flex justify-content-center mt-2">
+        <a href="{{ route('products.index') }}"
+            class="btn btn-primary">{{ $sectionProductPreview->button_text ?? '-' }}
+            <i class="bi bi-chevron-double-right"></i>
+        </a>
+    </div>
+@endif

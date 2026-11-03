@@ -4,7 +4,7 @@
         @method('PUT')
     @endif
     <div class="row">
-        <div class="col-md-3 col-3">
+        <div class="col-3 col-md-3">
             <div class="form-group">
                 <label>Category</label>
                 <select name="product_category_id" id="product_category_id"
@@ -23,7 +23,7 @@
                 @enderror
             </div>
         </div>
-        <div class="col-md-9 col-9">
+        <div class="col-6 col-md-6">
             <div class="form-group">
                 <label>Name</label>
                 <input type="text" id="name" class="form-control @error('name') is-invalid @enderror"
@@ -33,17 +33,7 @@
                 @enderror
             </div>
         </div>
-    </div>
-    <div class="form-group mb-3">
-        <label class="form-label">Description</label>
-        <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description"
-            rows="5">{{ old('description', $product->description ?? null) }}</textarea>
-        @error('description')
-            <div class="invalid-feedback">{{ $message }}</div>
-        @enderror
-    </div>
-    <div class="row">
-        <div class="col-md-6 col-6">
+        <div class="col-3 col-md-3">
             <div class="form-group">
                 <label>Price</label>
                 <input type="number" min="0" id="price"
@@ -54,7 +44,17 @@
                 @enderror
             </div>
         </div>
-        <div class="col-md-6 col-6">
+    </div>
+    <div class="row">
+        <div class="col-9 col-md-9">
+            <label class="form-label">Description</label>
+            <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description"
+                rows="5">{{ old('description', $product->description ?? null) }}</textarea>
+            @error('description')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+        <div class="col-3 col-md-3">
             <div class="form-group">
                 <label for="formFile" class="form-label">Image</label><br>
                 @if ($product->image ?? null)
@@ -68,7 +68,7 @@
             </div>
         </div>
     </div>
-    <div class="col-12 col-md-12 d-flex mt-4">
+    <div class="col-12 col-md-12 text-center mt-4">
         <button type="submit" class="btn btn-primary me-1 mb-1">
             {!! $submitLabel !!}
         </button>

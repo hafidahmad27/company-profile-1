@@ -22,8 +22,10 @@
                 </div>
                 <div class="modal-footer">
                     <div class="form-group me-auto">
-                        <a href="{{ route('be.products.export', ['isTemplate' => 1]) }}">download
-                            template</a>
+                        @if ($products->count() === 0)
+                            <a href="{{ route('be.products.export', ['isTemplate' => 1]) }}">download
+                                template</a>
+                        @endif
                     </div>
                     <button type="submit" class="btn btn-outline-success ms-1" data-bs-dismiss="modal">
                         <i class="bx bx-check d-block d-sm-none"></i>

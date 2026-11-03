@@ -16,18 +16,18 @@ class ArticleCategorySeeder extends Seeder
     {
         ArticleCategory::factory()->createMany([
             [
-                'name' => 'Berita',
-                'slug' => Str::slug('Berita'),
+                'name' => 'Category 1',
+                'slug' => Str::slug('Category 1'),
                 'is_active' => true,
             ],
             [
-                'name' => 'Informasi',
-                'slug' => Str::slug('Informasi'),
+                'name' => 'Category 2',
+                'slug' => Str::slug('Category 2'),
                 'is_active' => true,
             ],
             [
-                'name' => 'Pengumuman',
-                'slug' => Str::slug('Pengumuman'),
+                'name' => 'Category 3',
+                'slug' => Str::slug('Category 3'),
                 'is_active' => true,
             ],
         ]);

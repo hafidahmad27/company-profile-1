@@ -20,9 +20,12 @@
                             data-bs-target="#default">
                             <i class="bi bi-arrow-bar-up"></i> Import
                         </button>
-                        <a href="{{ route('be.articles.export') }}" class="btn btn-outline-secondary">
-                            <i class="bi bi-file-earmark-excel-fill"></i> Export
-                        </a>
+
+                        @if ($articles->count() > 0)
+                            <a href="{{ route('be.articles.export') }}" class="btn btn-outline-secondary">
+                                <i class="bi bi-file-earmark-excel-fill"></i> Export
+                            </a>
+                        @endif
                     </div>
                 </div>
             </h5>
