@@ -14,18 +14,12 @@ class ArticleService
 {
     use GenerateUploadPathTrait;
 
-    protected FileUploadService $fileUploadService;
-    protected ImportExportService $importExportService;
-    protected ArticleRepository $articleRepo;
-    protected ArticleCategoryRepository $articleCategoryRepo;
-
-    public function __construct(FileUploadService $fileUploadService, ImportExportService $importExportService, ArticleRepository $articleRepo, ArticleCategoryRepository $articleCategoryRepo)
-    {
-        $this->fileUploadService = $fileUploadService;
-        $this->importExportService = $importExportService;
-        $this->articleRepo = $articleRepo;
-        $this->articleCategoryRepo = $articleCategoryRepo;
-    }
+    public function __construct(
+        protected FileUploadService $fileUploadService,
+        protected ImportExportService $importExportService,
+        protected ArticleRepository $articleRepo,
+        protected ArticleCategoryRepository $articleCategoryRepo
+    ) {}
 
     public function getArticles()
     {

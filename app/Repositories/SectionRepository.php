@@ -6,12 +6,9 @@ use App\Models\Section;
 
 class SectionRepository
 {
-    protected Section $section;
-
-    public function __construct(Section $section)
-    {
-        $this->section = $section;
-    }
+    public function __construct(
+        protected Section $section
+    ) {}
 
     public function getAllByPageId(int $pageId)
     {

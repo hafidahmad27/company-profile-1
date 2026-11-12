@@ -9,12 +9,9 @@ use App\Services\ArticleCategoryService;
 
 class ArticleCategoryController extends Controller
 {
-    protected ArticleCategoryService $articleCategoryService;
-
-    public function __construct(ArticleCategoryService $articleCategoryService)
-    {
-        $this->articleCategoryService = $articleCategoryService;
-    }
+    public function __construct(
+        protected ArticleCategoryService $articleCategoryService
+    ) {}
 
     public function index()
     {

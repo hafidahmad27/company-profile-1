@@ -9,12 +9,9 @@ use App\Services\ProductCategoryService;
 
 class ProductCategoryController extends Controller
 {
-    protected ProductCategoryService $productCategoryService;
-
-    public function __construct(ProductCategoryService $productCategoryService)
-    {
-        $this->productCategoryService = $productCategoryService;
-    }
+    public function __construct(
+        protected ProductCategoryService $productCategoryService
+    ) {}
 
     public function index()
     {

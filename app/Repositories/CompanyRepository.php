@@ -6,12 +6,9 @@ use App\Models\Company;
 
 class CompanyRepository
 {
-    protected Company $company;
-
-    public function __construct(Company $company)
-    {
-        $this->company = $company;
-    }
+    public function __construct(
+        protected Company $company
+    ) {}
 
     public function getById(int $id)
     {

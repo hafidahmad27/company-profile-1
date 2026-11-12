@@ -7,12 +7,9 @@ use App\Models\Page;
 
 class ArticleRepository
 {
-    protected Article $article;
-
-    public function __construct(Article $article)
-    {
-        $this->article = $article;
-    }
+    public function __construct(
+        protected Article $article
+    ) {}
 
     public function getAll()
     {

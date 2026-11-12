@@ -36,6 +36,10 @@ class ArticlesImport implements Import, WithMultipleSheets
                     $articleCategory->id,
                     $this->articleService
                 );
+            } elseif (!$worksheet) {
+                throw new \Exception(
+                    'Nama sheet harus sama dengan nama kategori yang ada di database.'
+                );
             }
         }
 

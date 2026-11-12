@@ -6,14 +6,10 @@ use App\Repositories\CompanyRepository;
 
 class CompanyService
 {
-    protected FileUploadService $fileUploadService;
-    protected CompanyRepository $companyRepo;
-
-    public function __construct(FileUploadService $fileUploadService, CompanyRepository $companyRepo)
-    {
-        $this->fileUploadService = $fileUploadService;
-        $this->companyRepo = $companyRepo;
-    }
+    public function __construct(
+        protected FileUploadService $fileUploadService,
+        protected CompanyRepository $companyRepo
+    ) {}
 
     public function getCompany()
     {

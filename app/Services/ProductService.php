@@ -14,18 +14,12 @@ class ProductService
 {
     use GenerateUploadPathTrait;
 
-    protected FileUploadService $fileUploadService;
-    protected ImportExportService $importExportService;
-    protected ProductRepository $productRepo;
-    protected ProductCategoryRepository $productCategoryRepo;
-
-    public function __construct(FileUploadService $fileUploadService, ImportExportService $importExportService, ProductRepository $productRepo, ProductCategoryRepository $productCategoryRepo)
-    {
-        $this->fileUploadService = $fileUploadService;
-        $this->importExportService = $importExportService;
-        $this->productRepo = $productRepo;
-        $this->productCategoryRepo = $productCategoryRepo;
-    }
+    public function __construct(
+        protected FileUploadService $fileUploadService,
+        protected ImportExportService $importExportService,
+        protected ProductRepository $productRepo,
+        protected ProductCategoryRepository $productCategoryRepo
+    ) {}
 
     public function getProducts()
     {

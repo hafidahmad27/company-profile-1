@@ -11,16 +11,11 @@ class PageService
 {
     use GenerateUploadPathTrait;
 
-    protected FileUploadService $fileUploadService;
-    protected PageRepository $pageRepo;
-    protected SectionRepository $sectionRepo;
-
-    public function __construct(FileUploadService $fileUploadService, PageRepository $pageRepo, SectionRepository $sectionRepo)
-    {
-        $this->fileUploadService = $fileUploadService;
-        $this->pageRepo = $pageRepo;
-        $this->sectionRepo = $sectionRepo;
-    }
+    public function __construct(
+        protected FileUploadService $fileUploadService,
+        protected PageRepository $pageRepo,
+        protected SectionRepository $sectionRepo
+    ) {}
 
     public function getPages()
     {

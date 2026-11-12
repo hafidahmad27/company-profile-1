@@ -36,6 +36,10 @@ class ProductsImport implements Import, WithMultipleSheets
                     $productCategory->id,
                     $this->productService
                 );
+            } elseif (!$worksheet) {
+                throw new \Exception(
+                    'Nama sheet harus sama dengan nama kategori yang ada di database.'
+                );
             }
         }
 

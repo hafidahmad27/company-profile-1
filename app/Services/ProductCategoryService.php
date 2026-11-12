@@ -6,12 +6,9 @@ use App\Repositories\ProductCategoryRepository;
 
 class ProductCategoryService
 {
-    protected ProductCategoryRepository $productCategoryRepo;
-
-    public function __construct(ProductCategoryRepository $productCategoryRepo)
-    {
-        $this->productCategoryRepo = $productCategoryRepo;
-    }
+    public function __construct(
+        protected ProductCategoryRepository $productCategoryRepo
+    ) {}
 
     public function getCategories()
     {

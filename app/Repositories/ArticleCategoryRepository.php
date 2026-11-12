@@ -6,12 +6,9 @@ use App\Models\ArticleCategory;
 
 class ArticleCategoryRepository
 {
-    protected ArticleCategory $articleCategory;
-
-    public function __construct(ArticleCategory $articleCategory)
-    {
-        $this->articleCategory = $articleCategory;
-    }
+    public function __construct(
+        protected ArticleCategory $articleCategory
+    ) {}
 
     public function getAll()
     {

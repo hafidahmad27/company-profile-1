@@ -1,7 +1,7 @@
 <thead>
-    <th>Order</th>
+    <th style="width: 10%">#</th>
     <th>Image</th>
-    <th style="width: 50%">Title & Subtitle</th>
+    <th style="width: 55%">Title & Subtitle</th>
     {{-- <th>Content</th> --}}
     {{-- <th>Button Text</th> --}}
     <th class="text-center">Is Active?</th>
@@ -12,7 +12,8 @@
         <tr>
             <td>
                 <input type="number" name="sections[{{ $section->id }}][order]"
-                    value="{{ old('sections.' . $section->id . '.order', $section->order) }}" class="form-control">
+                    value="{{ old('sections.' . $section->id . '.order', $section->order) }}" class="form-control"
+                    readonly>
             </td>
             <td>
                 <div class="form-group">

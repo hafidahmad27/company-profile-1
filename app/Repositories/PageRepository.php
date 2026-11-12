@@ -6,12 +6,9 @@ use App\Models\Page;
 
 class PageRepository
 {
-    protected Page $page;
-
-    public function __construct(Page $page)
-    {
-        $this->page = $page;
-    }
+    public function __construct(
+        protected Page $page
+    ) {}
 
     public function getAll()
     {

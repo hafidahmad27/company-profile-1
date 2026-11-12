@@ -88,8 +88,8 @@
                         <div class="row">
                             <div class="form-group mb-3 text-light">
                                 <label class="form-label">Message</label>
-                                <textarea class="form-control @error('message') is-invalid @enderror" id="message" name="message" maxlength="255"
-                                    rows="5" required>{{ old('message') }}</textarea>
+                                <textarea class="form-control @error('message') is-invalid @enderror" id="message" name="message" rows="5"
+                                    required>{{ old('message') }}</textarea>
                                 @error('message')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

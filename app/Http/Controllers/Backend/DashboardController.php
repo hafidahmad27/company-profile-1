@@ -8,14 +8,10 @@ use App\Repositories\ProductRepository;
 
 class DashboardController extends Controller
 {
-    protected ProductRepository $productRepo;
-    protected ArticleRepository $articleRepo;
-
-    public function __construct(ProductRepository $productRepo, ArticleRepository $articleRepo)
-    {
-        $this->productRepo = $productRepo;
-        $this->articleRepo = $articleRepo;
-    }
+    public function __construct(
+        protected ProductRepository $productRepo,
+        protected ArticleRepository $articleRepo
+    ) {}
 
     public function index()
     {

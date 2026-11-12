@@ -6,12 +6,9 @@ use App\Repositories\ArticleCategoryRepository;
 
 class ArticleCategoryService
 {
-    protected ArticleCategoryRepository $articleCategoryRepo;
-
-    public function __construct(ArticleCategoryRepository $articleCategoryRepo)
-    {
-        $this->articleCategoryRepo = $articleCategoryRepo;
-    }
+    public function __construct(
+        protected ArticleCategoryRepository $articleCategoryRepo
+    ) {}
 
     public function getCategories()
     {

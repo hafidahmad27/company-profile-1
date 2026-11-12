@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class Section extends Model
 {
@@ -20,7 +21,9 @@ class Section extends Model
     protected function imageUrl(): Attribute
     {
         return Attribute::make(
-            get: fn() => $this->image ? Storage::url($this->image) : null,
+            get: fn() => Str::startsWith($this->image, 'https://')
+                ? $this->image
+                : Storage::url($this->image),
         );
     }
 }

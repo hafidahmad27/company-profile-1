@@ -7,12 +7,9 @@ use App\Services\ContactMessageService;
 
 class ContactMessageController extends Controller
 {
-    protected ContactMessageService $contactMessageService;
-
-    public function __construct(ContactMessageService $contactMessageService)
-    {
-        $this->contactMessageService = $contactMessageService;
-    }
+    public function __construct(
+        protected ContactMessageService $contactMessageService
+    ) {}
 
     public function index()
     {

@@ -9,12 +9,9 @@ use App\Services\PageService;
 
 class PageController extends Controller
 {
-    protected PageService $pageService;
-
-    public function __construct(PageService $pageService)
-    {
-        $this->pageService = $pageService;
-    }
+    public function __construct(
+        protected PageService $pageService
+    ) {}
 
     public function index()
     {

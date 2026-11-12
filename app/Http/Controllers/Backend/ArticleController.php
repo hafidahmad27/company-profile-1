@@ -11,14 +11,10 @@ use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
-    protected ArticleService $articleService;
-    protected ArticleCategoryService $articleCategoryService;
-
-    public function __construct(ArticleService $articleService, ArticleCategoryService $articleCategoryService)
-    {
-        $this->articleService = $articleService;
-        $this->articleCategoryService = $articleCategoryService;
-    }
+    public function __construct(
+        protected ArticleService $articleService,
+        protected ArticleCategoryService $articleCategoryService
+    ) {}
 
     public function index()
     {
@@ -100,6 +96,9 @@ class ArticleController extends Controller
                     ->withErrors(['file' => $e->getMessage()]);
             }
             throw $e;
+        } catch (\Exception $e) {
+            return back()
+                ->withErrors(['file' => $e->getMessage()]);
         }
     }
 

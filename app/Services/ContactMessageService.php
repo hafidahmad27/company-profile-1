@@ -6,12 +6,9 @@ use App\Repositories\ContactMessageRepository;
 
 class ContactMessageService
 {
-    protected ContactMessageRepository $contactMessageRepo;
-
-    public function __construct(ContactMessageRepository $contactMessageRepo)
-    {
-        $this->contactMessageRepo = $contactMessageRepo;
-    }
+    public function __construct(
+        protected ContactMessageRepository $contactMessageRepo
+    ) {}
 
     public function getContactMessages()
     {

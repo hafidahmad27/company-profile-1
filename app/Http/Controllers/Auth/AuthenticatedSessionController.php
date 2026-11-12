@@ -12,12 +12,9 @@ use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
 {
-    protected CompanyRepository $companyRepo;
-
-    public function __construct(CompanyRepository $companyRepo)
-    {
-        $this->companyRepo = $companyRepo;
-    }
+    public function __construct(
+        protected CompanyRepository $companyRepo
+    ) {}
 
     /**
      * Display the login view.

@@ -8,12 +8,9 @@ use App\Services\CompanyService;
 
 class CompanyController extends Controller
 {
-    protected CompanyService $companyService;
-
-    public function __construct(CompanyService $companyService)
-    {
-        $this->companyService = $companyService;
-    }
+    public function __construct(
+        protected CompanyService $companyService
+    ) {}
 
     public function index()
     {

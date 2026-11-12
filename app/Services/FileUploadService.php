@@ -7,12 +7,9 @@ use Illuminate\Contracts\Filesystem\Factory as FilesystemFactory;
 
 class FileUploadService
 {
-    protected FilesystemFactory $storage;
-
-    public function __construct(FilesystemFactory $storage)
-    {
-        $this->storage = $storage;
-    }
+    public function __construct(
+        protected FilesystemFactory $storage
+    ) {}
 
     public function upload(UploadedFile $file, string $path, string $disk)
     {
