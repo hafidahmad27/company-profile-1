@@ -16,7 +16,7 @@ class SectionRepository
     public function getAllByPageId(int $pageId)
     {
         return $this->section->where('page_id', $pageId)
-            ->orderBy('order', 'desc')
+            ->orderBy('id', 'asc')
             ->get();
     }
 

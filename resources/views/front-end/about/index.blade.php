@@ -7,9 +7,11 @@
         {{ $section->title ?? null }}
     </p> --}}
 
-    <p class="text-center py-3" style="font-size: 18pt">
-        {{ $section->subtitle ?? null }}
-    </p>
+    @if ($section->subtitle)
+        <p class="text-center py-2" style="font-size: 18pt">
+            {{ $section->subtitle ?? null }}
+        </p>
+    @endif
 
     @if ($section->image)
         <div class="text-center mb-4">

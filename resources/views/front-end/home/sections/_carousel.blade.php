@@ -23,10 +23,10 @@
         @foreach ($carouselSlides as $key => $slide)
             <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
                 <img src="{{ $slide->image_url }}" class="d-block w-100">
-                {{-- <div class="carousel-caption d-block">
-                            <h5>{{ $slide->title }}</h5>
-                            <p>{{ $slide->subtitle }}</p>
-                        </div> --}}
+                <div class="carousel-caption d-block">
+                    <h2 class="fw-bold">{{ $slide->title ?? null }}</h2>
+                    <h5>{{ $slide->subtitle ?? null }}</h5>
+                </div>
             </div>
         @endforeach
     </div>

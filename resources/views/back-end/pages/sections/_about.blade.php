@@ -1,8 +1,7 @@
 <thead>
     {{-- <th>Order</th> --}}
     <th style="width: 30%">Banner Background</th>
-    <th>Subtitle</th>
-    <th>Content</th>
+    <th>Subtitle & Content</th>
     {{-- <th class="text-center">Is Active?</th> --}}
 </thead>
 
@@ -14,7 +13,7 @@
                     value="{{ old('sections.' . $section->id . '.order', $section->order) }}" class="form-control">
             </td> --}}
             <td>
-                <div class="form-group gap-3">
+                <div class="form-group">
                     @if ($section->image)
                         <img src="{{ $section->image_url }}" alt="Image" class="img-thumbnail mt-2">
                     @endif
@@ -26,12 +25,13 @@
                 </div>
             </td>
             <td>
+                <label class="fw-bold">Subtitle:</label>
                 <input type="text" name="sections[{{ $section->id }}][subtitle]"
                     value="{{ old('sections.' . $section->id . '.subtitle', $section->subtitle) }}"
                     class="form-control">
-            </td>
-            <td>
-                <textarea rows="6" name="sections[{{ $section->id }}][content]" class="form-control">{{ old('sections.' . $section->id . '.content', $section->content) }}</textarea>
+
+                <label class="fw-bold mt-2">Content:</label>
+                <textarea rows="5" name="sections[{{ $section->id }}][content]" class="form-control">{{ old('sections.' . $section->id . '.content', $section->content) }}</textarea>
             </td>
             {{-- <td class="text-center"> --}}
             <input type="hidden" name="sections[{{ $section->id }}][is_active]" value="1"

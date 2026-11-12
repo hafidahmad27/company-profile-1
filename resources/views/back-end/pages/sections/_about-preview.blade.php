@@ -1,7 +1,7 @@
 <thead>
     {{-- <th>Order</th> --}}
-    <th style="width: 17%">Title</th>
-    <th style="width: 25%">Subtitle</th>
+    <th style="width: 20%">Title</th>
+    <th style="width: 30%">Subtitle</th>
     <th>Content</th>
     {{-- <th>Image</th> --}}
     {{-- <th>Button Text</th> --}}

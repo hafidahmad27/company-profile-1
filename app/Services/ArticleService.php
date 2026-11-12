@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Exports\ArticlesExport;
+use App\Exports\Sheets\ArticlesByCategorySheet;
 use App\Imports\ArticlesImport;
 use App\Repositories\ArticleCategoryRepository;
 use App\Repositories\ArticleRepository;
@@ -101,6 +102,20 @@ class ArticleService
         return 'Article updated successfully.';
     }
 
+    public function updateOrCreate(int $articleCategoryId, array $row) // For Import Excel
+    {
+        $this->articleRepo->updateOrCreate(
+            [
+                'id' => $row['id']
+            ],
+            [
+                'article_category_id' => $articleCategoryId,
+                'title' => $row['title'] ?? ('Untitled-' . uniqid()),
+                'content' => $row['content']
+            ]
+        );
+    }
+
     public function delete(int $id)
     {
         $article = $this->articleRepo->getById($id);
@@ -131,7 +146,8 @@ class ArticleService
 
     public function import(UploadedFile $file)
     {
-        $import = new ArticlesImport($this->articleRepo, $this->articleCategoryRepo, $file);
+        $articleCategories = $this->articleCategoryRepo->getAll();
+        $import = new ArticlesImport($articleCategories, $this, $file);
 
         $this->importExportService->import($import, $file);
 
@@ -140,13 +156,25 @@ class ArticleService
 
     public function export(bool $isTemplate = false)
     {
-        // $articleCategories = $this->articleCategoryRepo->getActive();
+        $sheets = [];
+        $articleCategories = $this->articleCategoryRepo->getAll();
 
-        // if ($articleCategories->isEmpty()) {
-        //     return back()->with('error', 'No active categories found.');
-        // }
+        foreach ($articleCategories as $articleCategory) {
+            $articles = $isTemplate ? collect([]) :
+                $this->articleRepo->getByCategoryId($articleCategory->id)
+                ->map(fn($article) => [
+                    'id'      => $article->id,
+                    'title'   => $article->title,
+                    'content' => $article->content,
+                ]);
 
-        $export = new ArticlesExport($this->articleRepo, $this->articleCategoryRepo, $isTemplate);
+            $sheets[$articleCategory->name] = new ArticlesByCategorySheet(
+                $articleCategory->name,
+                $articles
+            );
+        }
+
+        $export = new ArticlesExport($sheets);
         $page = $this->articleRepo->getPageSlug();
         $filename = $page . ($isTemplate ? '_template.xlsx' : '_data.xlsx');
 

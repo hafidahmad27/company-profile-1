@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Exports\ProductsExport;
+use App\Exports\Sheets\ProductsByCategorySheet;
 use App\Imports\ProductsImport;
 use App\Repositories\ProductCategoryRepository;
 use App\Repositories\ProductRepository;
@@ -101,6 +102,21 @@ class ProductService
         return 'Product updated successfully.';
     }
 
+    public function updateOrCreate(int $productCategoryId, array $row) // For Import Excel
+    {
+        $this->productRepo->updateOrCreate(
+            [
+                'id' => $row['id']
+            ],
+            [
+                'product_category_id' => $productCategoryId,
+                'name' => $row['name'] ?? ('Untitled-' . uniqid()),
+                'price' => $row['price'],
+                'description' => $row['description']
+            ]
+        );
+    }
+
     public function delete(int $id)
     {
         $product = $this->productRepo->getById($id);
@@ -131,7 +147,8 @@ class ProductService
 
     public function import(UploadedFile $file)
     {
-        $import = new ProductsImport($this->productRepo, $this->productCategoryRepo, $file);
+        $productCategories = $this->productCategoryRepo->getAll();
+        $import = new ProductsImport($productCategories, $this, $file);
 
         $this->importExportService->import($import, $file);
 
@@ -140,13 +157,26 @@ class ProductService
 
     public function export(bool $isTemplate = false)
     {
-        // $productCategories = $this->productCategoryRepo->getActive();
+        $sheets = [];
+        $productCategories = $this->productCategoryRepo->getAll();
 
-        // if ($productCategories->isEmpty()) {
-        //     return back()->with('error', 'No active categories found.');
-        // }
+        foreach ($productCategories as $productCategory) {
+            $products = $isTemplate ? collect([]) :
+                $this->productRepo->getByCategoryId($productCategory->id)
+                ->map(fn($product) => [
+                    'id'      => $product->id,
+                    'name'   => $product->name,
+                    'price' => $product->price,
+                    'description' => $product->description,
+                ]);
 
-        $export = new ProductsExport($this->productRepo, $this->productCategoryRepo, $isTemplate);
+            $sheets[$productCategory->name] = new ProductsByCategorySheet(
+                $productCategory->name,
+                $products
+            );
+        }
+
+        $export = new ProductsExport($sheets);
         $page = $this->productRepo->getPageSlug();
         $filename = $page . ($isTemplate ? '_template.xlsx' : '_data.xlsx');
 

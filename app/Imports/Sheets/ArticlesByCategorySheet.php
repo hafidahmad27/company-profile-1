@@ -2,35 +2,23 @@
 
 namespace App\Imports\Sheets;
 
-use App\Repositories\ArticleRepository;
+use App\Services\ArticleService;
 use Maatwebsite\Excel\Concerns\OnEachRow;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Row;
 
 class ArticlesByCategorySheet implements OnEachRow, WithHeadingRow
 {
-    protected int $articleCategoryId;
-    protected ArticleRepository $articleRepo;
-
-    public function __construct(int $articleCategoryId, ArticleRepository $articleRepo)
-    {
-        $this->articleCategoryId = $articleCategoryId;
-        $this->articleRepo = $articleRepo;
-    }
+    public function __construct(
+        private int $articleCategoryId,
+        private ArticleService $articleService
+    ) {}
 
     public function onRow(Row $row): void
     {
-        $data = $row->toArray();
-
-        $this->articleRepo->updateOrCreate(
-            [
-                'id' => $data['id']
-            ],
-            [
-                'article_category_id' => $this->articleCategoryId,
-                'title' => $data['title'] ?? ('Untitled-' . uniqid()),
-                'content' => $data['content']
-            ]
+        $this->articleService->updateOrCreate(
+            $this->articleCategoryId,
+            $row->toArray()
         );
     }
 }
